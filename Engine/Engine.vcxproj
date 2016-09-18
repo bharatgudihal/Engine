@@ -19,10 +19,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Vector2D.h" />
+    <ClInclude Include="Math\Vector2D.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Vector2D.cpp" />
+    <ClCompile Include="Math\Private\Vector2D.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{71B675E8-5F71-4AD6-B294-BC7210075F0C}</ProjectGuid>

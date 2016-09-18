@@ -3,8 +3,8 @@
 #include "conio.h"
 #include "stdio.h"
 #include "stdlib.h"
-#include "Monster.h"
-#include "Engine\Vector2D.h"
+#include "Actor\Monster.h"
+#include "Math\Vector2D.h"
 using namespace std;
 
 const int GRIDSIZE = 64;
