@@ -6,6 +6,7 @@
 #include "Actor\Monster.h"
 #include "Math\Vector2D.h"
 using namespace std;
+using namespace Engine;
 
 const int GRIDSIZE = 64;
 const Vector2D MONSTER_SPEED_X = Vector2D(3, 0);
@@ -115,11 +116,6 @@ bool CheckPlayerToMonsterCollision(Monster* player, Monster* monsterArray, int m
 }
 
 int main() {
-	/*Vector2D a = Vector2D(1, 1);
-	Vector2D b = Vector2D(1, 1);
-	a -= b;
-	printf("o/p [%f,%f]", a.getX(), a.getY());
-	_getch();*/
 	printf("Please enter the number of monsters you want to start with: ");
 	int monsterCount;
 	scanf_s("%d", &monsterCount);
