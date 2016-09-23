@@ -11,7 +11,7 @@
 const int ARRAY_SIZE = 500;
 const int WORD_SIZE = 25;
 
-char* MakeSentence(const char * strings[]) {	
+char* MakeSentence(char * strings[]) {	
 	char * sentence;	
 	int memorySize=0;
 	int sourceIndex = 0;
@@ -57,14 +57,15 @@ char * RemoveNewLine(char* input) {
 
 void main( int i_argc, char ** i_argl )
 {
-	const char * strings[ARRAY_SIZE];
+	char * strings[ARRAY_SIZE];
 	int index = 0;
+	int size;
 	printf("Enter a words for your one by one sentence. If you want to end it, just press ENTER\n");
-	char* input = NULL;
+	char* input;
 	while (true) {
 		input = (char*)malloc(WORD_SIZE);
 		fgets(input, WORD_SIZE,stdin);
-		if (input[0] != '\n') {			
+		if (input[0] != '\n') {
 			strings[index] = RemoveNewLine(input);
 			index++;
 		}
@@ -72,12 +73,16 @@ void main( int i_argc, char ** i_argl )
 			strings[index] = NULL;
 			break;
 		}
-	}	
+	}
+	size = index;
 	char * pSentence = MakeSentence( strings );
 	printf( "The Sentence is: %s", pSentence );
 	_getch();
 	free( pSentence );
 	free(input);
+	for (index = 0; index < size; index++) {
+		free(strings[index]);
+	}
 #if defined(_DEBUG)
 	_CrtDumpMemoryLeaks();
 #endif // _DEBUG
