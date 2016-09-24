@@ -1,10 +1,10 @@
-
-
 #include "conio.h"
 #include "stdio.h"
 #include "stdlib.h"
 #include "Actor\Monster.h"
 #include "Math\Vector2D.h"
+#include <assert.h>
+#include "Logger\Logger.h"
 using namespace std;
 using namespace Engine;
 
@@ -16,6 +16,7 @@ const Vector2D PLAYER_SPEED_Y = Vector2D(0, 1);
 
 bool CheckInput(char c) {
 	if (c != 'A' && c != 'a' && c != 'W' && c != 'w' && c != 'S' && c != 's' && c != 'D' && c != 'd' && c == 'Q' && c == 'q') {
+		DebugLog("input entered %c ", c);
 		printf("\\(O_O)/\n");
 		printf("Wrong Input! Read the instructions and try again dummy!\n");
 		return false;
@@ -24,6 +25,7 @@ bool CheckInput(char c) {
 }
 
 void UpdatePlayer(Monster* player, char c) {
+	assert(player != NULL);
 	Vector2D currentPlayerPosition = player->getPosition();
 	if (c == 'A', c == 'a') {
 		currentPlayerPosition -= PLAYER_SPEED_X;
@@ -53,6 +55,7 @@ void UpdatePlayer(Monster* player, char c) {
 }
 
 void UpdateMonsterLocation(Monster* monsterArray, int count) {
+	assert(monsterArray != NULL);
 	for (int i = 0; i < count; i++) {
 		Vector2D currentMonsterPosition = monsterArray[i].getPosition();
 		if (rand() % 2 + 1 == 1) {
@@ -94,10 +97,12 @@ void UpdateMonsterLocation(Monster* monsterArray, int count) {
 }
 
 void CheckMonsterToMonsterCollision(Monster* monsterArray, int monsterCount) {
+	assert(monsterArray != NULL);
 	for (int i = 0; i < monsterCount; i++) {
 		for (int j = i + 1; j < monsterCount; j++) {
 			if (monsterArray[i].getPosition() == monsterArray[j].getPosition()) {
 				// If collision spawn another monster
+				DebugLog("Collision position [%f,%f] ", monsterArray[i].getPosition().getX(), monsterArray[i].getPosition().getY());
 				monsterArray[j].getPosition() = Vector2D(static_cast<float>(rand() % 64), static_cast<float>(rand() % 64));
 				printf("Collision between monster %s and %s. %s has respawned at a different location.\n", monsterArray[i].getName(), monsterArray[j].getName(), monsterArray[j].getName());
 			}
@@ -106,8 +111,11 @@ void CheckMonsterToMonsterCollision(Monster* monsterArray, int monsterCount) {
 }
 
 bool CheckPlayerToMonsterCollision(Monster* player, Monster* monsterArray, int monsterCount) {
+	assert(monsterArray != NULL);
+	assert(player != NULL);
 	for (int i = 0; i < monsterCount; i++) {
 		if (player->getPosition() == monsterArray[i].getPosition()) {
+			DebugLog("Collision position [%f,%f] ", player->getPosition().getX(), player->getPosition().getY());
 			printf("Player %s has been caught by monster %s!\n", player->getName(), monsterArray[i].getName());
 			return true;
 		}
@@ -120,10 +128,12 @@ int main() {
 	int monsterCount;
 	scanf_s("%d", &monsterCount);
 	while (monsterCount < 1) {
+		DebugLog("monsterCount entered %d ",monsterCount);
 		printf("Please enter a valid input: ");
 		scanf_s("%d", &monsterCount);
 	}
 	while (monsterCount > 50) {
+		DebugLog("monsterCount entered %d ", monsterCount);
 		printf("Do you really think you can escape so many monsters?\nTry something smaller: ");
 		scanf_s("%d", &monsterCount);
 	}
