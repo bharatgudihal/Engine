@@ -19,9 +19,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Logger\Logger.h" />
     <ClInclude Include="Math\Vector2D.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Logger\Private\Logger.cpp" />
     <ClCompile Include="Math\Private\Vector2D.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
