@@ -157,14 +157,19 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="MonsterChase\Main.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="MonsterChase\Actor\Monster.h" />
+    <ClCompile Include="MonsterChase\MonsterChase.cpp" />
+    <ClCompile Include="MonsterChase\Monster\Private\Monster.cpp" />
+    <ClCompile Include="MonsterChase\Player\Private\Player.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Engine\Engine.vcxproj">
       <Project>{71b675e8-5f71-4ad6-b294-bc7210075f0c}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="MonsterChase\MonsterChase.h" />
+    <ClInclude Include="MonsterChase\Monster\Monster.h" />
+    <ClInclude Include="MonsterChase\Player\Player.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

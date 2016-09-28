@@ -4,11 +4,11 @@ namespace Engine {
 	class Vector2D
 	{
 	public:
-		Vector2D(float iX, float iY) :x(iX), y(iY) {};
-		float getX() const { return x; }
-		void setX(float iX) { x = iX; }
-		float getY() const { return y; }
-		void setY(float iY) { y = iY; }
+		Vector2D(const float iX, const float iY);
+		float getX() const;
+		void setX(const float iX);
+		float getY() const;
+		void setY(const float iY);
 		Vector2D& operator+=(const Vector2D&);
 		Vector2D& operator-=(const Vector2D&);
 	private:
