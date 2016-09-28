@@ -1,9 +1,7 @@
 #include <conio.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <assert.h>
 #include "Player\Player.h"
-#include "Actor\Monster.h"
 #include "Math\Vector2D.h"
 #include "Monster\Monster.h"
 #include "MonsterChase.h"
