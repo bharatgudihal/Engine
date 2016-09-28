@@ -19,9 +19,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Actor\Actor.h" />
     <ClInclude Include="Math\Vector2D.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Actor\Private\Actor.cpp" />
     <ClCompile Include="Math\Private\Vector2D.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
