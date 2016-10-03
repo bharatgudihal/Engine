@@ -20,13 +20,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor\Actor.h" />
-	<ClInclude Include="Logger\Logger.h" />
+    <ClInclude Include="Logger\Logger.h" />
     <ClInclude Include="Math\Vector2D.h" />
+    <ClInclude Include="Memory\HeapManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Actor\Private\Actor.cpp" />
-	<ClCompile Include="Logger\Private\Logger.cpp" />
+    <ClCompile Include="Logger\Private\Logger.cpp" />
     <ClCompile Include="Math\Private\Vector2D.cpp" />
+    <ClCompile Include="Memory\Private\HeapManager.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{71B675E8-5F71-4AD6-B294-BC7210075F0C}</ProjectGuid>
