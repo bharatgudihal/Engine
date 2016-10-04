@@ -30,12 +30,11 @@ HeapManager::BlockDescriptor* HeapManager::getUninitializedBlock() {
 
 void HeapManager::returnBlockToUninitializedList(BlockDescriptor* i_blockDescriptor) {
 	BlockDescriptor* head = uninitializedBlocksList;
-	i_blockDescriptor->next = nullptr;
+	i_blockDescriptor->next = head;
 	i_blockDescriptor->base = nullptr;
 	i_blockDescriptor->size = 0;
 	i_blockDescriptor->userSize = 0;
 	uninitializedBlocksList = i_blockDescriptor;
-	uninitializedBlocksList->next = head;
 }
 
 HeapManager::HeapManager() {
@@ -51,7 +50,7 @@ HeapManager::HeapManager() {
 }
 
 HeapManager::BlockDescriptor* HeapManager::splitAndReturnBlock(BlockDescriptor* block, void* splitLocation) {
-	int newSize = (char*)splitLocation - (char*)block->base;
+	size_t newSize = (char*)splitLocation - (char*)block->base;
 	BlockDescriptor* newBlockDescriptor = getUninitializedBlock();
 	newBlockDescriptor->next = nullptr;
 	newBlockDescriptor->base = splitLocation;
@@ -99,28 +98,67 @@ void HeapManager::removeBlockFromFreeBlocksList(BlockDescriptor* assignedBlock) 
 
 void* HeapManager::getPointerFromFreeBlocks(size_t i_size) {
 	void* memoryLocation = nullptr;
-	BlockDescriptor* current = freeBlocksList;
+	BlockDescriptor* head = freeBlocksList;
 	do {
-		if (current->size > i_size + GUARD_BAND_SIZE * 2) {
-			char* pointer = (char*)current->base + current->size - GUARD_BAND_SIZE * 2 - i_size;
+		if (head->size > i_size + GUARD_BAND_SIZE * 2) {
+			char* pointer = (char*)head->base + head->size - GUARD_BAND_SIZE * 2 - i_size;
 			pointer = *pointer % 4 == 0 ? pointer : pointer - (4 - *pointer % 4);
-			if (pointer > current->base) {
+			if (pointer > head->base) {
 				BlockDescriptor* assignedBlock;
-				if (pointer - (char*)current->base >= MIN_BLOCK_SIZE) {
-					assignedBlock = splitAndReturnBlock(current, pointer);
+				if (pointer - (char*)head->base >= MIN_BLOCK_SIZE) {
+					assignedBlock = splitAndReturnBlock(head, pointer);
 				}
 				else {
-					assignedBlock = current;
+					assignedBlock = head;
 				}
-				memoryLocation = padBlockAndReturnPointer(assignedBlock, i_size);
+				memoryLocation = padBlockAndReturnPointer(assignedBlock, (int)i_size);
 				removeBlockFromFreeBlocksList(assignedBlock);
 				assignedBlock->userSize = i_size;
 				putBlockInAssignedBlockList(assignedBlock);
 				break;
 			}
+			else {
+				head = head->next;
+			}
 		}
-	} while (current->next != nullptr);
+		else {
+			head = head->next;
+		}
+	} while (head != nullptr);
 	return memoryLocation;
+}
+
+HeapManager::BlockDescriptor* HeapManager::joinBlocks(BlockDescriptor* sourceBlock, BlockDescriptor* blockToBeJoined, BlockDescriptor* previousBlock) {
+	BlockDescriptor* returnBlock = blockToBeJoined->next;
+	sourceBlock->size += blockToBeJoined->size;
+	// If first block in the freeBlocksList is to be joined with the source block
+	if (previousBlock == nullptr) {
+		freeBlocksList = blockToBeJoined->next;
+	}
+	else {
+		previousBlock->next = blockToBeJoined->next;
+	}
+	returnBlockToUninitializedList(blockToBeJoined);
+	return returnBlock;
+}
+
+void HeapManager::runGarbageCollector() {
+	BlockDescriptor* outerHead = freeBlocksList;
+	while (outerHead != nullptr) {
+		char* endOfBlock = (char*)outerHead->base + outerHead->size;
+		BlockDescriptor* innerHead = freeBlocksList;
+		BlockDescriptor* previousBlock = nullptr;
+		while (innerHead != nullptr) {
+			if (endOfBlock == innerHead->base) {
+				innerHead = joinBlocks(outerHead, innerHead, previousBlock);
+				endOfBlock = (char*)outerHead->base + outerHead->size;
+			}
+			else {
+				innerHead = innerHead->next;
+			}
+		}
+		outerHead = outerHead->next;
+	}
 }
 
 void * HeapManager::allocate(size_t i_size) {
@@ -128,7 +166,11 @@ void * HeapManager::allocate(size_t i_size) {
 	assert(availableBlockDescriptorsCount != 0);
 	void* ptr;
 	ptr = getPointerFromFreeBlocks(i_size);
-	assert(ptr != nullptr);
+	if (ptr == nullptr) {
+		runGarbageCollector();
+		ptr = getPointerFromFreeBlocks(i_size);
+		assert(ptr != nullptr);
+	}
 	return ptr;
 }
 
@@ -141,7 +183,7 @@ void HeapManager::checkGuardBands(void* i_ptr, BlockDescriptor* assignedBlock) {
 		*pointer = FREE_BLOCKS_FILL;
 		pointer++;
 	}
-	for (i = 0; i < assignedBlock->userSize; i++) {
+	for (i = 0; i < (int)assignedBlock->userSize; i++) {
 		*pointer = FREE_BLOCKS_FILL;
 		pointer++;
 	}

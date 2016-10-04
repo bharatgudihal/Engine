@@ -37,5 +37,7 @@ private:
 	BlockDescriptor* findBlockForPointer(void* ptr);
 	void checkGuardBands(void* ptr, BlockDescriptor* assignedBlock);
 	void addBlockToFreeBlocksList(BlockDescriptor* assignedBlock);
+	void runGarbageCollector();
+	BlockDescriptor* joinBlocks(BlockDescriptor* firstBlock, BlockDescriptor* secondBlock, BlockDescriptor* previousBlock);
 };
 #endif // !MEMORY_ALLOCATOR_H
