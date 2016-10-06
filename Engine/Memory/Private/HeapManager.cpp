@@ -37,7 +37,9 @@ void HeapManager::returnBlockToUninitializedList(BlockDescriptor* i_blockDescrip
 	uninitializedBlocksList = i_blockDescriptor;
 }
 
-HeapManager::HeapManager() {
+HeapManager::HeapManager(size_t blockSize, int numberOfBlockDescriptors) {
+	BLOCK_SIZE = blockSize;
+	NUMBER_OF_BLOCKDESCRIPTORS = numberOfBlockDescriptors;
 	BLOCK = _aligned_malloc(BLOCK_SIZE + sizeof(BlockDescriptor)*NUMBER_OF_BLOCKDESCRIPTORS, 4);
 	initializeBlockDescriptors();
 	// Initialize free blocks list

@@ -1,13 +1,11 @@
 #ifndef MEMORY_ALLOCATOR_H
 #define MEMORY_ALLOCATOR_H
 #define GUARD_BAND_SIZE 2
-#define NUMBER_OF_BLOCKDESCRIPTORS 4
-#define BLOCK_SIZE 52
 #define MIN_BLOCK_SIZE 16
 #include <malloc.h>
 class HeapManager {
 public:
-	HeapManager();
+	HeapManager(size_t blockSize, int numberOfBlockDescriptors);
 	void* allocate(size_t size);
 	void free(void * pointer);
 
@@ -18,6 +16,8 @@ private:
 		size_t size;
 		size_t userSize;
 	};
+	size_t BLOCK_SIZE;
+	int NUMBER_OF_BLOCKDESCRIPTORS;
 	unsigned char GUARD_BAND_FILL = 0xBB;
 	unsigned char FREE_BLOCKS_FILL = 0xCD;
 	int availableBlockDescriptorsCount;
