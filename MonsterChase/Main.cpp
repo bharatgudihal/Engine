@@ -1,6 +1,7 @@
 #include <conio.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <assert.h>
 #include "Player\Player.h"
 #include "Math\Vector2D.h"
 #include "Monster\Monster.h"
@@ -24,15 +25,12 @@ int main() {
 	printf("Please enter the number of monsters you want to start with: ");
 	int monsterCount;
 	scanf_s("%d", &monsterCount);
-	while (monsterCount < 1) {
-		DEBUG_LOG("monsterCount entered %d ",monsterCount);
-		printf("Please enter a valid input: ");
-		scanf_s("%d", &monsterCount);
-	}
+	assert(monsterCount >= 1);
 	while (monsterCount > 50) {
 		DEBUG_LOG("monsterCount entered %d ", monsterCount);
 		printf("Do you really think you can escape so many monsters?\nTry something smaller: ");
 		scanf_s("%d", &monsterCount);
+		assert(monsterCount >= 1);
 	}
 	Monster monsterArray[50];
 	for (int i = 0; i < monsterCount; i++) {
