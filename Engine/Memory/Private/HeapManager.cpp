@@ -106,7 +106,7 @@ namespace Engine {
 		do {
 			if (head->size > i_size + GUARD_BAND_SIZE * 2) {
 				char* pointer = (char*)head->base + head->size - GUARD_BAND_SIZE * 2 - i_size;
-				pointer = *pointer % 4 == 0 ? pointer : pointer - (4 - *pointer % 4);
+				pointer = (int)pointer % 4 == 0 ? pointer : pointer - (4 - ((int)pointer % 4));
 				if (pointer > head->base) {
 					BlockDescriptor* assignedBlock;
 					if (pointer - (char*)head->base >= MIN_BLOCK_SIZE) {
