@@ -1,11 +1,9 @@
-#ifdef _DEBUG
-#define _CRTDBG_MAP_ALLOC
 #include <stdlib.h>
 #include <stdio.h>
 #include <conio.h>
+#ifdef _DEBUG
+#define _CRTDBG_MAP_ALLOC
 #include <crtdbg.h>
-#else
-#include <stdlib.h>
 #endif // _DEBUG
 
 const int ARRAY_SIZE = 500;
