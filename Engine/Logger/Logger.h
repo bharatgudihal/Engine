@@ -1,7 +1,7 @@
 #include <varargs.h>
 #ifndef LOGGER_H
 namespace Engine {	
-	void DebugLog(const char* format, char* fileName, int lineNumber, ...);
+	void DebugLog(const char* format, ...);
 }
 #endif // !LOGGER_H
 #ifdef _DEBUG

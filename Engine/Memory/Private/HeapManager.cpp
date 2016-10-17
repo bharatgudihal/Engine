@@ -1,4 +1,5 @@
 #include "..\HeapManager.h"
+#include "..\..\Logger\Logger.h"
 #include <assert.h>
 #include <malloc.h>
 
@@ -27,6 +28,7 @@ namespace Engine {
 		assert(uninitializedBlocksList != nullptr);
 		BlockDescriptor* head = uninitializedBlocksList;
 		uninitializedBlocksList = head->next;
+		availableBlockDescriptorsCount--;
 		return head;
 	}
 
@@ -37,6 +39,7 @@ namespace Engine {
 		i_blockDescriptor->size = 0;
 		i_blockDescriptor->userSize = 0;
 		uninitializedBlocksList = i_blockDescriptor;
+		availableBlockDescriptorsCount++;
 	}
 
 	HeapManager::HeapManager(size_t blockSize, int numberOfBlockDescriptors) {
@@ -51,6 +54,7 @@ namespace Engine {
 		freeBlocksList->size = BLOCK_SIZE;
 		availableBlockDescriptorsCount = NUMBER_OF_BLOCKDESCRIPTORS - 1;
 		assignedBlocksList = nullptr;
+		LogHeaps();
 	}
 
 	HeapManager::BlockDescriptor* HeapManager::splitAndReturnBlock(BlockDescriptor* block, void* splitLocation) {
@@ -97,7 +101,7 @@ namespace Engine {
 				break;
 			}
 			head = head->next;
-		}
+		}		
 	}
 
 	void* HeapManager::getPointerFromFreeBlocks(size_t i_size) {
@@ -147,6 +151,7 @@ namespace Engine {
 	}
 
 	void HeapManager::runGarbageCollector() {
+		DEBUG_LOG("====Garbage Collection Started====\n");
 		BlockDescriptor* outerHead = freeBlocksList;
 		while (outerHead != nullptr) {
 			char* endOfBlock = (char*)outerHead->base + outerHead->size;
@@ -156,13 +161,19 @@ namespace Engine {
 				if (endOfBlock == innerHead->base) {
 					innerHead = joinBlocks(outerHead, innerHead, previousBlock);
 					endOfBlock = (char*)outerHead->base + outerHead->size;
+					LogHeaps();
 				}
 				else {
+					previousBlock = innerHead;
 					innerHead = innerHead->next;
+					LogHeaps();
 				}
 			}
 			outerHead = outerHead->next;
+			LogHeaps();
 		}
+		DEBUG_LOG("====Garbage Collection Ended====\n");
+		LogHeaps();
 	}
 
 	void * HeapManager::allocate(size_t i_size) {
@@ -175,6 +186,7 @@ namespace Engine {
 			ptr = getPointerFromFreeBlocks(i_size);
 			assert(ptr != nullptr);
 		}
+		LogHeaps();
 		return ptr;
 	}
 
@@ -234,5 +246,37 @@ namespace Engine {
 		assert(assignedBlock != nullptr);
 		checkGuardBands(ptr, assignedBlock);
 		addBlockToFreeBlocksList(assignedBlock);
+		LogHeaps();
 	}
+
+	void HeapManager::LogHeaps() {
+		BlockDescriptor* head = uninitializedBlocksList;
+		int count = 0;		
+		/*while (head != nullptr) {
+			count++;
+			head = head->next;
+		}*/
+		DEBUG_LOG("==============Log Started==============\n");
+		DEBUG_LOG("Number of available block descriptors: %d\n", availableBlockDescriptorsCount);
+		head = freeBlocksList;
+		count = 0;
+		DEBUG_LOG("Free blocks:\n");
+		while (head != nullptr) {
+			count++;
+			DEBUG_LOG("Free block number: %d \n", count);
+			DEBUG_LOG("Free block size: %d \n", head->size);
+			head = head->next;
+		}
+		head = assignedBlocksList;
+		count = 0;
+		DEBUG_LOG("Assigned blocks:\n");
+		while (head != nullptr) {
+			count++;
+			DEBUG_LOG("Assigned block number: %d \n", count);
+			DEBUG_LOG("Assigned block size: %d \n", head->size);
+			DEBUG_LOG("Assigned block user size: %d \n", head->userSize);
+			head = head->next;
+		}
+		DEBUG_LOG("==============Log Ended==============\n");
+	}	
 }

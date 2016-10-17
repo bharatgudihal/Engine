@@ -11,11 +11,11 @@ namespace Engine {
 		void free(void * pointer);
 
 	private:
-		struct BlockDescriptor {
-			BlockDescriptor* next;
+		struct BlockDescriptor {			
 			void* base;
 			size_t size;
 			size_t userSize;
+			BlockDescriptor* next;
 		};
 		size_t BLOCK_SIZE;
 		int NUMBER_OF_BLOCKDESCRIPTORS;
@@ -40,6 +40,7 @@ namespace Engine {
 		void addBlockToFreeBlocksList(BlockDescriptor* assignedBlock);
 		void runGarbageCollector();
 		BlockDescriptor* joinBlocks(BlockDescriptor* firstBlock, BlockDescriptor* secondBlock, BlockDescriptor* previousBlock);
+		void LogHeaps();
 	};
 }
 #endif // !MEMORY_ALLOCATOR_H

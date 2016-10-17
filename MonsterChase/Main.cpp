@@ -7,6 +7,7 @@
 #include "Monster\Monster.h"
 #include "MonsterChase.h"
 #include "Logger\Logger.h"
+#include "HeapManagerTest.h"
 using namespace std;
 using namespace Engine;
 
@@ -21,6 +22,7 @@ bool CheckInput(char c) {
 }
 
 int main() {
+	StartTest();
 	MonsterChase monsterChase;
 	printf("Please enter the number of monsters you want to start with: ");
 	int monsterCount;
