@@ -110,7 +110,7 @@ namespace Engine {
 		do {
 			if (head->size > i_size + GUARD_BAND_SIZE * 2) {
 				char* pointer = (char*)head->base + head->size - GUARD_BAND_SIZE * 2 - i_size;
-				pointer = (int)pointer % 4 == 0 ? pointer : pointer - (4 - ((int)pointer % 4));
+				pointer = (size_t)pointer % 4 == 0 ? pointer : pointer - (4 - ((size_t)pointer % 4));
 				if (pointer > head->base) {
 					BlockDescriptor* assignedBlock;
 					if (pointer - (char*)head->base >= MIN_BLOCK_SIZE) {
@@ -251,11 +251,7 @@ namespace Engine {
 
 	void HeapManager::LogHeaps() {
 		BlockDescriptor* head = uninitializedBlocksList;
-		int count = 0;		
-		/*while (head != nullptr) {
-			count++;
-			head = head->next;
-		}*/
+		int count = 0;
 		DEBUG_LOG("==============Log Started==============\n");
 		DEBUG_LOG("Number of available block descriptors: %d\n", availableBlockDescriptorsCount);
 		head = freeBlocksList;

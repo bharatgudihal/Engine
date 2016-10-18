@@ -5,8 +5,6 @@ namespace Engine {
 	void DebugLog(const char* format,...) {
 		const size_t lenTemp = 256;
 		char strTemp[lenTemp] = "DEBUG: %s %d ";
-		char strTempOut[lenTemp];
-		//sprintf_s(strTempOut, strTemp, fileName, lineNumber);
 		strcat_s(strTemp, format);
 		va_list args;
 		va_start(args, format);
