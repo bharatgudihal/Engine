@@ -8,7 +8,7 @@ namespace Engine {
 		char* startingPointer = (char*)BLOCK;
 		startingPointer += BLOCK_SIZE;
 		uninitializedBlocksList = (BlockDescriptor*)startingPointer;
-		BlockDescriptor* head = (BlockDescriptor*)startingPointer;
+		BlockDescriptor* head = (BlockDescriptor*)startingPointer;		
 		for (int i = 0; i < NUMBER_OF_BLOCKDESCRIPTORS; i++) {
 			head->base = nullptr;
 			head->size = 0;
@@ -16,7 +16,7 @@ namespace Engine {
 			startingPointer += sizeof(BlockDescriptor);
 			if (i != NUMBER_OF_BLOCKDESCRIPTORS - 1) {
 				head->next = (BlockDescriptor*)startingPointer;
-				head = head->next;
+				head = head->next;				
 			}
 			else {
 				head->next = nullptr;
@@ -50,7 +50,7 @@ namespace Engine {
 		// Initialize free blocks list
 		freeBlocksList = getUninitializedBlock();
 		freeBlocksList->next = nullptr;
-		freeBlocksList->base = BLOCK;
+		freeBlocksList->base = BLOCK;		
 		freeBlocksList->size = BLOCK_SIZE;
 		availableBlockDescriptorsCount = NUMBER_OF_BLOCKDESCRIPTORS - 1;
 		assignedBlocksList = nullptr;
@@ -109,8 +109,9 @@ namespace Engine {
 		BlockDescriptor* head = freeBlocksList;
 		do {
 			if (head->size > i_size + GUARD_BAND_SIZE * 2) {
-				char* pointer = (char*)head->base + head->size - GUARD_BAND_SIZE * 2 - i_size;
+				char* pointer = (char*)head->base + head->size - GUARD_BAND_SIZE - i_size;
 				pointer = (size_t)pointer % 4 == 0 ? pointer : pointer - (4 - ((size_t)pointer % 4));
+				pointer -= GUARD_BAND_SIZE;
 				if (pointer > head->base) {
 					BlockDescriptor* assignedBlock;
 					if (pointer - (char*)head->base >= MIN_BLOCK_SIZE) {
@@ -178,7 +179,10 @@ namespace Engine {
 
 	void * HeapManager::allocate(size_t i_size) {
 		assert((int)i_size <= BLOCK_SIZE);
-		assert(availableBlockDescriptorsCount != 0);
+		if (availableBlockDescriptorsCount == 0) {
+			runGarbageCollector();
+			assert(availableBlockDescriptorsCount != 0);
+		}
 		void* ptr;
 		ptr = getPointerFromFreeBlocks(i_size);
 		if (ptr == nullptr) {
