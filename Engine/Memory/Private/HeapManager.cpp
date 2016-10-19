@@ -5,7 +5,7 @@
 
 namespace Engine {
 	void HeapManager::initializeBlockDescriptors() {
-		char* startingPointer = (char*)BLOCK;
+		char* startingPointer = static_cast<char*>(BLOCK);
 		startingPointer += BLOCK_SIZE;
 		uninitializedBlocksList = (BlockDescriptor*)startingPointer;
 		BlockDescriptor* head = (BlockDescriptor*)startingPointer;		
@@ -58,7 +58,7 @@ namespace Engine {
 	}
 
 	HeapManager::BlockDescriptor* HeapManager::splitAndReturnBlock(BlockDescriptor* block, void* splitLocation) {
-		size_t newSize = (char*)splitLocation - (char*)block->base;
+		ptrdiff_t newSize = static_cast<char*>(splitLocation) - static_cast<char*>(block->base);
 		BlockDescriptor* newBlockDescriptor = getUninitializedBlock();
 		newBlockDescriptor->next = nullptr;
 		newBlockDescriptor->base = splitLocation;
@@ -67,8 +67,8 @@ namespace Engine {
 		return newBlockDescriptor;
 	}
 
-	void* HeapManager::padBlockAndReturnPointer(BlockDescriptor* assignedBlock, int i_size) {
-		char* pointer = (char*)assignedBlock->base;
+	void* HeapManager::padBlockAndReturnPointer(BlockDescriptor* assignedBlock, size_t i_size) {
+		char* pointer = static_cast<char*>(assignedBlock->base);
 		for (int i = 0; i < GUARD_BAND_SIZE; i++) {
 			*pointer = GUARD_BAND_FILL;
 			pointer++;
@@ -78,7 +78,7 @@ namespace Engine {
 			*pointer = GUARD_BAND_FILL;
 			pointer++;
 		}
-		pointer = (char*)assignedBlock->base;
+		pointer = static_cast<char*>(assignedBlock->base);
 		return pointer + GUARD_BAND_SIZE;
 	}
 
@@ -109,18 +109,18 @@ namespace Engine {
 		BlockDescriptor* head = freeBlocksList;
 		do {
 			if (head->size > i_size + GUARD_BAND_SIZE * 2) {
-				char* pointer = (char*)head->base + head->size - GUARD_BAND_SIZE - i_size;
-				pointer = (size_t)pointer % 4 == 0 ? pointer : pointer - (4 - ((size_t)pointer % 4));
+				char* pointer = static_cast<char*>(head->base) + head->size - GUARD_BAND_SIZE - i_size;
+				pointer = reinterpret_cast<size_t>(pointer) % 4 == 0 ? pointer : pointer - (4 - (reinterpret_cast<size_t>(pointer) % 4));
 				pointer -= GUARD_BAND_SIZE;
 				if (pointer > head->base) {
 					BlockDescriptor* assignedBlock;
-					if (pointer - (char*)head->base >= MIN_BLOCK_SIZE) {
+					if (pointer - static_cast<char*>(head->base) >= MIN_BLOCK_SIZE) {
 						assignedBlock = splitAndReturnBlock(head, pointer);
 					}
 					else {
 						assignedBlock = head;
 					}
-					memoryLocation = padBlockAndReturnPointer(assignedBlock, (int)i_size);
+					memoryLocation = padBlockAndReturnPointer(assignedBlock, i_size);
 					removeBlockFromFreeBlocksList(assignedBlock);
 					assignedBlock->userSize = i_size;
 					putBlockInAssignedBlockList(assignedBlock);
@@ -155,13 +155,13 @@ namespace Engine {
 		DEBUG_LOG("====Garbage Collection Started====\n");
 		BlockDescriptor* outerHead = freeBlocksList;
 		while (outerHead != nullptr) {
-			char* endOfBlock = (char*)outerHead->base + outerHead->size;
+			char* endOfBlock = static_cast<char*>(outerHead->base) + outerHead->size;
 			BlockDescriptor* innerHead = freeBlocksList;
 			BlockDescriptor* previousBlock = nullptr;
 			while (innerHead != nullptr) {
 				if (endOfBlock == innerHead->base) {
 					innerHead = joinBlocks(outerHead, innerHead, previousBlock);
-					endOfBlock = (char*)outerHead->base + outerHead->size;
+					endOfBlock = static_cast<char*>(outerHead->base) + outerHead->size;
 					LogHeaps();
 				}
 				else {
@@ -178,7 +178,7 @@ namespace Engine {
 	}
 
 	void * HeapManager::allocate(size_t i_size) {
-		assert((int)i_size <= BLOCK_SIZE);
+		assert(i_size <= BLOCK_SIZE);
 		if (availableBlockDescriptorsCount == 0) {
 			runGarbageCollector();
 			assert(availableBlockDescriptorsCount != 0);
@@ -195,15 +195,15 @@ namespace Engine {
 	}
 
 	void HeapManager::checkGuardBands(void* i_ptr, BlockDescriptor* assignedBlock) {
-		char* pointer = (char*)i_ptr;
+		char* pointer = static_cast<char*>(i_ptr);
 		pointer -= GUARD_BAND_SIZE;
-		int i;
+		size_t i;
 		for (i = 0; i < GUARD_BAND_SIZE; i++) {
 			assert((unsigned char)*pointer == GUARD_BAND_FILL);
 			*pointer = FREE_BLOCKS_FILL;
 			pointer++;
 		}
-		for (i = 0; i < (int)assignedBlock->userSize; i++) {
+		for (i = 0; i < assignedBlock->userSize; i++) {
 			*pointer = FREE_BLOCKS_FILL;
 			pointer++;
 		}
@@ -219,7 +219,7 @@ namespace Engine {
 		BlockDescriptor* head = assignedBlocksList;
 		BlockDescriptor* previousHead = nullptr;
 		while (head != nullptr) {
-			if (ptr >= head->base && ptr <= (char*)head->base + head->size) {
+			if (ptr >= head->base && ptr <= static_cast<char*>(head->base) + head->size) {
 				assignedBlock = head;
 				// Remove block from assigned blocks list
 				if (previousHead == nullptr) {

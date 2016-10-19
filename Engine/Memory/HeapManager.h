@@ -11,11 +11,11 @@ namespace Engine {
 		void free(void * pointer);
 
 	private:
-		struct BlockDescriptor {			
-			void* base;
+		struct BlockDescriptor {
+			BlockDescriptor* next;
 			size_t size;
 			size_t userSize;
-			BlockDescriptor* next;
+			void* base;
 		};
 		size_t BLOCK_SIZE;
 		int NUMBER_OF_BLOCKDESCRIPTORS;
@@ -32,7 +32,7 @@ namespace Engine {
 		void initializeBlockDescriptors();
 		BlockDescriptor* getUninitializedBlock();
 		void returnBlockToUninitializedList(BlockDescriptor* i_blockDescriptor);
-		void* padBlockAndReturnPointer(BlockDescriptor* assignedBlock, int i_size);
+		void* padBlockAndReturnPointer(BlockDescriptor* assignedBlock, size_t i_size);
 		void putBlockInAssignedBlockList(BlockDescriptor* assignedBlock);
 		void removeBlockFromFreeBlocksList(BlockDescriptor* assignedBlock);
 		BlockDescriptor* findBlockForPointer(void* ptr);
