@@ -7,6 +7,7 @@ namespace Engine {
 	class HeapManager {
 	public:
 		HeapManager(size_t blockSize, int numberOfBlockDescriptors);
+		~HeapManager();
 		void* allocate(size_t size);
 		bool free(void * pointer);
 		void runGarbageCollector();

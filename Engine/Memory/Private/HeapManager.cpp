@@ -363,4 +363,8 @@ namespace Engine {
 		}
 		return maxSize;
 	}
+
+	HeapManager::~HeapManager() {
+		_aligned_free(BLOCK);
+	}
 }
