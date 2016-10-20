@@ -1,2 +1,2 @@
 #pragma once
-void StartTest();
+bool HeapManager_UnitTest();

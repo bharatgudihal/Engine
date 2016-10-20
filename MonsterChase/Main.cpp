@@ -22,8 +22,8 @@ bool CheckInput(char c) {
 }
 
 int main() {
-	StartTest();
-	MonsterChase monsterChase;
+	HeapManager_UnitTest();
+	/*MonsterChase monsterChase;
 	printf("Please enter the number of monsters you want to start with: ");
 	int monsterCount;
 	scanf_s("%d", &monsterCount);
@@ -68,6 +68,6 @@ int main() {
 			_getch();
 			break;
 		}
-	}
+	}*/
 	return 0;
 }

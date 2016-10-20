@@ -8,7 +8,14 @@ namespace Engine {
 	public:
 		HeapManager(size_t blockSize, int numberOfBlockDescriptors);
 		void* allocate(size_t size);
-		void free(void * pointer);
+		bool free(void * pointer);
+		void runGarbageCollector();
+		void ShowFreeBlocks();
+		void ShowOutstandingAllocations();
+		bool Contains(void* ptr);
+		bool IsAllocated(void* ptr);
+		size_t GetLargestFreeBlock();
+		const static size_t s_MinumumToLeave = MIN_BLOCK_SIZE*2;
 
 	private:
 		struct BlockDescriptor {
@@ -37,8 +44,7 @@ namespace Engine {
 		void removeBlockFromFreeBlocksList(BlockDescriptor* assignedBlock);
 		BlockDescriptor* findBlockForPointer(void* ptr);
 		void checkGuardBands(void* ptr, BlockDescriptor* assignedBlock);
-		void addBlockToFreeBlocksList(BlockDescriptor* assignedBlock);
-		void runGarbageCollector();
+		void addBlockToFreeBlocksList(BlockDescriptor* assignedBlock);		
 		BlockDescriptor* joinBlocks(BlockDescriptor* firstBlock, BlockDescriptor* secondBlock, BlockDescriptor* previousBlock);
 		void LogHeaps();
 	};
