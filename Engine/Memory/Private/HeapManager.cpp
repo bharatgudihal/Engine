@@ -308,11 +308,11 @@ namespace Engine {
 		while (head != nullptr) {
 			count++;
 			printf("Free block number: %d \n", count);
-			printf("Free block size: %d \n", head->size);
+			printf("Free block size: %zd \n", head->size);
 			totalSize += head->size;
 			head = head->next;
 		}
-		printf("Total size of free blocks: %d\n", totalSize);
+		printf("Total size of free blocks: %zd\n", totalSize);
 		if (count == 0) {
 			printf("No Free blocks left\n");
 		}
@@ -325,12 +325,12 @@ namespace Engine {
 		while (head != nullptr) {
 			count++;
 			printf("Assigned block number: %d \n", count);
-			printf("Assigned block size: %d \n", head->size);
-			printf("Assigned block user size: %d \n", head->userSize);
+			printf("Assigned block size: %zd \n", head->size);
+			printf("Assigned block user size: %zd \n", head->userSize);
 			totalSize += head->size;
 			head = head->next;
 		}
-		printf("Total size of allocated blocks: %d\n", totalSize);
+		printf("Total size of allocated blocks: %zd\n", totalSize);
 	}
 
 	bool HeapManager::Contains(void* ptr) {
