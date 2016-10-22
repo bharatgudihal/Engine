@@ -2,9 +2,6 @@
 #include <algorithm>
 #include <vector>
 #include "Memory\HeapManager.h"
-#include <stdlib.h>
-#include <crtdbg.h>
-#define _CRTDBG_MAP_ALLOC
 #define TEST_SINGLE_LARGE_ALLOCATION
 #define __TRACK_ALLOCATIONS
 using namespace Engine;
@@ -184,7 +181,6 @@ bool HeapManager_UnitTest()
 
 		}
 	}
-	_CrtDumpMemoryLeaks();
 	// we succeeded
 	return true;
 }
