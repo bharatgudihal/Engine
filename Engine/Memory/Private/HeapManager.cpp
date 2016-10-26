@@ -10,7 +10,7 @@ namespace Engine {
 		startingPointer += BLOCK_SIZE;
 		uninitializedBlocksList = (BlockDescriptor*)startingPointer;
 		BlockDescriptor* head = (BlockDescriptor*)startingPointer;		
-		for (int i = 0; i < NUMBER_OF_BLOCKDESCRIPTORS; i++) {
+		for (unsigned int i = 0; i < NUMBER_OF_BLOCKDESCRIPTORS; i++) {
 			head->base = nullptr;
 			head->size = 0;
 			head->userSize = 0;
@@ -43,7 +43,7 @@ namespace Engine {
 		availableBlockDescriptorsCount++;
 	}
 
-	HeapManager::HeapManager(size_t blockSize, int numberOfBlockDescriptors) {
+	HeapManager::HeapManager(size_t blockSize, unsigned int numberOfBlockDescriptors) {
 		BLOCK_SIZE = blockSize;
 		NUMBER_OF_BLOCKDESCRIPTORS = numberOfBlockDescriptors;
 		BLOCK = _aligned_malloc(BLOCK_SIZE + sizeof(BlockDescriptor)*NUMBER_OF_BLOCKDESCRIPTORS, 4);
@@ -69,12 +69,12 @@ namespace Engine {
 
 	void* HeapManager::padBlockAndReturnPointer(BlockDescriptor* assignedBlock, size_t i_size) {
 		char* pointer = static_cast<char*>(assignedBlock->base);
-		for (int i = 0; i < GUARD_BAND_SIZE; i++) {
+		for (uint8_t i = 0; i < GUARD_BAND_SIZE; i++) {
 			*pointer = GUARD_BAND_FILL;
 			pointer++;
 		}
 		pointer += i_size;
-		for (int i = 0; i < GUARD_BAND_SIZE; i++) {
+		for (uint8_t i = 0; i < GUARD_BAND_SIZE; i++) {
 			*pointer = GUARD_BAND_FILL;
 			pointer++;
 		}
@@ -276,7 +276,7 @@ namespace Engine {
 	}
 
 	void HeapManager::LogHeaps() {		
-		int count = 0;
+		unsigned int count = 0;
 		DEBUG_LOG("==============Log Started==============\n");
 		DEBUG_LOG("Number of available block descriptors: %d\n", availableBlockDescriptorsCount);
 		BlockDescriptor* head = freeBlocksList;
@@ -304,7 +304,7 @@ namespace Engine {
 	void HeapManager::ShowFreeBlocks() {
 		size_t totalSize = 0;
 		BlockDescriptor* head = freeBlocksList;
-		int count = 0;		
+		unsigned int count = 0;		
 		while (head != nullptr) {
 			count++;
 			printf("Free block number: %d \n", count);
@@ -321,7 +321,7 @@ namespace Engine {
 	void HeapManager::ShowOutstandingAllocations() {
 		BlockDescriptor* head = assignedBlocksList;
 		size_t totalSize = 0;
-		int count = 0;
+		unsigned int count = 0;
 		while (head != nullptr) {
 			count++;
 			printf("Assigned block number: %d \n", count);

@@ -6,7 +6,7 @@
 namespace Engine {
 	class HeapManager {
 	public:
-		HeapManager(size_t blockSize, int numberOfBlockDescriptors);
+		HeapManager(size_t blockSize, unsigned int numberOfBlockDescriptors);
 		~HeapManager();
 		void* allocate(size_t size);
 		bool free(void * pointer);
@@ -26,10 +26,10 @@ namespace Engine {
 			void* base;
 		};
 		size_t BLOCK_SIZE;
-		int NUMBER_OF_BLOCKDESCRIPTORS;
+		unsigned int NUMBER_OF_BLOCKDESCRIPTORS;
 		unsigned char GUARD_BAND_FILL = 0xBB;
 		unsigned char FREE_BLOCKS_FILL = 0xCD;
-		int availableBlockDescriptorsCount;
+		unsigned int availableBlockDescriptorsCount;
 		void* BLOCK;
 		void* BLOCKDESCRIPTOR_POOL;
 		BlockDescriptor* freeBlocksList;

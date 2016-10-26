@@ -181,6 +181,6 @@ bool HeapManager_UnitTest()
 
 		}
 	}
-	// we succeeded
+	// we succeeded	
 	return true;
 }
