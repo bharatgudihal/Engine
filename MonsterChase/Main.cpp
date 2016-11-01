@@ -30,7 +30,7 @@ int main() {
 	#endif // _DEBUG
 	HeapManager_UnitTest();
 	_CrtDumpMemoryLeaks();
-	/*MonsterChase monsterChase;
+	MonsterChase monsterChase;
 	printf("Please enter the number of monsters you want to start with: ");
 	int monsterCount;
 	scanf_s("%d", &monsterCount);
@@ -55,9 +55,9 @@ int main() {
 	bool quitGame = false;
 	while (true) {
 		for (int i = 0; i < monsterCount; i++) {
-			printf("Monster %s at [%f,%f]\n", monsterArray[i].getName(), monsterArray[i].getPosition().getX(), monsterArray[i].getPosition().getY());
+			printf("Monster %s at [%f,%f]\n", monsterArray[i].getName(), monsterArray[i].getPosition().X(), monsterArray[i].getPosition().Y());
 		}
-		printf("Player %s at [%f,%f]\n", player.getName(), player.getPosition().getX(), player.getPosition().getY());
+		printf("Player %s at [%f,%f]\n", player.getName(), player.getPosition().X(), player.getPosition().Y());
 		printf("Use the W,A,S,D keys to move. Press Q to quit.\n");
 		char c;
 		c = _getch();
@@ -75,6 +75,6 @@ int main() {
 			_getch();
 			break;
 		}
-	}*/
+	}
 	return 0;
 }

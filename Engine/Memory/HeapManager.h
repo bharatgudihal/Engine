@@ -13,7 +13,7 @@ namespace Engine {
 		void runGarbageCollector();
 		void ShowFreeBlocks();
 		void ShowOutstandingAllocations();
-		bool Contains(void* ptr);
+		inline bool Contains(void* ptr);
 		bool IsAllocated(void* ptr);
 		size_t GetLargestFreeBlock();
 		const static size_t s_MinumumToLeave = MIN_BLOCK_SIZE*2;
@@ -50,4 +50,5 @@ namespace Engine {
 		void LogHeaps();
 	};
 }
+#include "HeapManager_Inl.h"
 #endif // !MEMORY_ALLOCATOR_H

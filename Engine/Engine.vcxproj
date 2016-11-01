@@ -20,9 +20,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor\Actor.h" />
+    <ClInclude Include="Actor\Actor_Inl.h" />
     <ClInclude Include="Logger\Logger.h" />
     <ClInclude Include="Math\Vector2D.h" />
+    <ClInclude Include="Math\Vector2D_Inl.h" />
     <ClInclude Include="Memory\HeapManager.h" />
+    <ClInclude Include="Memory\HeapManager_Inl.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Actor\Private\Actor.cpp" />

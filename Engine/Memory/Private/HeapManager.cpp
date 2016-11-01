@@ -177,17 +177,9 @@ namespace Engine {
 		void* ptr = nullptr;
 		assert(i_size <= BLOCK_SIZE);
 		if (availableBlockDescriptorsCount == 0) {
-			//runGarbageCollector();
-			//assert(availableBlockDescriptorsCount != 0);
 			return ptr;
-		}
-		
+		}		
 		ptr = getPointerFromFreeBlocks(i_size);
-		/*if (ptr == nullptr) {
-			runGarbageCollector();
-			ptr = getPointerFromFreeBlocks(i_size);
-			assert(ptr != nullptr);
-		}*/		
 		return ptr;
 	}
 
@@ -331,11 +323,7 @@ namespace Engine {
 			head = head->next;
 		}
 		printf("Total size of allocated blocks: %zd\n", totalSize);
-	}
-
-	bool HeapManager::Contains(void* ptr) {
-		return (ptr >= BLOCK && ptr <= static_cast<char*>(BLOCK) + BLOCK_SIZE);
-	}
+	}	
 
 	bool HeapManager::IsAllocated(void* ptr) {
 		bool result = false;		

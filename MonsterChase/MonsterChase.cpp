@@ -19,7 +19,7 @@ void MonsterChase::CheckMonsterToMonsterCollision(Monster* monsterArray, int mon
 		for (int j = i + 1; j < monsterCount; j++) {
 			if (monsterArray[i].getPosition() == monsterArray[j].getPosition()) {
 				// If collision spawn another monster
-				DEBUG_LOG("Collision position [%f,%f] ", monsterArray[i].getPosition().getX(), monsterArray[i].getPosition().getY());
+				DEBUG_LOG("Collision position [%f,%f] ", monsterArray[i].getPosition().X(), monsterArray[i].getPosition().Y());
 				monsterArray[j].getPosition() = Engine::Vector2D(static_cast<float>(rand() % 64), static_cast<float>(rand() % 64));
 				printf("Collision between monster %s and %s. %s has respawned at a different location.\n", monsterArray[i].getName(), monsterArray[j].getName(), monsterArray[j].getName());
 			}
@@ -30,7 +30,7 @@ void MonsterChase::CheckMonsterToMonsterCollision(Monster* monsterArray, int mon
 bool MonsterChase::CheckPlayerToMonsterCollision(Player* player, Monster* monsterArray, int monsterCount) {
 	for (int i = 0; i < monsterCount; i++) {
 		if (player->getPosition() == monsterArray[i].getPosition()) {
-			DEBUG_LOG("Collision position [%f,%f] ", player->getPosition().getX(), player->getPosition().getY());
+			DEBUG_LOG("Collision position [%f,%f] ", player->getPosition().X(), player->getPosition().Y());
 			printf("Player %s has been caught by monster %s!\n", player->getName(), monsterArray[i].getName());
 			return true;
 		}

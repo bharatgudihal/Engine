@@ -5,17 +5,18 @@ namespace Engine {
 	{
 	public:
 		Vector2D(const float iX, const float iY);
-		float getX() const;
-		void setX(const float iX);
-		float getY() const;
-		void setY(const float iY);
-		Vector2D& operator+=(const Vector2D&);
-		Vector2D& operator-=(const Vector2D&);
+		inline float X() const;
+		inline void X(const float iX);
+		inline float Y() const;
+		inline void Y(const float iY);
+		inline Vector2D& operator+=(const Vector2D&);
+		inline Vector2D& operator-=(const Vector2D&);
 	private:
 		float x, y;
 	};
-	Vector2D operator+(const Vector2D&, const Vector2D&);
-	Vector2D operator-(const Vector2D&, const Vector2D&);
-	bool operator==(const Vector2D&, const Vector2D&);
+	inline Vector2D operator+(const Vector2D&, const Vector2D&);
+	inline Vector2D operator-(const Vector2D&, const Vector2D&);
+	inline bool operator==(const Vector2D&, const Vector2D&);
 }
+#include "Vector2D_Inl.h"
 #endif // !VECTOR2D_H

@@ -7,12 +7,13 @@ namespace Engine {
 	public:
 		Actor() {};
 		Actor(char *i_name, Vector2D i_position);
-		char* getName();
-		Vector2D getPosition();
-		void setPosition(const Vector2D newPosition);
+		inline char* getName();
+		inline Vector2D getPosition();
+		inline void setPosition(const Vector2D newPosition);
 	private:
 		char *name;
 		Vector2D position = Vector2D(0, 0);
 	};
 }
+#include "Actor_Inl.h"
 #endif
