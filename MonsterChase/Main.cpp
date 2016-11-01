@@ -8,6 +8,7 @@
 #include "MonsterChase.h"
 #include "Logger\Logger.h"
 #include "HeapManagerTest.h"
+#include "ConstChecker.h"
 #include <stdlib.h>
 #include <crtdbg.h>
 #define _CRTDBG_MAP_ALLOC
@@ -29,7 +30,7 @@ int main() {
 		_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 	#endif // _DEBUG
 	HeapManager_UnitTest();
-	_CrtDumpMemoryLeaks();
+	ConstChecker();	
 	MonsterChase monsterChase;
 	printf("Please enter the number of monsters you want to start with: ");
 	int monsterCount;
@@ -76,5 +77,6 @@ int main() {
 			break;
 		}
 	}
+	_CrtDumpMemoryLeaks();
 	return 0;
 }
