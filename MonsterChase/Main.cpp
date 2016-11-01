@@ -31,7 +31,7 @@ int main() {
 	#endif // _DEBUG
 	HeapManager_UnitTest();
 	ConstChecker();	
-	MonsterChase monsterChase;
+	/*MonsterChase monsterChase;
 	printf("Please enter the number of monsters you want to start with: ");
 	int monsterCount;
 	scanf_s("%d", &monsterCount);
@@ -76,7 +76,7 @@ int main() {
 			_getch();
 			break;
 		}
-	}
+	}*/
 	_CrtDumpMemoryLeaks();
 	return 0;
 }

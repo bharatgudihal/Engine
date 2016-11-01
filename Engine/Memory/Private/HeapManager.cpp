@@ -109,10 +109,11 @@ namespace Engine {
 		BlockDescriptor* head = freeBlocksList;
 		do {
 			if (head->size > i_size + GUARD_BAND_SIZE * 2) {
-				char* pointer = static_cast<char*>(head->base) + head->size - GUARD_BAND_SIZE - i_size;
+				char* pointer = static_cast<char*>(head->base) + head->size - 1 - GUARD_BAND_SIZE - i_size;				
 				pointer = reinterpret_cast<size_t>(pointer) % 4 == 0 ? pointer : pointer - ((reinterpret_cast<size_t>(pointer) % 4));
 				pointer -= GUARD_BAND_SIZE;
-				if (pointer > head->base) {
+				ptrdiff_t blockSize = static_cast<char*>(head->base) + head->size - 1 - static_cast<char*>(pointer);
+				if (pointer > head->base && (pointer + blockSize) < (static_cast<char*>(head->base) + head->size)) {
 					BlockDescriptor* assignedBlock;
 					if (pointer - static_cast<char*>(head->base) >= MIN_BLOCK_SIZE) {
 						assignedBlock = splitAndReturnBlock(head, pointer);
@@ -121,8 +122,9 @@ namespace Engine {
 						assignedBlock = head;
 					}
 					memoryLocation = padBlockAndReturnPointer(assignedBlock, i_size);
+					assert(!IsAllocated(memoryLocation));
 					removeBlockFromFreeBlocksList(assignedBlock);
-					assignedBlock->userSize = i_size;
+					assignedBlock->userSize = i_size;					
 					putBlockInAssignedBlockList(assignedBlock);
 					break;
 				}
@@ -152,7 +154,6 @@ namespace Engine {
 	}
 
 	void HeapManager::runGarbageCollector() {
-		DEBUG_LOG("====Garbage Collection Started====\n");
 		BlockDescriptor* outerHead = freeBlocksList;
 		while (outerHead != nullptr) {
 			char* endOfBlock = static_cast<char*>(outerHead->base) + outerHead->size;
@@ -170,7 +171,6 @@ namespace Engine {
 			}
 			outerHead = outerHead->next;			
 		}
-		DEBUG_LOG("====Garbage Collection Ended====\n");		
 	}
 
 	void * HeapManager::allocate(const size_t i_size) {
@@ -208,7 +208,7 @@ namespace Engine {
 		BlockDescriptor* head = assignedBlocksList;
 		BlockDescriptor* previousHead = nullptr;
 		while (head != nullptr) {
-			if (ptr >= head->base && ptr <= static_cast<char*>(head->base) + head->size) {
+			if (ptr >= head->base && ptr <= static_cast<char*>(head->base) + head->size - 1) {
 				assignedBlock = head;
 				// Remove block from assigned blocks list
 				if (previousHead == nullptr) {
@@ -258,6 +258,7 @@ namespace Engine {
 	}
 
 	bool HeapManager::free(void* ptr) {
+		assert(IsAllocated(ptr));
 		bool result = false;
 		BlockDescriptor* assignedBlock = findBlockForPointer(ptr);
 		assert(assignedBlock != nullptr);

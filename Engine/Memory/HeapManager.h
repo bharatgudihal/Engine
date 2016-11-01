@@ -1,6 +1,12 @@
 #ifndef MEMORY_ALLOCATOR_H
 #define MEMORY_ALLOCATOR_H
-#define GUARD_BAND_SIZE 2
+#ifdef _DEBUG
+	#define GUARD_BAND_SIZE 2	
+#else
+	#define GUARD_BAND_SIZE 0	
+#endif // _DEBUG
+
+
 #define MIN_BLOCK_SIZE 16
 
 namespace Engine {
