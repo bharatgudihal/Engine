@@ -1,5 +1,5 @@
 namespace Engine {
-	inline float Vector2D::X()const { return x; }
+	inline float Vector2D::X() const { return x; }
 
 	inline void Vector2D::X(const float iX) { x = iX; }
 

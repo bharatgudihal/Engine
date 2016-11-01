@@ -8,6 +8,6 @@ class Monster :public Engine::Actor {
 	public:
 		Monster() {};
 		Monster(char *i_name, Engine::Vector2D i_position) :Actor(i_name, i_position) {};
-		void Update(MonsterChase* monsterChase);
+		void Update(const MonsterChase* monsterChase);
 };
 #endif

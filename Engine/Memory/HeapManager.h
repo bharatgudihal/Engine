@@ -6,16 +6,16 @@
 namespace Engine {
 	class HeapManager {
 	public:
-		HeapManager(size_t blockSize, unsigned int numberOfBlockDescriptors);
+		HeapManager(const size_t blockSize, const unsigned int numberOfBlockDescriptors);
 		~HeapManager();
-		void* allocate(size_t size);
+		void* allocate(const size_t size);
 		bool free(void * pointer);
 		void runGarbageCollector();
-		void ShowFreeBlocks();
-		void ShowOutstandingAllocations();
-		inline bool Contains(void* ptr);
-		bool IsAllocated(void* ptr);
-		size_t GetLargestFreeBlock();
+		void ShowFreeBlocks() const;
+		void ShowOutstandingAllocations() const;
+		inline bool Contains(const void* ptr) const;
+		bool IsAllocated(const void* ptr) const;
+		size_t GetLargestFreeBlock() const;
 		const static size_t s_MinumumToLeave = MIN_BLOCK_SIZE*2;
 
 	private:
@@ -35,19 +35,19 @@ namespace Engine {
 		BlockDescriptor* freeBlocksList;
 		BlockDescriptor* assignedBlocksList;
 		BlockDescriptor* uninitializedBlocksList;
-		void* getPointerFromFreeBlocks(size_t size);
+		void* getPointerFromFreeBlocks(const size_t size);
 		BlockDescriptor* splitAndReturnBlock(BlockDescriptor* block, void* splitLocation);
 		void initializeBlockDescriptors();
 		BlockDescriptor* getUninitializedBlock();
 		void returnBlockToUninitializedList(BlockDescriptor* i_blockDescriptor);
-		void* padBlockAndReturnPointer(BlockDescriptor* assignedBlock, size_t i_size);
+		void* padBlockAndReturnPointer(BlockDescriptor* assignedBlock, const size_t i_size);
 		void putBlockInAssignedBlockList(BlockDescriptor* assignedBlock);
-		void removeBlockFromFreeBlocksList(BlockDescriptor* assignedBlock);
-		BlockDescriptor* findBlockForPointer(void* ptr);
-		void checkGuardBands(void* ptr, BlockDescriptor* assignedBlock);
+		void removeBlockFromFreeBlocksList(const BlockDescriptor* assignedBlock);
+		BlockDescriptor* findBlockForPointer(const void* ptr);
+		void checkGuardBands(void* ptr, const BlockDescriptor* assignedBlock);
 		void addBlockToFreeBlocksList(BlockDescriptor* assignedBlock);		
 		BlockDescriptor* joinBlocks(BlockDescriptor* firstBlock, BlockDescriptor* secondBlock, BlockDescriptor* previousBlock);
-		void LogHeaps();
+		void LogHeaps() const;
 	};
 }
 #include "HeapManager_Inl.h"

@@ -3,7 +3,7 @@
 #include "..\..\MonsterChase.h"
 
 
-void Monster::Update(MonsterChase* monsterChase) {
+void Monster::Update(const MonsterChase* monsterChase) {
 	Engine::Vector2D currentMonsterPosition = this->getPosition();
 	if (rand() % 2 + 1 == 1) {
 		//Change x coordinate

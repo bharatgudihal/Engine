@@ -1,7 +1,7 @@
 #include "..\Player.h"
 #include "..\..\MonsterChase.h"
 
-void Player::Update(char c,MonsterChase* monsterChase) {
+void Player::Update(const char c, const MonsterChase* monsterChase) {
 	Engine::Vector2D currentPlayerPosition = this->getPosition();
 	if (c == 'A', c == 'a') {
 		currentPlayerPosition -= monsterChase->PLAYER_SPEED_X;

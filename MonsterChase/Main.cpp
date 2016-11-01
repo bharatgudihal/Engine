@@ -14,7 +14,7 @@
 using namespace std;
 using namespace Engine;
 
-bool CheckInput(char c) {
+bool CheckInput(const char c) {
 	if (c != 'A' && c != 'a' && c != 'W' && c != 'w' && c != 'S' && c != 's' && c != 'D' && c != 'd' && c == 'Q' && c == 'q') {
 		DEBUG_LOG("input entered %c ", c);
 		printf("\\(O_O)/\n");

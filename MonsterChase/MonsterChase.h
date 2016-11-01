@@ -14,8 +14,8 @@ class MonsterChase{
 		const Engine::Vector2D PLAYER_SPEED_X = Engine::Vector2D(1, 0);
 		const Engine::Vector2D PLAYER_SPEED_Y = Engine::Vector2D(0, 1);
 		MonsterChase() {};
-		void UpdateMonsterLocation(Monster* monsterArray, int count);
-		void CheckMonsterToMonsterCollision(Monster* monsterArray, int monsterCount);
-		bool CheckPlayerToMonsterCollision(Player* player, Monster* monsterArray, int monsterCount);
+		void UpdateMonsterLocation(Monster* monsterArray, const int count);
+		void CheckMonsterToMonsterCollision(const Monster* monsterArray, const int monsterCount) const;
+		bool CheckPlayerToMonsterCollision(const Player* player, const Monster* monsterArray, const int monsterCount) const;
 };
 #endif // !MONSTERCHASE_H

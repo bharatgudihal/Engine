@@ -7,14 +7,14 @@
 #include "MonsterChase.h"
 #include "Monster\Monster.h"
 
-void MonsterChase::UpdateMonsterLocation(Monster* monsterArray, int count) {
+void MonsterChase::UpdateMonsterLocation(Monster* monsterArray, const int count) {
 	assert(monsterArray != NULL);
 	for (int i = 0; i < count; i++) {
 		monsterArray[i].Update(this);
 	}
 }
 
-void MonsterChase::CheckMonsterToMonsterCollision(Monster* monsterArray, int monsterCount) {
+void MonsterChase::CheckMonsterToMonsterCollision(const Monster* monsterArray, const int monsterCount) const {
 	for (int i = 0; i < monsterCount; i++) {
 		for (int j = i + 1; j < monsterCount; j++) {
 			if (monsterArray[i].getPosition() == monsterArray[j].getPosition()) {
@@ -27,7 +27,7 @@ void MonsterChase::CheckMonsterToMonsterCollision(Monster* monsterArray, int mon
 	}
 }
 
-bool MonsterChase::CheckPlayerToMonsterCollision(Player* player, Monster* monsterArray, int monsterCount) {
+bool MonsterChase::CheckPlayerToMonsterCollision(const Player* player, const Monster* monsterArray, const int monsterCount) const {
 	for (int i = 0; i < monsterCount; i++) {
 		if (player->getPosition() == monsterArray[i].getPosition()) {
 			DEBUG_LOG("Collision position [%f,%f] ", player->getPosition().X(), player->getPosition().Y());

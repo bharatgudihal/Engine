@@ -43,7 +43,7 @@ namespace Engine {
 		availableBlockDescriptorsCount++;
 	}
 
-	HeapManager::HeapManager(size_t blockSize, unsigned int numberOfBlockDescriptors) {
+	HeapManager::HeapManager(const size_t blockSize, const unsigned int numberOfBlockDescriptors) {
 		BLOCK_SIZE = blockSize;
 		NUMBER_OF_BLOCKDESCRIPTORS = numberOfBlockDescriptors;
 		BLOCK = _aligned_malloc(BLOCK_SIZE + sizeof(BlockDescriptor)*NUMBER_OF_BLOCKDESCRIPTORS, 4);
@@ -67,7 +67,7 @@ namespace Engine {
 		return newBlockDescriptor;
 	}
 
-	void* HeapManager::padBlockAndReturnPointer(BlockDescriptor* assignedBlock, size_t i_size) {
+	void* HeapManager::padBlockAndReturnPointer(BlockDescriptor* assignedBlock, const size_t i_size) {
 		char* pointer = static_cast<char*>(assignedBlock->base);
 		for (uint8_t i = 0; i < GUARD_BAND_SIZE; i++) {
 			*pointer = GUARD_BAND_FILL;
@@ -89,7 +89,7 @@ namespace Engine {
 		assignedBlocksList->next = head;
 	}
 
-	void HeapManager::removeBlockFromFreeBlocksList(BlockDescriptor* assignedBlock) {
+	void HeapManager::removeBlockFromFreeBlocksList(const BlockDescriptor* assignedBlock) {
 		BlockDescriptor* head = freeBlocksList;
 		while (head != nullptr) {
 			if (head == assignedBlock) {
@@ -104,7 +104,7 @@ namespace Engine {
 		}		
 	}
 
-	void* HeapManager::getPointerFromFreeBlocks(size_t i_size) {
+	void* HeapManager::getPointerFromFreeBlocks(const size_t i_size) {
 		void* memoryLocation = nullptr;
 		BlockDescriptor* head = freeBlocksList;
 		do {
@@ -173,7 +173,7 @@ namespace Engine {
 		DEBUG_LOG("====Garbage Collection Ended====\n");		
 	}
 
-	void * HeapManager::allocate(size_t i_size) {
+	void * HeapManager::allocate(const size_t i_size) {
 		void* ptr = nullptr;
 		assert(i_size <= BLOCK_SIZE);
 		if (availableBlockDescriptorsCount == 0) {
@@ -183,7 +183,7 @@ namespace Engine {
 		return ptr;
 	}
 
-	void HeapManager::checkGuardBands(void* i_ptr, BlockDescriptor* assignedBlock) {
+	void HeapManager::checkGuardBands(void* i_ptr, const BlockDescriptor* assignedBlock) {
 		char* pointer = static_cast<char*>(i_ptr);
 		pointer -= GUARD_BAND_SIZE;
 		size_t i;
@@ -203,7 +203,7 @@ namespace Engine {
 		}
 	}
 
-	HeapManager::BlockDescriptor* HeapManager::findBlockForPointer(void* ptr) {
+	HeapManager::BlockDescriptor* HeapManager::findBlockForPointer(const void* ptr) {
 		BlockDescriptor* assignedBlock = nullptr;
 		BlockDescriptor* head = assignedBlocksList;
 		BlockDescriptor* previousHead = nullptr;
@@ -267,7 +267,7 @@ namespace Engine {
 		return result;
 	}
 
-	void HeapManager::LogHeaps() {		
+	void HeapManager::LogHeaps() const {		
 		unsigned int count = 0;
 		DEBUG_LOG("==============Log Started==============\n");
 		DEBUG_LOG("Number of available block descriptors: %d\n", availableBlockDescriptorsCount);
@@ -293,7 +293,7 @@ namespace Engine {
 		DEBUG_LOG("==============Log Ended==============\n");
 	}
 
-	void HeapManager::ShowFreeBlocks() {
+	void HeapManager::ShowFreeBlocks() const {
 		size_t totalSize = 0;
 		BlockDescriptor* head = freeBlocksList;
 		unsigned int count = 0;		
@@ -310,7 +310,7 @@ namespace Engine {
 		}
 	}
 
-	void HeapManager::ShowOutstandingAllocations() {
+	void HeapManager::ShowOutstandingAllocations() const {
 		BlockDescriptor* head = assignedBlocksList;
 		size_t totalSize = 0;
 		unsigned int count = 0;
@@ -325,7 +325,7 @@ namespace Engine {
 		printf("Total size of allocated blocks: %zd\n", totalSize);
 	}	
 
-	bool HeapManager::IsAllocated(void* ptr) {
+	bool HeapManager::IsAllocated(const void* ptr) const {
 		bool result = false;		
 		BlockDescriptor* head = assignedBlocksList;		
 		while (head != nullptr) {
@@ -340,7 +340,7 @@ namespace Engine {
 		return result;
 	}
 
-	size_t HeapManager::GetLargestFreeBlock() {
+	size_t HeapManager::GetLargestFreeBlock() const {
 		size_t maxSize = 0;
 		BlockDescriptor* head = freeBlocksList;
 		while (head != nullptr) {

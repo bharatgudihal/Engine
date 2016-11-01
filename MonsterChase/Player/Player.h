@@ -8,6 +8,6 @@ class MonsterChase;
 class Player:public Engine::Actor {
 	public:
 		Player(char *i_name, Engine::Vector2D i_position) :Actor(i_name, i_position) {};
-		void Update(char c, MonsterChase* monsterChase);
+		void Update(const char c, const MonsterChase* monsterChase);
 };
 #endif // !PLAYER_H

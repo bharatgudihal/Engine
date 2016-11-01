@@ -7,8 +7,8 @@ namespace Engine {
 	public:
 		Actor() {};
 		Actor(char *i_name, Vector2D i_position);
-		inline char* getName();
-		inline Vector2D getPosition();
+		inline char* getName() const;
+		inline Vector2D getPosition() const;
 		inline void setPosition(const Vector2D newPosition);
 	private:
 		char *name;
