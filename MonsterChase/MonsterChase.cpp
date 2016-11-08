@@ -6,15 +6,17 @@
 #include "Logger\Logger.h"
 #include "MonsterChase.h"
 #include "Monster\Monster.h"
+#include "Actor\Actor.h"
 
-void MonsterChase::UpdateMonsterLocation(Monster* monsterArray, const int count) {
+void MonsterChase::UpdateMonsterLocation(Engine::Actor* monsterArray, const int count) {
 	assert(monsterArray != NULL);
 	for (int i = 0; i < count; i++) {
-		monsterArray[i].Update(this);
+		monsterController.SetActor(&monsterArray[i]);
+		monsterController.Update(NULL);
 	}
 }
 
-void MonsterChase::CheckMonsterToMonsterCollision(const Monster* monsterArray, const int monsterCount) const {
+void MonsterChase::CheckMonsterToMonsterCollision(const Engine::Actor* monsterArray, const int monsterCount) const {
 	for (int i = 0; i < monsterCount; i++) {
 		for (int j = i + 1; j < monsterCount; j++) {
 			if (monsterArray[i].getPosition() == monsterArray[j].getPosition()) {
@@ -27,7 +29,7 @@ void MonsterChase::CheckMonsterToMonsterCollision(const Monster* monsterArray, c
 	}
 }
 
-bool MonsterChase::CheckPlayerToMonsterCollision(const Player* player, const Monster* monsterArray, const int monsterCount) const {
+bool MonsterChase::CheckPlayerToMonsterCollision(const Engine::Actor* player, const Engine::Actor* monsterArray, const int monsterCount) const {
 	for (int i = 0; i < monsterCount; i++) {
 		if (player->getPosition() == monsterArray[i].getPosition()) {
 			DEBUG_LOG("Collision position [%f,%f] ", player->getPosition().X(), player->getPosition().Y());

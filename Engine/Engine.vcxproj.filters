@@ -36,6 +36,9 @@
     <ClInclude Include="Math\Vector2D_Inl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Controllers\ActorController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Math\Private\Vector2D.cpp">

@@ -9,6 +9,7 @@
 #include "Logger\Logger.h"
 #include "HeapManagerTest.h"
 #include "ConstChecker.h"
+#include "Monster\MonsterController.h"
 #include <stdlib.h>
 #include <crtdbg.h>
 #define _CRTDBG_MAP_ALLOC
@@ -29,9 +30,9 @@ int main() {
 	#ifdef _DEBUG
 		_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 	#endif // _DEBUG
-	HeapManager_UnitTest();
-	ConstChecker();	
-	/*MonsterChase monsterChase;
+	//HeapManager_UnitTest();
+	//ConstChecker();	
+	MonsterChase monsterChase;
 	printf("Please enter the number of monsters you want to start with: ");
 	int monsterCount;
 	scanf_s("%d", &monsterCount);
@@ -42,7 +43,7 @@ int main() {
 		scanf_s("%d", &monsterCount);
 		assert(monsterCount >= 1);
 	}
-	Monster monsterArray[50];
+	Engine::Actor monsterArray[50];
 	for (int i = 0; i < monsterCount; i++) {
 		printf("Enter the name of monster %d: ", i);
 		char monsterName[20];
@@ -52,7 +53,9 @@ int main() {
 	printf("Enter the player's name: ");
 	char playerName[20];
 	scanf_s("%s", playerName, 20);
-	Player player = Player(playerName,Vector2D(0,0));
+	Engine::Actor player = Engine::Actor(playerName,Vector2D(0,0));
+	PlayerController playerController;
+	playerController.SetActor(&player);
 	bool quitGame = false;
 	while (true) {
 		for (int i = 0; i < monsterCount; i++) {
@@ -68,7 +71,7 @@ int main() {
 		if (c == 'Q' || c == 'q') {
 			break;
 		}
-		player.Update(c, &monsterChase);
+		playerController.Update(c);
 		monsterChase.UpdateMonsterLocation(monsterArray, monsterCount);
 		monsterChase.CheckMonsterToMonsterCollision(monsterArray, monsterCount);
 		if (monsterChase.CheckPlayerToMonsterCollision(&player, monsterArray, monsterCount)) {
@@ -76,7 +79,7 @@ int main() {
 			_getch();
 			break;
 		}
-	}*/
+	}
 	_CrtDumpMemoryLeaks();
 	return 0;
 }
