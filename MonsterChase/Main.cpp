@@ -72,7 +72,7 @@ int main() {
 			break;
 		}
 		playerController.Update(c);
-		monsterChase.UpdateMonsterLocation(monsterArray, monsterCount);
+		monsterChase.UpdateMonsterLocation(monsterArray, monsterCount, &player);
 		monsterChase.CheckMonsterToMonsterCollision(monsterArray, monsterCount);
 		if (monsterChase.CheckPlayerToMonsterCollision(&player, monsterArray, monsterCount)) {
 			printf("Press any button to exit.");

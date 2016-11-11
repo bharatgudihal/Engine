@@ -1,3 +1,4 @@
+#include <math.h>
 namespace Engine {
 	inline float Vector2D::X() const { return x; }
 
@@ -23,5 +24,11 @@ namespace Engine {
 	inline Vector2D& Vector2D::operator-=(const Vector2D& rhs) {
 		*this = *this - rhs;
 		return *this;
+	}
+	inline float Vector2D::Magnitude() const {
+		return static_cast<float>((pow(x, 2) + pow(y, 2)));
+	}
+	inline Vector2D operator*(const Vector2D& lhs_vector, const float& rhs_float) {
+		return Vector2D(lhs_vector.X() * rhs_float, lhs_vector.Y() * rhs_float);
 	}
 }

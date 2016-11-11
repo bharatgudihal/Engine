@@ -8,11 +8,18 @@
 #include "Monster\Monster.h"
 #include "Actor\Actor.h"
 
-void MonsterChase::UpdateMonsterLocation(Engine::Actor* monsterArray, const int count) {
+void MonsterChase::UpdateMonsterLocation(Engine::Actor* monsterArray, const int count, const Engine::Actor* player) {
 	assert(monsterArray != NULL);
 	for (int i = 0; i < count; i++) {
-		monsterController.SetActor(&monsterArray[i]);
-		monsterController.Update(NULL);
+		if (i % 2 == 0) {
+			trackingMonsterController.SetActor(&monsterArray[i]);
+			trackingMonsterController.SetDirection(player);
+			trackingMonsterController.Update(NULL);
+		}
+		else {
+			monsterController.SetActor(&monsterArray[i]);
+			monsterController.Update(NULL);
+		}
 	}
 }
 

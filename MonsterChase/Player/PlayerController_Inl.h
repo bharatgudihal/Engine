@@ -1,3 +1,1 @@
-#include "PlayerController.h"
-
-inline void PlayerController::SetActor(Actor* actor) { player = actor; }
+inline void PlayerController::SetActor(Engine::Actor* actor) { player = actor; }

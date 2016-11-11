@@ -5,11 +5,11 @@
 using namespace Engine;
 class MonsterController:public IActorController {
 public:
-	inline void SetActor(Actor* actor) override;
+	inline void SetActor(Engine::Actor* actor) override;
 	void Update(const char input) override;
 private:
-	Actor* monster;
-	inline Vector2D GetRandomVector();
+	Engine::Actor* monster;
+	inline Vector2D GetRandomDirection() const;
 };
 #include "MonsterController_Inl.h"
 #endif // !MONSTERCONTROLLER_H

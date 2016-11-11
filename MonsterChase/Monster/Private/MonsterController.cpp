@@ -3,7 +3,7 @@ using namespace Engine;
 
 void MonsterController::Update(const char input) {
 	Vector2D currentPlayerPosition = monster->getPosition();
-	monster->setPosition(currentPlayerPosition + GetRandomVector());
+	monster->setPosition(currentPlayerPosition + GetRandomDirection());
 	if (monster->getPosition().X() > GRIDSIZE) {
 		monster->getPosition().X(GRIDSIZE);
 	}

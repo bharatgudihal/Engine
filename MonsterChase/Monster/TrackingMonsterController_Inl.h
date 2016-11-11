@@ -1,0 +1,2 @@
+inline void TrackingMonsterController::SetActor(Engine::Actor* actor) { monster = actor; }
+inline void TrackingMonsterController::Update(const char c) { monster->setPosition(monster->getPosition() + monster->getDirection() * speed); }

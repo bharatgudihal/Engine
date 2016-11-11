@@ -11,12 +11,15 @@ namespace Engine {
 		inline void Y(const float iY);
 		inline Vector2D& operator+=(const Vector2D&);
 		inline Vector2D& operator-=(const Vector2D&);
+		inline float Magnitude() const;
+		void Normalize();
 	private:
 		float x, y;
 	};
 	inline Vector2D operator+(const Vector2D&, const Vector2D&);
 	inline Vector2D operator-(const Vector2D&, const Vector2D&);
 	inline bool operator==(const Vector2D&, const Vector2D&);
+	inline Vector2D operator*(const Vector2D&, const float&);
 }
 #include "Vector2D_Inl.h"
 #endif // !VECTOR2D_H
