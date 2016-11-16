@@ -32,7 +32,4 @@ static const uint8_t HEAP_PATTERN = 0xAA;
 static const uint8_t DEFAULT_ALIGNMENT = 4;
 
 Engine::HeapManager* getDefaultHeapManager(Engine::HeapManager* i_heapManager);
-//inline void setDefaultHeapManager(Engine::HeapManager* i_heapManager);
-
-#include "Allocators_Inl.h"
 #endif
