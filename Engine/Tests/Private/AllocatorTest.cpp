@@ -18,24 +18,25 @@ bool startAllocatorTest() {
 	Actor* allignedActors = new (16)Actor[20];
 	assert(allignedActors);
 	delete[] allignedActors;
+	void* heapManagerPointer = _aligned_malloc(sizeof(Engine::HeapManager), 4);
 	// Create heap manager
-	HeapManager* pHeapManager = HeapManager::create(1024, 16);
+	Engine::HeapManager* testHeapManager = Engine::HeapManager::create(heapManagerPointer, 1024, 16);
 	// Actor with heap manager
-	Actor* heapActor = new (pHeapManager)Actor("Test", Vector2D::ZERO);
+	Actor* heapActor = new (testHeapManager)Actor("Test", Vector2D::ZERO);
 	assert(heapActor);
 	delete heapActor;
 	// Actor array with heap manager
-	Actor* heapActors = new (pHeapManager)Actor[20];
+	Actor* heapActors = new (testHeapManager)Actor[20];
 	assert(heapActors);
 	delete[] heapActors;
 	// Actor with heap manager and alignment
-	Actor* heapAllignedActor = new (pHeapManager,16)Actor("Test", Vector2D::ZERO);
+	Actor* heapAllignedActor = new (testHeapManager,16)Actor("Test", Vector2D::ZERO);
 	assert(heapAllignedActor);
 	delete heapAllignedActor;
 	// Actor array with heap manager and alignment
-	Actor* heapAllignedActors = new (pHeapManager,16)Actor[20];
+	Actor* heapAllignedActors = new (testHeapManager,16)Actor[20];
 	assert(heapAllignedActors);
 	delete[] heapAllignedActors;
-	delete pHeapManager;
+	delete testHeapManager;
 	return true;
 }

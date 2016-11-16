@@ -8,9 +8,9 @@ bool HeapManager_UnitTest()
 
 	const size_t 		sizeHeap = 1024 * 1024;
 	const unsigned int 	numDescriptors = 2048;
-
+	void* heapManagerMemory = _aligned_malloc(sizeof(HeapManager), 4);
 	// Create a heap manager for my test heap.
-	HeapManager* pHeapManager = HeapManager::create(sizeHeap, numDescriptors);
+	HeapManager* pHeapManager = HeapManager::create(heapManagerMemory,sizeHeap, numDescriptors);
 
 
 #ifdef TEST_SINGLE_LARGE_ALLOCATION

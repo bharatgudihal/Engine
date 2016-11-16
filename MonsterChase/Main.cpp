@@ -13,6 +13,7 @@
 #include "Tests\HeapManagerTest.h"
 #include "Tests\ConstChecker.h"
 #include "Tests\AllocatorTest.h"
+#include "Memory\Allocators.h"
 #define _CRTDBG_MAP_ALLOC
 //#define HEAPMANAGERTEST
 //#define CONSTTEST
@@ -32,6 +33,12 @@ bool CheckInput(const char c) {
 }
 
 int main() {
+	void* heapManagerMemory = _aligned_malloc(sizeof(HeapManager),4);
+	HeapManager* heapManager = HeapManager::create(heapManagerMemory, 1024, 16);
+	getDefaultHeapManager(heapManager);
+	Engine::Actor* actor = new Engine::Actor("Test", Vector2D::ZERO);
+	assert(actor);
+	delete actor;
 	#ifdef _DEBUG
 		_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 	#endif // _DEBUG
@@ -94,6 +101,7 @@ int main() {
 		}
 	}
 #endif
+	delete heapManager;
 	_CrtDumpMemoryLeaks();
 	return 0;
 }

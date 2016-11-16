@@ -6,10 +6,10 @@
 	#define GUARD_BAND_SIZE 0	
 #endif // _DEBUG
 #include <stdint.h>
-#include "..\Logger\Logger.h"
 #include <assert.h>
 #include <malloc.h>
 #include <algorithm>
+#include "..\Logger\Logger.h"
 
 #define MIN_BLOCK_SIZE 16
 
@@ -17,7 +17,7 @@ namespace Engine {
 	class HeapManager {
 	public:
 		~HeapManager();
-		inline static HeapManager* create(const size_t blockSize, const uint16_t numberOfBlockDescriptors);
+		inline static HeapManager* create(void* i_ptr,const size_t blockSize, const uint16_t numberOfBlockDescriptors);
 		void* allocate(const size_t size);
 		void* allocate(const size_t size, const uint8_t alignment);
 		bool free(void * pointer);

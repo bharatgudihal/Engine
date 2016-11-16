@@ -26,6 +26,7 @@
     <ClInclude Include="Math\Vector2D.h" />
     <ClInclude Include="Math\Vector2D_Inl.h" />
     <ClInclude Include="Memory\Allocators.h" />
+    <ClInclude Include="Memory\Allocators_Inl.h" />
     <ClInclude Include="Memory\HeapManager.h" />
     <ClInclude Include="Memory\HeapManager_Inl.h" />
     <ClInclude Include="Tests\AllocatorTest.h" />
