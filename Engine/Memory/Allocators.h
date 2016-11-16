@@ -14,8 +14,17 @@ void operator delete[](void* i_ptr);
 void* operator new (size_t i_size, uint8_t alignment);
 void operator delete (void* i_ptr, uint8_t alignment);
 
+void* operator new[](size_t i_size, uint8_t alignment);
+void operator delete[](void* i_ptr, uint8_t alignment);
+
 void* operator new (size_t i_size, Engine::HeapManager* pHeapManager);
 void operator delete (void* i_ptr, Engine::HeapManager* pHeapManager);
 
+void* operator new[](size_t i_size, Engine::HeapManager* pHeapManager);
+void operator delete[](void* i_ptr, Engine::HeapManager* pHeapManager);
+
 void* operator new (size_t i_size, Engine::HeapManager* pHeapManager, uint8_t alignment);
 void operator delete (void* i_ptr, Engine::HeapManager* pHeapManager, uint8_t alignment);
+
+void* operator new[](size_t i_size, Engine::HeapManager* pHeapManager, uint8_t alignment);
+void operator delete[](void* i_ptr, Engine::HeapManager* pHeapManager, uint8_t alignment);
