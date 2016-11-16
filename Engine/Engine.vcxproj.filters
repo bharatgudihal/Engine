@@ -51,9 +51,6 @@
     <ClInclude Include="Tests\AllocatorTest.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Memory\Allocators_Inl.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Math\Private\Vector2D.cpp">
