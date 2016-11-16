@@ -13,6 +13,8 @@
 #include <stdlib.h>
 #include <crtdbg.h>
 #define _CRTDBG_MAP_ALLOC
+//#define TEST
+#define MONSTERCHASE
 using namespace std;
 using namespace Engine;
 
@@ -30,8 +32,11 @@ int main() {
 	#ifdef _DEBUG
 		_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 	#endif // _DEBUG
-	//HeapManager_UnitTest();
+#ifdef TEST
+	HeapManager_UnitTest();
 	//ConstChecker();	
+#endif
+#ifdef MONSTERCHASE
 	MonsterChase monsterChase;
 	printf("Please enter the number of monsters you want to start with: ");
 	int monsterCount;
@@ -80,6 +85,7 @@ int main() {
 			break;
 		}
 	}
+#endif
 	_CrtDumpMemoryLeaks();
 	return 0;
 }

@@ -5,14 +5,14 @@
 #else
 	#define GUARD_BAND_SIZE 0	
 #endif // _DEBUG
-
+#include <stdint.h>
 
 #define MIN_BLOCK_SIZE 16
 
 namespace Engine {
 	class HeapManager {
 	public:
-		HeapManager(const size_t blockSize, const unsigned int numberOfBlockDescriptors);
+		HeapManager(const size_t blockSize, const uint16_t numberOfBlockDescriptors);
 		~HeapManager();
 		void* allocate(const size_t size);
 		bool free(void * pointer);
@@ -32,10 +32,10 @@ namespace Engine {
 			void* base;
 		};
 		size_t BLOCK_SIZE;
-		unsigned int NUMBER_OF_BLOCKDESCRIPTORS;
-		unsigned char GUARD_BAND_FILL = 0xBB;
-		unsigned char FREE_BLOCKS_FILL = 0xCD;
-		unsigned int availableBlockDescriptorsCount;
+		uint16_t NUMBER_OF_BLOCKDESCRIPTORS;
+		uint8_t GUARD_BAND_FILL = 0xBB;
+		uint8_t FREE_BLOCKS_FILL = 0xCD;
+		uint16_t availableBlockDescriptorsCount;
 		void* BLOCK;
 		void* BLOCKDESCRIPTOR_POOL;
 		BlockDescriptor* freeBlocksList;

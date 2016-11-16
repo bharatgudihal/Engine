@@ -10,7 +10,7 @@ namespace Engine {
 		startingPointer += BLOCK_SIZE;
 		uninitializedBlocksList = (BlockDescriptor*)startingPointer;
 		BlockDescriptor* head = (BlockDescriptor*)startingPointer;		
-		for (unsigned int i = 0; i < NUMBER_OF_BLOCKDESCRIPTORS; i++) {
+		for (uint16_t i = 0; i < NUMBER_OF_BLOCKDESCRIPTORS; i++) {
 			head->base = nullptr;
 			head->size = 0;
 			head->userSize = 0;
@@ -43,7 +43,7 @@ namespace Engine {
 		availableBlockDescriptorsCount++;
 	}
 
-	HeapManager::HeapManager(const size_t blockSize, const unsigned int numberOfBlockDescriptors) {
+	HeapManager::HeapManager(const size_t blockSize, const uint16_t numberOfBlockDescriptors) {
 		BLOCK_SIZE = blockSize;
 		NUMBER_OF_BLOCKDESCRIPTORS = numberOfBlockDescriptors;
 		BLOCK = _aligned_malloc(BLOCK_SIZE + sizeof(BlockDescriptor)*NUMBER_OF_BLOCKDESCRIPTORS, 4);
@@ -269,7 +269,7 @@ namespace Engine {
 	}
 
 	void HeapManager::LogHeaps() const {		
-		unsigned int count = 0;
+		uint16_t count = 0;
 		DEBUG_LOG("==============Log Started==============\n");
 		DEBUG_LOG("Number of available block descriptors: %d\n", availableBlockDescriptorsCount);
 		BlockDescriptor* head = freeBlocksList;
@@ -297,7 +297,7 @@ namespace Engine {
 	void HeapManager::ShowFreeBlocks() const {
 		size_t totalSize = 0;
 		BlockDescriptor* head = freeBlocksList;
-		unsigned int count = 0;		
+		uint16_t count = 0;
 		while (head != nullptr) {
 			count++;
 			printf("Free block number: %d \n", count);
@@ -314,7 +314,7 @@ namespace Engine {
 	void HeapManager::ShowOutstandingAllocations() const {
 		BlockDescriptor* head = assignedBlocksList;
 		size_t totalSize = 0;
-		unsigned int count = 0;
+		uint16_t count = 0;
 		while (head != nullptr) {
 			count++;
 			printf("Assigned block number: %d \n", count);
