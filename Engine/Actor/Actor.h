@@ -1,6 +1,7 @@
 #ifndef ACTOR_H
 #define ACTOR_H
 #include "..\Math\Vector2D.h"
+#include <string.h>
 
 namespace Engine {
 	class Actor {

@@ -67,8 +67,8 @@ namespace Engine {
 		return newBlockDescriptor;
 	}
 
-	void* HeapManager::padBlockAndReturnPointer(BlockDescriptor* assignedBlock, const size_t i_size) {
-		char* pointer = static_cast<char*>(assignedBlock->base);
+	void* HeapManager::padBlockAndReturnPointer(char* assignedPointer, const size_t i_size) {
+		char* pointer = assignedPointer;
 		for (uint8_t i = 0; i < GUARD_BAND_SIZE; i++) {
 			*pointer = GUARD_BAND_FILL;
 			pointer++;
@@ -78,7 +78,7 @@ namespace Engine {
 			*pointer = GUARD_BAND_FILL;
 			pointer++;
 		}
-		pointer = static_cast<char*>(assignedBlock->base);
+		pointer = assignedPointer;
 		return pointer + GUARD_BAND_SIZE;
 	}
 
@@ -104,24 +104,25 @@ namespace Engine {
 		}		
 	}
 
-	void* HeapManager::getPointerFromFreeBlocks(const size_t i_size) {
+	void* HeapManager::getPointerFromFreeBlocks(const size_t i_size, const uint8_t alignment) {
 		void* memoryLocation = nullptr;
 		BlockDescriptor* head = freeBlocksList;
 		do {
 			if (head->size > i_size + GUARD_BAND_SIZE * 2) {
 				char* pointer = static_cast<char*>(head->base) + head->size - 1 - GUARD_BAND_SIZE - i_size;				
-				pointer = reinterpret_cast<size_t>(pointer) % 4 == 0 ? pointer : pointer - ((reinterpret_cast<size_t>(pointer) % 4));
+				pointer = reinterpret_cast<size_t>(pointer) % alignment == 0 ? pointer : pointer - ((reinterpret_cast<size_t>(pointer) % alignment));
 				pointer -= GUARD_BAND_SIZE;
 				ptrdiff_t blockSize = static_cast<char*>(head->base) + head->size - 1 - static_cast<char*>(pointer);
 				if (pointer > head->base && (pointer + blockSize) < (static_cast<char*>(head->base) + head->size)) {
 					BlockDescriptor* assignedBlock;
 					if (pointer - static_cast<char*>(head->base) >= MIN_BLOCK_SIZE) {
 						assignedBlock = splitAndReturnBlock(head, pointer);
+						memoryLocation = padBlockAndReturnPointer(static_cast<char*>(assignedBlock->base), i_size);
 					}
 					else {
 						assignedBlock = head;
+						memoryLocation = padBlockAndReturnPointer(pointer, i_size);
 					}
-					memoryLocation = padBlockAndReturnPointer(assignedBlock, i_size);
 					assert(!IsAllocated(memoryLocation));
 					removeBlockFromFreeBlocksList(assignedBlock);
 					assignedBlock->userSize = i_size;					
@@ -173,14 +174,19 @@ namespace Engine {
 		}
 	}
 
-	void * HeapManager::allocate(const size_t i_size) {
+	void * HeapManager::allocate(const size_t i_size, const uint8_t alignment) {
 		void* ptr = nullptr;
 		assert(i_size <= BLOCK_SIZE);
 		if (availableBlockDescriptorsCount == 0) {
 			return ptr;
 		}		
-		ptr = getPointerFromFreeBlocks(i_size);
+		ptr = getPointerFromFreeBlocks(i_size, alignment);
 		return ptr;
+	}
+
+	void * HeapManager::allocate(const size_t i_size) {
+		uint8_t alignment = 4;
+		return allocate(i_size, alignment);
 	}
 
 	void HeapManager::checkGuardBands(void* i_ptr, const BlockDescriptor* assignedBlock) {
@@ -188,7 +194,7 @@ namespace Engine {
 		pointer -= GUARD_BAND_SIZE;
 		size_t i;
 		for (i = 0; i < GUARD_BAND_SIZE; i++) {
-			assert((unsigned char)*pointer == GUARD_BAND_FILL);
+			assert(static_cast<uint8_t>(*pointer) == GUARD_BAND_FILL);
 			*pointer = FREE_BLOCKS_FILL;
 			pointer++;
 		}
@@ -197,7 +203,7 @@ namespace Engine {
 			pointer++;
 		}
 		for (i = 0; i < GUARD_BAND_SIZE; i++) {
-			assert((unsigned char)*pointer == GUARD_BAND_FILL);
+			assert(static_cast<uint8_t>(*pointer) == GUARD_BAND_FILL);
 			*pointer = FREE_BLOCKS_FILL;
 			pointer++;
 		}
@@ -243,6 +249,8 @@ namespace Engine {
 				else {
 					freeBlocksList = assignedBlock;
 					freeBlocksList->next = head;
+					isInserted = true;
+					break;
 				}
 			}
 			else {

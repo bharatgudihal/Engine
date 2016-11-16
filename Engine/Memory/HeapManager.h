@@ -15,6 +15,7 @@ namespace Engine {
 		HeapManager(const size_t blockSize, const uint16_t numberOfBlockDescriptors);
 		~HeapManager();
 		void* allocate(const size_t size);
+		void* allocate(const size_t size, const uint8_t alignment);
 		bool free(void * pointer);
 		void runGarbageCollector();
 		void ShowFreeBlocks() const;
@@ -41,12 +42,12 @@ namespace Engine {
 		BlockDescriptor* freeBlocksList;
 		BlockDescriptor* assignedBlocksList;
 		BlockDescriptor* uninitializedBlocksList;
-		void* getPointerFromFreeBlocks(const size_t size);
+		void* getPointerFromFreeBlocks(const size_t size, const uint8_t alignment);
 		BlockDescriptor* splitAndReturnBlock(BlockDescriptor* block, void* splitLocation);
 		void initializeBlockDescriptors();
 		BlockDescriptor* getUninitializedBlock();
 		void returnBlockToUninitializedList(BlockDescriptor* i_blockDescriptor);
-		void* padBlockAndReturnPointer(BlockDescriptor* assignedBlock, const size_t i_size);
+		void* padBlockAndReturnPointer(char* assignedPointer, const size_t i_size);
 		void putBlockInAssignedBlockList(BlockDescriptor* assignedBlock);
 		void removeBlockFromFreeBlocksList(const BlockDescriptor* assignedBlock);
 		BlockDescriptor* findBlockForPointer(const void* ptr);

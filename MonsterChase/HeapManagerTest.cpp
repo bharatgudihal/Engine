@@ -67,19 +67,19 @@ bool HeapManager_UnitTest()
 	// allocate memory of random sizes up to 1024 bytes from the heap manager
 	// until it runs out of memory
 	do
-	{
+	{		
 		const size_t		maxTestAllocationSize = 1024;
 
-		//const unsigned int	alignments[] = { 4, 8, 16, 32, 64 };
+		const unsigned int	alignments[] = { 4, 8, 16, 32, 64 };
 
-		//unsigned int	index = rand() % (sizeof(alignments) / sizeof(alignments[0]));
+		unsigned int	index = rand() % (sizeof(alignments) / sizeof(alignments[0]));
 
-		//unsigned int	alignment = alignments[index];
-		unsigned int	alignment = 4;
+		unsigned int	alignment = alignments[index];
+		//unsigned int	alignment = 4;
 
 		size_t			sizeAlloc = 1 + (rand() & (maxTestAllocationSize - 1));
 
-		void * pPtr = pHeapManager.allocate(sizeAlloc);
+		void * pPtr = pHeapManager.allocate(sizeAlloc,alignment);
 
 		assert((reinterpret_cast<uintptr_t>(pPtr) & (alignment - 1)) == 0);
 
