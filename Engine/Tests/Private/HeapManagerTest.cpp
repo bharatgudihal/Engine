@@ -177,8 +177,7 @@ bool HeapManager_UnitTest()
 
 		}
 	}
-	// we succeeded	
-	pHeapManager->destroy();
+	// we succeeded
 	delete pHeapManager;
 	return true;
 }

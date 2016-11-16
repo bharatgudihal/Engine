@@ -6,8 +6,4 @@ namespace Engine {
 	inline HeapManager* HeapManager::create(const size_t blockSize, const uint16_t numberOfBlockDescriptors) {
 		return new HeapManager(blockSize, numberOfBlockDescriptors);
 	}
-
-	inline void HeapManager::destroy() {
-		_aligned_free(BLOCK);
-	}
 }

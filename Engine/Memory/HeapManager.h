@@ -18,7 +18,6 @@ namespace Engine {
 	public:
 		~HeapManager();
 		inline static HeapManager* create(const size_t blockSize, const uint16_t numberOfBlockDescriptors);
-		inline void destroy();
 		void* allocate(const size_t size);
 		void* allocate(const size_t size, const uint8_t alignment);
 		bool free(void * pointer);

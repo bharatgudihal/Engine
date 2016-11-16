@@ -19,7 +19,7 @@ bool startAllocatorTest() {
 	assert(allignedActors);
 	delete[] allignedActors;
 	// Create heap manager
-	HeapManager* pHeapManager = HeapManager::create(1024, 8);
+	HeapManager* pHeapManager = HeapManager::create(1024, 16);
 	// Actor with heap manager
 	Actor* heapActor = new (pHeapManager)Actor("Test", Vector2D::ZERO);
 	assert(heapActor);
@@ -36,7 +36,6 @@ bool startAllocatorTest() {
 	Actor* heapAllignedActors = new (pHeapManager,16)Actor[20];
 	assert(heapAllignedActors);
 	delete[] heapAllignedActors;
-	pHeapManager->destroy();
 	delete pHeapManager;
 	return true;
 }

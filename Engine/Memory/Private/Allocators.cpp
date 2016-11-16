@@ -2,7 +2,25 @@
 
 void* operator new (size_t i_size) {
 	DEBUG_LOG("Allocating pointer for size %d\n", i_size);
-	return _aligned_malloc(i_size, 4);
+	uint8_t* pointer;
+	if (m_heapManager) {
+		size_t totalSize = i_size + sizeof(m_heapManager) + sizeof(HEAP_PATTERN);
+		pointer = static_cast<uint8_t*>(m_heapManager->allocate(totalSize));
+		if (!pointer) {
+			m_heapManager->runGarbageCollector();
+			pointer = static_cast<uint8_t*>(m_heapManager->allocate(totalSize));
+			assert(pointer);
+		}
+		Engine::HeapManager** temp = reinterpret_cast<Engine::HeapManager**>(pointer);
+		*temp = m_heapManager;
+		pointer += sizeof(m_heapManager);
+		*pointer = HEAP_PATTERN;
+		pointer += sizeof(HEAP_PATTERN);
+	}
+	else {
+		pointer = static_cast<uint8_t*>(_aligned_malloc(i_size, 4));
+	}
+	return pointer;
 }
 
 void operator delete (void* i_ptr) {
@@ -22,7 +40,25 @@ void operator delete (void* i_ptr) {
 
 void* operator new[](size_t i_size) {
 	DEBUG_LOG("Allocating array pointer for size %d\n", i_size);
-	return _aligned_malloc(i_size, 4);
+	uint8_t* pointer;
+	if (m_heapManager) {
+		size_t totalSize = i_size + sizeof(m_heapManager) + sizeof(HEAP_PATTERN);
+		pointer = static_cast<uint8_t*>(m_heapManager->allocate(totalSize));
+		if (!pointer) {
+			m_heapManager->runGarbageCollector();
+			pointer = static_cast<uint8_t*>(m_heapManager->allocate(totalSize));
+			assert(pointer);
+		}
+		Engine::HeapManager** temp = reinterpret_cast<Engine::HeapManager**>(pointer);
+		*temp = m_heapManager;
+		pointer += sizeof(m_heapManager);
+		*pointer = HEAP_PATTERN;
+		pointer += sizeof(HEAP_PATTERN);
+	}
+	else {
+		pointer = static_cast<uint8_t*>(_aligned_malloc(i_size, 4));
+	}
+	return pointer;
 }
 
 void operator delete[](void* i_ptr) {
@@ -42,7 +78,25 @@ void operator delete[](void* i_ptr) {
 
 void* operator new (size_t i_size, uint8_t alignment) {
 	DEBUG_LOG("Allocating pointer for size %d and alignment %d\n", i_size, alignment);
-	return _aligned_malloc(i_size, alignment);
+	uint8_t* pointer;
+	if (m_heapManager) {
+		size_t totalSize = i_size + sizeof(m_heapManager) + sizeof(HEAP_PATTERN);
+		pointer = static_cast<uint8_t*>(m_heapManager->allocate(totalSize,alignment));
+		if (!pointer) {
+			m_heapManager->runGarbageCollector();
+			pointer = static_cast<uint8_t*>(m_heapManager->allocate(totalSize));
+			assert(pointer);
+		}
+		Engine::HeapManager** temp = reinterpret_cast<Engine::HeapManager**>(pointer);
+		*temp = m_heapManager;
+		pointer += sizeof(m_heapManager);
+		*pointer = HEAP_PATTERN;
+		pointer += sizeof(HEAP_PATTERN);
+	}
+	else {
+		pointer = static_cast<uint8_t*>(_aligned_malloc(i_size, alignment));
+	}
+	return pointer;
 }
 
 void operator delete (void* i_ptr, uint8_t alignment) {
@@ -53,7 +107,25 @@ void operator delete (void* i_ptr, uint8_t alignment) {
 
 void* operator new[](size_t i_size, uint8_t alignment) {
 	DEBUG_LOG("Allocating array pointer for size %d and alignment %d\n", i_size, alignment);
-	return _aligned_malloc(i_size, 4);
+	uint8_t* pointer;
+	if (m_heapManager) {
+		size_t totalSize = i_size + sizeof(m_heapManager) + sizeof(HEAP_PATTERN);
+		pointer = static_cast<uint8_t*>(m_heapManager->allocate(totalSize, alignment));
+		if (!pointer) {
+			m_heapManager->runGarbageCollector();
+			pointer = static_cast<uint8_t*>(m_heapManager->allocate(totalSize));
+			assert(pointer);
+		}
+		Engine::HeapManager** temp = reinterpret_cast<Engine::HeapManager**>(pointer);
+		*temp = m_heapManager;
+		pointer += sizeof(m_heapManager);
+		*pointer = HEAP_PATTERN;
+		pointer += sizeof(HEAP_PATTERN);
+	}
+	else {
+		pointer = static_cast<uint8_t*>(_aligned_malloc(i_size, alignment));
+	}
+	return pointer;
 }
 
 void operator delete[](void* i_ptr, uint8_t alignment) {

@@ -28,3 +28,5 @@ void operator delete (void* i_ptr, Engine::HeapManager* pHeapManager, uint8_t al
 
 void* operator new[](size_t i_size, Engine::HeapManager* pHeapManager, uint8_t alignment);
 void operator delete[](void* i_ptr, Engine::HeapManager* pHeapManager, uint8_t alignment);
+
+static Engine::HeapManager* m_heapManager = Engine::HeapManager::create(1024, 16);
