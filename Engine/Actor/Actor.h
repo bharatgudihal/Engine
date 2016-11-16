@@ -15,8 +15,8 @@ namespace Engine {
 		inline void setDirection(const Vector2D newDirection);
 	private:
 		char *name;
-		Vector2D position = Vector2D(0, 0);
-		Vector2D direction = Vector2D(0, 0);
+		Vector2D position = Vector2D::ZERO;
+		Vector2D direction = Vector2D::ZERO;
 	};
 }
 #include "Actor_Inl.h"

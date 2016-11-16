@@ -1,9 +1,6 @@
-#include <assert.h>
-#include <algorithm>
-#include <vector>
-#include "Memory\HeapManager.h"
 #define TEST_SINGLE_LARGE_ALLOCATION
 #define __TRACK_ALLOCATIONS
+#include "../HeapManagerTest.h"
 using namespace Engine;
 
 bool HeapManager_UnitTest()
@@ -182,6 +179,6 @@ bool HeapManager_UnitTest()
 	}
 	// we succeeded	
 	pHeapManager->destroy();
-	free(pHeapManager);
+	delete pHeapManager;
 	return true;
 }

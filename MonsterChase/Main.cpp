@@ -2,25 +2,28 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
+#include <stdlib.h>
+#include <crtdbg.h>
 #include "Player\Player.h"
 #include "Math\Vector2D.h"
 #include "Monster\Monster.h"
 #include "MonsterChase.h"
 #include "Logger\Logger.h"
-#include "HeapManagerTest.h"
-#include "ConstChecker.h"
 #include "Monster\MonsterController.h"
-#include <stdlib.h>
-#include <crtdbg.h>
+#include "Tests\HeapManagerTest.h"
+#include "Tests\ConstChecker.h"
+#include "Tests\AllocatorTest.h"
 #define _CRTDBG_MAP_ALLOC
-//#define TEST
-#define MONSTERCHASE
+//#define HEAPMANAGERTEST
+//#define CONSTTEST
+#define ALLOCATORTEST
+//#define MONSTERCHASE
 using namespace std;
 using namespace Engine;
 
 bool CheckInput(const char c) {
 	if (c != 'A' && c != 'a' && c != 'W' && c != 'w' && c != 'S' && c != 's' && c != 'D' && c != 'd' && c == 'Q' && c == 'q') {
-		DEBUG_LOG("input entered %c ", c);
+		DEBUG_LOG("input entered %c ", c);		
 		printf("\\(O_O)/\n");
 		printf("Wrong Input! Read the instructions and try again dummy!\n");
 		return false;
@@ -32,9 +35,14 @@ int main() {
 	#ifdef _DEBUG
 		_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 	#endif // _DEBUG
-#ifdef TEST
-	HeapManager_UnitTest();
-	//ConstChecker();	
+#ifdef HEAPMANAGERTEST
+	HeapManager_UnitTest();		
+#endif
+#ifdef CONSTTEST
+	ConstChecker();
+#endif
+#ifdef ALLOCATORTEST
+	startAllocatorTest();
 #endif
 #ifdef MONSTERCHASE
 	MonsterChase monsterChase;

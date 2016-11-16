@@ -2,7 +2,8 @@
 #include <conio.h>
 #include <stdio.h>
 namespace Engine {
-	Vector2D::Vector2D(const float iX, const float iY) :x(iX), y(iY) {};
+
+	const Vector2D Vector2D::ZERO(0.0f, 0.0f);
 
 	void Vector2D::Normalize() {
 		float magnitude = Magnitude();

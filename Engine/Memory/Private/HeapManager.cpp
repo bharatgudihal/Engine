@@ -1,8 +1,5 @@
 #include "..\HeapManager.h"
-#include "..\..\Logger\Logger.h"
-#include <assert.h>
-#include <malloc.h>
-#include <algorithm>
+
 
 namespace Engine {
 	void HeapManager::initializeBlockDescriptors() {
@@ -361,7 +358,7 @@ namespace Engine {
 		return maxSize;
 	}
 
-	HeapManager::~HeapManager() {
-		_aligned_free(BLOCK);
+	HeapManager::~HeapManager() {		
+		
 	}
 }

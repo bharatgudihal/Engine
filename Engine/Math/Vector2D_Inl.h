@@ -1,5 +1,8 @@
 #include <math.h>
 namespace Engine {
+
+	inline 	Vector2D::Vector2D(const float iX, const float iY) :x(iX), y(iY) {};
+
 	inline float Vector2D::X() const { return x; }
 
 	inline void Vector2D::X(const float iX) { x = iX; }

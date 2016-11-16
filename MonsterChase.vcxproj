@@ -156,8 +156,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="MonsterChase\ConstChecker.cpp" />
-    <ClCompile Include="MonsterChase\HeapManagerTest.cpp" />
     <ClCompile Include="MonsterChase\Main.cpp" />
     <ClCompile Include="MonsterChase\MonsterChase.cpp" />
     <ClCompile Include="MonsterChase\Monster\Private\MonsterController.cpp" />
@@ -170,8 +168,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="MonsterChase\ConstChecker.h" />
-    <ClInclude Include="MonsterChase\HeapManagerTest.h" />
     <ClInclude Include="MonsterChase\MonsterChase.h" />
     <ClInclude Include="MonsterChase\Monster\MonsterController.h" />
     <ClInclude Include="MonsterChase\Monster\MonsterController_Inl.h" />

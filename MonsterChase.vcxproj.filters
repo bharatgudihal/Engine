@@ -21,12 +21,6 @@
     <ClCompile Include="MonsterChase\MonsterChase.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MonsterChase\HeapManagerTest.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MonsterChase\ConstChecker.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="MonsterChase\Monster\Private\MonsterController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -39,12 +33,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MonsterChase\MonsterChase.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MonsterChase\HeapManagerTest.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MonsterChase\ConstChecker.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MonsterChase\Player\PlayerController.h">
