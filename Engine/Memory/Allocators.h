@@ -31,5 +31,5 @@ void operator delete[](void* i_ptr, Engine::HeapManager* pHeapManager, uint8_t a
 static const uint8_t HEAP_PATTERN = 0xAA;
 static const uint8_t DEFAULT_ALIGNMENT = 4;
 
-Engine::HeapManager* getDefaultHeapManager(Engine::HeapManager* i_heapManager);
+Engine::HeapManager* DefaultHeapManager(Engine::HeapManager* i_heapManager);
 #endif

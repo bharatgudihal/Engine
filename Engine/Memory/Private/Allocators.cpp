@@ -1,6 +1,6 @@
 #include "../Allocators.h"
 
-Engine::HeapManager* getDefaultHeapManager(Engine::HeapManager* i_heapManager) {
+Engine::HeapManager* DefaultHeapManager(Engine::HeapManager* i_heapManager) {
 	static Engine::HeapManager* m_heapManager = nullptr;
 	if (!m_heapManager) {
 		m_heapManager = i_heapManager;
@@ -10,7 +10,7 @@ Engine::HeapManager* getDefaultHeapManager(Engine::HeapManager* i_heapManager) {
 
 void* operator new (const size_t i_size) {
 	DEBUG_LOG("Allocating pointer for size %d\n", i_size);
-	Engine::HeapManager* m_heapManager = getDefaultHeapManager(nullptr);
+	Engine::HeapManager* m_heapManager = DefaultHeapManager(nullptr);
 	size_t totalSize = i_size + sizeof(m_heapManager) + sizeof(HEAP_PATTERN);
 	uint8_t* pointer = static_cast<uint8_t*>(m_heapManager->allocate(totalSize,DEFAULT_ALIGNMENT));
 	if (!pointer) {
@@ -43,7 +43,7 @@ void operator delete (void* i_ptr) {
 
 void* operator new[](size_t i_size) {
 	DEBUG_LOG("Allocating array pointer for size %d\n", i_size);
-	Engine::HeapManager* m_heapManager = getDefaultHeapManager(nullptr);
+	Engine::HeapManager* m_heapManager = DefaultHeapManager(nullptr);
 	size_t totalSize = i_size + sizeof(m_heapManager) + sizeof(HEAP_PATTERN);
 	uint8_t* pointer = static_cast<uint8_t*>(m_heapManager->allocate(totalSize, DEFAULT_ALIGNMENT));
 	if (!pointer) {
@@ -76,7 +76,7 @@ void operator delete[](void* i_ptr) {
 
 void* operator new (size_t i_size, uint8_t alignment) {
 	DEBUG_LOG("Allocating pointer for size %d and alignment %d\n", i_size, alignment);
-	Engine::HeapManager* m_heapManager = getDefaultHeapManager(nullptr);
+	Engine::HeapManager* m_heapManager = DefaultHeapManager(nullptr);
 	size_t totalSize = i_size + sizeof(m_heapManager) + sizeof(HEAP_PATTERN);
 	uint8_t* pointer = static_cast<uint8_t*>(m_heapManager->allocate(totalSize, alignment));
 	if (!pointer) {
@@ -100,7 +100,7 @@ void operator delete (void* i_ptr, uint8_t alignment) {
 
 void* operator new[](size_t i_size, uint8_t alignment) {
 	DEBUG_LOG("Allocating array pointer for size %d and alignment %d\n", i_size, alignment);
-	Engine::HeapManager* m_heapManager = getDefaultHeapManager(nullptr);
+	Engine::HeapManager* m_heapManager = DefaultHeapManager(nullptr);
 	size_t totalSize = i_size + sizeof(m_heapManager) + sizeof(HEAP_PATTERN);
 	uint8_t* pointer = static_cast<uint8_t*>(m_heapManager->allocate(totalSize, alignment));
 	if (!pointer) {

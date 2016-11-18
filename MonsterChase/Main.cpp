@@ -35,10 +35,7 @@ bool CheckInput(const char c) {
 int main() {
 	void* heapManagerMemory = _aligned_malloc(sizeof(HeapManager),4);
 	HeapManager* heapManager = HeapManager::create(heapManagerMemory, 1024, 16);
-	getDefaultHeapManager(heapManager);
-	Engine::Actor* actor = new Engine::Actor("Test", Vector2D::ZERO);
-	assert(actor);
-	delete actor;
+	DefaultHeapManager(heapManager);
 	#ifdef _DEBUG
 		_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 	#endif // _DEBUG
