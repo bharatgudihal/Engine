@@ -1,5 +1,8 @@
 #ifndef POINT2D_H
 #define POINT2D_H
+#include <assert.h>
+#include <math.h>
+#include "FloatCheck.h"
 namespace Engine {
 	class Vector2D
 	{

@@ -51,6 +51,12 @@
     <ClInclude Include="Tests\AllocatorTest.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Math\FloatCheck.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\FloatCheck-Inl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Math\Private\Vector2D.cpp">

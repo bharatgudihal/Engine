@@ -23,6 +23,8 @@
     <ClInclude Include="Actor\Actor_Inl.h" />
     <ClInclude Include="Controllers\ActorController.h" />
     <ClInclude Include="Logger\Logger.h" />
+    <ClInclude Include="Math\FloatCheck-Inl.h" />
+    <ClInclude Include="Math\FloatCheck.h" />
     <ClInclude Include="Math\Vector2D.h" />
     <ClInclude Include="Math\Vector2D_Inl.h" />
     <ClInclude Include="Memory\Allocators.h" />
