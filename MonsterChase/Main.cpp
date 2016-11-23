@@ -14,10 +14,12 @@
 #include "Tests\ConstChecker.h"
 #include "Tests\AllocatorTest.h"
 #include "Memory\Allocators.h"
+#include "Math\IsNANTest.h"
 #define _CRTDBG_MAP_ALLOC
 //#define HEAPMANAGERTEST
 //#define CONSTTEST
-#define ALLOCATORTEST
+//#define ALLOCATORTEST
+#define FLOATCHECKTEST
 //#define MONSTERCHASE
 using namespace std;
 using namespace Engine;
@@ -48,6 +50,10 @@ int main() {
 #ifdef ALLOCATORTEST
 	startAllocatorTest();
 #endif
+#ifdef FLOATCHECKTEST
+	TestNAN();
+#endif // FLOATCHECKTEST
+
 #ifdef MONSTERCHASE
 	MonsterChase monsterChase;
 	printf("Please enter the number of monsters you want to start with: ");
