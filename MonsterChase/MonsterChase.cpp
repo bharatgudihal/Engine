@@ -24,12 +24,13 @@ void MonsterChase::UpdateMonsterLocation(Engine::Actor* monsterArray, const int 
 }
 
 void MonsterChase::CheckMonsterToMonsterCollision(const Engine::Actor* monsterArray, const int monsterCount) const {
+	int gridSize = 64;
 	for (int i = 0; i < monsterCount; i++) {
 		for (int j = i + 1; j < monsterCount; j++) {
 			if (monsterArray[i].getPosition() == monsterArray[j].getPosition()) {
 				// If collision spawn another monster
 				DEBUG_LOG("Collision position [%f,%f] ", monsterArray[i].getPosition().X(), monsterArray[i].getPosition().Y());
-				monsterArray[j].getPosition() = Engine::Vector2D(static_cast<float>(rand() % 64), static_cast<float>(rand() % 64));
+				monsterArray[j].getPosition() = Engine::Vector2D(static_cast<float>(rand() % gridSize), static_cast<float>(rand() % gridSize));
 				printf("Collision between monster %s and %s. %s has respawned at a different location.\n", monsterArray[i].getName(), monsterArray[j].getName(), monsterArray[j].getName());
 			}
 		}

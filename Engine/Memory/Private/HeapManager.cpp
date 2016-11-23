@@ -41,9 +41,10 @@ namespace Engine {
 	}
 
 	HeapManager::HeapManager(const size_t blockSize, const uint16_t numberOfBlockDescriptors) {
+		size_t alignment = 4;
 		BLOCK_SIZE = blockSize;
 		NUMBER_OF_BLOCKDESCRIPTORS = numberOfBlockDescriptors;
-		BLOCK = _aligned_malloc(BLOCK_SIZE + sizeof(BlockDescriptor)*NUMBER_OF_BLOCKDESCRIPTORS, 4);
+		BLOCK = _aligned_malloc(BLOCK_SIZE + sizeof(BlockDescriptor)*NUMBER_OF_BLOCKDESCRIPTORS, alignment);
 		initializeBlockDescriptors();
 		// Initialize free blocks list
 		freeBlocksList = getUninitializedBlock();
