@@ -2,8 +2,7 @@
 #define TRACKING_MONSTERCONTROLLER_H
 #include "Controllers\ActorController.h"
 #include "Actor\Actor.h"
-using namespace Engine;
-class TrackingMonsterController :public IActorController {
+class TrackingMonsterController :public Engine::IActorController {
 public:
 	inline void SetActor(Engine::Actor* actor) override;
 	inline void Update(const char input) override;

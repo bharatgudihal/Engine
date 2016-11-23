@@ -1,7 +1,8 @@
 #ifndef ACTORCONTROLLER_H
 #define ACTORCONTROLLER_H
-#include "../Actor/Actor.h"
 namespace Engine {
+	class Actor;
+
 	class IActorController{
 	public:
 		inline virtual void SetActor(Actor* actor) = 0;

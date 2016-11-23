@@ -2,8 +2,8 @@
 #define PLAYERCONTROLLER_H
 #include "Controllers\ActorController.h"
 #include "Actor\Actor.h"
-using namespace Engine;
-class PlayerController:public IActorController {
+
+class PlayerController:public Engine::IActorController {
 public:
 	inline void SetActor(Engine::Actor* actor) override;
 	void Update(const char input) override;
