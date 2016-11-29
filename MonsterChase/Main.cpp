@@ -4,23 +4,28 @@
 #include <assert.h>
 #include <stdlib.h>
 #include <crtdbg.h>
+#include <vector>
 #include "Player\Player.h"
 #include "Math\Vector2D.h"
 #include "Monster\Monster.h"
 #include "MonsterChase.h"
 #include "Logger\Logger.h"
 #include "Monster\MonsterController.h"
+#include "Memory\Allocators.h"
 #include "Tests\HeapManagerTest.h"
 #include "Tests\ConstChecker.h"
 #include "Tests\AllocatorTest.h"
-#include "Memory\Allocators.h"
-#include "Math\IsNANTest.h"
+#include "Tests\IsNANTest.h"
+#include "Tests\MoveCopyTest.h"
+
 #define _CRTDBG_MAP_ALLOC
 //#define HEAPMANAGERTEST
 //#define CONSTTEST
 //#define ALLOCATORTEST
-#define FLOATCHECKTEST
+//#define FLOATCHECKTEST
+#define MOVECOPYTEST
 //#define MONSTERCHASE
+
 using namespace std;
 using namespace Engine;
 
@@ -32,6 +37,60 @@ bool CheckInput(const char c) {
 		return false;
 	}
 	return true;
+}
+
+void playMonsterChase() {
+	MonsterChase monsterChase;
+	printf("Please enter the number of monsters you want to start with: ");
+	int monsterCount;
+	scanf_s("%d", &monsterCount);
+	assert(monsterCount >= 1);
+	while (monsterCount > 50) {
+		DEBUG_LOG("monsterCount entered %d ", monsterCount);
+		printf("Do you really think you can escape so many monsters?\nTry something smaller: ");
+		scanf_s("%d", &monsterCount);
+		assert(monsterCount >= 1);
+	}
+	vector<Engine::Actor> monsterArray;
+	monsterArray.reserve(monsterCount);
+	for (int i = 0; i < monsterCount; i++) {
+		printf("Enter the name of monster %d: ", i);
+		char* monsterName = new char[20];
+		scanf_s("%s", monsterName, 20);
+		monsterArray.push_back(Monster(monsterName, Vector2D((float)(rand() % monsterChase.GRIDSIZE), (float)(rand() % monsterChase.GRIDSIZE))));
+		delete[] monsterName;
+	}
+	printf("Enter the player's name: ");
+	char* playerName = new char[20];
+	scanf_s("%s", playerName, 20);
+	Engine::Actor player = Engine::Actor(playerName, Vector2D(0, 0));
+	delete[] playerName;
+	PlayerController playerController;
+	playerController.SetActor(&player);
+	bool quitGame = false;
+	while (true) {
+		for (int i = 0; i < monsterCount; i++) {
+			printf("Monster %s at [%f,%f]\n", monsterArray[i].getName(), monsterArray[i].getPosition().X(), monsterArray[i].getPosition().Y());
+		}
+		printf("Player %s at [%f,%f]\n", player.getName(), player.getPosition().X(), player.getPosition().Y());
+		printf("Use the W,A,S,D keys to move. Press Q to quit.\n");
+		char c;
+		c = _getch();
+		while (!CheckInput(c)) {
+			c = _getch();
+		}
+		if (c == 'Q' || c == 'q') {
+			break;
+		}
+		playerController.Update(c);
+		monsterChase.UpdateMonsterLocation(&monsterArray, monsterCount, &player);
+		monsterChase.CheckMonsterToMonsterCollision(&monsterArray, monsterCount);
+		if (monsterChase.CheckPlayerToMonsterCollision(&player, &monsterArray, monsterCount)) {
+			printf("Press any button to exit.");
+			_getch();
+			break;
+		}
+	}
 }
 
 int main() {
@@ -53,56 +112,12 @@ int main() {
 #ifdef FLOATCHECKTEST
 	TestNAN();
 #endif // FLOATCHECKTEST
+#ifdef MOVECOPYTEST
+	MoveCopyTest();
+#endif // MOVECOPYTEST
 
 #ifdef MONSTERCHASE
-	MonsterChase monsterChase;
-	printf("Please enter the number of monsters you want to start with: ");
-	int monsterCount;
-	scanf_s("%d", &monsterCount);
-	assert(monsterCount >= 1);
-	while (monsterCount > 50) {
-		DEBUG_LOG("monsterCount entered %d ", monsterCount);
-		printf("Do you really think you can escape so many monsters?\nTry something smaller: ");
-		scanf_s("%d", &monsterCount);
-		assert(monsterCount >= 1);
-	}
-	Engine::Actor monsterArray[50];
-	for (int i = 0; i < monsterCount; i++) {
-		printf("Enter the name of monster %d: ", i);
-		char monsterName[20];
-		scanf_s("%s", monsterName, 20);
-		monsterArray[i] = Monster(monsterName, Vector2D((float)(rand() % monsterChase.GRIDSIZE), (float)(rand() % monsterChase.GRIDSIZE)));
-	}
-	printf("Enter the player's name: ");
-	char playerName[20];
-	scanf_s("%s", playerName, 20);
-	Engine::Actor player = Engine::Actor(playerName,Vector2D(0,0));
-	PlayerController playerController;
-	playerController.SetActor(&player);
-	bool quitGame = false;
-	while (true) {
-		for (int i = 0; i < monsterCount; i++) {
-			printf("Monster %s at [%f,%f]\n", monsterArray[i].getName(), monsterArray[i].getPosition().X(), monsterArray[i].getPosition().Y());
-		}
-		printf("Player %s at [%f,%f]\n", player.getName(), player.getPosition().X(), player.getPosition().Y());
-		printf("Use the W,A,S,D keys to move. Press Q to quit.\n");
-		char c;
-		c = _getch();
-		while (!CheckInput(c)) {
-			c = _getch();
-		}
-		if (c == 'Q' || c == 'q') {
-			break;
-		}
-		playerController.Update(c);
-		monsterChase.UpdateMonsterLocation(monsterArray, monsterCount, &player);
-		monsterChase.CheckMonsterToMonsterCollision(monsterArray, monsterCount);
-		if (monsterChase.CheckPlayerToMonsterCollision(&player, monsterArray, monsterCount)) {
-			printf("Press any button to exit.");
-			_getch();
-			break;
-		}
-	}
+	playMonsterChase();
 #endif
 	delete heapManager;
 	_CrtDumpMemoryLeaks();

@@ -2,6 +2,8 @@ namespace Engine {
 
 	inline 	Vector2D::Vector2D(const float iX, const float iY) :x(iX), y(iY) {};
 
+	inline 	Vector2D::Vector2D(const Vector2D& other) :x(other.x), y(other.y) {};
+
 	inline float Vector2D::X() const { return x; }
 
 	inline void Vector2D::X(const float iX) {
@@ -31,6 +33,11 @@ namespace Engine {
 	}
 	inline Vector2D& Vector2D::operator-=(const Vector2D& rhs) {
 		*this = *this - rhs;
+		return *this;
+	}
+	inline Vector2D& Vector2D::operator=(const Vector2D& rhs) {
+		x = rhs.x;
+		y = rhs.y;
 		return *this;
 	}
 	inline float Vector2D::Magnitude() const {

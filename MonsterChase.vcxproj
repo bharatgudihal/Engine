@@ -158,8 +158,10 @@
   <ItemGroup>
     <ClCompile Include="MonsterChase\Main.cpp" />
     <ClCompile Include="MonsterChase\MonsterChase.cpp" />
+    <ClCompile Include="MonsterChase\Monster\Private\Monster.cpp" />
     <ClCompile Include="MonsterChase\Monster\Private\MonsterController.cpp" />
     <ClCompile Include="MonsterChase\Monster\Private\TrackingMonsterController.cpp" />
+    <ClCompile Include="MonsterChase\Player\Private\Player.cpp" />
     <ClCompile Include="MonsterChase\Player\Private\PlayerController.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -169,10 +171,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MonsterChase\MonsterChase.h" />
+    <ClInclude Include="MonsterChase\Monster\Monster.h" />
     <ClInclude Include="MonsterChase\Monster\MonsterController.h" />
     <ClInclude Include="MonsterChase\Monster\MonsterController_Inl.h" />
     <ClInclude Include="MonsterChase\Monster\TrackingMonsterController.h" />
     <ClInclude Include="MonsterChase\Monster\TrackingMonsterController_Inl.h" />
+    <ClInclude Include="MonsterChase\Player\Player.h" />
     <ClInclude Include="MonsterChase\Player\PlayerController.h" />
     <ClInclude Include="MonsterChase\Player\PlayerController_Inl.h" />
   </ItemGroup>

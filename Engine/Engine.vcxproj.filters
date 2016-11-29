@@ -57,7 +57,10 @@
     <ClInclude Include="Math\FloatCheck-Inl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Math\IsNANTest.h">
+    <ClInclude Include="Tests\MoveCopyTest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Tests\IsNANTest.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -86,7 +89,10 @@
     <ClCompile Include="Tests\Private\AllocatorTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Math\Private\IsNANTest.cpp">
+    <ClCompile Include="Tests\Private\MoveCopyTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Tests\Private\IsNANTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -30,6 +30,12 @@
     <ClCompile Include="MonsterChase\Monster\Private\TrackingMonsterController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MonsterChase\Player\Private\Player.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MonsterChase\Monster\Private\Monster.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MonsterChase\MonsterChase.h">
@@ -51,6 +57,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MonsterChase\Monster\TrackingMonsterController_Inl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MonsterChase\Monster\Monster.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MonsterChase\Player\Player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

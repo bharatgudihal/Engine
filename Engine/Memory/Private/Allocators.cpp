@@ -27,16 +27,17 @@ void* operator new (const size_t i_size) {
 }
 
 void operator delete (void* i_ptr) {
-	assert(i_ptr);
-	DEBUG_LOG("Freeing pointer %p\n", i_ptr);
+	assert(i_ptr);	
 	uint8_t* pointer = static_cast<uint8_t*>(i_ptr);
 	pointer -= sizeof(HEAP_PATTERN);
 	if (*pointer == HEAP_PATTERN) {
+		DEBUG_LOG("Freeing pointer %p\n", i_ptr);
 		pointer -= sizeof(Engine::HeapManager*);
 		Engine::HeapManager** pHeapManager = reinterpret_cast<Engine::HeapManager**>(pointer);
 		(*pHeapManager)->free(pointer);
 	}
 	else {
+		DEBUG_LOG("Freeing heapmanager pointer %p\n", i_ptr);
 		_aligned_free(i_ptr);
 	}	
 }

@@ -9,12 +9,14 @@ namespace Engine {
 	public:
 		Vector2D() {};
 		inline Vector2D(const float iX, const float iY);
+		inline Vector2D(const Vector2D& other);
 		inline float X() const;
 		inline void X(const float iX);
 		inline float Y() const;
 		inline void Y(const float iY);
-		inline Vector2D& operator+=(const Vector2D&);
-		inline Vector2D& operator-=(const Vector2D&);
+		inline Vector2D& operator+=(const Vector2D& rhs);
+		inline Vector2D& operator-=(const Vector2D& rhs);
+		inline Vector2D& operator=(const Vector2D& rhs);
 		inline float Magnitude() const;
 		void Normalize();
 		static const Vector2D ZERO;

@@ -25,7 +25,6 @@
     <ClInclude Include="Logger\Logger.h" />
     <ClInclude Include="Math\FloatCheck-Inl.h" />
     <ClInclude Include="Math\FloatCheck.h" />
-    <ClInclude Include="Math\IsNANTest.h" />
     <ClInclude Include="Math\Vector2D.h" />
     <ClInclude Include="Math\Vector2D_Inl.h" />
     <ClInclude Include="Memory\Allocators.h" />
@@ -34,17 +33,20 @@
     <ClInclude Include="Tests\AllocatorTest.h" />
     <ClInclude Include="Tests\ConstChecker.h" />
     <ClInclude Include="Tests\HeapManagerTest.h" />
+    <ClInclude Include="Tests\IsNANTest.h" />
+    <ClInclude Include="Tests\MoveCopyTest.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Actor\Private\Actor.cpp" />
     <ClCompile Include="Logger\Private\Logger.cpp" />
-    <ClCompile Include="Math\Private\IsNANTest.cpp" />
     <ClCompile Include="Math\Private\Vector2D.cpp" />
     <ClCompile Include="Memory\Private\Allocators.cpp" />
     <ClCompile Include="Memory\Private\HeapManager.cpp" />
     <ClCompile Include="Tests\Private\AllocatorTest.cpp" />
     <ClCompile Include="Tests\Private\ConstChecker.cpp" />
     <ClCompile Include="Tests\Private\HeapManagerTest.cpp" />
+    <ClCompile Include="Tests\Private\IsNANTest.cpp" />
+    <ClCompile Include="Tests\Private\MoveCopyTest.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{71B675E8-5F71-4AD6-B294-BC7210075F0C}</ProjectGuid>
