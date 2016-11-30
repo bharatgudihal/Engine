@@ -17,13 +17,15 @@
 #include "Tests\AllocatorTest.h"
 #include "Tests\IsNANTest.h"
 #include "Tests\MoveCopyTest.h"
+#include "Interview\TestReverseWords.h"
 
 #define _CRTDBG_MAP_ALLOC
 //#define HEAPMANAGERTEST
 //#define CONSTTEST
 //#define ALLOCATORTEST
 //#define FLOATCHECKTEST
-#define MOVECOPYTEST
+//#define MOVECOPYTEST
+#define TESTREVERSEWORDS
 //#define MONSTERCHASE
 
 using namespace std;
@@ -115,6 +117,9 @@ int main() {
 #ifdef MOVECOPYTEST
 	MoveCopyTest();
 #endif // MOVECOPYTEST
+#ifdef TESTREVERSEWORDS
+	TestReverseWords();
+#endif // TESTREVERSEWORDS
 
 #ifdef MONSTERCHASE
 	playMonsterChase();

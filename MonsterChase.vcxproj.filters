@@ -36,6 +36,12 @@
     <ClCompile Include="MonsterChase\Monster\Private\Monster.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MonsterChase\Interview\Private\ReverseWords.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MonsterChase\Interview\Private\TestReverseWords.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MonsterChase\MonsterChase.h">
@@ -63,6 +69,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MonsterChase\Player\Player.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MonsterChase\Interview\ReverseWords.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MonsterChase\Interview\TestReverseWords.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
