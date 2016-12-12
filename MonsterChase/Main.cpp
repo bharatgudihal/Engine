@@ -19,6 +19,7 @@
 #include "Tests\MoveCopyTest.h"
 #include "Interview\TestReverseWords.h"
 #include "Tests\BitArrayUnitTest.h"
+#include "Tests\FSATest.h"
 
 #define _CRTDBG_MAP_ALLOC
 //#define HEAPMANAGERTEST
@@ -27,7 +28,8 @@
 //#define FLOATCHECKTEST
 //#define MOVECOPYTEST
 //#define TESTREVERSEWORDS
-#define BITARRAYTEST
+//#define BITARRAYTEST
+#define FSATEST
 //#define MONSTERCHASE
 
 using namespace std;
@@ -99,7 +101,7 @@ void playMonsterChase() {
 
 int main() {
 	void* heapManagerMemory = _aligned_malloc(sizeof(HeapManager),4);
-	HeapManager* heapManager = HeapManager::create(heapManagerMemory, 1024, 16);
+	HeapManager* heapManager = HeapManager::create(heapManagerMemory, 2048, 24);
 	DefaultHeapManager(heapManager);
 	#ifdef _DEBUG
 		_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
@@ -124,6 +126,9 @@ int main() {
 #endif // TESTREVERSEWORDS
 #ifdef BITARRAYTEST
 	BitArray_UnitTest();
+#endif
+#ifdef FSATEST
+	FSAUnitTest();
 #endif
 #ifdef MONSTERCHASE
 	playMonsterChase();

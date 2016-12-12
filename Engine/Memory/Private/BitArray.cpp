@@ -30,16 +30,28 @@ namespace Engine {
 		ClearAll();
 	}
 
+	BitArray::BitArray(size_t i_numberOfBits, void* i_ptr) {
+		numberOfBits = i_numberOfBits;
+		remainder = numberOfBits % bitsPerUnit;
+		arraySize = numberOfBits / bitsPerUnit;
+		if (remainder != 0) {
+			arraySize += 1;
+		}
+		bits = new (i_ptr) size_t[arraySize];
+		assert(bits);
+		SetAll();
+	}
+
 	BitArray::~BitArray() {
 		delete[] bits;
 	}
 
 	void BitArray::SetAll() {
 		if (remainder == 0) {
-			memset(bits, 0xFF, bitsPerUnit / bitsPerByte*arraySize);
+			memset(bits, MAX, bitsPerUnit / bitsPerByte * arraySize);
 		}
 		else {
-			memset(bits, 0xFF, arraySize-1);
+			memset(bits, MAX, bitsPerUnit / bitsPerByte * (arraySize-1));
 			for (size_t index = 0; index < remainder; index++) {
 				bits[arraySize - 1] = bits[arraySize-1] | (maskUnit << index);
 			}
@@ -112,11 +124,11 @@ namespace Engine {
 	}
 
 	bool BitArray::GetFirstSetBit(size_t& o_bitNumber) const {
-		for (size_t index = 0; index < arraySize; index++) {
+		for (size_t index = 0; index < arraySize - 1; index++) {
 			if (bits[index] != 0) {
 				unsigned long bitIndex;
 				if (BITSCAN(&bitIndex, bits[index])) {
-					o_bitNumber = bitIndex + index*bitsPerUnit;
+					o_bitNumber = bitIndex + index * bitsPerUnit;
 					return true;
 				}
 				else {
@@ -124,6 +136,16 @@ namespace Engine {
 				}
 			}
 		}
-		return false;
+		size_t bitIndex = 0;
+		while (!(bits[arraySize - 1] & (maskUnit << bitIndex)) && (bitIndex < remainder)) {
+			bitIndex++;
+		}
+		o_bitNumber = bitIndex + (arraySize - 1) * bitsPerUnit;
+		if (o_bitNumber == numberOfBits) {
+			return false;
+		}
+		else {
+			return true;
+		}		
 	}
 }

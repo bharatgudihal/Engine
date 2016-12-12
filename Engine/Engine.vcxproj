@@ -30,11 +30,14 @@
     <ClInclude Include="Memory\Allocators.h" />
     <ClInclude Include="Memory\BitArray.h" />
     <ClInclude Include="Memory\BitArray_Inl.h" />
+    <ClInclude Include="Memory\FixedSizeAllocator.h" />
+    <ClInclude Include="Memory\FixedSizeAllocator_Inl.h" />
     <ClInclude Include="Memory\HeapManager.h" />
     <ClInclude Include="Memory\HeapManager_Inl.h" />
     <ClInclude Include="Tests\AllocatorTest.h" />
     <ClInclude Include="Tests\BitArrayUnitTest.h" />
     <ClInclude Include="Tests\ConstChecker.h" />
+    <ClInclude Include="Tests\FSATest.h" />
     <ClInclude Include="Tests\HeapManagerTest.h" />
     <ClInclude Include="Tests\IsNANTest.h" />
     <ClInclude Include="Tests\MoveCopyTest.h" />
@@ -45,10 +48,12 @@
     <ClCompile Include="Math\Private\Vector2D.cpp" />
     <ClCompile Include="Memory\Private\Allocators.cpp" />
     <ClCompile Include="Memory\Private\BitArray.cpp" />
+    <ClCompile Include="Memory\Private\FixedSizeAllocator.cpp" />
     <ClCompile Include="Memory\Private\HeapManager.cpp" />
     <ClCompile Include="Tests\Private\AllocatorTest.cpp" />
     <ClCompile Include="Tests\Private\BitArrayUnitTest.cpp" />
     <ClCompile Include="Tests\Private\ConstChecker.cpp" />
+    <ClCompile Include="Tests\Private\FSATest.cpp" />
     <ClCompile Include="Tests\Private\HeapManagerTest.cpp" />
     <ClCompile Include="Tests\Private\IsNANTest.cpp" />
     <ClCompile Include="Tests\Private\MoveCopyTest.cpp" />

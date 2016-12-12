@@ -1,6 +1,6 @@
 #pragma once
 #include "HeapManager.h"
-namespace Engine {
+namespace Engine {	
 	class BitArray {
 	#ifdef _WIN64
 	#define BITSCAN(index,mask) _BitScanForward64(index,mask)	
@@ -10,6 +10,7 @@ namespace Engine {
 	public:
 		inline static BitArray* Create(size_t i_numberOfBits, bool i_startClear, HeapManager* heapManager);
 		inline static BitArray* Create(size_t i_numberOfBits);
+		inline static BitArray* Create(size_t i_numberOfBits, void* i_ptr, void* i_arrayPtr);
 		~BitArray();
 		inline void ClearAll();
 		void SetAll();
@@ -21,21 +22,23 @@ namespace Engine {
 		void ClearBit(size_t i_bitNumber);
 		bool GetFirstClearBit(size_t& o_bitNumber) const;
 		bool GetFirstSetBit(size_t& o_bitNumber) const;
+		inline static size_t BitsPerUnit();
 
 	private:
 		BitArray(size_t i_numberOfBits, bool i_startClear, HeapManager* heapManager);
 		BitArray(size_t i_numberOfBits);
+		BitArray(size_t i_numberOfBits, void* i_ptr);
 		size_t* bits;
 		size_t arraySize;
 		size_t numberOfBits;
 		size_t remainder;
-		const size_t bitsPerByte = 8;
-		const size_t bitsPerUnit = (sizeof(size_t)*bitsPerByte);
-		const size_t maskUnit = 1;
+		static const size_t bitsPerByte = 8;
+		static const size_t bitsPerUnit = (sizeof(size_t)*bitsPerByte);
+		static const size_t maskUnit = 1;
 		#ifdef _WIN64
-		const size_t MAX = UINT64_MAX;
+		static const size_t MAX = UINT64_MAX;
 		#else
-		const size_t MAX = UINT32_MAX;
+		static const size_t MAX = UINT32_MAX;
 		#endif
 	};
 }
