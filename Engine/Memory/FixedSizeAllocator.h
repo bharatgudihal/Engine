@@ -1,14 +1,13 @@
 #pragma once
 #include <stdint.h>
+#include "BitArray.h"
 namespace Engine {
-	class HeapManager;
-	class BitArray;
 	class FixedSizeAllocator {
 	public:
 		inline static FixedSizeAllocator* Create(size_t i_blockSize, size_t i_units, HeapManager* i_heapManager);
 		~FixedSizeAllocator();
 		void* allocate();
-		void free(void* ptr);
+		bool free(void* ptr);
 		size_t unitSize;		
 
 	private:

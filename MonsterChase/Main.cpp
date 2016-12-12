@@ -12,6 +12,7 @@
 #include "Logger\Logger.h"
 #include "Monster\MonsterController.h"
 #include "Memory\Allocators.h"
+#include "Memory\MasterMemoryManager.h"
 #include "Tests\HeapManagerTest.h"
 #include "Tests\ConstChecker.h"
 #include "Tests\AllocatorTest.h"
@@ -100,9 +101,7 @@ void playMonsterChase() {
 }
 
 int main() {
-	void* heapManagerMemory = _aligned_malloc(sizeof(HeapManager),4);
-	HeapManager* heapManager = HeapManager::create(heapManagerMemory, 2048, 24);
-	DefaultHeapManager(heapManager);
+	MasterMemoryManager::Startup();
 	#ifdef _DEBUG
 		_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 	#endif // _DEBUG
@@ -133,7 +132,7 @@ int main() {
 #ifdef MONSTERCHASE
 	playMonsterChase();
 #endif
-	delete heapManager;
+	MasterMemoryManager::ShutDown();
 	_CrtDumpMemoryLeaks();
 	return 0;
 }

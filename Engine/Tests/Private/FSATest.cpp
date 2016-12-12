@@ -1,10 +1,9 @@
 #include "../FSATest.h"
-#include "../../Memory/FixedSizeAllocator.h"
 #include "../../Memory/Allocators.h"
 
 namespace Engine {
 	bool FSAUnitTest() {		
-		FixedSizeAllocator* FSA = FixedSizeAllocator::Create(1600, 100, DefaultHeapManager(nullptr));
+		FixedSizeAllocator* FSA = FixedSizeAllocator::Create(1600, 100, Engine::MasterMemoryManager::Instance()->DefaultHeapManager());
 		void* pointerArray[100];
 		for (int i = 0; i < 100; i++) {
 			void* ptr = FSA->allocate();

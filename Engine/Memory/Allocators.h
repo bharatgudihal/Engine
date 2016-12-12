@@ -1,8 +1,6 @@
 #ifndef ALLOCATORS_H
 #define ALLOCATORS_H
-#include <stdint.h>
-#include <assert.h>
-#include "HeapManager.h"
+#include "MasterMemoryManager.h"
 
 void* operator new (const size_t i_size);
 void operator delete(void* i_ptr);
@@ -31,5 +29,4 @@ void operator delete[](void* i_ptr, Engine::HeapManager* pHeapManager, uint8_t a
 static const uint8_t HEAP_PATTERN = 0xAA;
 static const uint8_t DEFAULT_ALIGNMENT = 4;
 
-Engine::HeapManager* DefaultHeapManager(Engine::HeapManager* i_heapManager);
 #endif

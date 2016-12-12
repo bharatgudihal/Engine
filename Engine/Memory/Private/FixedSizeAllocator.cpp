@@ -1,5 +1,5 @@
 #include "../FixedSizeAllocator.h"
-#include "../BitArray.h"
+
 namespace Engine {
 	FixedSizeAllocator::FixedSizeAllocator(size_t i_blockSize, size_t i_units, HeapManager* i_heapManager) {
 		blockSize = i_blockSize;
@@ -20,7 +20,8 @@ namespace Engine {
 		workingBase = static_cast<uintptr_t*>(ptr);
 	}
 
-	FixedSizeAllocator::~FixedSizeAllocator() {		
+	FixedSizeAllocator::~FixedSizeAllocator() {
+		assert(bitArray->AreAllSet());
 		heapManager->free(blockBase);
 	}
 
@@ -35,10 +36,15 @@ namespace Engine {
 		}
 	}
 
-	void FixedSizeAllocator::free(void* ptr) {
+	bool FixedSizeAllocator::free(void* ptr) {
 		size_t index = 0;
-		assert(isValid(ptr, index));
-		bitArray->SetBit(index);
+		if (isValid(ptr, index)) {
+			bitArray->SetBit(index);
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	bool FixedSizeAllocator::isValid(void* ptr, size_t& o_index) {
