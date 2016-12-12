@@ -18,6 +18,7 @@
 #include "Tests\IsNANTest.h"
 #include "Tests\MoveCopyTest.h"
 #include "Interview\TestReverseWords.h"
+#include "Tests\BitArrayUnitTest.h"
 
 #define _CRTDBG_MAP_ALLOC
 //#define HEAPMANAGERTEST
@@ -25,7 +26,8 @@
 //#define ALLOCATORTEST
 //#define FLOATCHECKTEST
 //#define MOVECOPYTEST
-#define TESTREVERSEWORDS
+//#define TESTREVERSEWORDS
+#define BITARRAYTEST
 //#define MONSTERCHASE
 
 using namespace std;
@@ -120,7 +122,9 @@ int main() {
 #ifdef TESTREVERSEWORDS
 	TestReverseWords();
 #endif // TESTREVERSEWORDS
-
+#ifdef BITARRAYTEST
+	BitArray_UnitTest();
+#endif
 #ifdef MONSTERCHASE
 	playMonsterChase();
 #endif
