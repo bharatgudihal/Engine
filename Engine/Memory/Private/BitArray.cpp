@@ -59,9 +59,23 @@ namespace Engine {
 	}
 
 	bool BitArray::AreAllClear() const{
-		for (size_t index = 0; index < arraySize; index++) {
-			if (bits[index] != 0) {
-				return false;
+		if (remainder == 0) {
+			for (size_t index = 0; index < arraySize; index++) {
+				if (bits[index] != 0) {
+					return false;
+				}
+			}
+		}
+		else {
+			for (size_t index = 0; index < arraySize - 1; index++) {
+				if (bits[index] != 0) {
+					return false;
+				}
+			}
+			for (size_t bitIndex = 0; bitIndex < remainder; bitIndex++) {
+				if ((bits[arraySize - 1] & (maskUnit << bitIndex))) {
+					return false;
+				}
 			}
 		}
 		return true;
@@ -82,7 +96,7 @@ namespace Engine {
 				}
 			}
 			for (size_t bitIndex = 0; bitIndex < remainder; bitIndex++) {
-				if (!(bits[arraySize - 1] && (maskUnit << bitIndex))) {
+				if (!(bits[arraySize - 1] & (maskUnit << bitIndex))) {
 					return false;
 				}
 			}

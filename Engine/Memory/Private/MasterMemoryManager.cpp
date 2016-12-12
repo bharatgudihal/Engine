@@ -15,7 +15,7 @@ namespace Engine {
 
 	MasterMemoryManager::MasterMemoryManager() {
 		void* heapManagerMemory = _aligned_malloc(sizeof(HeapManager), 4);
-		defaultHeapManager = HeapManager::create(heapManagerMemory, 10240, 100);		
+		defaultHeapManager = HeapManager::create(heapManagerMemory, 20480, 100);		
 	}
 
 	bool MasterMemoryManager::SetupFixedSizeAllocators() {
