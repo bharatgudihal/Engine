@@ -35,6 +35,7 @@ namespace Engine {
 		static const size_t bitsPerByte = 8;
 		static const size_t bitsPerUnit = (sizeof(size_t)*bitsPerByte);
 		static const size_t maskUnit = 1;
+		static const int MAX_SET = INT_MAX;
 		#ifdef _WIN64
 		static const size_t MAX = UINT64_MAX;
 		#else

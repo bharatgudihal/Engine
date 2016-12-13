@@ -47,11 +47,11 @@ namespace Engine {
 	}
 
 	void BitArray::SetAll() {
-		if (remainder == 0) {
-			memset(bits, MAX, bitsPerUnit / bitsPerByte * arraySize);
+ 		if (remainder == 0) {
+			memset(bits, MAX_SET, bitsPerUnit / bitsPerByte * arraySize);
 		}
 		else {
-			memset(bits, MAX, bitsPerUnit / bitsPerByte * (arraySize-1));
+			memset(bits, MAX_SET, bitsPerUnit / bitsPerByte * (arraySize-1));
 			for (size_t index = 0; index < remainder; index++) {
 				bits[arraySize - 1] = bits[arraySize-1] | (maskUnit << index);
 			}
