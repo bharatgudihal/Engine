@@ -23,7 +23,7 @@
 #include "Tests\FSATest.h"
 
 #define _CRTDBG_MAP_ALLOC
-//#define HEAPMANAGERTEST
+#define HEAPMANAGERTEST
 //#define CONSTTEST
 //#define ALLOCATORTEST
 //#define FLOATCHECKTEST

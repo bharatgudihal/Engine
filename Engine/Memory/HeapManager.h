@@ -31,7 +31,6 @@ namespace Engine {
 
 	private:
 		HeapManager(const size_t blockSize, const uint16_t numberOfBlockDescriptors);		
-		//static HeapManager* m_HeapManager;
 		struct BlockDescriptor {
 			BlockDescriptor* next;
 			size_t size;

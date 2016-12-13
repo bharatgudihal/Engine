@@ -360,6 +360,9 @@ namespace Engine {
 	}
 
 	HeapManager::~HeapManager() {
+		if (assignedBlocksList != nullptr) {
+			DEBUG_LOG("There are still outstanding allocations!\n");
+		}
 		_aligned_free(BLOCK);
 	}
 }

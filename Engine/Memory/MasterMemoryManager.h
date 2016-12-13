@@ -17,7 +17,9 @@ namespace Engine {
 		HeapManager* defaultHeapManager;
 		FixedSizeAllocator* FSAArray[4];
 		static MasterMemoryManager* m_Instance;
-		bool SetupFixedSizeAllocators();		
+		bool SetupFixedSizeAllocators();
+		const size_t HeapSize = 40960;
+		const uint16_t numberOfBlockDescriptors = 200;
 	};
 }
 #include "MasterMemoryManager_Inl.h"

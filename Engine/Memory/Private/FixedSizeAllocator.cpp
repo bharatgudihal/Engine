@@ -23,9 +23,11 @@ namespace Engine {
 		DEBUG_LOG("FSA created for size %zd bytes\n", unitSize);
 	}
 
-	FixedSizeAllocator::~FixedSizeAllocator() {
+	FixedSizeAllocator::~FixedSizeAllocator() {		
+		if(!bitArray->AreAllSet()) {
+			DEBUG_LOG("FSA for size %zd bytes has allocations pending!\n", unitSize);
+		}
 		DEBUG_LOG("FSA destroyed for size %zd bytes\n", unitSize);
-		assert(bitArray->AreAllSet());
 		heapManager->free(blockBase);
 	}
 
