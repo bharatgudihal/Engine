@@ -31,12 +31,12 @@ namespace Engine {
 
 	void FixedSizeAllocator::AddGuardBands(uint8_t* userPointer) {		
 		for (uint8_t count = 0; count < FSA_GUARD_BAND_SIZE; count++) {
-			*(userPointer) = GUARD_BAND_FILL;
+			*(userPointer) = FSA_GUARD_BAND_FILL;
 			userPointer++;
 		}
 		userPointer += unitSize - FSA_GUARD_BAND_SIZE * 2;
 		for (uint8_t count = 0; count < FSA_GUARD_BAND_SIZE; count++) {
-			*(userPointer) = GUARD_BAND_FILL;
+			*(userPointer) = FSA_GUARD_BAND_FILL;
 			userPointer++;
 		}
 	}
@@ -48,18 +48,18 @@ namespace Engine {
 			bitArray->ClearBit(index);
 			uint8_t* userPointer = reinterpret_cast<uint8_t*>(workingBase) + (unitSize * index);
 			AddGuardBands(userPointer);
-			return userPointer;
+			return userPointer + FSA_GUARD_BAND_SIZE;
 		}
 		else {
 			return nullptr;
 		}
 	}
 
-	bool FixedSizeAllocator::free(void* ptr) {
-		DEBUG_LOG("Freeing from FSA for size %zd bytes\n", unitSize);
+	bool FixedSizeAllocator::free(void* ptr) {		
 		size_t index = 0;
 		if (isValid(ptr, index)) {
 			bitArray->SetBit(index);
+			DEBUG_LOG("Freeing from FSA for size %zd bytes\n", unitSize);
 			return true;
 		}
 		else {
@@ -70,23 +70,24 @@ namespace Engine {
 	void FixedSizeAllocator::CheckGuardBands(void* i_ptr) {
 		uint8_t* checkPointer = static_cast<uint8_t*>(i_ptr);
 		for (uint8_t count = 0; count < FSA_GUARD_BAND_SIZE; count++) {
-			assert(*checkPointer == GUARD_BAND_FILL);
+			assert(*checkPointer == FSA_GUARD_BAND_FILL);
 			checkPointer++;
 		}
 		checkPointer += unitSize - FSA_GUARD_BAND_SIZE * 2;
 		for (uint8_t count = 0; count < FSA_GUARD_BAND_SIZE; count++) {
-			assert(*checkPointer == GUARD_BAND_FILL);
+			assert(*checkPointer == FSA_GUARD_BAND_FILL);
 			checkPointer++;
 		}
 	}
 
 	bool FixedSizeAllocator::isValid(void* ptr, size_t& o_index) {
 		uint8_t* address = static_cast<uint8_t*>(ptr);
+		address -= FSA_GUARD_BAND_SIZE;
 		ptrdiff_t addressDiff = address - workingBase;
-		if (addressDiff % unitSize == 0) {
+		if (addressDiff >= 0 && addressDiff % unitSize == 0) {
 			o_index = addressDiff / unitSize;			
 			if (bitArray->IsBitClear(o_index)) {
-				CheckGuardBands(ptr);
+				CheckGuardBands(address);
 				return true;
 			}
 			else {

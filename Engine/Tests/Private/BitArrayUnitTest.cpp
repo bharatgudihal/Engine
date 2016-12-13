@@ -1,22 +1,20 @@
 #include "../../Memory/BitArray.h"
 #include "../BitArrayUnitTest.h"
 
-namespace Engine {
-	void BitArray_UnitTest()
-	{
-		const size_t bitCount = 1000;
+namespace Engine {	
 
+	void TestBitArray(size_t bitCount) {
 		Engine::BitArray* pMyArray = Engine::BitArray::Create(bitCount);
-
-		pMyArray->SetBit(20);
+		size_t bitNumber = rand() % bitCount;
+		pMyArray->SetBit(bitNumber);
 
 		size_t firstSetBit = 0;
 		size_t firstClearBit = 0;
 
 		bool foundSetBit = pMyArray->GetFirstSetBit(firstSetBit);
-		assert(foundSetBit && (firstSetBit == 20));
+		assert(foundSetBit && (firstSetBit == bitNumber));
 
-		pMyArray->ClearBit(20);
+		pMyArray->ClearBit(bitNumber);
 		foundSetBit = pMyArray->GetFirstSetBit(firstSetBit);
 		assert(foundSetBit == false);
 
@@ -46,5 +44,13 @@ namespace Engine {
 		assert(pMyArray->GetFirstSetBit(firstSetBit) == false);
 
 		delete pMyArray;
+	}
+
+	void BitArray_UnitTest()
+	{		
+		for (size_t i = 1; i < 33; i++) {
+			TestBitArray(i);
+		}
+		TestBitArray(1000);
 	}
 }

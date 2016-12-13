@@ -29,7 +29,7 @@
 //#define FLOATCHECKTEST
 //#define MOVECOPYTEST
 //#define TESTREVERSEWORDS
-//#define BITARRAYTEST
+#define BITARRAYTEST
 #define FSATEST
 //#define MONSTERCHASE
 

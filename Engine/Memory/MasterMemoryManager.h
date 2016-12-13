@@ -10,13 +10,14 @@ namespace Engine {
 		bool FreePointerFromFSA(void* i_ptr);
 		static void ShutDown();
 		~MasterMemoryManager();
+		static bool isReady;
 
 	private:
 		MasterMemoryManager();
 		HeapManager* defaultHeapManager;
 		FixedSizeAllocator* FSAArray[4];
 		static MasterMemoryManager* m_Instance;
-		bool SetupFixedSizeAllocators();
+		bool SetupFixedSizeAllocators();		
 	};
 }
 #include "MasterMemoryManager_Inl.h"

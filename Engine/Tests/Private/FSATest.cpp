@@ -2,6 +2,8 @@
 #include "../../Memory/Allocators.h"
 #include <vector>
 
+//#define TESTOVERWRITE
+
 namespace Engine {
 	bool FSAUnitTest() {
 		size_t blockSize = 1600;
@@ -33,7 +35,11 @@ namespace Engine {
 				break;
 			}
 			allocatedPointers.push_back(ptr);
-
+			#ifdef TESTOVERWRITE
+			uint8_t* testptr = static_cast<uint8_t*>(ptr);
+			testptr -= 1;
+			*testptr = 0xAB;
+			#endif // TESTOVERWRITE
 			const unsigned int freeAboutEvery = 10;
 			if (!allocatedPointers.empty() && ((rand() % freeAboutEvery) == 0))
 			{

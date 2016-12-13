@@ -2,6 +2,7 @@
 namespace Engine {
 
 	BitArray::BitArray(size_t i_numberOfBits, bool i_startClear, HeapManager* heapManager) {
+		assert(i_numberOfBits > 0);
 		numberOfBits = i_numberOfBits;
 		remainder = numberOfBits % bitsPerUnit;
 		arraySize = numberOfBits / bitsPerUnit;

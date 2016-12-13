@@ -4,6 +4,7 @@
 namespace Engine {
 
 	MasterMemoryManager* MasterMemoryManager::m_Instance = nullptr;
+	bool MasterMemoryManager::isReady = false;
 
 	bool MasterMemoryManager::Startup() {
 		DEBUG_LOG("Starting up MasterMemoryManager\n");
@@ -13,6 +14,7 @@ namespace Engine {
 			m_Instance = new (managerMemory) MasterMemoryManager;			
 		}
 		result = m_Instance->SetupFixedSizeAllocators();
+		isReady = true;
 		return result;
 	}
 
@@ -35,7 +37,7 @@ namespace Engine {
 
 	FixedSizeAllocator* MasterMemoryManager::FindFixedSizeAllocator(size_t i_size){		
 		for (uint8_t index = 0; index < 4; index++) {
-			if (i_size < FSAArray[index]->unitSize - FSA_GUARD_BAND_SIZE * 2) {
+			if (i_size <= FSAArray[index]->unitSize - FSA_GUARD_BAND_SIZE * 2) {
 				return FSAArray[index];
 			}
 		}

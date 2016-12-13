@@ -26,7 +26,7 @@ namespace Engine {
 		BitArray* bitArray;
 		HeapManager* heapManager;
 		bool isValid(void* ptr, size_t& o_index);
-		const uint8_t GUARD_BAND_FILL = 0xAA;
+		const uint8_t FSA_GUARD_BAND_FILL = 0xCC;
 		void AddGuardBands(uint8_t*);
 		void CheckGuardBands(void*);
 	};
