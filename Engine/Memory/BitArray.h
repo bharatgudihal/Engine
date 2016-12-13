@@ -8,26 +8,26 @@ namespace Engine {
 	#define BITSCAN(index,mask) _BitScanForward(index,mask)	
 	#endif
 	public:
-		inline static BitArray* Create(size_t i_numberOfBits, bool i_startClear, HeapManager* heapManager);
-		inline static BitArray* Create(size_t i_numberOfBits);
-		inline static BitArray* Create(size_t i_numberOfBits, void* i_ptr, void* i_arrayPtr);
+		inline static BitArray* Create(const size_t i_numberOfBits, const bool i_startClear, HeapManager* heapManager);
+		inline static BitArray* Create(const size_t i_numberOfBits);
+		inline static BitArray* Create(const size_t i_numberOfBits, void* i_ptr, void* i_arrayPtr);
 		~BitArray();
 		inline void ClearAll();
 		void SetAll();
 		bool AreAllClear() const;
 		bool AreAllSet() const;
-		bool IsBitSet(size_t i_bitNumber) const;
-		inline bool IsBitClear(size_t i_bitNumber) const;
-		void SetBit(size_t i_bitNumber);
-		void ClearBit(size_t i_bitNumber);
+		bool IsBitSet(const size_t i_bitNumber) const;
+		inline bool IsBitClear(const size_t i_bitNumber) const;
+		void SetBit(const size_t i_bitNumber);
+		void ClearBit(const size_t i_bitNumber);
 		bool GetFirstClearBit(size_t& o_bitNumber) const;
 		bool GetFirstSetBit(size_t& o_bitNumber) const;
 		inline static size_t BitsPerUnit();
 
 	private:
-		BitArray(size_t i_numberOfBits, bool i_startClear, HeapManager* heapManager);
-		BitArray(size_t i_numberOfBits);
-		BitArray(size_t i_numberOfBits, void* i_ptr);
+		BitArray(const size_t i_numberOfBits, const bool i_startClear, HeapManager* heapManager);
+		BitArray(const size_t i_numberOfBits);
+		BitArray(const size_t i_numberOfBits, void* i_ptr);
 		size_t* bits;
 		size_t arraySize;
 		size_t numberOfBits;

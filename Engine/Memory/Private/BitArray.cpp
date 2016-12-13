@@ -1,7 +1,7 @@
 #include "../BitArray.h"
 namespace Engine {
 
-	BitArray::BitArray(size_t i_numberOfBits, bool i_startClear, HeapManager* heapManager) {
+	BitArray::BitArray(const size_t i_numberOfBits, const bool i_startClear, HeapManager* heapManager) {
 		assert(i_numberOfBits > 0);
 		numberOfBits = i_numberOfBits;
 		remainder = numberOfBits % bitsPerUnit;
@@ -19,7 +19,7 @@ namespace Engine {
 		}
 	}
 
-	BitArray::BitArray(size_t i_numberOfBits) {
+	BitArray::BitArray(const size_t i_numberOfBits) {
 		numberOfBits = i_numberOfBits;
 		remainder = numberOfBits % bitsPerUnit;
 		arraySize = numberOfBits / bitsPerUnit;
@@ -31,7 +31,7 @@ namespace Engine {
 		ClearAll();
 	}
 
-	BitArray::BitArray(size_t i_numberOfBits, void* i_ptr) {
+	BitArray::BitArray(const size_t i_numberOfBits, void* i_ptr) {
 		numberOfBits = i_numberOfBits;
 		remainder = numberOfBits % bitsPerUnit;
 		arraySize = numberOfBits / bitsPerUnit;
@@ -105,62 +105,93 @@ namespace Engine {
 		return true;
 	}
 
-	bool BitArray::IsBitSet(size_t i_bitNumber) const {
+	bool BitArray::IsBitSet(const size_t i_bitNumber) const {
 		size_t arrayIndex = i_bitNumber / bitsPerUnit;
 		size_t bitRemainder = i_bitNumber % bitsPerUnit;
 		return (bits[arrayIndex] & (maskUnit << bitRemainder)) != 0;
 	}
 
-	void BitArray::SetBit(size_t i_bitNumber) {
+	void BitArray::SetBit(const size_t i_bitNumber) {
 		size_t arrayIndex = i_bitNumber / bitsPerUnit;
 		size_t bitRemainder = i_bitNumber % bitsPerUnit;
 		bits[arrayIndex] = bits[arrayIndex] | (maskUnit << bitRemainder);
 	}
 
-	void BitArray::ClearBit(size_t i_bitNumber) {
+	void BitArray::ClearBit(const size_t i_bitNumber) {
 		size_t arrayIndex = i_bitNumber / bitsPerUnit;
 		size_t bitRemainder = i_bitNumber % bitsPerUnit;
 		bits[arrayIndex] = bits[arrayIndex] & ~(maskUnit << bitRemainder);
 	}
 
 	bool BitArray::GetFirstClearBit(size_t& o_bitNumber) const{
-		for (size_t index = 0; index < arraySize; index++) {
-			size_t lmax = index != arraySize - 1 ? MAX : static_cast<size_t>(pow(2.0f, remainder)-1);
-			if (bits[index] != lmax) {
-				size_t bitIndex = 0;
-				while ((bits[index] & (maskUnit << bitIndex)) && (bitIndex < (index != arraySize-1?bitsPerUnit:remainder))) {
-					bitIndex++;
+		if (remainder == 0) {
+			for (size_t index = 0; index < arraySize; index++) {				
+				if (bits[index] != MAX) {
+					size_t bitIndex = 0;
+					while ((bits[index] & (maskUnit << bitIndex)) && (bitIndex < bitsPerUnit)) {
+						bitIndex++;
+					}
+					o_bitNumber = bitIndex + index*bitsPerUnit;
+					return true;
 				}
-				o_bitNumber = bitIndex + index*bitsPerUnit;
-				return true;
+			}
+		}
+		else {
+			for (size_t index = 0; index < arraySize; index++) {
+				size_t lmax = index != arraySize - 1 ? MAX : static_cast<size_t>(pow(2.0f, remainder) - 1);
+				if (bits[index] != lmax) {
+					size_t bitIndex = 0;
+					while ((bits[index] & (maskUnit << bitIndex)) && (bitIndex < (index != arraySize - 1 ? bitsPerUnit : remainder))) {
+						bitIndex++;
+					}
+					o_bitNumber = bitIndex + index*bitsPerUnit;
+					return true;
+				}
 			}
 		}
 		return false;
 	}
 
 	bool BitArray::GetFirstSetBit(size_t& o_bitNumber) const {
-		for (size_t index = 0; index < arraySize - 1; index++) {
-			if (bits[index] != 0) {
-				unsigned long bitIndex;
-				if (BITSCAN(&bitIndex, bits[index])) {
-					o_bitNumber = bitIndex + index * bitsPerUnit;
-					return true;
-				}
-				else {
-					return false;
+		if (remainder == 0) {
+			for (size_t index = 0; index < arraySize; index++) {
+				if (bits[index] != 0) {
+					unsigned long bitIndex;
+					if (BITSCAN(&bitIndex, bits[index])) {
+						o_bitNumber = bitIndex + index * bitsPerUnit;
+						return true;
+					}
+					else {
+						return false;
+					}
 				}
 			}
 		}
-		size_t bitIndex = 0;
-		while (!(bits[arraySize - 1] & (maskUnit << bitIndex)) && (bitIndex < remainder)) {
-			bitIndex++;
-		}
-		o_bitNumber = bitIndex + (arraySize - 1) * bitsPerUnit;
-		if (o_bitNumber == numberOfBits) {
-			return false;
-		}
 		else {
-			return true;
-		}		
+			for (size_t index = 0; index < arraySize - 1; index++) {
+				if (bits[index] != 0) {
+					unsigned long bitIndex;
+					if (BITSCAN(&bitIndex, bits[index])) {
+						o_bitNumber = bitIndex + index * bitsPerUnit;
+						return true;
+					}
+					else {
+						return false;
+					}
+				}
+			}
+			size_t bitIndex = 0;
+			while (!(bits[arraySize - 1] & (maskUnit << bitIndex)) && (bitIndex < remainder)) {
+				bitIndex++;
+			}
+			o_bitNumber = bitIndex + (arraySize - 1) * bitsPerUnit;
+			if (o_bitNumber == numberOfBits) {
+				return false;
+			}
+			else {
+				return true;
+			}
+		}
+		return false;
 	}
 }

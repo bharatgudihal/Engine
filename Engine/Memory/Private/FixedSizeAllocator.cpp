@@ -29,7 +29,7 @@ namespace Engine {
 		heapManager->free(blockBase);
 	}
 
-	void FixedSizeAllocator::AddGuardBands(uint8_t* userPointer) {		
+	void FixedSizeAllocator::AddGuardBands(uint8_t* userPointer) const{		
 		for (uint8_t count = 0; count < FSA_GUARD_BAND_SIZE; count++) {
 			*(userPointer) = FSA_GUARD_BAND_FILL;
 			userPointer++;
@@ -67,7 +67,7 @@ namespace Engine {
 		}
 	}
 
-	void FixedSizeAllocator::CheckGuardBands(void* i_ptr) {
+	void FixedSizeAllocator::CheckGuardBands(void* i_ptr) const{
 		uint8_t* checkPointer = static_cast<uint8_t*>(i_ptr);
 		for (uint8_t count = 0; count < FSA_GUARD_BAND_SIZE; count++) {
 			assert(*checkPointer == FSA_GUARD_BAND_FILL);
@@ -80,7 +80,7 @@ namespace Engine {
 		}
 	}
 
-	bool FixedSizeAllocator::isValid(void* ptr, size_t& o_index) {
+	bool FixedSizeAllocator::isValid(void* ptr, size_t& o_index) const{
 		uint8_t* address = static_cast<uint8_t*>(ptr);
 		address -= FSA_GUARD_BAND_SIZE;
 		ptrdiff_t addressDiff = address - workingBase;

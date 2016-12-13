@@ -10,7 +10,6 @@ namespace Engine {
 
 		size_t firstSetBit = 0;
 		size_t firstClearBit = 0;
-
 		bool foundSetBit = pMyArray->GetFirstSetBit(firstSetBit);
 		assert(foundSetBit && (firstSetBit == bitNumber));
 
