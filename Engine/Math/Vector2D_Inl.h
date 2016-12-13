@@ -41,7 +41,7 @@ namespace Engine {
 		return *this;
 	}
 	inline float Vector2D::Magnitude() const {
-		return static_cast<float>((pow(x, 2) + pow(y, 2)));
+		return static_cast<float>(pow((pow(x, 2) + pow(y, 2)),0.5f));
 	}
 	inline Vector2D operator*(const Vector2D& lhs_vector, const float& rhs_float) {
 		return Vector2D(lhs_vector.X() * rhs_float, lhs_vector.Y() * rhs_float);

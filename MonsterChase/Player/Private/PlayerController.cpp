@@ -1,4 +1,5 @@
 #include "../PlayerController.h"
+#include "Actor\Actor.h"
 
 void PlayerController::Update(const char input) {
 	Engine::Vector2D currentPlayerPosition = player->getPosition();

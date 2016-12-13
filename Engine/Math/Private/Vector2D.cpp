@@ -7,7 +7,9 @@ namespace Engine {
 
 	void Vector2D::Normalize() {
 		float magnitude = Magnitude();
-		x /= magnitude;
-		y /= magnitude;
+		if (magnitude != 0) {
+			x /= magnitude;
+			y /= magnitude;
+		}
 	}
 }
