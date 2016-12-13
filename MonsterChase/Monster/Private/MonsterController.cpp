@@ -1,4 +1,5 @@
 #include "../MonsterController.h"
+#include "Actor\Actor.h"
 using namespace Engine;
 
 void MonsterController::Update(const char input) {

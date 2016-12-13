@@ -1,9 +1,10 @@
 #ifndef PLAYERCONTROLLER_H
 #define PLAYERCONTROLLER_H
 #include "Controllers\ActorController.h"
-#include "Actor\Actor.h"
+#include "Math\Vector2D.h"
 
 class PlayerController:public Engine::IActorController {
+	class Actor;
 public:
 	inline void SetActor(Engine::Actor* actor) override;
 	void Update(const char input) override;
