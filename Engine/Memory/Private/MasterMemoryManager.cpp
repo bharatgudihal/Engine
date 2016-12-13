@@ -1,9 +1,12 @@
 #include "../MasterMemoryManager.h"
+#include "../../Logger/Logger.h"
+
 namespace Engine {
 
 	MasterMemoryManager* MasterMemoryManager::m_Instance = nullptr;
 
 	bool MasterMemoryManager::Startup() {
+		DEBUG_LOG("Starting up MasterMemoryManager\n");
 		bool result = false;
 		if (m_Instance == nullptr) {
 			void* managerMemory = _aligned_malloc(sizeof(MasterMemoryManager), 4);
@@ -32,7 +35,7 @@ namespace Engine {
 
 	FixedSizeAllocator* MasterMemoryManager::FindFixedSizeAllocator(size_t i_size){		
 		for (uint8_t index = 0; index < 4; index++) {
-			if (i_size < FSAArray[index]->unitSize) {
+			if (i_size < FSAArray[index]->unitSize - FSA_GUARD_BAND_SIZE * 2) {
 				return FSAArray[index];
 			}
 		}
@@ -48,7 +51,8 @@ namespace Engine {
 		return false;
 	}
 
-	void MasterMemoryManager::ShutDown() {		
+	void MasterMemoryManager::ShutDown() {
+		DEBUG_LOG("Shutting down MasterMemoryManager\n");
 		delete m_Instance;
 	}
 

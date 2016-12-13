@@ -1,8 +1,9 @@
 #include "../FixedSizeAllocator.h"
+#include "../../Logger/Logger.h"
 
 namespace Engine {
-	FixedSizeAllocator::FixedSizeAllocator(size_t i_blockSize, size_t i_units, HeapManager* i_heapManager) {
-		blockSize = i_blockSize + GUARD_BAND_SIZE * i_units * 2;
+	FixedSizeAllocator::FixedSizeAllocator(size_t i_blockSize, size_t i_units, HeapManager* i_heapManager) {		
+		blockSize = i_blockSize + FSA_GUARD_BAND_SIZE * i_units * 2;
 		units = i_units;
 		heapManager = i_heapManager;
 		assert(blockSize % i_units == 0);
@@ -19,26 +20,29 @@ namespace Engine {
 		bitArray = BitArray::Create(units, bitArrayPointer, bitArrayPointer + sizeof(BitArray));
 		ptr += sizeof(BitArray) + (sizeof(size_t) * arraySize);
 		workingBase = ptr;
+		DEBUG_LOG("FSA created for size %zd bytes\n", unitSize);
 	}
 
 	FixedSizeAllocator::~FixedSizeAllocator() {
+		DEBUG_LOG("FSA destroyed for size %zd bytes\n", unitSize);
 		assert(bitArray->AreAllSet());
 		heapManager->free(blockBase);
 	}
 
 	void FixedSizeAllocator::AddGuardBands(uint8_t* userPointer) {		
-		for (uint8_t count = 0; count < GUARD_BAND_SIZE; count++) {
+		for (uint8_t count = 0; count < FSA_GUARD_BAND_SIZE; count++) {
 			*(userPointer) = GUARD_BAND_FILL;
 			userPointer++;
 		}
-		userPointer += unitSize - GUARD_BAND_SIZE * 2;
-		for (uint8_t count = 0; count < GUARD_BAND_SIZE; count++) {
+		userPointer += unitSize - FSA_GUARD_BAND_SIZE * 2;
+		for (uint8_t count = 0; count < FSA_GUARD_BAND_SIZE; count++) {
 			*(userPointer) = GUARD_BAND_FILL;
 			userPointer++;
 		}
 	}
 
 	void* FixedSizeAllocator::allocate() {
+		DEBUG_LOG("Allocating from FSA for size %zd bytes\n", unitSize);
 		size_t index = 0;
 		if (bitArray->GetFirstSetBit(index)) {
 			bitArray->ClearBit(index);
@@ -52,6 +56,7 @@ namespace Engine {
 	}
 
 	bool FixedSizeAllocator::free(void* ptr) {
+		DEBUG_LOG("Freeing from FSA for size %zd bytes\n", unitSize);
 		size_t index = 0;
 		if (isValid(ptr, index)) {
 			bitArray->SetBit(index);
@@ -64,12 +69,12 @@ namespace Engine {
 
 	void FixedSizeAllocator::CheckGuardBands(void* i_ptr) {
 		uint8_t* checkPointer = static_cast<uint8_t*>(i_ptr);
-		for (uint8_t count = 0; count < GUARD_BAND_SIZE; count++) {
+		for (uint8_t count = 0; count < FSA_GUARD_BAND_SIZE; count++) {
 			assert(*checkPointer == GUARD_BAND_FILL);
 			checkPointer++;
 		}
-		checkPointer += unitSize - GUARD_BAND_SIZE * 2;
-		for (uint8_t count = 0; count < GUARD_BAND_SIZE; count++) {
+		checkPointer += unitSize - FSA_GUARD_BAND_SIZE * 2;
+		for (uint8_t count = 0; count < FSA_GUARD_BAND_SIZE; count++) {
 			assert(*checkPointer == GUARD_BAND_FILL);
 			checkPointer++;
 		}

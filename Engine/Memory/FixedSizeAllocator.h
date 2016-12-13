@@ -3,9 +3,9 @@
 #include "BitArray.h"
 namespace Engine {
 	#ifdef _DEBUG
-	#define GUARD_BAND_SIZE 2
+	#define FSA_GUARD_BAND_SIZE 4
 	#else
-	#define GUARD_BAND_SIZE 0
+	#define FSA_GUARD_BAND_SIZE 0
 	#endif // _DEBUG
 	class FixedSizeAllocator {
 	public:
