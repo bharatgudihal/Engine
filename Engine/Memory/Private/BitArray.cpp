@@ -60,16 +60,18 @@ namespace Engine {
 	}
 
 	bool BitArray::AreAllClear() const{
+		unsigned long bitIndex;
 		if (remainder == 0) {
 			for (size_t index = 0; index < arraySize; index++) {
-				if (bits[index] != 0) {
+				unsigned long bitIndex;
+				if (BITSCAN(&bitIndex, bits[index])) {
 					return false;
 				}
 			}
 		}
-		else {
-			for (size_t index = 0; index < arraySize - 1; index++) {
-				if (bits[index] != 0) {
+		else {			
+			for (size_t index = 0; index < arraySize - 1; index++) {				
+				if (BITSCAN(&bitIndex, bits[index])) {
 					return false;
 				}
 			}
@@ -83,16 +85,18 @@ namespace Engine {
 	}
 
 	bool BitArray::AreAllSet() const {
+		unsigned long bitIndex;
 		if (remainder == 0) {
+			unsigned long bitIndex;
 			for (size_t index = 0; index < arraySize; index++) {
-				if (bits[index] != MAX) {
+				if (BITSCAN(&bitIndex, ~bits[index])) {
 					return false;
 				}
 			}
 		}
 		else {
 			for (size_t index = 0; index < arraySize-1; index++) {
-				if (bits[index] != MAX) {
+				if (BITSCAN(&bitIndex, ~bits[index])) {
 					return false;
 				}
 			}
@@ -153,10 +157,10 @@ namespace Engine {
 	}
 
 	bool BitArray::GetFirstSetBit(size_t& o_bitNumber) const {
+		unsigned long bitIndex;
 		if (remainder == 0) {
 			for (size_t index = 0; index < arraySize; index++) {
-				if (bits[index] != 0) {
-					unsigned long bitIndex;
+				if (bits[index] != 0) {					
 					if (BITSCAN(&bitIndex, bits[index])) {
 						o_bitNumber = bitIndex + index * bitsPerUnit;
 						return true;
@@ -170,7 +174,6 @@ namespace Engine {
 		else {
 			for (size_t index = 0; index < arraySize - 1; index++) {
 				if (bits[index] != 0) {
-					unsigned long bitIndex;
 					if (BITSCAN(&bitIndex, bits[index])) {
 						o_bitNumber = bitIndex + index * bitsPerUnit;
 						return true;
