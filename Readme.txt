@@ -10,8 +10,10 @@
 "\Engine\Memory\Private\BitArray.cpp" Line 74
 "\Engine\Memory\Private\BitArray.cpp" Line 92
 "\Engine\Memory\Private\BitArray.cpp" Line 99
-"\Engine\Memory\Private\BitArray.cpp" Line 164
-"\Engine\Memory\Private\BitArray.cpp" Line 177
+"\Engine\Memory\Private\BitArray.cpp" Line 134
+"\Engine\Memory\Private\BitArray.cpp" Line 142
+"\Engine\Memory\Private\BitArray.cpp" Line 167
+"\Engine\Memory\Private\BitArray.cpp" Line 180
 
 4) Creating FSA in one allocation
 "\Engine\Memory\Private\FixedSizeAllocator.cpp" Line 17

@@ -47,9 +47,8 @@ namespace Engine {
 
 	void BitArray_UnitTest()
 	{		
-		for (size_t i = 1; i < 33; i++) {
+		for (size_t i = 1; i < 1000; i++) {
 			TestBitArray(i);
 		}
-		TestBitArray(1000);
 	}
 }
