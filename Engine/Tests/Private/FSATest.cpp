@@ -9,11 +9,14 @@ namespace Engine {
 		size_t blockSize = 1600;
 		size_t units = 100;
 		FixedSizeAllocator* FSA = FixedSizeAllocator::Create(blockSize, units, Engine::MasterMemoryManager::Instance()->DefaultHeapManager());
+		size_t defaultAlignment = 4;
 		std::vector<void*> allocatedPointers;
 		// Allocate all
 		for (unsigned int i = 0; i < units; i++) {
 			void* ptr = FSA->allocate();
-			assert(ptr);			
+			assert(ptr);
+			// Check for alignment
+			assert(reinterpret_cast<uintptr_t>(ptr) % defaultAlignment == 0);
 			allocatedPointers.push_back(ptr);
 		}
 		assert(FSA->allocate() == nullptr);
@@ -34,6 +37,8 @@ namespace Engine {
 			if (ptr == nullptr) {
 				break;
 			}
+			// Check for alignment
+			assert(reinterpret_cast<uintptr_t>(ptr) % defaultAlignment == 0);
 			allocatedPointers.push_back(ptr);
 			#ifdef TESTOVERWRITE
 			uint8_t* testptr = static_cast<uint8_t*>(ptr);
@@ -45,7 +50,6 @@ namespace Engine {
 			{
 				void * pPtr = allocatedPointers.back();
 				allocatedPointers.pop_back();
-
 				bool success = FSA->free(pPtr);
 				assert(success);
 			}
