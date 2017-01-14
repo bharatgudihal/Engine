@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <crtdbg.h>
 #include <vector>
+#include <Windows.h>
 #include "Player\Player.h"
 #include "Math\Vector2D.h"
 #include "Monster\Monster.h"
@@ -21,17 +22,19 @@
 #include "Interview\TestReverseWords.h"
 #include "Tests\BitArrayUnitTest.h"
 #include "Tests\FSATest.h"
+#include "GLibTest\GLibTest.h"
 
 #define _CRTDBG_MAP_ALLOC
-#define HEAPMANAGERTEST
+//#define HEAPMANAGERTEST
 //#define CONSTTEST
 //#define ALLOCATORTEST
 //#define FLOATCHECKTEST
 //#define MOVECOPYTEST
 //#define TESTREVERSEWORDS
-#define BITARRAYTEST
-#define FSATEST
+//#define BITARRAYTEST
+//#define FSATEST
 //#define MONSTERCHASE
+#define GLIBTEST
 
 using namespace std;
 using namespace Engine;
@@ -100,11 +103,11 @@ void playMonsterChase() {
 	}
 }
 
-int main() {
+int WINAPI wWinMain(HINSTANCE i_hInstance, HINSTANCE i_hPrevInstance, LPWSTR i_lpCmdLine, int i_nCmdShow) {
 	MasterMemoryManager::Startup();
-	#ifdef _DEBUG
+#ifdef _DEBUG
 		_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-	#endif // _DEBUG
+#endif // _DEBUG
 #ifdef HEAPMANAGERTEST
 	HeapManager_UnitTest();		
 #endif
@@ -132,7 +135,9 @@ int main() {
 #ifdef MONSTERCHASE
 	playMonsterChase();
 #endif
+#ifdef GLIBTEST
+	GLibTest(i_hInstance, i_nCmdShow);
+#endif
 	MasterMemoryManager::ShutDown();
-	_CrtDumpMemoryLeaks();
 	return 0;
 }

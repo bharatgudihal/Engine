@@ -42,6 +42,9 @@
     <ClCompile Include="MonsterChase\Interview\Private\TestReverseWords.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MonsterChase\GLibTest\Private\GLibTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MonsterChase\MonsterChase.h">
@@ -75,6 +78,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MonsterChase\Interview\TestReverseWords.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MonsterChase\GLibTest\GLibTest.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

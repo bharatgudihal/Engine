@@ -46,6 +46,10 @@ void operator delete (void* i_ptr) {
 				_aligned_free(i_ptr);
 			}
 		}
+		else {
+			DEBUG_LOG("Freeing pointer outside heapmanager %p\n", i_ptr);
+			_aligned_free(i_ptr);
+		}
 	}	
 }
 

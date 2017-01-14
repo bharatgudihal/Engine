@@ -64,6 +64,7 @@ namespace Engine {
 				delete FSAArray[index];
 			}
 		}
+		isReady = false;
 		if (defaultHeapManager != nullptr) {
 			delete defaultHeapManager;
 		}
