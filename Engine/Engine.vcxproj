@@ -43,6 +43,7 @@
     <ClInclude Include="Tests\HeapManagerTest.h" />
     <ClInclude Include="Tests\IsNANTest.h" />
     <ClInclude Include="Tests\MoveCopyTest.h" />
+    <ClInclude Include="Timer\CoreTimer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Actor\Private\Actor.cpp" />
@@ -60,6 +61,7 @@
     <ClCompile Include="Tests\Private\HeapManagerTest.cpp" />
     <ClCompile Include="Tests\Private\IsNANTest.cpp" />
     <ClCompile Include="Tests\Private\MoveCopyTest.cpp" />
+    <ClCompile Include="Timer\Private\CoreTimer.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{71B675E8-5F71-4AD6-B294-BC7210075F0C}</ProjectGuid>

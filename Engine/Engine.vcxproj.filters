@@ -46,6 +46,12 @@
     <Filter Include="Source Files\Tests">
       <UniqueIdentifier>{fa483171-4733-4ad7-870e-f9d80655ae7f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Timer">
+      <UniqueIdentifier>{d758d564-fd47-460e-ace1-7169e91e83cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Timer">
+      <UniqueIdentifier>{909d76be-3d00-4294-ae98-7e32e5f9db02}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor\Actor.h">
@@ -120,6 +126,9 @@
     <ClInclude Include="Tests\MoveCopyTest.h">
       <Filter>Header Files\Tests</Filter>
     </ClInclude>
+    <ClInclude Include="Timer\CoreTimer.h">
+      <Filter>Header Files\Timer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Actor\Private\Actor.cpp">
@@ -166,6 +175,9 @@
     </ClCompile>
     <ClCompile Include="Tests\Private\MoveCopyTest.cpp">
       <Filter>Source Files\Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer\Private\CoreTimer.cpp">
+      <Filter>Source Files\Timer</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
