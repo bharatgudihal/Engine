@@ -10,7 +10,7 @@ namespace Engine {
 		LARGE_INTEGER frequency;
 		if (!tickFrequency) {
 			QueryPerformanceFrequency(&frequency);
-			tickFrequency = static_cast<__int64>(frequency.QuadPart);
+			tickFrequency = frequency.QuadPart;
 		}
 		return tickFrequency;
 	}
@@ -18,7 +18,7 @@ namespace Engine {
 	__int64 CoreTimer::GetCounter() {
 		LARGE_INTEGER counterValue;
 		QueryPerformanceCounter(&counterValue);
-		return static_cast<__int64>(counterValue.QuadPart);
+		return counterValue.QuadPart;
 	}
 
 	float CoreTimer::CalculateDeltaTime() {
