@@ -13,126 +13,159 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\Actor">
+      <UniqueIdentifier>{e57b0345-0291-42e6-b3e4-33362e7d4e03}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Actor">
+      <UniqueIdentifier>{951676c7-22ca-42f0-b16b-d94a9248fc09}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Controllers">
+      <UniqueIdentifier>{3edb5c7c-0280-470e-98af-8f22bd701f4c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Logger">
+      <UniqueIdentifier>{20507a37-ff85-42af-873f-9abfce8924f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Math">
+      <UniqueIdentifier>{7e196a4d-a2e6-4cab-9253-8a1321ae91b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Memory">
+      <UniqueIdentifier>{d1fb21d7-a54d-4250-a25b-05b980f97557}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Tests">
+      <UniqueIdentifier>{6be68fd1-edb5-42ae-b2a2-de51e662df61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Logger">
+      <UniqueIdentifier>{2d8e7378-b9fa-416b-bb02-348b61bf5d2f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Math">
+      <UniqueIdentifier>{f8862101-b0e5-455b-910b-c29ad5804661}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Memory">
+      <UniqueIdentifier>{6e7c9080-3023-4224-a79b-96be4d7887bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Tests">
+      <UniqueIdentifier>{fa483171-4733-4ad7-870e-f9d80655ae7f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Math\Vector2D.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Actor\Actor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Logger\Logger.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Memory\HeapManager.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Actor</Filter>
     </ClInclude>
     <ClInclude Include="Actor\Actor_Inl.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Memory\HeapManager_Inl.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Math\Vector2D_Inl.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Actor</Filter>
     </ClInclude>
     <ClInclude Include="Controllers\ActorController.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Controllers</Filter>
     </ClInclude>
-    <ClInclude Include="Memory\Allocators.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Logger\Logger.h">
+      <Filter>Header Files\Logger</Filter>
     </ClInclude>
-    <ClInclude Include="Tests\ConstChecker.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Math\Vector2D.h">
+      <Filter>Header Files\Math</Filter>
     </ClInclude>
-    <ClInclude Include="Tests\HeapManagerTest.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Tests\AllocatorTest.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Math\Vector2D_Inl.h">
+      <Filter>Header Files\Math</Filter>
     </ClInclude>
     <ClInclude Include="Math\FloatCheck.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Tests\MoveCopyTest.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Tests\IsNANTest.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Memory\BitArray.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Math</Filter>
     </ClInclude>
     <ClInclude Include="Math\FloatCheck_Inl.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Memory\Allocators.h">
+      <Filter>Header Files\Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="Memory\BitArray.h">
+      <Filter>Header Files\Memory</Filter>
     </ClInclude>
     <ClInclude Include="Memory\BitArray_Inl.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Tests\BitArrayUnitTest.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Memory</Filter>
     </ClInclude>
     <ClInclude Include="Memory\FixedSizeAllocator.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Memory</Filter>
     </ClInclude>
     <ClInclude Include="Memory\FixedSizeAllocator_Inl.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Memory</Filter>
     </ClInclude>
-    <ClInclude Include="Tests\FSATest.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Memory\HeapManager.h">
+      <Filter>Header Files\Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="Memory\HeapManager_Inl.h">
+      <Filter>Header Files\Memory</Filter>
     </ClInclude>
     <ClInclude Include="Memory\MasterMemoryManager.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Memory</Filter>
     </ClInclude>
     <ClInclude Include="Memory\MasterMemoryManager_Inl.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="Tests\AllocatorTest.h">
+      <Filter>Header Files\Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="Tests\BitArrayUnitTest.h">
+      <Filter>Header Files\Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="Tests\ConstChecker.h">
+      <Filter>Header Files\Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="Tests\FSATest.h">
+      <Filter>Header Files\Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="Tests\HeapManagerTest.h">
+      <Filter>Header Files\Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="Tests\IsNANTest.h">
+      <Filter>Header Files\Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="Tests\MoveCopyTest.h">
+      <Filter>Header Files\Tests</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Math\Private\Vector2D.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Actor\Private\Actor.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Actor</Filter>
     </ClCompile>
     <ClCompile Include="Logger\Private\Logger.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Logger</Filter>
     </ClCompile>
-    <ClCompile Include="Memory\Private\HeapManager.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Math\Private\Vector2D.cpp">
+      <Filter>Source Files\Math</Filter>
     </ClCompile>
     <ClCompile Include="Memory\Private\Allocators.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Tests\Private\ConstChecker.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Tests\Private\HeapManagerTest.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Tests\Private\AllocatorTest.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Tests\Private\MoveCopyTest.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Tests\Private\IsNANTest.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Memory</Filter>
     </ClCompile>
     <ClCompile Include="Memory\Private\BitArray.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Tests\Private\BitArrayUnitTest.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Memory</Filter>
     </ClCompile>
     <ClCompile Include="Memory\Private\FixedSizeAllocator.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Memory</Filter>
     </ClCompile>
-    <ClCompile Include="Tests\Private\FSATest.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Memory\Private\HeapManager.cpp">
+      <Filter>Source Files\Memory</Filter>
     </ClCompile>
     <ClCompile Include="Memory\Private\MasterMemoryManager.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Memory</Filter>
+    </ClCompile>
+    <ClCompile Include="Tests\Private\AllocatorTest.cpp">
+      <Filter>Source Files\Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="Tests\Private\BitArrayUnitTest.cpp">
+      <Filter>Source Files\Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="Tests\Private\ConstChecker.cpp">
+      <Filter>Source Files\Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="Tests\Private\FSATest.cpp">
+      <Filter>Source Files\Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="Tests\Private\HeapManagerTest.cpp">
+      <Filter>Source Files\Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="Tests\Private\IsNANTest.cpp">
+      <Filter>Source Files\Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="Tests\Private\MoveCopyTest.cpp">
+      <Filter>Source Files\Tests</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
