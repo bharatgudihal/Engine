@@ -69,6 +69,9 @@
     <ClCompile Include="MonsterChase\Player\Private\PlayerController.cpp">
       <Filter>Source Files\Player</Filter>
     </ClCompile>
+    <ClCompile Include="MonsterChase\Game.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MonsterChase\MonsterChase.h">
@@ -106,6 +109,9 @@
     </ClInclude>
     <ClInclude Include="MonsterChase\Player\PlayerController_Inl.h">
       <Filter>Header Files\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="MonsterChase\Game.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

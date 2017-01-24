@@ -52,6 +52,12 @@
     <Filter Include="Source Files\Timer">
       <UniqueIdentifier>{909d76be-3d00-4294-ae98-7e32e5f9db02}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\SpriteUtilities">
+      <UniqueIdentifier>{bfdde498-981a-4bdf-b5f4-6e616797b612}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\SpriteUtilities">
+      <UniqueIdentifier>{92d0a475-02aa-46b9-846f-4756579a9916}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor\Actor.h">
@@ -129,6 +135,9 @@
     <ClInclude Include="Timer\CoreTimer.h">
       <Filter>Header Files\Timer</Filter>
     </ClInclude>
+    <ClInclude Include="SpriteUtilities\SpriteUtilities.h">
+      <Filter>Header Files\SpriteUtilities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Actor\Private\Actor.cpp">
@@ -178,6 +187,9 @@
     </ClCompile>
     <ClCompile Include="Timer\Private\CoreTimer.cpp">
       <Filter>Source Files\Timer</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteUtilities\Private\SpriteUtilities.cpp">
+      <Filter>Source Files\SpriteUtilities</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

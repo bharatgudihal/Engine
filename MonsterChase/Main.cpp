@@ -23,7 +23,7 @@
 #include "Tests\BitArrayUnitTest.h"
 #include "Tests\FSATest.h"
 #include "GLibTest\GLibTest.h"
-#include "Timer\CoreTimer.h"
+#include "Game.h"
 
 #define _CRTDBG_MAP_ALLOC
 //#define HEAPMANAGERTEST
@@ -40,46 +40,49 @@
 using namespace std;
 using namespace Engine;
 
+void RunTests();
+
 int WINAPI wWinMain(HINSTANCE i_hInstance, HINSTANCE i_hPrevInstance, LPWSTR i_lpCmdLine, int i_nCmdShow) {
 	if (MasterMemoryManager::Startup()) {
 #ifdef _DEBUG
 		_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 #endif // _DEBUG
-#ifdef HEAPMANAGERTEST
-		HeapManager_UnitTest();
-#endif
-#ifdef CONSTTEST
-		ConstChecker();
-#endif
-#ifdef ALLOCATORTEST
-		startAllocatorTest();
-#endif
-#ifdef FLOATCHECKTEST
-		TestNAN();
-#endif // FLOATCHECKTEST
-#ifdef MOVECOPYTEST
-		MoveCopyTest();
-#endif // MOVECOPYTEST
-#ifdef TESTREVERSEWORDS
-		TestReverseWords();
-#endif // TESTREVERSEWORDS
-#ifdef BITARRAYTEST
-		BitArray_UnitTest();
-#endif
-#ifdef FSATEST
-		FSAUnitTest();
-#endif
-#ifdef MONSTERCHASE
-		playMonsterChase();
-#endif
-#ifdef GLIBTEST
-		GLibTest(i_hInstance, i_nCmdShow);
-#endif
-		while (1) {
-			float time = CoreTimer::GetDeltaTime();
-			DEBUG_LOG("%f \n", time);
-		}
+		RunTests();
+		Game::StartGame(i_hInstance, i_nCmdShow);
 		MasterMemoryManager::ShutDown();
 	}
 	return 0;
+}
+
+void RunTests() {
+#ifdef HEAPMANAGERTEST
+	HeapManager_UnitTest();
+#endif
+#ifdef CONSTTEST
+	ConstChecker();
+#endif
+#ifdef ALLOCATORTEST
+	startAllocatorTest();
+#endif
+#ifdef FLOATCHECKTEST
+	TestNAN();
+#endif // FLOATCHECKTEST
+#ifdef MOVECOPYTEST
+	MoveCopyTest();
+#endif // MOVECOPYTEST
+#ifdef TESTREVERSEWORDS
+	TestReverseWords();
+#endif // TESTREVERSEWORDS
+#ifdef BITARRAYTEST
+	BitArray_UnitTest();
+#endif
+#ifdef FSATEST
+	FSAUnitTest();
+#endif
+#ifdef MONSTERCHASE
+	playMonsterChase();
+#endif
+#ifdef GLIBTEST
+	GLibTest(i_hInstance, i_nCmdShow);
+#endif
 }

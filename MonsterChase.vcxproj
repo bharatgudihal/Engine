@@ -169,6 +169,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="MonsterChase\Game.cpp" />
     <ClCompile Include="MonsterChase\GLibTest\Private\GLibTest.cpp" />
     <ClCompile Include="MonsterChase\Interview\Private\ReverseWords.cpp" />
     <ClCompile Include="MonsterChase\Interview\Private\TestReverseWords.cpp" />
@@ -186,6 +187,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="MonsterChase\Game.h" />
     <ClInclude Include="MonsterChase\GLibTest\GLibTest.h" />
     <ClInclude Include="MonsterChase\Interview\ReverseWords.h" />
     <ClInclude Include="MonsterChase\Interview\TestReverseWords.h" />
