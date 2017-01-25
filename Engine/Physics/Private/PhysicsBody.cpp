@@ -2,7 +2,7 @@
 
 namespace Engine {
 	namespace Physics {
-		PhysicsBody::PhysicsBody(Actor* i_actor, float i_speed, float i_mass, float i_drag, bool i_useGravity) {
+		PhysicsBody::PhysicsBody(Actor* i_actor, const float i_speed, const float i_mass, const float i_drag, const bool i_useGravity) {
 			assert(i_mass);
 			actor = i_actor;
 			mass = i_mass;
@@ -37,7 +37,7 @@ namespace Engine {
 			}
 		}
 
-		Vector2D Physics::PhysicsBody::CalculateDrag() {			
+		Vector2D Physics::PhysicsBody::CalculateDrag() const{			
 			Vector2D drag = currentVelocity*currentVelocity*dragCoefficient;
 			if (currentVelocity.X() > 0) {
 				drag.X(-drag.X());
@@ -54,7 +54,7 @@ namespace Engine {
 			return drag;
 		}
 
-		void PhysicsBody::PhysicsUpdate(float deltaTime) {
+		void PhysicsBody::PhysicsUpdate(const float deltaTime) {
 			Vector2D dragForce = CalculateDrag();
 			Vector2D netForce = force * speed + dragForce + (useGravity ? GRAVITY : Vector2D::ZERO);
 			Vector2D acceleration = netForce / mass;

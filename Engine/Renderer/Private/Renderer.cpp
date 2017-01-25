@@ -26,7 +26,7 @@ namespace Engine {
 			return sprite;
 		}
 
-		void Draw(Actor* actor, GLib::Sprites::Sprite* sprite) {
+		void Draw(const Actor* actor, const GLib::Sprites::Sprite* sprite) {
 			GLib::BeginRendering();
 			GLib::Sprites::BeginRendering();
 			GLib::Point2D position = { actor->getPosition().X(), actor->getPosition().Y() };

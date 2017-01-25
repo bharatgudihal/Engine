@@ -6,6 +6,6 @@
 namespace Engine {
 	namespace Renderer {
 		GLib::Sprites::Sprite * CreateSprite(void* file, size_t sizeOfFile);
-		void Draw(Actor* actor, GLib::Sprites::Sprite* sprite);
+		void Draw(const Actor* actor, const GLib::Sprites::Sprite* sprite);
 	}
 }
