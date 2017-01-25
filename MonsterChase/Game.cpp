@@ -3,12 +3,11 @@
 namespace Game {
 
 	bool quit;
-	GLib::Sprites::Sprite * player;
+	GLib::Sprites::Sprite * playerSprite;
+	Engine::Actor playerActor;
+	float deltaTime;
 	void Update();
-
-	void KeyChangeCallBack(unsigned int keyCode, bool isDown) {
-
-	}
+	Engine::Physics::PhysicsBody* physicsBody;
 
 	void* LoadFile(const char* fileName, size_t & size) {
 		FILE * file = nullptr;
@@ -32,33 +31,43 @@ namespace Game {
 		return buffer;
 	}
 
+	void InitializeActors() {
+		size_t fileSize;
+		void* file = LoadFile("Assets\\Sprites\\player.dds", fileSize);
+		playerSprite = Engine::Renderer::CreateSprite(file, fileSize);
+		delete file;
+		playerActor.setPosition(Engine::Vector2D::ZERO);
+		physicsBody = new Engine::Physics::PhysicsBody(&playerActor,100.0f,1.0f,0.05f);
+		assert(playerSprite);
+	}
+
+	void TearDownActors() {
+		delete physicsBody;
+	}
+
 	void StartGame(HINSTANCE i_hInstance, int i_nCmdShow) {
 		if (GLib::Initialize(i_hInstance, i_nCmdShow, "Game", -1, 800, 600)) {
-			GLib::SetKeyStateChangeCallback(KeyChangeCallBack);
-			size_t fileSize;
-			void* file = LoadFile("Assets\\Sprites\\player.dds", fileSize);
-			player = Engine::SpriteUtilities::CreateSprite(file, fileSize);
-			assert(player);
+			GLib::SetKeyStateChangeCallback(Engine::Input::KeyChangeCallBack);
+			InitializeActors();
 			quit = false;
 			do {
+				deltaTime = Engine::CoreTimer::GetDeltaTime();
 				GLib::Service(quit);
-				Update();
+				Update();				
 			} while (!quit);
-			if (player) {
-				GLib::Sprites::Release(player);
+			if (playerSprite) {
+				GLib::Sprites::Release(playerSprite);
 			}
+			TearDownActors();
 			GLib::Shutdown();
 		}
 	}
 
 	void Update() {
 		if (!quit) {
-			GLib::BeginRendering();
-			GLib::Sprites::BeginRendering();
-			GLib::Point2D position = { 0,0 };
-			GLib::Sprites::RenderSprite(*player, position, 0.0f);
-			GLib::Sprites::EndRendering();
-			GLib::EndRendering();
+			physicsBody->ApplyForce();
+			physicsBody->PhysicsUpdate(deltaTime);
+			Engine::Renderer::Draw(&playerActor, playerSprite);			
 		}
 	}
 }

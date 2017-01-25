@@ -1,7 +1,7 @@
-#include "../SpriteUtilities.h"
+#include "../Renderer.h"
 
 namespace Engine {
-	namespace SpriteUtilities {
+	namespace Renderer {
 		GLib::Sprites::Sprite * CreateSprite(void* file, size_t sizeOfFile) {
 			GLib::Texture * texture = file ? GLib::CreateTexture(file, sizeOfFile) : nullptr;			
 			if (texture == nullptr) {
@@ -23,8 +23,16 @@ namespace Engine {
 				return nullptr;
 			}
 			GLib::Sprites::SetTexture(*sprite, *texture);
-
 			return sprite;
+		}
+
+		void Draw(Actor* actor, GLib::Sprites::Sprite* sprite) {
+			GLib::BeginRendering();
+			GLib::Sprites::BeginRendering();
+			GLib::Point2D position = { actor->getPosition().X(), actor->getPosition().Y() };
+			GLib::Sprites::RenderSprite(*sprite, position, 0.0f);
+			GLib::Sprites::EndRendering();
+			GLib::EndRendering();
 		}
 	}
 }

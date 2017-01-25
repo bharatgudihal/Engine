@@ -52,11 +52,23 @@
     <Filter Include="Source Files\Timer">
       <UniqueIdentifier>{909d76be-3d00-4294-ae98-7e32e5f9db02}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\SpriteUtilities">
+    <Filter Include="Header Files\Renderer">
       <UniqueIdentifier>{bfdde498-981a-4bdf-b5f4-6e616797b612}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\SpriteUtilities">
+    <Filter Include="Source Files\Renderer">
       <UniqueIdentifier>{92d0a475-02aa-46b9-846f-4756579a9916}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Physics">
+      <UniqueIdentifier>{7b0bf96b-c033-414a-b921-63c37916f2d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Physics">
+      <UniqueIdentifier>{c9965aed-2abc-43c0-9013-822078ec66ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Input">
+      <UniqueIdentifier>{ba17153a-5632-4ee9-b2d7-29067c9c9f38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Input">
+      <UniqueIdentifier>{dbe1d15c-1695-434c-b510-448b15274a9c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -135,8 +147,14 @@
     <ClInclude Include="Timer\CoreTimer.h">
       <Filter>Header Files\Timer</Filter>
     </ClInclude>
-    <ClInclude Include="SpriteUtilities\SpriteUtilities.h">
-      <Filter>Header Files\SpriteUtilities</Filter>
+    <ClInclude Include="Renderer\Renderer.h">
+      <Filter>Header Files\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Input\Input.h">
+      <Filter>Header Files\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics\PhysicsBody.h">
+      <Filter>Header Files\Physics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -188,8 +206,14 @@
     <ClCompile Include="Timer\Private\CoreTimer.cpp">
       <Filter>Source Files\Timer</Filter>
     </ClCompile>
-    <ClCompile Include="SpriteUtilities\Private\SpriteUtilities.cpp">
-      <Filter>Source Files\SpriteUtilities</Filter>
+    <ClCompile Include="Renderer\Private\Renderer.cpp">
+      <Filter>Source Files\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Input\Private\Input.cpp">
+      <Filter>Source Files\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Physics\Private\PhysicsBody.cpp">
+      <Filter>Source Files\Physics</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

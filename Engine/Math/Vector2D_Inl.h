@@ -21,29 +21,48 @@ namespace Engine {
 	inline Vector2D operator+(const Vector2D& lhs_vector, const Vector2D& rhs_vector) {
 		return Vector2D(lhs_vector.X() + rhs_vector.X(), lhs_vector.Y() + rhs_vector.Y());
 	}
+
 	inline Vector2D operator-(const Vector2D& lhs_vector, const Vector2D& rhs_vector) {
 		return Vector2D(lhs_vector.X() - rhs_vector.X(), lhs_vector.Y() - rhs_vector.Y());
 	}
+
 	inline bool operator==(const Vector2D& rhs, const Vector2D& lhs) {
 		return Engine::AreAboutEqual(rhs.X(), lhs.X()) && Engine::AreAboutEqual(rhs.Y(), lhs.Y());
 	}
+
 	inline Vector2D& Vector2D::operator+=(const Vector2D& rhs) {
 		*this = *this + rhs;
 		return *this;
 	}
+
 	inline Vector2D& Vector2D::operator-=(const Vector2D& rhs) {
 		*this = *this - rhs;
 		return *this;
 	}
+
 	inline Vector2D& Vector2D::operator=(const Vector2D& rhs) {
 		x = rhs.x;
 		y = rhs.y;
 		return *this;
 	}
+
 	inline float Vector2D::Magnitude() const {
 		return static_cast<float>(pow((pow(x, 2) + pow(y, 2)),0.5f));
 	}
+
 	inline Vector2D operator*(const Vector2D& lhs_vector, const float& rhs_float) {
 		return Vector2D(lhs_vector.X() * rhs_float, lhs_vector.Y() * rhs_float);
+	}
+
+	inline Vector2D operator/(const Vector2D& lhs_vector, const float& rhs_float) {
+		return Vector2D(lhs_vector.X() / rhs_float, lhs_vector.Y() / rhs_float);
+	}
+
+	inline Vector2D operator-(const Vector2D& rhs) {
+		return Vector2D(-rhs.X(), -rhs.Y());
+	}
+
+	inline Vector2D operator*(const Vector2D& lhs, const Vector2D& rhs) {
+		return Vector2D(lhs.X()*rhs.X(), lhs.Y()*rhs.Y());
 	}
 }
