@@ -70,6 +70,12 @@
     <Filter Include="Source Files\Input">
       <UniqueIdentifier>{dbe1d15c-1695-434c-b510-448b15274a9c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Pointer">
+      <UniqueIdentifier>{5c73f027-d48b-47c5-a3b0-47533f9a4a11}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Pointer">
+      <UniqueIdentifier>{58520717-2aad-4579-a914-b31816e08d61}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor\Actor.h">
@@ -156,6 +162,33 @@
     <ClInclude Include="Physics\PhysicsBody.h">
       <Filter>Header Files\Physics</Filter>
     </ClInclude>
+    <ClInclude Include="Renderer\RenderObject.h">
+      <Filter>Header Files\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\RenderObject_Inl.h">
+      <Filter>Header Files\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Pointer\SmartPointer.h">
+      <Filter>Header Files\Pointer</Filter>
+    </ClInclude>
+    <ClInclude Include="Pointer\Counter.h">
+      <Filter>Header Files\Pointer</Filter>
+    </ClInclude>
+    <ClInclude Include="Pointer\SmartPointer_Inl.h">
+      <Filter>Header Files\Pointer</Filter>
+    </ClInclude>
+    <ClInclude Include="Pointer\WeakPointer.h">
+      <Filter>Header Files\Pointer</Filter>
+    </ClInclude>
+    <ClInclude Include="Pointer\WeakPointer_Inl.h">
+      <Filter>Header Files\Pointer</Filter>
+    </ClInclude>
+    <ClInclude Include="Pointer\UniquePointer.h">
+      <Filter>Header Files\Pointer</Filter>
+    </ClInclude>
+    <ClInclude Include="Pointer\UniquePointer_Inl.h">
+      <Filter>Header Files\Pointer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Actor\Private\Actor.cpp">
@@ -214,6 +247,15 @@
     </ClCompile>
     <ClCompile Include="Physics\Private\PhysicsBody.cpp">
       <Filter>Source Files\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Pointer\Private\SmartPointer.cpp">
+      <Filter>Source Files\Pointer</Filter>
+    </ClCompile>
+    <ClCompile Include="Pointer\Private\WeakPointer.cpp">
+      <Filter>Source Files\Pointer</Filter>
+    </ClCompile>
+    <ClCompile Include="Pointer\Private\UniquePointer.cpp">
+      <Filter>Source Files\Pointer</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

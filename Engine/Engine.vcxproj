@@ -38,7 +38,16 @@
     <ClInclude Include="Memory\MasterMemoryManager.h" />
     <ClInclude Include="Memory\MasterMemoryManager_Inl.h" />
     <ClInclude Include="Physics\PhysicsBody.h" />
+    <ClInclude Include="Pointer\Counter.h" />
+    <ClInclude Include="Pointer\SmartPointer.h" />
+    <ClInclude Include="Pointer\SmartPointer_Inl.h" />
+    <ClInclude Include="Pointer\UniquePointer.h" />
+    <ClInclude Include="Pointer\UniquePointer_Inl.h" />
+    <ClInclude Include="Pointer\WeakPointer.h" />
+    <ClInclude Include="Pointer\WeakPointer_Inl.h" />
     <ClInclude Include="Renderer\Renderer.h" />
+    <ClInclude Include="Renderer\RenderObject.h" />
+    <ClInclude Include="Renderer\RenderObject_Inl.h" />
     <ClInclude Include="Tests\AllocatorTest.h" />
     <ClInclude Include="Tests\BitArrayUnitTest.h" />
     <ClInclude Include="Tests\ConstChecker.h" />
@@ -59,6 +68,9 @@
     <ClCompile Include="Memory\Private\HeapManager.cpp" />
     <ClCompile Include="Memory\Private\MasterMemoryManager.cpp" />
     <ClCompile Include="Physics\Private\PhysicsBody.cpp" />
+    <ClCompile Include="Pointer\Private\SmartPointer.cpp" />
+    <ClCompile Include="Pointer\Private\UniquePointer.cpp" />
+    <ClCompile Include="Pointer\Private\WeakPointer.cpp" />
     <ClCompile Include="Renderer\Private\Renderer.cpp" />
     <ClCompile Include="Tests\Private\AllocatorTest.cpp" />
     <ClCompile Include="Tests\Private\BitArrayUnitTest.cpp" />

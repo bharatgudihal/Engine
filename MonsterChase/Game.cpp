@@ -2,9 +2,9 @@
 
 namespace Game {
 
-	bool quit;
-	GLib::Sprites::Sprite * playerSprite;
-	Engine::Actor playerActor;
+	bool quit;	
+	Engine::Renderer::RenderObject* playerRenderObject;
+	Engine::Actor* playerActor;
 	float deltaTime;
 	void Update();
 	Engine::Physics::PhysicsBody* physicsBody;
@@ -34,15 +34,18 @@ namespace Game {
 	void InitializeActors() {
 		size_t fileSize;
 		void* file = LoadFile("Assets\\Sprites\\player.dds", fileSize);
-		playerSprite = Engine::Renderer::CreateSprite(file, fileSize);
+		playerActor = new Engine::Actor();
+		playerRenderObject = Engine::Renderer::RenderObject::Create(playerActor, file, fileSize);		
 		delete file;
-		playerActor.setPosition(Engine::Vector2D::ZERO);
-		physicsBody = new Engine::Physics::PhysicsBody(&playerActor,100.0f,1.0f,0.05f);
-		assert(playerSprite);
+		playerActor->setPosition(Engine::Vector2D::ZERO);
+		physicsBody = new Engine::Physics::PhysicsBody(playerActor,200.0f,1.0f,0.05f);
+		assert(playerRenderObject);
 	}
 
 	void TearDownActors() {
+		delete playerRenderObject;
 		delete physicsBody;
+		delete playerActor;
 	}
 
 	void StartGame(HINSTANCE i_hInstance, int i_nCmdShow) {
@@ -55,9 +58,6 @@ namespace Game {
 				GLib::Service(quit);
 				Update();				
 			} while (!quit);
-			if (playerSprite) {
-				GLib::Sprites::Release(playerSprite);
-			}
 			TearDownActors();
 			GLib::Shutdown();
 		}
@@ -67,7 +67,7 @@ namespace Game {
 		if (!quit) {
 			physicsBody->ApplyForce();
 			physicsBody->PhysicsUpdate(deltaTime);
-			Engine::Renderer::Draw(&playerActor, playerSprite);			
+			Engine::Renderer::Draw(playerRenderObject);
 		}
 	}
 }

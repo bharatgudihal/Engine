@@ -1,4 +1,5 @@
 #include "../Renderer.h"
+#include "../RenderObject.h"
 
 namespace Engine {
 	namespace Renderer {
@@ -26,11 +27,11 @@ namespace Engine {
 			return sprite;
 		}
 
-		void Draw(const Actor* actor, const GLib::Sprites::Sprite* sprite) {
+		void Draw(const RenderObject* renderObject) {
 			GLib::BeginRendering();
 			GLib::Sprites::BeginRendering();
-			GLib::Point2D position = { actor->getPosition().X(), actor->getPosition().Y() };
-			GLib::Sprites::RenderSprite(*sprite, position, 0.0f);
+			GLib::Point2D position = { renderObject->GetActor()->getPosition().X(), renderObject->GetActor()->getPosition().Y() };
+			GLib::Sprites::RenderSprite(*renderObject->Sprite(), position, 0.0f);
 			GLib::Sprites::EndRendering();
 			GLib::EndRendering();
 		}

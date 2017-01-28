@@ -4,6 +4,7 @@
 #include <assert.h>
 #include "GLib.h"
 #include "Renderer\Renderer.h"
+#include "Renderer\RenderObject.h"
 #include "Timer\CoreTimer.h"
 #include "Actor\Actor.h"
 #include "Input\Input.h"
