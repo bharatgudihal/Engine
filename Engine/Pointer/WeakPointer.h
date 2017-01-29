@@ -6,9 +6,9 @@ namespace Engine {
 		class WeakPointer {
 		public:
 
-			WeakPointer(SmartPointer<T>* smartPtr = nullptr) :smartPointer(smartPtr) {
-				if (smartPointer) {
-					counter = smartPointer->getCounter();
+			WeakPointer(SmartPointer<T> smartPtr = nullptr) :smartPointer(smartPtr) {
+				if (smartPointer != nullptr) {
+					counter = smartPointer.getCounter();
 					counter->weakCount++;
 				}
 			}
@@ -56,7 +56,7 @@ namespace Engine {
 			inline bool operator!() const;
 
 			void swap(WeakPointer& weakPointer) {
-				SmartPointer<T>* tempPointer = weakPointer.smartPointer;
+				SmartPointer<T> tempPointer = weakPointer.smartPointer;
 				Counter* tempCounter = weakPointer.counter;
 				weakPointer.smartPointer = smartPointer;
 				weakPointer.counter = counter;
@@ -64,9 +64,9 @@ namespace Engine {
 				counter = tempCounter;
 			}
 
-			inline SmartPointer<T>* Acquire() const;
+			inline SmartPointer<T> Acquire() const;
 		private:
-			SmartPointer<T>* smartPointer;
+			SmartPointer<T> smartPointer;
 			Counter* counter = nullptr;
 
 			void decrementCounter() {

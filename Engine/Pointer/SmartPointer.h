@@ -18,7 +18,9 @@ namespace Engine {
 				checkCountersAndDelete();
 				pointer = smartPtr.pointer;
 				counter = smartPtr.counter;
-				counter->smartCount++;
+				if (counter) {
+					counter->smartCount++;
+				}
 			}
 
 			SmartPointer(SmartPointer&& smartPtr) {				
@@ -34,7 +36,9 @@ namespace Engine {
 				assert(pointer != smartPtr.pointer);
 				checkCountersAndDelete();
 				counter = smartPtr.counter;
-				counter->smartCount++;
+				if (counter) {
+					counter->smartCount++;
+				}
 				pointer = smartPtr.pointer;
 				return *this;
 			}

@@ -1,16 +1,17 @@
 #pragma once
 #include "../Actor/Actor.h"
 #include "../Input/Input.h"
+#include "../Pointer/WeakPointer.h"
 
 namespace Engine {
 	namespace Physics {
 		class PhysicsBody {
 		public:
-			PhysicsBody(Actor* i_actor, const float i_speed, const float i_mass = 1.0f, const float i_drag = 0.0f, const bool i_useGravity = false);
+			PhysicsBody(Pointer::SmartPointer<Actor> smartPointer, const float i_speed, const float i_mass = 1.0f, const float i_drag = 0.0f, const bool i_useGravity = false);
 			void PhysicsUpdate(const float deltaTime);
 			void ApplyForce();
 		private:
-			Actor* actor;
+			Pointer::WeakPointer<Actor> weakPointer;
 			float mass;
 			float dragCoefficient;
 			float speed;

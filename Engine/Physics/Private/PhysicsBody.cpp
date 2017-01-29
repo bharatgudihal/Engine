@@ -2,9 +2,8 @@
 
 namespace Engine {
 	namespace Physics {
-		PhysicsBody::PhysicsBody(Actor* i_actor, const float i_speed, const float i_mass, const float i_drag, const bool i_useGravity) {
+		PhysicsBody::PhysicsBody(Pointer::SmartPointer<Actor> smartPointer, const float i_speed, const float i_mass, const float i_drag, const bool i_useGravity):weakPointer(smartPointer){
 			assert(i_mass);
-			actor = i_actor;
 			mass = i_mass;
 			dragCoefficient = i_drag;
 			useGravity = i_useGravity;
@@ -60,8 +59,9 @@ namespace Engine {
 			Vector2D acceleration = netForce / mass;
 			Vector2D previousVelocity = currentVelocity;
 			currentVelocity = previousVelocity + acceleration * deltaTime;
-			Vector2D newPosition = actor->getPosition() + ((previousVelocity + currentVelocity) / 2) * deltaTime;			
-			actor->setPosition(newPosition);
+			Engine::Pointer::SmartPointer<Actor> smartPtr = weakPointer.Acquire();
+			Vector2D newPosition = smartPtr->getPosition() + ((previousVelocity + currentVelocity) / 2) * deltaTime;
+			smartPtr->setPosition(newPosition);
 		}
 	}
 }

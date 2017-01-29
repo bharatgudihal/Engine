@@ -153,6 +153,7 @@ namespace Engine {
 	}
 
 	void HeapManager::runGarbageCollector() {
+		DEBUG_LOG("Running garbage collector\n");
 		BlockDescriptor* outerHead = freeBlocksList;
 		while (outerHead != nullptr) {
 			char* endOfBlock = static_cast<char*>(outerHead->base) + outerHead->size;

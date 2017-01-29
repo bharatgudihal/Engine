@@ -23,7 +23,7 @@ namespace Engine {
 		}
 
 		template<class T>
-		inline SmartPointer<T>* WeakPointer<T>::Acquire() const{
+		inline SmartPointer<T> WeakPointer<T>::Acquire() const{
 			return smartPointer;
 		}
 	}

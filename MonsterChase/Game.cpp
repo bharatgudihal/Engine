@@ -2,12 +2,12 @@
 
 namespace Game {
 
-	bool quit;	
+	bool quit;
+	Engine::Pointer::SmartPointer<Engine::Actor>* playerActor;
 	Engine::Renderer::RenderObject* playerRenderObject;
-	Engine::Actor* playerActor;
+	Engine::Physics::PhysicsBody* physicsBody;
 	float deltaTime;
 	void Update();
-	Engine::Physics::PhysicsBody* physicsBody;
 
 	void* LoadFile(const char* fileName, size_t & size) {
 		FILE * file = nullptr;
@@ -31,14 +31,14 @@ namespace Game {
 		return buffer;
 	}
 
-	void InitializeActors() {
+	void InitializeActors() {		
+		playerActor = new Engine::Pointer::SmartPointer<Engine::Actor> (new Engine::Actor("Player", Engine::Vector2D::ZERO));
 		size_t fileSize;
 		void* file = LoadFile("Assets\\Sprites\\player.dds", fileSize);
-		playerActor = new Engine::Actor();
-		playerRenderObject = Engine::Renderer::RenderObject::Create(playerActor, file, fileSize);		
+		playerRenderObject = Engine::Renderer::RenderObject::Create(*playerActor, file, fileSize);		
 		delete file;
-		playerActor->setPosition(Engine::Vector2D::ZERO);
-		physicsBody = new Engine::Physics::PhysicsBody(playerActor,200.0f,1.0f,0.05f);
+		(*playerActor)->setPosition(Engine::Vector2D::ZERO);
+		physicsBody = new Engine::Physics::PhysicsBody(*playerActor,200.0f,1.0f,0.05f);
 		assert(playerRenderObject);
 	}
 

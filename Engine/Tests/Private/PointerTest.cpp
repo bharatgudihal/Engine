@@ -32,7 +32,7 @@ namespace Engine {
 			assert(smartTest4.getCounter()->smartCount == 3);
 			assert(smartTest4.getCounter()->weakCount == 0);
 			if (true) {
-				Engine::Pointer::WeakPointer<Actor> weakTest1(&smartTest4);
+				Engine::Pointer::WeakPointer<Actor> weakTest1(smartTest4);
 				assert(weakTest1);
 				assert(smartTest4.getCounter()->weakCount == 1);
 				Engine::Pointer::WeakPointer<Actor> weakTest2(weakTest1);
@@ -44,7 +44,7 @@ namespace Engine {
 				assert(weakTest3);
 				assert(smartTest4.getCounter()->weakCount == 3);
 				assert(weakTest2 == weakTest3);
-				assert(weakTest2 == &smartTest4);
+				assert(weakTest2 == smartTest4);
 				Engine::Pointer::WeakPointer<Actor> weakTest4;
 				assert(!weakTest4);
 				weakTest4.swap(weakTest3);

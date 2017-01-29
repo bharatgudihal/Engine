@@ -1,5 +1,6 @@
 #pragma once
 #include "GLib.h"
+#include "../Pointer/WeakPointer.h"
 #include "../Actor/Actor.h"
 #include "Renderer.h"
 
@@ -7,15 +8,15 @@ namespace Engine {
 	namespace Renderer {
 		class RenderObject {
 		public:
-			inline static RenderObject* Create(Actor* i_actor, void* file, size_t fileSize);
+			inline static RenderObject* Create(const Pointer::SmartPointer<Actor> smartPointer, void* file, size_t fileSize);
 			~RenderObject();
-			inline Actor* GetActor() const;
+			inline Pointer::WeakPointer<Actor> GetPointer() const;
 			inline GLib::Sprites::Sprite* Sprite() const;
 		private:
 			RenderObject();
-			inline RenderObject(Actor* i_actor, void* file, size_t fileSize);
+			inline RenderObject(Pointer::SmartPointer<Actor> smartPointer, void* file, size_t fileSize);
 			GLib::Sprites::Sprite* sprite;
-			Actor* actor;
+			Pointer::WeakPointer<Actor> weakPointer;
 		};
 	}
 }
