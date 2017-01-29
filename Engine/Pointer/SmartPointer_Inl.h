@@ -9,13 +9,22 @@ namespace Engine {
 
 		template<class T>
 		inline bool SmartPointer<T>::operator==(const SmartPointer& smartPtr) const{
-			assert(smartPtr);
-			return pointer == smartPtr->pointer;
+			return pointer == smartPtr.pointer;
 		}
 
 		template<class T>
-		inline bool SmartPointer<T>::operator==(T& ptr) const{
+		inline bool SmartPointer<T>::operator!=(const SmartPointer& smartPtr) const {
+			return pointer != smartPtr.pointer;
+		}
+
+		template<class T>
+		inline bool SmartPointer<T>::operator==(T* ptr) const{
 			return pointer == ptr;
+		}
+
+		template<class T>
+		inline bool SmartPointer<T>::operator!=(T* ptr) const {
+			return pointer != ptr;
 		}
 
 		template<class T>
@@ -33,6 +42,11 @@ namespace Engine {
 		inline T* SmartPointer<T>::operator->() const {
 			assert(pointer);
 			return pointer;
+		}
+
+		template<class T>
+		inline Counter* SmartPointer<T>::getCounter() {
+			return counter;
 		}
 	}
 }

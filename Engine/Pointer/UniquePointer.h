@@ -10,16 +10,19 @@ namespace Engine {
 			inline UniquePointer(UniquePointer&);
 			inline UniquePointer(UniquePointer&&);
 			inline ~UniquePointer();
-			UniquePointer& operator=(UniquePointer&);
-			UniquePointer& operator=(UniquePointer&&);
+			inline UniquePointer& operator=(UniquePointer&);
+			inline UniquePointer& operator=(UniquePointer&&);
 			inline bool operator==(const UniquePointer&) const;
-			inline bool operator==(T&) const;
+			inline bool operator==(T*) const;
 			inline bool operator!() const;
 			inline T& operator*() const;
 			inline T* operator->() const;
 		private:
 			T* pointer;
-			void TakePointer(UniquePointer&);
+			void TakePointer(UniquePointer& uniquePointer) {
+				pointer = uniquePointer.pointer;
+				uniquePointer.pointer = nullptr;
+			}
 		};
 	}
 }

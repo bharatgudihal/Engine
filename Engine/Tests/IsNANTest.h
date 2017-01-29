@@ -4,5 +4,7 @@
 #include "..\Math\FloatCheck.h"
 #include "../Logger/Logger.h"
 namespace Engine {
-	bool TestNAN();
+	namespace Test {
+		bool TestNAN();
+	}
 }

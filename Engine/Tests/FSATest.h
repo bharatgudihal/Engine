@@ -1,4 +1,6 @@
 #pragma once
 namespace Engine {
-	bool FSAUnitTest();
+	namespace Test {
+		bool FSAUnitTest();
+	}
 }

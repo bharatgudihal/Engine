@@ -6,7 +6,7 @@ namespace Engine {
 		public:
 			long smartCount;
 			long weakCount;
-			~Counter() { assert(smartCount != 0); assert(weakCount != 0); };
+			~Counter() { assert(smartCount == 0); assert(weakCount == 0); };
 		};
 	}
 }

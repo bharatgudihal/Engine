@@ -6,12 +6,6 @@
 #include <crtdbg.h>
 #include <vector>
 #include <Windows.h>
-#include "Player\Player.h"
-#include "Math\Vector2D.h"
-#include "Monster\Monster.h"
-#include "MonsterChase.h"
-#include "Logger\Logger.h"
-#include "Monster\MonsterController.h"
 #include "Memory\Allocators.h"
 #include "Memory\MasterMemoryManager.h"
 #include "Tests\HeapManagerTest.h"
@@ -22,6 +16,7 @@
 #include "Interview\TestReverseWords.h"
 #include "Tests\BitArrayUnitTest.h"
 #include "Tests\FSATest.h"
+#include "Tests\PointerTest.h"
 #include "GLibTest\GLibTest.h"
 #include "Game.h"
 
@@ -36,53 +31,54 @@
 //#define FSATEST
 //#define MONSTERCHASE
 //#define GLIBTEST
+#define POINTERTEST
 
 using namespace std;
-using namespace Engine;
 
-void RunTests();
+void RunTests(HINSTANCE i_hInstance, int i_nCmdShow);
 
 int WINAPI wWinMain(HINSTANCE i_hInstance, HINSTANCE i_hPrevInstance, LPWSTR i_lpCmdLine, int i_nCmdShow) {
-	if (MasterMemoryManager::Startup()) {
+	if (Engine::MasterMemoryManager::Startup()) {
 #ifdef _DEBUG
 		_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 #endif // _DEBUG
-		RunTests();
-		Game::StartGame(i_hInstance, i_nCmdShow);
-		MasterMemoryManager::ShutDown();
+		RunTests(i_hInstance, i_nCmdShow);
+		//Game::StartGame(i_hInstance, i_nCmdShow);
+		Engine::MasterMemoryManager::ShutDown();
 	}
 	return 0;
 }
 
-void RunTests() {
+void RunTests(HINSTANCE i_hInstance, int i_nCmdShow) {
 #ifdef HEAPMANAGERTEST
-	HeapManager_UnitTest();
+	Engine::Test::HeapManager_UnitTest();
 #endif
 #ifdef CONSTTEST
-	ConstChecker();
+	Engine::Test::ConstChecker();
 #endif
 #ifdef ALLOCATORTEST
-	startAllocatorTest();
+	Engine::Test::startAllocatorTest();
 #endif
 #ifdef FLOATCHECKTEST
-	TestNAN();
+	Engine::Test::TestNAN();
 #endif // FLOATCHECKTEST
 #ifdef MOVECOPYTEST
-	MoveCopyTest();
+	Engine::Test::MoveCopyTest();
 #endif // MOVECOPYTEST
 #ifdef TESTREVERSEWORDS
 	TestReverseWords();
 #endif // TESTREVERSEWORDS
 #ifdef BITARRAYTEST
-	BitArray_UnitTest();
+	Engine::Test::BitArray_UnitTest();
 #endif
 #ifdef FSATEST
-	FSAUnitTest();
-#endif
-#ifdef MONSTERCHASE
-	playMonsterChase();
+	Engine::Test::FSAUnitTest();
 #endif
 #ifdef GLIBTEST
 	GLibTest(i_hInstance, i_nCmdShow);
 #endif
+#ifdef POINTERTEST
+	Engine::Test::TestPointers();
+#endif // POINTERTEST
+
 }

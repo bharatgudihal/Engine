@@ -55,6 +55,7 @@
     <ClInclude Include="Tests\HeapManagerTest.h" />
     <ClInclude Include="Tests\IsNANTest.h" />
     <ClInclude Include="Tests\MoveCopyTest.h" />
+    <ClInclude Include="Tests\PointerTest.h" />
     <ClInclude Include="Timer\CoreTimer.h" />
   </ItemGroup>
   <ItemGroup>
@@ -68,9 +69,6 @@
     <ClCompile Include="Memory\Private\HeapManager.cpp" />
     <ClCompile Include="Memory\Private\MasterMemoryManager.cpp" />
     <ClCompile Include="Physics\Private\PhysicsBody.cpp" />
-    <ClCompile Include="Pointer\Private\SmartPointer.cpp" />
-    <ClCompile Include="Pointer\Private\UniquePointer.cpp" />
-    <ClCompile Include="Pointer\Private\WeakPointer.cpp" />
     <ClCompile Include="Renderer\Private\Renderer.cpp" />
     <ClCompile Include="Tests\Private\AllocatorTest.cpp" />
     <ClCompile Include="Tests\Private\BitArrayUnitTest.cpp" />
@@ -79,6 +77,7 @@
     <ClCompile Include="Tests\Private\HeapManagerTest.cpp" />
     <ClCompile Include="Tests\Private\IsNANTest.cpp" />
     <ClCompile Include="Tests\Private\MoveCopyTest.cpp" />
+    <ClCompile Include="Tests\Private\PointerTest.cpp" />
     <ClCompile Include="Timer\Private\CoreTimer.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

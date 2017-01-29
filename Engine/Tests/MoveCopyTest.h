@@ -1,3 +1,7 @@
 #pragma once
 #include "../Actor/Actor.h"
-bool MoveCopyTest();
+namespace Engine {
+	namespace Test {
+		bool MoveCopyTest();
+	}
+}

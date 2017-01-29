@@ -1,2 +1,6 @@
 #pragma once
-bool ConstChecker();
+namespace Engine {
+	namespace Test {
+		bool ConstChecker();
+	}
+}

@@ -23,22 +23,24 @@ namespace Engine {
 		}
 
 		template<class T>
-		UniquePointer<T>& UniquePointer<T>::operator=(UniquePointer& uniquePointer) {
+		inline UniquePointer<T>& UniquePointer<T>::operator=(UniquePointer& uniquePointer) {
 			TakePointer(uniquePointer);
+			return *this;
 		}
 
 		template<class T>
-		UniquePointer<T>& UniquePointer<T>::operator=(UniquePointer&& uniquePointer) {
+		inline UniquePointer<T>& UniquePointer<T>::operator=(UniquePointer&& uniquePointer) {
 			TakePointer(uniquePointer);
+			return *this;
 		}
 
 		template<class T>
 		inline bool UniquePointer<T>::operator==(const UniquePointer& uniquePointer) const {
-			return pointer == uniquePointer->pointer;
+			return pointer == uniquePointer.pointer;
 		}
 
 		template<class T>
-		inline bool UniquePointer<T>::operator==(T& ptr) const {
+		inline bool UniquePointer<T>::operator==(T* ptr) const {
 			return pointer == ptr;
 		}
 

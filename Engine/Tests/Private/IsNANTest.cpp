@@ -1,6 +1,6 @@
 #include "../IsNANTest.h"
 
-bool Engine::TestNAN() {
+bool Engine::Test::TestNAN() {
 	DEBUG_LOG("Float Test Started\n");
 	float test1 = 0.00000000000000001f;
 	assert(!Engine::IsNAN(test1));

@@ -3,4 +3,8 @@
 #include <algorithm>
 #include <vector>
 #include "..\Memory\HeapManager.h"
-bool HeapManager_UnitTest();
+namespace Engine {
+	namespace Test {
+		bool HeapManager_UnitTest();
+	}
+}

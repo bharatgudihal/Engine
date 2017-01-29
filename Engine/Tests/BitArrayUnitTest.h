@@ -1,4 +1,6 @@
 #pragma once
 namespace Engine {
-	void BitArray_UnitTest();
+	namespace Test {
+		void BitArray_UnitTest();
+	}
 }
