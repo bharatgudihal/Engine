@@ -48,6 +48,7 @@
     <ClInclude Include="Renderer\Renderer.h" />
     <ClInclude Include="Renderer\RenderObject.h" />
     <ClInclude Include="Renderer\RenderObject_Inl.h" />
+    <ClInclude Include="String\StringPool.h" />
     <ClInclude Include="Tests\AllocatorTest.h" />
     <ClInclude Include="Tests\BitArrayUnitTest.h" />
     <ClInclude Include="Tests\ConstChecker.h" />
@@ -70,6 +71,7 @@
     <ClCompile Include="Memory\Private\MasterMemoryManager.cpp" />
     <ClCompile Include="Physics\Private\PhysicsBody.cpp" />
     <ClCompile Include="Renderer\Private\Renderer.cpp" />
+    <ClCompile Include="String\Private\StringPool.cpp" />
     <ClCompile Include="Tests\Private\AllocatorTest.cpp" />
     <ClCompile Include="Tests\Private\BitArrayUnitTest.cpp" />
     <ClCompile Include="Tests\Private\ConstChecker.cpp" />
