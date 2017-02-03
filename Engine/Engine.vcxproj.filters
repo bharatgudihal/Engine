@@ -198,6 +198,12 @@
     <ClInclude Include="String\StringPool.h">
       <Filter>Header Files\String</Filter>
     </ClInclude>
+    <ClInclude Include="String\StringPool_Inl.h">
+      <Filter>Header Files\String</Filter>
+    </ClInclude>
+    <ClInclude Include="Tests\StringPoolTest.h">
+      <Filter>Header Files\Tests</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Actor\Private\Actor.cpp">
@@ -262,6 +268,9 @@
     </ClCompile>
     <ClCompile Include="String\Private\StringPool.cpp">
       <Filter>Source Files\String</Filter>
+    </ClCompile>
+    <ClCompile Include="Tests\Private\StringPoolTest.cpp">
+      <Filter>Source Files\Tests</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -49,6 +49,7 @@
     <ClInclude Include="Renderer\RenderObject.h" />
     <ClInclude Include="Renderer\RenderObject_Inl.h" />
     <ClInclude Include="String\StringPool.h" />
+    <ClInclude Include="String\StringPool_Inl.h" />
     <ClInclude Include="Tests\AllocatorTest.h" />
     <ClInclude Include="Tests\BitArrayUnitTest.h" />
     <ClInclude Include="Tests\ConstChecker.h" />
@@ -57,6 +58,7 @@
     <ClInclude Include="Tests\IsNANTest.h" />
     <ClInclude Include="Tests\MoveCopyTest.h" />
     <ClInclude Include="Tests\PointerTest.h" />
+    <ClInclude Include="Tests\StringPoolTest.h" />
     <ClInclude Include="Timer\CoreTimer.h" />
   </ItemGroup>
   <ItemGroup>
@@ -80,6 +82,7 @@
     <ClCompile Include="Tests\Private\IsNANTest.cpp" />
     <ClCompile Include="Tests\Private\MoveCopyTest.cpp" />
     <ClCompile Include="Tests\Private\PointerTest.cpp" />
+    <ClCompile Include="Tests\Private\StringPoolTest.cpp" />
     <ClCompile Include="Timer\Private\CoreTimer.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

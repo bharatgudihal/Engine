@@ -17,6 +17,7 @@
 #include "Tests\BitArrayUnitTest.h"
 #include "Tests\FSATest.h"
 #include "Tests\PointerTest.h"
+#include "Tests\StringPoolTest.h"
 #include "GLibTest\GLibTest.h"
 #include "Game.h"
 
@@ -31,7 +32,8 @@
 //#define FSATEST
 //#define MONSTERCHASE
 //#define GLIBTEST
-#define POINTERTEST
+//#define POINTERTEST
+#define STRINGPOOLTEST
 
 using namespace std;
 
@@ -43,7 +45,7 @@ int WINAPI wWinMain(HINSTANCE i_hInstance, HINSTANCE i_hPrevInstance, LPWSTR i_l
 		_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 #endif // _DEBUG
 		RunTests(i_hInstance, i_nCmdShow);
-		Game::StartGame(i_hInstance, i_nCmdShow);
+		//Game::StartGame(i_hInstance, i_nCmdShow);
 		Engine::MasterMemoryManager::ShutDown();
 	}
 	return 0;
@@ -80,5 +82,8 @@ void RunTests(HINSTANCE i_hInstance, int i_nCmdShow) {
 #ifdef POINTERTEST
 	Engine::Test::TestPointers();
 #endif // POINTERTEST
+#ifdef STRINGPOOLTEST
+	Engine::Test::TestStringPool();
+#endif // STRINGPOOLTEST
 
 }
