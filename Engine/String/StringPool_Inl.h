@@ -1,14 +1,23 @@
 #pragma once
 namespace Engine {
 	namespace String {
-		inline StringPool* StringPool::Create(const size_t size) {
+		inline bool StringPool::Startup(const size_t size) {
 			assert(size > 0);
-			return new StringPool(size);
+			instance =  new StringPool(size);
+			return true;
+		}
+
+		inline StringPool* StringPool::Instance() {
+			return instance;
+		}
+
+		inline void StringPool::ShutDown() {
+			delete instance;
 		}
 
 		inline StringPool::~StringPool() {
 			assert(startOfBlock);
-			MasterMemoryManager::Instance()->DefaultHeapManager()->free(startOfBlock);
+			Memory::MasterMemoryManager::Instance()->DefaultHeapManager()->free(startOfBlock);
 		}
 	}
 }

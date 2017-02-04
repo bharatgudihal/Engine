@@ -1,37 +1,51 @@
 #include "../StringPool.h"
 namespace Engine {
 	namespace String {
+
+		StringPool* StringPool::instance = nullptr;
+
 		StringPool::StringPool(size_t size) {
-			startOfBlock = static_cast<char*>(MasterMemoryManager::Instance()->DefaultHeapManager()->allocate(size));
+			startOfBlock = static_cast<char*>(Memory::MasterMemoryManager::Instance()->DefaultHeapManager()->allocate(size));
 			poolSize = size;
 			currentPosition = startOfBlock;
+			FillPool();
 		}
 
-		void* StringPool::Add(const char* inputString) {
+		void StringPool::FillPool() {
+			for (size_t index = 0; index < poolSize; index++) {
+				startOfBlock[index] = DEFAULTFILL;
+			}
+		}
+
+		const char* StringPool::Add(const char* inputString) {
 			assert(inputString);
-			void* returnPointer = Find(inputString);
+			const char* returnPointer = Find(inputString);
 			if(returnPointer == nullptr){
-				size_t sizeOfString = getStringLength(inputString);
-				assert(sizeOfString > 0 && currentPosition + sizeOfString + sizeof(size_t) < startOfBlock + poolSize);
-				size_t* tempSizeT = reinterpret_cast<size_t*>(currentPosition);
-				*tempSizeT = sizeOfString;
-				currentPosition += sizeof(size_t);
-				memcpy(currentPosition, inputString, sizeOfString);
-				returnPointer = currentPosition;
-				currentPosition += sizeOfString;
+				uint8_t sizeOfString = getStringLength(inputString);
+				if (sizeOfString > 0 && currentPosition + sizeOfString + sizeof(uint8_t) < startOfBlock + poolSize) {
+					uint8_t* tempSizeT = reinterpret_cast<uint8_t*>(currentPosition);
+					*tempSizeT = sizeOfString;
+					currentPosition += sizeof(uint8_t);
+					memcpy(currentPosition, inputString, sizeOfString);
+					returnPointer = currentPosition;
+					currentPosition += sizeOfString;
+				}
 			}
 			return returnPointer;
 		}
 
-		void* StringPool::Find(const char* inputString) const{
+		const char* StringPool::Find(const char* inputString) const{
 			if (currentPosition != startOfBlock) {
 				assert(inputString);
-				size_t sizeOfString = getStringLength(inputString);
+				uint8_t sizeOfString = getStringLength(inputString);
 				assert(sizeOfString > 0);
 				char* walker = startOfBlock;
 				while (walker < startOfBlock + poolSize) {
+					if (*walker == static_cast<char>(DEFAULTFILL)) {
+						break;
+					}
 					if (sizeOfString == *walker) {
-						walker += sizeof(size_t);
+						walker += sizeof(uint8_t);
 						if (AreEqual(walker, inputString, sizeOfString)) {
 							return walker;
 						}
@@ -40,23 +54,23 @@ namespace Engine {
 						}
 					}
 					else {
-						walker += sizeof(size_t) + *walker;
+						walker += sizeof(uint8_t) + *walker;
 					}
 				}
 			}
 			return nullptr;
 		}
 
-		size_t StringPool::getStringLength(const char* inputString) const{
-			size_t length = 0;
+		uint8_t StringPool::getStringLength(const char* inputString) const{
+			uint8_t length = 0;
 			while (*(inputString + length) != '\0') {
 				length++;
 			}
-			return length;
+			return length + 1;
 		}
 
-		bool StringPool::AreEqual(const char* rhs, const char* lhs, size_t size) const{
-			for (size_t index = 0; index < size; index++) {
+		bool StringPool::AreEqual(const char* rhs, const char* lhs, uint8_t size) const{
+			for (uint8_t index = 0; index < size; index++) {
 				if (rhs[index] != lhs[index]) {
 					return false;
 				}

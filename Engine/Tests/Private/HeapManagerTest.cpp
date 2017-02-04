@@ -9,9 +9,9 @@ namespace Engine {
 
 			const size_t 		sizeHeap = 1024 * 1024;
 			const unsigned int 	numDescriptors = 2048;
-			void* heapManagerMemory = _aligned_malloc(sizeof(HeapManager), 4);
+			void* heapManagerMemory = _aligned_malloc(sizeof(Memory::HeapManager), 4);
 			// Create a heap manager for my test heap.
-			HeapManager* pHeapManager = HeapManager::create(heapManagerMemory, sizeHeap, numDescriptors);
+			Memory::HeapManager* pHeapManager = Memory::HeapManager::create(heapManagerMemory, sizeHeap, numDescriptors);
 
 
 #ifdef TEST_SINGLE_LARGE_ALLOCATION
@@ -21,7 +21,7 @@ namespace Engine {
 				pHeapManager->ShowFreeBlocks();
 
 				size_t largestBeforeAlloc = pHeapManager->GetLargestFreeBlock();
-				void * pPtr = pHeapManager->allocate(largestBeforeAlloc - HeapManager::s_MinumumToLeave);
+				void * pPtr = pHeapManager->allocate(largestBeforeAlloc - Memory::HeapManager::s_MinumumToLeave);
 
 				if (pPtr)
 				{

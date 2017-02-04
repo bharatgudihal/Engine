@@ -7,7 +7,7 @@
 #include <vector>
 #include <Windows.h>
 #include "Memory\Allocators.h"
-#include "Memory\MasterMemoryManager.h"
+#include "Core\Engine.h"
 #include "Tests\HeapManagerTest.h"
 #include "Tests\ConstChecker.h"
 #include "Tests\AllocatorTest.h"
@@ -40,13 +40,13 @@ using namespace std;
 void RunTests(HINSTANCE i_hInstance, int i_nCmdShow);
 
 int WINAPI wWinMain(HINSTANCE i_hInstance, HINSTANCE i_hPrevInstance, LPWSTR i_lpCmdLine, int i_nCmdShow) {
-	if (Engine::MasterMemoryManager::Startup()) {
+	if (Engine::Core::Startup()) {
 #ifdef _DEBUG
 		_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 #endif // _DEBUG
 		RunTests(i_hInstance, i_nCmdShow);
 		//Game::StartGame(i_hInstance, i_nCmdShow);
-		Engine::MasterMemoryManager::ShutDown();
+		Engine::Core::ShutDown();
 	}
 	return 0;
 }

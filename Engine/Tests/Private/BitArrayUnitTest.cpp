@@ -4,7 +4,7 @@
 namespace Engine {	
 	namespace Test {
 		void TestBitArray(size_t bitCount) {
-			Engine::BitArray* pMyArray = Engine::BitArray::Create(bitCount);
+			Engine::Memory::BitArray* pMyArray = Engine::Memory::BitArray::Create(bitCount);
 			size_t bitNumber = rand() % bitCount;
 			pMyArray->SetBit(bitNumber);
 

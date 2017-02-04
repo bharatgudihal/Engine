@@ -22,6 +22,7 @@
     <ClInclude Include="Actor\Actor.h" />
     <ClInclude Include="Actor\Actor_Inl.h" />
     <ClInclude Include="Controllers\ActorController.h" />
+    <ClInclude Include="Core\Engine.h" />
     <ClInclude Include="Input\Input.h" />
     <ClInclude Include="Logger\Logger.h" />
     <ClInclude Include="Math\FloatCheck_Inl.h" />
@@ -48,6 +49,8 @@
     <ClInclude Include="Renderer\Renderer.h" />
     <ClInclude Include="Renderer\RenderObject.h" />
     <ClInclude Include="Renderer\RenderObject_Inl.h" />
+    <ClInclude Include="String\PooledString.h" />
+    <ClInclude Include="String\PooledString_Inl.h" />
     <ClInclude Include="String\StringPool.h" />
     <ClInclude Include="String\StringPool_Inl.h" />
     <ClInclude Include="Tests\AllocatorTest.h" />
@@ -63,6 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Actor\Private\Actor.cpp" />
+    <ClCompile Include="Core\Private\Engine.cpp" />
     <ClCompile Include="Input\Private\Input.cpp" />
     <ClCompile Include="Logger\Private\Logger.cpp" />
     <ClCompile Include="Math\Private\Vector2D.cpp" />

@@ -23,9 +23,9 @@ namespace Engine {
 			Actor* allignedActors = new (alignment)Actor[arraySize];
 			assert(allignedActors);
 			delete[] allignedActors;
-			void* heapManagerPointer = _aligned_malloc(sizeof(Engine::HeapManager), defaultAlignment);
+			void* heapManagerPointer = _aligned_malloc(sizeof(Engine::Memory::HeapManager), defaultAlignment);
 			// Create heap manager
-			Engine::HeapManager* testHeapManager = Engine::HeapManager::create(heapManagerPointer, heapSize, alignment);
+			Engine::Memory::HeapManager* testHeapManager = Engine::Memory::HeapManager::create(heapManagerPointer, heapSize, alignment);
 			// Actor with heap manager
 			Actor* heapActor = new (testHeapManager)Actor("Test", Vector2D::ZERO);
 			assert(heapActor);

@@ -9,7 +9,7 @@ namespace Engine {
 		bool FSAUnitTest() {
 			size_t blockSize = 1600;
 			size_t units = 100;
-			FixedSizeAllocator* FSA = FixedSizeAllocator::Create(blockSize, units, Engine::MasterMemoryManager::Instance()->DefaultHeapManager());
+			Memory::FixedSizeAllocator* FSA = Memory::FixedSizeAllocator::Create(blockSize, units, Engine::Memory::MasterMemoryManager::Instance()->DefaultHeapManager());
 			size_t defaultAlignment = 4;
 			std::vector<void*> allocatedPointers;
 			// Allocate all
