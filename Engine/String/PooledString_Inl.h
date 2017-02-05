@@ -20,10 +20,6 @@ namespace Engine {
 			return stringValue != nullptr;
 		}
 
-		inline char* PooledString::Duplicate() const {
-			return _strdup(stringValue);
-		}
-
 		inline const char* PooledString::Get() const {
 			return stringValue;
 		}

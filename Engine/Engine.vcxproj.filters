@@ -219,6 +219,12 @@
     <ClInclude Include="String\PooledString_Inl.h">
       <Filter>Header Files\String</Filter>
     </ClInclude>
+    <ClInclude Include="String\HashedString.h">
+      <Filter>Header Files\String</Filter>
+    </ClInclude>
+    <ClInclude Include="String\HashedString_Inl.h">
+      <Filter>Header Files\String</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Actor\Private\Actor.cpp">
@@ -289,6 +295,9 @@
     </ClCompile>
     <ClCompile Include="Core\Private\Engine.cpp">
       <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="String\Private\HashedString.cpp">
+      <Filter>Source Files\String</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

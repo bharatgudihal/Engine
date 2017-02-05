@@ -49,6 +49,8 @@
     <ClInclude Include="Renderer\Renderer.h" />
     <ClInclude Include="Renderer\RenderObject.h" />
     <ClInclude Include="Renderer\RenderObject_Inl.h" />
+    <ClInclude Include="String\HashedString.h" />
+    <ClInclude Include="String\HashedString_Inl.h" />
     <ClInclude Include="String\PooledString.h" />
     <ClInclude Include="String\PooledString_Inl.h" />
     <ClInclude Include="String\StringPool.h" />
@@ -77,6 +79,7 @@
     <ClCompile Include="Memory\Private\MasterMemoryManager.cpp" />
     <ClCompile Include="Physics\Private\PhysicsBody.cpp" />
     <ClCompile Include="Renderer\Private\Renderer.cpp" />
+    <ClCompile Include="String\Private\HashedString.cpp" />
     <ClCompile Include="String\Private\StringPool.cpp" />
     <ClCompile Include="Tests\Private\AllocatorTest.cpp" />
     <ClCompile Include="Tests\Private\BitArrayUnitTest.cpp" />

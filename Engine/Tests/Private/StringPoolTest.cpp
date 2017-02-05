@@ -6,6 +6,7 @@ namespace Engine {
 	namespace Test {
 		bool TestStringPool() {
 			const char characterSet[] = "1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+			//StringPool test cases
 			char* first = "Test";
 			const char* pointer1 = String::StringPool::Instance()->Add(first);
 			assert(pointer1);
@@ -30,6 +31,7 @@ namespace Engine {
 				testPointer = String::StringPool::Instance()->Add(randomString);
 				delete randomString;
 			} while (testPointer);
+			//PooledString test cases
 			String::PooledString pooledString1("Test");
 			assert(pooledString1);
 			String::PooledString pooledString2("Test");
@@ -40,9 +42,21 @@ namespace Engine {
 			String::PooledString pooledString4("Third");
 			pooledString4 = pooledString3;
 			assert(pooledString4 == pooledString1);
-			char* fourth = pooledString4.Duplicate();
-			assert(fourth);
 			assert(pooledString4.Get() == pointer1);
+			//HashedString test cases
+			String::HashedString hash1("Test");
+			assert(hash1);
+			String::HashedString hash2(hash1);
+			assert(hash2);
+			assert(hash1 == hash2);
+			String::HashedString hash3(pooledString1);
+			assert(hash3);
+			assert(hash1 == hash3);
+			String::HashedString hash4 = hash3;
+			assert(hash4);
+			assert(hash1 == hash4);
+			assert(hash1.Get() != 0);
+			assert(hash1.Get() == hash4.Get());
 			return true;
 		}
 	}
