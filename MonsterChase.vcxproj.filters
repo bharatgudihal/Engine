@@ -42,9 +42,6 @@
     <ClCompile Include="MonsterChase\Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MonsterChase\MonsterChase.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="MonsterChase\GLibTest\Private\GLibTest.cpp">
       <Filter>Source Files\GLibTest</Filter>
     </ClCompile>
@@ -54,17 +51,11 @@
     <ClCompile Include="MonsterChase\Interview\Private\TestReverseWords.cpp">
       <Filter>Source Files\Interview</Filter>
     </ClCompile>
-    <ClCompile Include="MonsterChase\Monster\Private\Monster.cpp">
-      <Filter>Source Files\Monster</Filter>
-    </ClCompile>
     <ClCompile Include="MonsterChase\Monster\Private\MonsterController.cpp">
       <Filter>Source Files\Monster</Filter>
     </ClCompile>
     <ClCompile Include="MonsterChase\Monster\Private\TrackingMonsterController.cpp">
       <Filter>Source Files\Monster</Filter>
-    </ClCompile>
-    <ClCompile Include="MonsterChase\Player\Private\Player.cpp">
-      <Filter>Source Files\Player</Filter>
     </ClCompile>
     <ClCompile Include="MonsterChase\Player\Private\PlayerController.cpp">
       <Filter>Source Files\Player</Filter>
@@ -74,9 +65,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="MonsterChase\MonsterChase.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="MonsterChase\GLibTest\GLibTest.h">
       <Filter>Header Files\GLibTest</Filter>
     </ClInclude>
@@ -85,9 +73,6 @@
     </ClInclude>
     <ClInclude Include="MonsterChase\Interview\TestReverseWords.h">
       <Filter>Header Files\Interview</Filter>
-    </ClInclude>
-    <ClInclude Include="MonsterChase\Monster\Monster.h">
-      <Filter>Header Files\Monster</Filter>
     </ClInclude>
     <ClInclude Include="MonsterChase\Monster\MonsterController.h">
       <Filter>Header Files\Monster</Filter>
@@ -100,9 +85,6 @@
     </ClInclude>
     <ClInclude Include="MonsterChase\Monster\TrackingMonsterController_Inl.h">
       <Filter>Header Files\Monster</Filter>
-    </ClInclude>
-    <ClInclude Include="MonsterChase\Player\Player.h">
-      <Filter>Header Files\Player</Filter>
     </ClInclude>
     <ClInclude Include="MonsterChase\Player\PlayerController.h">
       <Filter>Header Files\Player</Filter>

@@ -3,49 +3,17 @@
 namespace Game {
 
 	bool quit;
-	Engine::Pointer::SmartPointer<Engine::Actor>* playerActor;
-	Engine::Renderer::RenderObject* playerRenderObject;
-	Engine::Physics::PhysicsBody* physicsBody;
+	Engine::GameObject::GameObject* player;
 	float deltaTime;
 	void Update();
 
-	void* LoadFile(const char* fileName, size_t & size) {
-		FILE * file = nullptr;
-		errno_t error = fopen_s(&file, fileName, "rb");
-		if (error != 0) {
-			return nullptr;
-		}
-		assert(file != nullptr);
-		int fileIOError = fseek(file, 0, SEEK_END);
-		assert(fileIOError == 0);
-		long fileSize = ftell(file);
-		assert(fileSize >= 0);
-		fileIOError = fseek(file, 0, SEEK_SET);
-		assert(fileIOError == 0);
-		uint8_t * buffer = new uint8_t[fileSize];
-		assert(buffer);
-		size_t FileRead = fread(buffer, 1, fileSize, file);
-		assert(FileRead == fileSize);
-		fclose(file);
-		size = fileSize;
-		return buffer;
-	}
-
-	void InitializeActors() {		
-		playerActor = new Engine::Pointer::SmartPointer<Engine::Actor> (new Engine::Actor("Player", Engine::Vector2D::ZERO));
-		size_t fileSize;
-		void* file = LoadFile("Assets\\Sprites\\player.dds", fileSize);
-		playerRenderObject = Engine::Renderer::RenderObject::Create(*playerActor, file, fileSize);		
-		delete file;
-		(*playerActor)->setPosition(Engine::Vector2D::ZERO);
-		physicsBody = new Engine::Physics::PhysicsBody(*playerActor,200.0f,1.0f,0.05f);
-		assert(playerRenderObject);
+	void InitializeActors() {
+		player = Engine::GameObject::GameObject::Create("Assets\\Data\\Player.lua");
+		assert(player);
 	}
 
 	void TearDownActors() {
-		delete playerRenderObject;
-		delete physicsBody;
-		delete playerActor;
+		delete player;
 	}
 
 	void StartGame(HINSTANCE i_hInstance, int i_nCmdShow) {
@@ -56,7 +24,7 @@ namespace Game {
 			do {
 				deltaTime = Engine::CoreTimer::GetDeltaTime();
 				GLib::Service(quit);
-				Update();				
+				Update();
 			} while (!quit);
 			TearDownActors();
 			GLib::Shutdown();
@@ -65,9 +33,7 @@ namespace Game {
 
 	void Update() {
 		if (!quit) {
-			physicsBody->ApplyForce();
-			physicsBody->PhysicsUpdate(deltaTime);
-			Engine::Renderer::Draw(playerRenderObject);
+			player->Update(deltaTime);
 		}
 	}
 }

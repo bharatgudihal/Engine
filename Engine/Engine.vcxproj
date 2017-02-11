@@ -23,8 +23,10 @@
     <ClInclude Include="Actor\Actor_Inl.h" />
     <ClInclude Include="Controllers\ActorController.h" />
     <ClInclude Include="Core\Engine.h" />
+    <ClInclude Include="GameObject\GameObject.h" />
     <ClInclude Include="Input\Input.h" />
     <ClInclude Include="Logger\Logger.h" />
+    <ClInclude Include="Lua\LuaHelper.h" />
     <ClInclude Include="Math\FloatCheck_Inl.h" />
     <ClInclude Include="Math\FloatCheck.h" />
     <ClInclude Include="Math\Vector2D.h" />
@@ -49,6 +51,7 @@
     <ClInclude Include="Renderer\Renderer.h" />
     <ClInclude Include="Renderer\RenderObject.h" />
     <ClInclude Include="Renderer\RenderObject_Inl.h" />
+    <ClInclude Include="String\ConstantStrings.h" />
     <ClInclude Include="String\HashedString.h" />
     <ClInclude Include="String\HashedString_Inl.h" />
     <ClInclude Include="String\PooledString.h" />
@@ -65,12 +68,15 @@
     <ClInclude Include="Tests\PointerTest.h" />
     <ClInclude Include="Tests\StringPoolTest.h" />
     <ClInclude Include="Timer\CoreTimer.h" />
+    <ClInclude Include="Utility\Utility.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Actor\Private\Actor.cpp" />
     <ClCompile Include="Core\Private\Engine.cpp" />
+    <ClCompile Include="GameObject\Private\GameObject.cpp" />
     <ClCompile Include="Input\Private\Input.cpp" />
     <ClCompile Include="Logger\Private\Logger.cpp" />
+    <ClCompile Include="Lua\Private\LuaHelper.cpp" />
     <ClCompile Include="Math\Private\Vector2D.cpp" />
     <ClCompile Include="Memory\Private\Allocators.cpp" />
     <ClCompile Include="Memory\Private\BitArray.cpp" />
@@ -79,6 +85,7 @@
     <ClCompile Include="Memory\Private\MasterMemoryManager.cpp" />
     <ClCompile Include="Physics\Private\PhysicsBody.cpp" />
     <ClCompile Include="Renderer\Private\Renderer.cpp" />
+    <ClCompile Include="String\Private\ConstantStrings.cpp" />
     <ClCompile Include="String\Private\HashedString.cpp" />
     <ClCompile Include="String\Private\StringPool.cpp" />
     <ClCompile Include="Tests\Private\AllocatorTest.cpp" />
@@ -91,6 +98,7 @@
     <ClCompile Include="Tests\Private\PointerTest.cpp" />
     <ClCompile Include="Tests\Private\StringPoolTest.cpp" />
     <ClCompile Include="Timer\Private\CoreTimer.cpp" />
+    <ClCompile Include="Utility\Private\Utility.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{71B675E8-5F71-4AD6-B294-BC7210075F0C}</ProjectGuid>

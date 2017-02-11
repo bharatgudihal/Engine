@@ -1,14 +1,14 @@
 #include "..\Math\Vector2D.h"
 
 namespace Engine {
-	inline Actor::Actor(char *i_name, Vector2D i_position) :name(_strdup(i_name ? i_name : "Default")), position(i_position) { 
+	inline Actor::Actor(const char *i_name, Vector2D i_position) :name(_strdup(i_name ? i_name : "Default")), position(i_position) { 
 		DEBUG_LOG("Actor constructor called duplicating char at location %p into location %p\n",i_name,name); 
 	}
 
-	inline Actor::Actor(const Actor& other) : name(_strdup(other.name ? other.name : "Default")), position(other.position) {
+	inline Actor::Actor(const Actor& other) : name(other.name), position(other.position) {
 		DEBUG_LOG("Actor copy constructor called duplicating char at location %p into location %p\n", other.name, name);
 	}	
-	inline char* Actor::getName() const { return name; }
+	inline String::HashedString Actor::getNameHash() const { return name; }
 	inline Vector2D Actor::getPosition() const { return position; }
 	inline void Actor::setPosition(const Vector2D newPosition) { position = newPosition; }
 	inline Vector2D Actor::getDirection() const { return direction; }

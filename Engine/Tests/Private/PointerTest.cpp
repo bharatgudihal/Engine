@@ -8,8 +8,8 @@ namespace Engine {
 			assert(smartTest1);
 			assert(smartTest1.getCounter()->smartCount == 1);
 			assert(smartTest1.getCounter()->weakCount == 0);
-			assert(smartTest1->getName());
-			assert((*smartTest1).getName());
+			assert(smartTest1->getNameHash());
+			assert((*smartTest1).getNameHash());
 			assert(!(smartTest1 == nullptr));
 			assert(smartTest1 != nullptr);
 			assert(smartTest1 == testActor1);
@@ -63,8 +63,8 @@ namespace Engine {
 			Engine::Pointer::UniquePointer<Actor> uniqueTest3(uniqueTest2);
 			assert(!uniqueTest2);
 			assert(uniqueTest3);
-			assert(uniqueTest3->getName());
-			assert((*uniqueTest3).getName());
+			assert(uniqueTest3->getNameHash());
+			assert((*uniqueTest3).getNameHash());
 			assert(uniqueTest3 == testActor2);
 			return true;
 		}
