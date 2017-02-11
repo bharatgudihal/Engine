@@ -1,4 +1,3 @@
-#include <varargs.h>
 #ifndef LOGGER_H
 namespace Engine {	
 	void DebugLog(const char* format, ...);
