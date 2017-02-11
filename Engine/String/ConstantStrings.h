@@ -4,7 +4,9 @@ namespace Engine {
 	namespace String {
 		class ConstantStrings{
 		public:
-			static ConstantStrings* GetInstance();
+			inline static ConstantStrings* GetInstance();
+			inline static bool Create();
+			inline static void Destroy();
 			const PooledString NAME;
 			const PooledString CLASS;
 			const PooledString CONTROLLER;
@@ -19,7 +21,9 @@ namespace Engine {
 			const PooledString FORCEMULTIPLIER;
 		private:
 			ConstantStrings();
+			~ConstantStrings();
 			static ConstantStrings* instance;
 		};
 	}
 }
+#include "ConstantStrings_Inl.h"

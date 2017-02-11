@@ -70,7 +70,7 @@ namespace Engine {
 			const char* result = lua_tostring(state, -1);
 			assert(result);
 			lua_pop(state, 1);
-			String::PooledString poolString(result);			
+			String::PooledString poolString(result);
 			return poolString;
 		}
 

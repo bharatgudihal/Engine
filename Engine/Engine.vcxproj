@@ -52,6 +52,7 @@
     <ClInclude Include="Renderer\RenderObject.h" />
     <ClInclude Include="Renderer\RenderObject_Inl.h" />
     <ClInclude Include="String\ConstantStrings.h" />
+    <ClInclude Include="String\ConstantStrings_Inl.h" />
     <ClInclude Include="String\HashedString.h" />
     <ClInclude Include="String\HashedString_Inl.h" />
     <ClInclude Include="String\PooledString.h" />

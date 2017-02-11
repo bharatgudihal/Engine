@@ -255,6 +255,9 @@
     <ClInclude Include="String\ConstantStrings.h">
       <Filter>Header Files\String</Filter>
     </ClInclude>
+    <ClInclude Include="String\ConstantStrings_Inl.h">
+      <Filter>Header Files\String</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Actor\Private\Actor.cpp">

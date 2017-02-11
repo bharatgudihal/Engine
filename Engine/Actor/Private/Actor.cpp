@@ -5,7 +5,7 @@ namespace Engine {
 
 	Actor::~Actor(){
 		if (name) {
-			DEBUG_LOG("Actor destructor called freeing char at location %p\n", name);			
+			DEBUG_LOG("Actor destructor called freeing char at location %p\n", name);		
 		}
 	}
 

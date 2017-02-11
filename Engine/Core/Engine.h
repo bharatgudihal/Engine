@@ -1,7 +1,6 @@
 #pragma once
-#include "../Memory/MasterMemoryManager.h"
 #include "../String/StringPool.h"
-
+#include "../String/ConstantStrings.h"
 namespace Engine {
 	namespace Core {
 		bool Startup();

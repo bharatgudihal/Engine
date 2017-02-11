@@ -3,7 +3,7 @@ namespace Engine {
 	namespace Core {
 		bool Startup() {
 			if (Memory::MasterMemoryManager::Startup()) {
-				if (String::StringPool::Startup(1024)) {
+				if (String::StringPool::Startup(1024) && String::ConstantStrings::Create()) {
 					return true;
 				}else{
 					Memory::MasterMemoryManager::ShutDown();
@@ -14,6 +14,7 @@ namespace Engine {
 		}
 
 		void ShutDown() {
+			String::ConstantStrings::Destroy();
 			String::StringPool::ShutDown();
 			Memory::MasterMemoryManager::ShutDown();
 		}

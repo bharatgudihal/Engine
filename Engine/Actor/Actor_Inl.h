@@ -1,7 +1,7 @@
 #include "..\Math\Vector2D.h"
 
 namespace Engine {
-	inline Actor::Actor(const char *i_name, Vector2D i_position) :name(_strdup(i_name ? i_name : "Default")), position(i_position) { 
+	inline Actor::Actor(const char *i_name, Vector2D i_position) :name(i_name), position(i_position) {
 		DEBUG_LOG("Actor constructor called duplicating char at location %p into location %p\n",i_name,name); 
 	}
 

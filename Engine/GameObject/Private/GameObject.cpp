@@ -1,7 +1,6 @@
 #include "../GameObject.h"
 namespace Engine {
 	namespace GameObject {
-
 		GameObject* GameObject::Create(const char* descriptorFile) {
 			LuaHelper::LuaHelper luaHelper(descriptorFile);
 			luaHelper.LoadGlobalTable(String::ConstantStrings::GetInstance()->PLAYER.Get());
