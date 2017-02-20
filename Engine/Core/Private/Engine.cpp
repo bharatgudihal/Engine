@@ -4,7 +4,15 @@ namespace Engine {
 		bool Startup() {
 			if (Memory::MasterMemoryManager::Startup()) {
 				if (String::StringPool::Startup(1024) && String::ConstantStrings::Create()) {
-					return true;
+					if (Utility::FileProcessor::Startup()) {
+						return true;
+					}
+					else {
+						String::ConstantStrings::Destroy();
+						String::StringPool::ShutDown();
+						Memory::MasterMemoryManager::ShutDown();
+						return false;
+					}
 				}else{
 					Memory::MasterMemoryManager::ShutDown();
 					return false;
@@ -14,6 +22,7 @@ namespace Engine {
 		}
 
 		void ShutDown() {
+			Utility::FileProcessor::ShutDown();
 			String::ConstantStrings::Destroy();
 			String::StringPool::ShutDown();
 			Memory::MasterMemoryManager::ShutDown();
