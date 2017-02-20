@@ -69,6 +69,7 @@
     <ClInclude Include="Tests\MoveCopyTest.h" />
     <ClInclude Include="Tests\PointerTest.h" />
     <ClInclude Include="Tests\StringPoolTest.h" />
+    <ClInclude Include="Threading\Event.h" />
     <ClInclude Include="Threading\Mutex.h" />
     <ClInclude Include="Threading\Semaphore.h" />
     <ClInclude Include="Threading\WaitableObject.h" />
@@ -102,6 +103,7 @@
     <ClCompile Include="Tests\Private\MoveCopyTest.cpp" />
     <ClCompile Include="Tests\Private\PointerTest.cpp" />
     <ClCompile Include="Tests\Private\StringPoolTest.cpp" />
+    <ClCompile Include="Threading\Private\Event.cpp" />
     <ClCompile Include="Threading\Private\Mutex.cpp" />
     <ClCompile Include="Threading\Private\Semaphore.cpp" />
     <ClCompile Include="Timer\Private\CoreTimer.cpp" />

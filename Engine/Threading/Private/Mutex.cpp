@@ -7,7 +7,8 @@ namespace Engine {
 		}
 
 		Mutex::~Mutex() {
-			CloseHandle(handle);
+			BOOL result = CloseHandle(handle);
+			assert(result == TRUE);
 		}
 
 		bool Mutex::TryToAcquire() {

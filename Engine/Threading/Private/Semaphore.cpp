@@ -9,7 +9,8 @@ namespace Engine {
 		}
 
 		Semaphore::~Semaphore() {
-			CloseHandle(handle);
+			BOOL result = CloseHandle(handle);
+			assert(result == TRUE);
 		}
 
 		void Semaphore::Increment(unsigned int count) {
