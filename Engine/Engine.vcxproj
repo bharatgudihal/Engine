@@ -69,6 +69,8 @@
     <ClInclude Include="Tests\MoveCopyTest.h" />
     <ClInclude Include="Tests\PointerTest.h" />
     <ClInclude Include="Tests\StringPoolTest.h" />
+    <ClInclude Include="Threading\Mutex.h" />
+    <ClInclude Include="Threading\WaitableObject.h" />
     <ClInclude Include="Timer\CoreTimer.h" />
     <ClInclude Include="Utility\Utility.h" />
   </ItemGroup>
@@ -99,6 +101,7 @@
     <ClCompile Include="Tests\Private\MoveCopyTest.cpp" />
     <ClCompile Include="Tests\Private\PointerTest.cpp" />
     <ClCompile Include="Tests\Private\StringPoolTest.cpp" />
+    <ClCompile Include="Threading\Private\Mutex.cpp" />
     <ClCompile Include="Timer\Private\CoreTimer.cpp" />
     <ClCompile Include="Utility\Private\Utility.cpp" />
   </ItemGroup>
@@ -126,7 +129,7 @@
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
