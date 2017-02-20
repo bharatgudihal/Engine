@@ -17,12 +17,12 @@ namespace Engine {
 
 		bool Mutex::Acquire(DWORD timeInMilliseconds) {
 			DWORD result = WaitForSingleObject(handle, timeInMilliseconds);
-			assert((timeInMilliseconds == InfiniteWait && result == WAIT_OBJECT_0) || result == WAIT_TIMEOUT);
+			assert((timeInMilliseconds == INFINITE && result == WAIT_OBJECT_0) || result == WAIT_TIMEOUT);
 			return result == WAIT_OBJECT_0;
 		}
 
 		void Mutex::Acquire() {
-			DWORD result = WaitForSingleObject(handle, InfiniteWait);
+			DWORD result = WaitForSingleObject(handle, INFINITE);
 			assert(result == WAIT_OBJECT_0);
 		}
 

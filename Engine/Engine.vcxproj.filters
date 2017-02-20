@@ -273,6 +273,9 @@
     <ClInclude Include="Threading\WaitableObject.h">
       <Filter>Header Files\Threading</Filter>
     </ClInclude>
+    <ClInclude Include="Threading\Semaphore.h">
+      <Filter>Header Files\Threading</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Actor\Private\Actor.cpp">
@@ -360,6 +363,9 @@
       <Filter>Source Files\String</Filter>
     </ClCompile>
     <ClCompile Include="Threading\Private\Mutex.cpp">
+      <Filter>Source Files\Threading</Filter>
+    </ClCompile>
+    <ClCompile Include="Threading\Private\Semaphore.cpp">
       <Filter>Source Files\Threading</Filter>
     </ClCompile>
   </ItemGroup>

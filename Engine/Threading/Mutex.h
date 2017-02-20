@@ -1,6 +1,5 @@
 #pragma once
 #include <assert.h>
-#include <windows.h>
 #include "WaitableObject.h"
 namespace Engine {
 	namespace Threading {
@@ -10,7 +9,7 @@ namespace Engine {
 			~Mutex();
 			bool TryToAcquire();
 			void Acquire();
-			bool Acquire(DWORD);
+			bool Acquire(DWORD timeInMilliseconds);
 			void Release();
 		};
 	}

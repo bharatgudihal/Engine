@@ -4,7 +4,6 @@ namespace Engine {
 	namespace Threading {
 		class WaitableObject {
 		public:
-			static const DWORD InfiniteWait = INFINITE;
 			WaitableObject() :handle(INVALID_HANDLE_VALUE) {}
 			virtual ~WaitableObject() {};
 			HANDLE GetHandle() { return handle; }
