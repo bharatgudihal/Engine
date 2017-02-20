@@ -1,31 +1,22 @@
 #include "../PlayerController.h"
-#include "Actor\Actor.h"
 
-void PlayerController::Update(const char input) {
-	Engine::Vector2D currentPlayerPosition = player->getPosition();
-	if (input == 'A' || input == 'a') {
-		currentPlayerPosition -= PLAYER_SPEED_X;
-		if (currentPlayerPosition.X() < -GRIDSIZE) {
-			currentPlayerPosition.X(-GRIDSIZE);
+PlayerController::PlayerController(Engine::Pointer::SmartPointer<Engine::Actor>* smartPointer):playerReference(*smartPointer){}
+
+void PlayerController::Update() {	
+	Engine::Vector2D direction = Engine::Vector2D::ZERO;
+	if (Engine::Input::isDown) {
+		if (Engine::Input::keyCode == 65) {
+			direction += Engine::Vector2D::LEFT;
+		}
+		if (Engine::Input::keyCode == 68) {
+			direction += Engine::Vector2D::RIGHT;
+		}
+		if (Engine::Input::keyCode == 83) {
+			direction += Engine::Vector2D::DOWN;
+		}
+		if (Engine::Input::keyCode == 87) {
+			direction += Engine::Vector2D::UP;
 		}
 	}
-	else if (input == 'D' || input == 'd') {
-		currentPlayerPosition += PLAYER_SPEED_X;		
-		if (currentPlayerPosition.X() > GRIDSIZE) {
-			currentPlayerPosition.X(GRIDSIZE);
-		}
-	}
-	else if (input == 'W' || input == 'w') {
-		currentPlayerPosition += PLAYER_SPEED_Y;
-		if (currentPlayerPosition.Y() > GRIDSIZE) {
-			currentPlayerPosition.Y(GRIDSIZE);
-		}
-	}
-	else {
-		currentPlayerPosition -= PLAYER_SPEED_Y;
-		if (currentPlayerPosition.Y() < -GRIDSIZE) {
-			currentPlayerPosition.Y(-GRIDSIZE);
-		}
-	}
-	player->setPosition(currentPlayerPosition);
+	playerReference.Acquire()->setDirection(direction);
 }

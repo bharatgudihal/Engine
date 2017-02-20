@@ -175,7 +175,6 @@
     <ClCompile Include="MonsterChase\Interview\Private\TestReverseWords.cpp" />
     <ClCompile Include="MonsterChase\Main.cpp" />
     <ClCompile Include="MonsterChase\Monster\Private\MonsterController.cpp" />
-    <ClCompile Include="MonsterChase\Monster\Private\TrackingMonsterController.cpp" />
     <ClCompile Include="MonsterChase\Player\Private\PlayerController.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -189,11 +188,7 @@
     <ClInclude Include="MonsterChase\Interview\ReverseWords.h" />
     <ClInclude Include="MonsterChase\Interview\TestReverseWords.h" />
     <ClInclude Include="MonsterChase\Monster\MonsterController.h" />
-    <ClInclude Include="MonsterChase\Monster\MonsterController_Inl.h" />
-    <ClInclude Include="MonsterChase\Monster\TrackingMonsterController.h" />
-    <ClInclude Include="MonsterChase\Monster\TrackingMonsterController_Inl.h" />
     <ClInclude Include="MonsterChase\Player\PlayerController.h" />
-    <ClInclude Include="MonsterChase\Player\PlayerController_Inl.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

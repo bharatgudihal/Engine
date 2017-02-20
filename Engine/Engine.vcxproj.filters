@@ -258,6 +258,9 @@
     <ClInclude Include="String\ConstantStrings_Inl.h">
       <Filter>Header Files\String</Filter>
     </ClInclude>
+    <ClInclude Include="GameObject\GameObject_Inl.h">
+      <Filter>Header Files\GameObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Actor\Private\Actor.cpp">

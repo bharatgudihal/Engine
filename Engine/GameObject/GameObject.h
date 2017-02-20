@@ -13,8 +13,11 @@ namespace Engine {
 		class GameObject {
 		public:
 			static GameObject* Create(const char*);
+			static GameObject* Create(LuaHelper::LuaHelper*);
 			~GameObject();
-			void Update(float);			
+			void SetController(IActorController*);
+			inline Pointer::SmartPointer<Actor>* GetActorReference();
+			void Update(float);
 		private:
 			GameObject(Pointer::SmartPointer<Actor> i_actor, Renderer::RenderObject* i_renderObject = nullptr, Physics::PhysicsBody* i_physicsBody = nullptr, IActorController* i_controller = nullptr);
 			Pointer::SmartPointer<Actor> actor;
@@ -24,3 +27,4 @@ namespace Engine {
 		};
 	}
 }
+#include "GameObject_Inl.h"

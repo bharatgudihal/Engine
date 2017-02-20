@@ -2,30 +2,34 @@
 namespace Engine {
 	namespace GameObject {
 		GameObject* GameObject::Create(const char* descriptorFile) {
-			LuaHelper::LuaHelper luaHelper(descriptorFile);
-			luaHelper.LoadGlobalTable(String::ConstantStrings::GetInstance()->PLAYER.Get());
-			String::PooledString name = luaHelper.GetStringFromTable(String::ConstantStrings::GetInstance()->NAME.Get(), -1);
+			LuaHelper::LuaHelper luaHelper(descriptorFile);						
+			return Create(&luaHelper);
+		}
+
+		GameObject* GameObject::Create(LuaHelper::LuaHelper* luaHelper) {
+			luaHelper->LoadGlobalTable(String::ConstantStrings::GetInstance()->PLAYER.Get());
+			String::PooledString name = luaHelper->GetStringFromTable(String::ConstantStrings::GetInstance()->NAME.Get(), -1);
 			Vector2D position;
-			luaHelper.GetVector2DFromTable(String::ConstantStrings::GetInstance()->POSITION.Get(), position, -1);
-			luaHelper.GetTableFromTable(String::ConstantStrings::GetInstance()->PHYSICSBODY.Get(), -1);
+			luaHelper->GetVector2DFromTable(String::ConstantStrings::GetInstance()->POSITION.Get(), position, -1);
+			luaHelper->GetTableFromTable(String::ConstantStrings::GetInstance()->PHYSICSBODY.Get(), -1);
 			float mass;
-			luaHelper.GetFloatFromTable(String::ConstantStrings::GetInstance()->MASS.Get(), mass, -1);
+			luaHelper->GetFloatFromTable(String::ConstantStrings::GetInstance()->MASS.Get(), mass, -1);
 			float drag;
-			luaHelper.GetFloatFromTable(String::ConstantStrings::GetInstance()->DRAG.Get(), drag, -1);
+			luaHelper->GetFloatFromTable(String::ConstantStrings::GetInstance()->DRAG.Get(), drag, -1);
 			float forceMultiplier;
-			luaHelper.GetFloatFromTable(String::ConstantStrings::GetInstance()->FORCEMULTIPLIER.Get(), forceMultiplier, -1);
-			luaHelper.Pop();
-			luaHelper.GetTableFromTable(String::ConstantStrings::GetInstance()->RENDERSETTINGS.Get(), -1);
-			String::PooledString spritePath = luaHelper.GetStringFromTable(String::ConstantStrings::GetInstance()->SPRITE.Get(), -1);
-			luaHelper.Pop();
-			luaHelper.Pop();
+			luaHelper->GetFloatFromTable(String::ConstantStrings::GetInstance()->FORCEMULTIPLIER.Get(), forceMultiplier, -1);
+			luaHelper->Pop();
+			luaHelper->GetTableFromTable(String::ConstantStrings::GetInstance()->RENDERSETTINGS.Get(), -1);
+			String::PooledString spritePath = luaHelper->GetStringFromTable(String::ConstantStrings::GetInstance()->SPRITE.Get(), -1);
+			luaHelper->Pop();
+			luaHelper->Pop();
 			Pointer::SmartPointer<Actor> actor(new Actor(name.Get(), position));
 			size_t fileSize;
 			void* file = Utility::LoadFile(spritePath.Get(), fileSize);
 			assert(file && fileSize);
 			Renderer::RenderObject* renderObject = Renderer::RenderObject::Create(actor, file, fileSize);
 			Physics::PhysicsBody* physicsBody = new Engine::Physics::PhysicsBody(actor, forceMultiplier, mass, drag);
-			delete file;			
+			delete file;
 			return new GameObject(actor, renderObject, physicsBody);
 		}
 
@@ -45,15 +49,19 @@ namespace Engine {
 		}
 
 		void GameObject::Update(float deltaTime) {
-			if (controller) {				
+			if (controller) {
+				controller->Update();
 			}
 			if (physicsBody) {
-				physicsBody->ApplyForce();
 				physicsBody->PhysicsUpdate(deltaTime);
 			}
 			if (renderObject) {
 				Engine::Renderer::Draw(renderObject);
 			}
+		}
+
+		void GameObject::SetController(IActorController* i_controller) {
+			controller = i_controller;
 		}
 	}
 }

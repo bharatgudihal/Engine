@@ -1,1 +1,0 @@
-inline void PlayerController::SetActor(Engine::Actor* actor) { player = actor; }

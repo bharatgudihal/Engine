@@ -8,8 +8,8 @@ namespace Engine {
 		class PhysicsBody {
 		public:
 			PhysicsBody(Pointer::SmartPointer<Actor> smartPointer, const float i_speed, const float i_mass = 1.0f, const float i_drag = 0.0f, const bool i_useGravity = false);
+			~PhysicsBody() {};
 			void PhysicsUpdate(const float deltaTime);
-			void ApplyForce();
 		private:
 			Pointer::WeakPointer<Actor> weakPointer;
 			float mass;

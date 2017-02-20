@@ -11,31 +11,6 @@ namespace Engine {
 			currentVelocity = Vector2D::ZERO;
 		}
 
-		void PhysicsBody::ApplyForce() {
-			if (Engine::Input::isDown) {
-				switch (Engine::Input::keyCode)
-				{
-				case 65:
-					force = Vector2D::LEFT;
-					break;
-				case 68:
-					force = Vector2D::RIGHT;
-					break;
-				case 83:
-					force = Vector2D::DOWN;
-					break;
-				case 87:
-					force = Vector2D::UP;
-					break;
-				default:
-					break;
-				}
-			}
-			else {
-				force = Vector2D::ZERO;
-			}
-		}
-
 		Vector2D Physics::PhysicsBody::CalculateDrag() const{			
 			Vector2D drag = currentVelocity*currentVelocity*dragCoefficient;
 			if (currentVelocity.X() > 0) {
@@ -55,11 +30,11 @@ namespace Engine {
 
 		void PhysicsBody::PhysicsUpdate(const float deltaTime) {
 			Vector2D dragForce = CalculateDrag();
-			Vector2D netForce = force * speed + dragForce + (useGravity ? GRAVITY : Vector2D::ZERO);
+			Engine::Pointer::SmartPointer<Actor> smartPtr = weakPointer.Acquire();
+			Vector2D netForce = smartPtr->getDirection() * speed + dragForce + (useGravity ? GRAVITY : Vector2D::ZERO);
 			Vector2D acceleration = netForce / mass;
 			Vector2D previousVelocity = currentVelocity;
-			currentVelocity = previousVelocity + acceleration * deltaTime;
-			Engine::Pointer::SmartPointer<Actor> smartPtr = weakPointer.Acquire();
+			currentVelocity = previousVelocity + acceleration * deltaTime;			
 			Vector2D newPosition = smartPtr->getPosition() + ((previousVelocity + currentVelocity) / 2) * deltaTime;
 			smartPtr->setPosition(newPosition);
 		}

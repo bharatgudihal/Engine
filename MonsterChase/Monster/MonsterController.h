@@ -1,16 +1,15 @@
 #ifndef MONSTERCONTROLLER_H
 #define MONSTERCONTROLLER_H
 #include "Controllers\ActorController.h"
-#include "Math\Vector2D.h"
+#include "Actor\Actor.h"
+#include "Pointer\WeakPointer.h"
 
 class MonsterController :public Engine::IActorController{
-	class Actor;
 public:
-	inline void SetActor(Engine::Actor* actor) override;
-	void Update(const char input) override;
+	MonsterController(Engine::Pointer::WeakPointer<Engine::Actor>, Engine::Pointer::WeakPointer<Engine::Actor>);
+	void Update() override;
 private:
-	Engine::Actor* monster;
-	inline Engine::Vector2D GetRandomDirection() const;
+	Engine::Pointer::WeakPointer<Engine::Actor> monsterReference;
+	Engine::Pointer::WeakPointer<Engine::Actor> playerReference;
 };
-#include "MonsterController_Inl.h"
 #endif // !MONSTERCONTROLLER_H

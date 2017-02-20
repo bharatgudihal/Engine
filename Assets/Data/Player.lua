@@ -1,5 +1,6 @@
 Player={
 	name = "Bharat",
+	controller = "PlayerController",
 	position = {0.0,0.0,0.0},
 	physicsbody = {
 		mass = 1.0,

@@ -1,20 +1,9 @@
 #include "../MonsterController.h"
-#include "Actor\Actor.h"
-using namespace Engine;
 
-void MonsterController::Update(const char input) {
-	Vector2D currentPlayerPosition = monster->getPosition();
-	monster->setPosition(currentPlayerPosition + GetRandomDirection());
-	if (monster->getPosition().X() > GRIDSIZE) {
-		monster->getPosition().X(GRIDSIZE);
-	}
-	else if (monster->getPosition().X() < GRIDSIZE) {
-		monster->getPosition().X(-GRIDSIZE);
-	}
-	else if (monster->getPosition().Y() > GRIDSIZE) {
-		monster->getPosition().Y(GRIDSIZE);
-	}
-	else if (monster->getPosition().Y() < GRIDSIZE) {
-		monster->getPosition().Y(-GRIDSIZE);
-	}
+MonsterController::MonsterController(Engine::Pointer::WeakPointer<Engine::Actor> monster, Engine::Pointer::WeakPointer<Engine::Actor> player) :monsterReference(monster), playerReference(player) {}
+
+void MonsterController::Update() {
+	Engine::Vector2D directionVector = playerReference.Acquire()->getPosition() - monsterReference.Acquire()->getPosition();
+	directionVector.Normalize();
+	monsterReference.Acquire()->setDirection(directionVector);
 }
