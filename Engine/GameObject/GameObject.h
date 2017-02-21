@@ -12,7 +12,7 @@ namespace Engine {
 	namespace GameObject {
 		class GameObject {
 		public:
-			static GameObject* Create(const char*);
+			static GameObject* Create(uint8_t* fileData, uint32_t fileSize);
 			static GameObject* Create(LuaHelper::LuaHelper*);
 			~GameObject();
 			void SetController(IActorController*);

@@ -19,6 +19,7 @@
 #include "Tests\PointerTest.h"
 #include "Tests\StringPoolTest.h"
 #include "GLibTest\GLibTest.h"
+#include "Tests\FileProcessorTest.h"
 #include "Game.h"
 
 #define _CRTDBG_MAP_ALLOC
@@ -34,6 +35,7 @@
 //#define GLIBTEST
 //#define POINTERTEST
 //#define STRINGPOOLTEST
+//#define FILEPROCESSORTEST
 
 using namespace std;
 
@@ -88,5 +90,9 @@ void RunTests(HINSTANCE i_hInstance, int i_nCmdShow) {
 #ifdef STRINGPOOLTEST
 	Engine::Test::TestStringPool();
 #endif // STRINGPOOLTEST
+#ifdef FILEPROCESSORTEST
+	Engine::Test::FileProcessorTest fileProcessorTest;
+	fileProcessorTest.TestFileProcessor();
+#endif // FILEPROCESSORTEST
 
 }

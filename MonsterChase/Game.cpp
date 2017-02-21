@@ -2,8 +2,8 @@
 
 namespace Game {
 
-	void Game::InitializeActors() {
-		Engine::LuaHelper::LuaHelper luaHelper("Assets\\Data\\Player.lua");
+	void Game::GameObjectTask::ProcessFile(uint8_t* fileData, uint32_t fileSize) {
+		Engine::LuaHelper::LuaHelper luaHelper(fileData, fileSize);
 		Engine::GameObject::GameObject* player = Engine::GameObject::GameObject::Create(&luaHelper);
 		luaHelper.LoadGlobalTable(Engine::String::ConstantStrings::GetInstance()->PLAYER.Get());
 		Engine::String::PooledString controller = luaHelper.GetStringFromTable(Engine::String::ConstantStrings::GetInstance()->CONTROLLER.Get(), -1);
@@ -12,7 +12,12 @@ namespace Game {
 			player->SetController(new PlayerController(player->GetActorReference()));
 		}
 		assert(player);
-		sceneObjects.push_back(player);
+		UpdatePostProcessQueue(player);
+	}
+
+	void Game::InitializeActors() {
+		GameObjectTask* task = new GameObjectTask("Assets\\Data\\Player.lua", &pendingGameObjectsQueue, &pendingQueueMutex);
+		Engine::Utility::FileProcessor::GetInstance().InsertInLoadQueue(*task);
 	}
 
 	void Game::TearDownActors() {
@@ -30,9 +35,23 @@ namespace Game {
 				deltaTime = Engine::CoreTimer::GetDeltaTime();
 				GLib::Service(quit);
 				Update();
+				CheckForNewGameObjects();
 			} while (!quit);
 			TearDownActors();
 			GLib::Shutdown();
+		}
+	}
+
+	void Game::CheckForNewGameObjects() {
+		void* gameObject = nullptr;
+		pendingQueueMutex.Acquire();
+		if (!pendingGameObjectsQueue.empty()) {
+			gameObject = pendingGameObjectsQueue.front();
+			pendingGameObjectsQueue.pop();
+		}
+		pendingQueueMutex.Release();
+		if (gameObject != nullptr) {
+			sceneObjects.push_back(static_cast<Engine::GameObject::GameObject*>(gameObject));
 		}
 	}
 

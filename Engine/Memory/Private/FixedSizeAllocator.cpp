@@ -26,7 +26,7 @@ namespace Engine {
 
 		FixedSizeAllocator::~FixedSizeAllocator() {
 			if (!bitArray->AreAllSet()) {
-				DEBUG_LOG("FSA for size %zd bytes has allocations pending!\n", unitSize);
+				DEBUG_LOG("FSA FOR SIZE %zd BYTES HAS ALLOCATIONS PENDING!\n", unitSize);
 			}
 			DEBUG_LOG("FSA destroyed for size %zd bytes\n", unitSize);
 			heapManager->free(blockBase);

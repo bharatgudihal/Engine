@@ -10,6 +10,7 @@
 #include <malloc.h>
 #include <algorithm>
 #include "..\Logger\Logger.h"
+#include "..\Threading\Mutex.h"
 
 #define MIN_BLOCK_SIZE 16
 
@@ -61,6 +62,7 @@ namespace Engine {
 			void addBlockToFreeBlocksList(BlockDescriptor* assignedBlock);
 			BlockDescriptor* joinBlocks(BlockDescriptor* firstBlock, BlockDescriptor* secondBlock, BlockDescriptor* previousBlock);
 			void LogHeaps() const;
+			Threading::Mutex heapManagerMutex;
 		};
 	}
 }

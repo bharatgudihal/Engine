@@ -40,7 +40,7 @@ namespace Engine {
 			availableBlockDescriptorsCount++;
 		}
 
-		HeapManager::HeapManager(const size_t blockSize, const uint16_t numberOfBlockDescriptors) {
+		HeapManager::HeapManager(const size_t blockSize, const uint16_t numberOfBlockDescriptors):heapManagerMutex(false,"HeapManagerMutex"){
 			size_t alignment = 4;
 			BLOCK_SIZE = blockSize;
 			NUMBER_OF_BLOCKDESCRIPTORS = numberOfBlockDescriptors;
@@ -153,6 +153,7 @@ namespace Engine {
 		}
 
 		void HeapManager::runGarbageCollector() {
+			heapManagerMutex.Acquire();
 			DEBUG_LOG("Running garbage collector\n");
 			BlockDescriptor* outerHead = freeBlocksList;
 			while (outerHead != nullptr) {
@@ -171,15 +172,18 @@ namespace Engine {
 				}
 				outerHead = outerHead->next;
 			}
+			heapManagerMutex.Release();
 		}
 
 		void * HeapManager::allocate(const size_t i_size, const uint8_t alignment) {
 			void* ptr = nullptr;
+			heapManagerMutex.Acquire();
 			assert(i_size <= BLOCK_SIZE);
 			if (availableBlockDescriptorsCount == 0) {
 				return ptr;
-			}
+			}			
 			ptr = getPointerFromFreeBlocks(i_size, alignment);
+			heapManagerMutex.Release();
 			return ptr;
 		}
 
@@ -265,12 +269,14 @@ namespace Engine {
 		}
 
 		bool HeapManager::free(void* ptr) {
+			heapManagerMutex.Acquire();
 			assert(IsAllocated(ptr));
 			bool result = false;
 			BlockDescriptor* assignedBlock = findBlockForPointer(ptr);
 			assert(assignedBlock != nullptr);
 			checkGuardBands(ptr, assignedBlock);
 			addBlockToFreeBlocksList(assignedBlock);
+			heapManagerMutex.Release();
 			result = true;
 			return result;
 		}
@@ -362,7 +368,7 @@ namespace Engine {
 
 		HeapManager::~HeapManager() {
 			if (assignedBlocksList != nullptr) {
-				DEBUG_LOG("There are still outstanding allocations!\n");
+				DEBUG_LOG("THERE ARE STILL OUTSTANDING ALLOCATIONS!\n");
 			}
 			_aligned_free(BLOCK);
 		}

@@ -9,7 +9,7 @@ namespace Engine {
 	namespace LuaHelper {
 		class LuaHelper {
 		public:
-			LuaHelper(const char*);
+			LuaHelper(void*, size_t);
 			~LuaHelper();
 			void LoadGlobalTable(const char*);
 			String::PooledString LoadGlobalString(const char*);

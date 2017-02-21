@@ -1,8 +1,8 @@
 #include "../GameObject.h"
 namespace Engine {
 	namespace GameObject {
-		GameObject* GameObject::Create(const char* descriptorFile) {
-			LuaHelper::LuaHelper luaHelper(descriptorFile);						
+		GameObject* GameObject::Create(uint8_t* fileData, uint32_t fileSize) {
+			LuaHelper::LuaHelper luaHelper(fileData, fileSize);
 			return Create(&luaHelper);
 		}
 

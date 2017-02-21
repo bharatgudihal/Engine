@@ -12,9 +12,15 @@
 #include "Lua\LuaHelper.h"
 #include "Player\PlayerController.h"
 #include "Monster\MonsterController.h"
+
 namespace Game {
 	class Game {
 	public:
+		class GameObjectTask :public Engine::Utility::FileProcessor::Task {
+		public:
+			GameObjectTask(const char* fileName, std::queue<void*>* i_postProcessQueue, Engine::Threading::Mutex* i_postProcessMutex) :Engine::Utility::FileProcessor::Task(fileName, i_postProcessQueue, i_postProcessMutex) {};
+			void ProcessFile(uint8_t*, uint32_t) override;
+		};
 		void StartGame(HINSTANCE i_hInstance, int i_nCmdShow);
 	private:
 		bool quit;
@@ -23,5 +29,8 @@ namespace Game {
 		void Update();
 		void InitializeActors();
 		void TearDownActors();
+		void CheckForNewGameObjects();
+		std::queue<void*> pendingGameObjectsQueue;
+		Engine::Threading::Mutex pendingQueueMutex;
 	};	
 }

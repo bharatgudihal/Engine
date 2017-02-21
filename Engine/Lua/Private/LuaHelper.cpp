@@ -2,19 +2,15 @@
 namespace Engine {
 	namespace LuaHelper {		
 
-		LuaHelper::LuaHelper(const char* fileName) {
-			assert(fileName);
+		LuaHelper::LuaHelper(void* file, size_t fileSize) {
 			state = luaL_newstate();
 			assert(state);
-			luaL_openlibs(state);
-			size_t fileSize;
-			void* file = Utility::LoadFile(fileName, fileSize);
+			luaL_openlibs(state);		
 			assert(file && fileSize);
 			int result = 0;
 			result = luaL_loadbuffer(state, static_cast<char *>(file), fileSize, nullptr);
 			lua_pcall(state, 0, 0, 0);
-			assert(result == 0);
-			delete[] file;
+			assert(result == 0);			
 		}
 
 		LuaHelper::~LuaHelper() {

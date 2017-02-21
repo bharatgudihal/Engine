@@ -6,26 +6,25 @@
 #include "../Threading/Event.h"
 #include "../Threading/Semaphore.h"
 #include "../Threading/Mutex.h"
+#include "../Logger/Logger.h"
+
 namespace Engine {
 	namespace Utility {
 		void* LoadFile(const char* fileName, size_t & o_size);
 
 		class FileProcessor{
-		public:
-			enum FileType
-			{
-				LUA,
-				SPRITE
-			};
+		public:			
 			class Task {
 			public:
-				Task(const char* i_fileName, FileType fileType);
+				Task(const char* i_fileName, std::queue<void*>* i_postProcessQueue, Threading::Mutex* i_postProcessMutex);
 				~Task();
 				char* GetFileName();
-				FileType GetGileType();
+				virtual void ProcessFile(uint8_t*, uint32_t) = 0;
+				void UpdatePostProcessQueue(void*);
 			private:
 				char* fileName;
-				FileType type;
+				std::queue<void*>* postProcessQueue;
+				Threading::Mutex* postProcessMutex;
 			};
 			static bool Startup();
 			static void ShutDown();

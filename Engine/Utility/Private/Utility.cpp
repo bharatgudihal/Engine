@@ -23,49 +23,52 @@ namespace Engine {
 			return buffer;
 		}
 
-		FileProcessor::Task::Task(const char* i_fileName, FileType fileType) {
+		FileProcessor::Task::Task(const char* i_fileName, std::queue<void*>* i_postProcessQueue, Threading::Mutex* i_postProcessMutex) {
 			assert(i_fileName != nullptr);
 			fileName = _strdup(i_fileName);
-			type = fileType;
+			postProcessQueue = i_postProcessQueue;
+			postProcessMutex = i_postProcessMutex;
 		}
 
 		char* FileProcessor::Task::GetFileName() {
 			return fileName;
 		}
-
-		FileProcessor::FileType FileProcessor::Task::GetGileType() {
-			return type;
-		}
 		
 		FileProcessor::Task::~Task() {
 			free(fileName);
+		}
+
+		void FileProcessor::Task::UpdatePostProcessQueue(void* object) {
+			postProcessMutex->Acquire();
+			postProcessQueue->push(object);
+			postProcessMutex->Release();
 		}
 		
 		FileProcessor* FileProcessor::Instance = nullptr;
 
 		bool FileProcessor::Startup() {
+			DEBUG_LOG("File Processor starting up\n");
 			HANDLE loadFileHandle = CreateThread(NULL, 0, FileProcessor::LoadFile, NULL, CREATE_SUSPENDED, 0);			
 			assert(loadFileHandle != NULL);
 			HANDLE processFileHandle = CreateThread(NULL, 0, FileProcessor::ProcessFile, NULL, CREATE_SUSPENDED, 0);
 			assert(processFileHandle != NULL);
 			Instance = new FileProcessor(loadFileHandle, processFileHandle);
 			assert(Instance != NULL);
+			DEBUG_LOG("File Processor started\n");
 			return true;
 		}
 
 		void FileProcessor::ShutDown() {
 			if (Instance)
 			{
+				DEBUG_LOG("File Processor shutting down\n");
 				FileProcessor& instance = GetInstance();
-
 				instance.shutDownEvent.Trigger();
-
 				HANDLE ThreadHandles[] = { instance.loadFileHandle };
-
 				DWORD Result = WaitForMultipleObjects(sizeof(ThreadHandles) / sizeof(ThreadHandles[0]), ThreadHandles, TRUE, INFINITE);
-
 				delete Instance;
 				Instance = nullptr;
+				DEBUG_LOG("File Processor shut down\n");
 			}
 		}
 
@@ -85,22 +88,26 @@ namespace Engine {
 		}
 
 		bool FileProcessor::InsertInLoadQueue(Task& task) {
+			DEBUG_LOG("Inserting %s in load queue\n", task.GetFileName());
 			loadMutex.Acquire();
 			loadQueue.push(&task);
 			loadMutex.Release();
 			loadSemaphore.Increment();
+			DEBUG_LOG("Inserted %s in load queue\n", task.GetFileName());
 			return true;
 		}
 
 		bool FileProcessor::InsertInProcessQueue(FileData& fileData) {
+			DEBUG_LOG("Inserting %s in process queue\n", fileData.task->GetFileName());
 			processMutex.Acquire();
 			processQueue.push(&fileData);
 			processMutex.Release();
 			processSemaphore.Increment();
+			DEBUG_LOG("Inserted %s in process queue\n", fileData.task->GetFileName());
 			return true;
 		}
 
-		FileProcessor::FileData* FileProcessor::GetFromProcessQueue() {
+		FileProcessor::FileData* FileProcessor::GetFromProcessQueue() {			
 			FileData* fileData = nullptr;
 			processMutex.Acquire();
 			if (!processQueue.empty()) {
@@ -108,7 +115,9 @@ namespace Engine {
 				processQueue.pop();
 			}
 			processMutex.Release();
-			processSemaphore.Decrement();
+			if (fileData != nullptr) {
+				DEBUG_LOG("Got %s from process queue\n", fileData->task->GetFileName());
+			}
 			return fileData;
 		}
 
@@ -120,11 +129,14 @@ namespace Engine {
 				loadQueue.pop();
 			}
 			loadMutex.Release();
-			loadSemaphore.Decrement();
+			if (task != nullptr) {
+				DEBUG_LOG("Got %s from load queue\n", task->GetFileName());
+			}
 			return task;
 		}
 
 		DWORD WINAPI FileProcessor::LoadFile(void* threadData) {
+			DEBUG_LOG("Load file thread started\n");
 			FileProcessor& instance = FileProcessor::GetInstance();
 			OVERLAPPED fileOverLapped;
 			fileOverLapped.Offset = fileOverLapped.OffsetHigh = 0;
@@ -168,6 +180,7 @@ namespace Engine {
 								BOOL GORResult = GetOverlappedResult(fileHandle, &fileOverLapped, &bytesRead, FALSE);
 								assert(GORResult == TRUE);
 								FileData* fileData = new FileData(task, fileBuffer, bytesRead);
+								instance.InsertInProcessQueue(*fileData);
 							}
 							else {
 								delete task;
@@ -177,28 +190,29 @@ namespace Engine {
 				}
 			}
 			CloseHandle(fileOverLapped.hEvent);
+			DEBUG_LOG("Load file thread ended\n");
 			return 0;
 		}
 
 		DWORD WINAPI FileProcessor::ProcessFile(void* threadData) {
+			DEBUG_LOG("Process file thread started\n");
 			FileProcessor& instance = FileProcessor::GetInstance();
 			HANDLE processHandles[] = { instance.shutDownEvent.GetHandle(), instance.processSemaphore.GetHandle() };
 			bool done = false;
-			while (done) {
+			while (!done) {
 				DWORD processResult = WaitForMultipleObjects(sizeof(processHandles) / sizeof(processHandles[0]), processHandles, FALSE, INFINITE);
 				if (processResult == WAIT_OBJECT_0) {
 					done = true;
 				}
 				else if(processResult == WAIT_OBJECT_0 + 1){
 					FileData* fileData = instance.GetFromProcessQueue();
-					if (fileData->task->GetGileType() == FileType::LUA) {
-						
-					}
-					else if (fileData->task->GetGileType() == FileType::SPRITE) {
-
-					}
+					fileData->task->ProcessFile(fileData->fileData, fileData->fileSize);
+					delete[] fileData->fileData;
+					delete fileData->task;
+					delete fileData;
 				}
 			}
+			DEBUG_LOG("Process file thread ended\n");
 			return 0;
 		}
 
