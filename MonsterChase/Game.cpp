@@ -21,7 +21,7 @@ namespace Game {
 	}
 
 	void Game::TearDownActors() {
-		for (int i = 0; i < sceneObjects.size(); i++) {
+		for (unsigned int i = 0; i < sceneObjects.size(); i++) {
 			delete sceneObjects[i];
 		}
 	}
@@ -57,7 +57,7 @@ namespace Game {
 
 	void Game::Update() {
 		if (!quit) {
-			for (int i = 0; i < sceneObjects.size(); i++) {
+			for (unsigned int i = 0; i < sceneObjects.size(); i++) {
 				sceneObjects[i]->Update(deltaTime);
 			}
 		}
