@@ -30,8 +30,8 @@
     <ClInclude Include="Lua\LuaHelper.h" />
     <ClInclude Include="Math\FloatCheck_Inl.h" />
     <ClInclude Include="Math\FloatCheck.h" />
-    <ClInclude Include="Math\Vector2D.h" />
-    <ClInclude Include="Math\Vector2D_Inl.h" />
+    <ClInclude Include="Math\Vector.h" />
+    <ClInclude Include="Math\Vector_Inl.h" />
     <ClInclude Include="Memory\Allocators.h" />
     <ClInclude Include="Memory\BitArray.h" />
     <ClInclude Include="Memory\BitArray_Inl.h" />
@@ -84,7 +84,7 @@
     <ClCompile Include="Input\Private\Input.cpp" />
     <ClCompile Include="Logger\Private\Logger.cpp" />
     <ClCompile Include="Lua\Private\LuaHelper.cpp" />
-    <ClCompile Include="Math\Private\Vector2D.cpp" />
+    <ClCompile Include="Math\Private\Vector.cpp" />
     <ClCompile Include="Memory\Private\Allocators.cpp" />
     <ClCompile Include="Memory\Private\BitArray.cpp" />
     <ClCompile Include="Memory\Private\FixedSizeAllocator.cpp" />

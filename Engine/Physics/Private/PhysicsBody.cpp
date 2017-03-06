@@ -8,11 +8,11 @@ namespace Engine {
 			dragCoefficient = i_drag;
 			useGravity = i_useGravity;
 			speed = i_speed;
-			currentVelocity = Vector2D::ZERO;
+			currentVelocity = Vector::ZERO;
 		}
 
-		Vector2D Physics::PhysicsBody::CalculateDrag() const{			
-			Vector2D drag = currentVelocity*currentVelocity*dragCoefficient;
+		Vector Physics::PhysicsBody::CalculateDrag() const{			
+			Vector drag = currentVelocity*currentVelocity*dragCoefficient;
 			if (currentVelocity.X() > 0) {
 				drag.X(-drag.X());
 			}
@@ -29,13 +29,13 @@ namespace Engine {
 		}
 
 		void PhysicsBody::PhysicsUpdate(const float deltaTime) {
-			Vector2D dragForce = CalculateDrag();
+			Vector dragForce = CalculateDrag();
 			Engine::Pointer::SmartPointer<Actor> smartPtr = weakPointer.Acquire();
-			Vector2D netForce = smartPtr->getDirection() * speed + dragForce + (useGravity ? GRAVITY : Vector2D::ZERO);
-			Vector2D acceleration = netForce / mass;
-			Vector2D previousVelocity = currentVelocity;
+			Vector netForce = smartPtr->getDirection() * speed + dragForce + (useGravity ? GRAVITY : Vector::ZERO);
+			Vector acceleration = netForce / mass;
+			Vector previousVelocity = currentVelocity;
 			currentVelocity = previousVelocity + acceleration * deltaTime;			
-			Vector2D newPosition = smartPtr->getPosition() + ((previousVelocity + currentVelocity) / 2) * deltaTime;
+			Vector newPosition = smartPtr->getPosition() + ((previousVelocity + currentVelocity) / 2) * deltaTime;
 			smartPtr->setPosition(newPosition);
 		}
 	}

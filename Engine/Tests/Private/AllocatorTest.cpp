@@ -8,7 +8,7 @@ namespace Engine {
 			int alignment = 16;
 			int heapSize = 1024;
 			// Pure actor
-			Actor* actor = new Actor("Test", Vector2D::ZERO);
+			Actor* actor = new Actor("Test", Vector::ZERO);
 			assert(actor);
 			delete actor;
 			// Actor array
@@ -16,7 +16,7 @@ namespace Engine {
 			assert(actors);
 			delete[] actors;
 			// Actor with alignment
-			Actor* allignedActor = new (alignment)Actor("Test", Vector2D::ZERO);
+			Actor* allignedActor = new (alignment)Actor("Test", Vector::ZERO);
 			assert(allignedActor);
 			delete allignedActor;
 			// Actor array with alignment
@@ -27,7 +27,7 @@ namespace Engine {
 			// Create heap manager
 			Engine::Memory::HeapManager* testHeapManager = Engine::Memory::HeapManager::create(heapManagerPointer, heapSize, alignment);
 			// Actor with heap manager
-			Actor* heapActor = new (testHeapManager)Actor("Test", Vector2D::ZERO);
+			Actor* heapActor = new (testHeapManager)Actor("Test", Vector::ZERO);
 			assert(heapActor);
 			delete heapActor;
 			// Actor array with heap manager
@@ -35,7 +35,7 @@ namespace Engine {
 			assert(heapActors);
 			delete[] heapActors;
 			// Actor with heap manager and alignment
-			Actor* heapAllignedActor = new (testHeapManager, alignment)Actor("Test", Vector2D::ZERO);
+			Actor* heapAllignedActor = new (testHeapManager, alignment)Actor("Test", Vector::ZERO);
 			assert(heapAllignedActor);
 			delete heapAllignedActor;
 			// Actor array with heap manager and alignment

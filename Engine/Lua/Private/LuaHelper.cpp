@@ -34,7 +34,7 @@ namespace Engine {
 			return String::PooledString(resultString);
 		}
 
-		void LuaHelper::LoadGlobalVector2D(const char* key, Vector2D& outVector) {
+		void LuaHelper::LoadGlobalVector2D(const char* key, Vector& outVector) {
 			assert(key);
 			int result = 0;
 			result = lua_getglobal(state, key);
@@ -70,7 +70,7 @@ namespace Engine {
 			return poolString;
 		}
 
-		void LuaHelper::GetVector2DFromTable(const char* key, Vector2D& outVector, int tableIndex) {
+		void LuaHelper::GetVector2DFromTable(const char* key, Vector& outVector, int tableIndex) {
 			assert(key);
 			int type = LUA_TNIL;
 			lua_pushstring(state, key);

@@ -3,7 +3,7 @@
 MonsterController::MonsterController(Engine::Pointer::WeakPointer<Engine::Actor> monster, Engine::Pointer::WeakPointer<Engine::Actor> player) :monsterReference(monster), playerReference(player) {}
 
 void MonsterController::Update() {
-	Engine::Vector2D directionVector = playerReference.Acquire()->getPosition() - monsterReference.Acquire()->getPosition();
+	Engine::Vector directionVector = playerReference.Acquire()->getPosition() - monsterReference.Acquire()->getPosition();
 	directionVector.Normalize();
 	monsterReference.Acquire()->setDirection(directionVector);
 }

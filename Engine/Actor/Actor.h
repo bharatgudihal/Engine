@@ -3,7 +3,7 @@
 #include <string.h>
 #include <malloc.h>
 #include <algorithm>
-#include "..\Math\Vector2D.h"
+#include "..\Math\Vector.h"
 #include "..\Logger\Logger.h"
 #include "..\String\HashedString.h"
 
@@ -12,20 +12,20 @@ namespace Engine {
 	public:
 		Actor();		
 		~Actor();
-		inline Actor(const char *i_name, Vector2D i_position);
+		inline Actor(const char *i_name, Vector i_position);
 		inline Actor(const Actor& other);
 		inline Actor(Actor&& other);
 		Actor& operator=(const Actor& rhs);
 		inline Actor& operator=(Actor&& rhs);
 		inline String::HashedString getNameHash() const;
-		inline Vector2D getPosition() const;
-		inline void setPosition(const Vector2D newPosition);
-		inline Vector2D getDirection() const;
-		inline void setDirection(const Vector2D newDirection);
+		inline Vector getPosition() const;
+		inline void setPosition(const Vector newPosition);
+		inline Vector getDirection() const;
+		inline void setDirection(const Vector newDirection);
 	private:
 		String::HashedString name;
-		Vector2D position = Vector2D::ZERO;
-		Vector2D direction = Vector2D::ZERO;
+		Vector position = Vector::ZERO;
+		Vector direction = Vector::ZERO;
 	};
 }
 #include "Actor_Inl.h"
