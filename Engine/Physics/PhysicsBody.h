@@ -15,11 +15,11 @@ namespace Engine {
 			float mass;
 			float dragCoefficient;
 			float speed;
-			Vector currentVelocity;
+			Math::Vector3 currentVelocity;
 			bool useGravity;
-			const Vector GRAVITY = Vector(0.0f, -9.8f);
-			Vector force;
-			Vector CalculateDrag() const;
+			const Math::Vector3 GRAVITY = Math::Vector3(0.0f, -9.8f);
+			Math::Vector3 force;
+			Math::Vector3 CalculateDrag() const;
 		};		
 	}
 }
