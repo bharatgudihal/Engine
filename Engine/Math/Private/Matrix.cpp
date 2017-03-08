@@ -103,32 +103,20 @@ namespace Engine {
 			return *this;
 		}
 
-		void Matrix::Transpose() {
-			float temp = a12;
-			a12 = a21;
-			a21 = temp;
-			temp = a13;
-			a13 = a31;
-			a31 = temp;
-			temp = a14;
-			a14 = a41;
-			a41 = temp;
-			temp = a23;
-			a23 = a32;
-			a32 = temp;
-			temp = a24;
-			a24 = a42;
-			a42 = temp;
-			temp = a34;
-			a34 = a43;
-			a43 = temp;
+		Matrix Matrix::GetTranspose() {
+			Matrix transpose(
+				a11, a21, a31, a41,
+				a12, a22, a32, a42,
+				a13, a23, a33, a43,
+				a14, a24, a34, a44);
+			return transpose;
 		}
 
 		Matrix Matrix::GetAdjugate() {
 
 			//Find minors
 			float adj11 = a22*(a33*a44 - a34*a43) - a23*(a32*a44 - a42*a34) + a24*(a32*a43 - a33*a42);
-			float adj12 = a21*(a33*a44 - a34*a43) - a23*(a31*a44 - a41*a34) + a24*(a31*a43 - a33*a11);
+			float adj12 = a21*(a33*a44 - a34*a43) - a23*(a31*a44 - a41*a34) + a24*(a31*a43 - a33*a41);
 			float adj13 = a21*(a32*a44 - a34*a42) - a22*(a31*a44 - a41*a34) + a24*(a31*a42 - a32*a41);
 			float adj14 = a21*(a32*a43 - a33*a42) - a22*(a31*a43 - a33*a41) + a23*(a31*a42 - a32*a41);
 			float adj21 = a12*(a33*a44 - a34*a43) - a13*(a32*a44 - a34*a42) + a14*(a32*a43 - a33*a42);
@@ -147,43 +135,26 @@ namespace Engine {
 			//Create matrix of cofactors
 			adj12 = -adj12;
 			adj14 = -adj14;
-			adj22 = -adj22;
-			adj24 = -adj24;
+			adj21 = -adj21;
+			adj23 = -adj23;
 			adj32 = -adj32;
 			adj34 = -adj34;
-			adj42 = -adj42;
-			adj44 = -adj44;
-
+			adj41 = -adj41;
+			adj43 = -adj43;
 			Matrix adj(
 				adj11, adj12, adj13, adj14,
 				adj21, adj22, adj23, adj24,
 				adj31, adj32, adj33, adj34,
 				adj41, adj42, adj43, adj44);
-
-			adj.Transpose();
-			return adj;
+			Matrix transpose = adj.GetTranspose();
+			return transpose;
 		}
 
-		void Matrix::Invert() {
+		Matrix Matrix::GetInverse() {
 			float determinant = Determinant();
 			Matrix adjugate = GetAdjugate();
 			Matrix inverse = adjugate / determinant;
-			a11 = inverse.a11;
-			a12 = inverse.a12;
-			a13 = inverse.a13;
-			a14 = inverse.a14;
-			a21 = inverse.a21;
-			a22 = inverse.a22;
-			a23 = inverse.a23;
-			a24 = inverse.a24;
-			a31 = inverse.a31;
-			a32 = inverse.a32;
-			a33 = inverse.a33;
-			a34 = inverse.a34;
-			a41 = inverse.a41;
-			a42 = inverse.a42;
-			a43 = inverse.a43;
-			a44 = inverse.a44;
+			return inverse;
 		}
 		
 		Matrix operator*(const Matrix& lhs, const Matrix& rhs) {

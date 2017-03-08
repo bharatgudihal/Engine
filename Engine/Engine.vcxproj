@@ -71,6 +71,7 @@
     <ClInclude Include="Tests\FSATest.h" />
     <ClInclude Include="Tests\HeapManagerTest.h" />
     <ClInclude Include="Tests\IsNANTest.h" />
+    <ClInclude Include="Tests\MatrixTest.h" />
     <ClInclude Include="Tests\MoveCopyTest.h" />
     <ClInclude Include="Tests\PointerTest.h" />
     <ClInclude Include="Tests\StringPoolTest.h" />
@@ -108,6 +109,7 @@
     <ClCompile Include="Tests\Private\FSATest.cpp" />
     <ClCompile Include="Tests\Private\HeapManagerTest.cpp" />
     <ClCompile Include="Tests\Private\IsNANTest.cpp" />
+    <ClCompile Include="Tests\Private\MatrixTest.cpp" />
     <ClCompile Include="Tests\Private\MoveCopyTest.cpp" />
     <ClCompile Include="Tests\Private\PointerTest.cpp" />
     <ClCompile Include="Tests\Private\StringPoolTest.cpp" />

@@ -20,9 +20,12 @@
 #include "Tests\StringPoolTest.h"
 #include "GLibTest\GLibTest.h"
 #include "Tests\FileProcessorTest.h"
+#include "Tests\MatrixTest.h"
 #include "Game.h"
 
 #define _CRTDBG_MAP_ALLOC
+#define TEST
+//#define GAME
 //#define HEAPMANAGERTEST
 //#define CONSTTEST
 //#define ALLOCATORTEST
@@ -36,6 +39,7 @@
 //#define POINTERTEST
 //#define STRINGPOOLTEST
 //#define FILEPROCESSORTEST
+#define MATRIXTEST
 
 using namespace std;
 
@@ -46,11 +50,15 @@ int WINAPI wWinMain(HINSTANCE i_hInstance, HINSTANCE i_hPrevInstance, LPWSTR i_l
 #ifdef _DEBUG
 		_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 #endif // _DEBUG
+#ifdef TEST
 		RunTests(i_hInstance, i_nCmdShow);
+#endif // TEST
+#ifdef GAME
 		{
 			Game::Game game;
 			game.StartGame(i_hInstance, i_nCmdShow);
 		}
+#endif // GAME
 		Engine::Core::ShutDown();
 	}
 	return 0;
@@ -94,5 +102,8 @@ void RunTests(HINSTANCE i_hInstance, int i_nCmdShow) {
 	Engine::Test::FileProcessorTest fileProcessorTest;
 	fileProcessorTest.TestFileProcessor();
 #endif // FILEPROCESSORTEST
+#ifdef  MATRIXTEST
+	Engine::Test::TestMatrix();
+#endif //  MATRIXTEST
 
 }

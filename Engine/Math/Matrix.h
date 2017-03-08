@@ -14,20 +14,21 @@ namespace Engine {
 						  const float i_a41 = 0.0f, const float i_a42 = 0.0f, const float i_a43 = 0.0f, const float i_a44 = 0.0f);
 			inline Matrix(const Matrix&);
 			static Matrix GetRotationMatrix(const float xRotation, const float yRotation, const float zRotation);
-			inline static Matrix GetScaleMatrix(float xScale = 1.0f, float yScale = 1.0f, float zScale = 1.0f);
-			inline static Matrix GetTranslationMatrix(float xTranslate = 0.0f, float yTranslate = 0.0f, float zTranslate = 0.0f);
+			inline static Matrix GetScaleMatrix(const Vector3&);
+			inline static Matrix GetTranslationMatrix(const Vector3&);			
 			static const Matrix IDENTITY;
 			Matrix& operator=(Matrix&);
+			inline bool operator==(Matrix&);
 			Matrix& operator*(const float);
 			Matrix& operator/(const float);
-			void Transpose();
-			void Invert();		
+			Matrix GetTranspose();
+			Matrix GetInverse();
+			inline float Determinant();
 			float a11,a12,a13,a14,
 				  a21,a22,a23,a24,
 				  a31,a32,a33,a34,
 				  a41,a42,a43,a44;
-		private:
-			inline float Determinant();
+		private:			
 			Matrix GetAdjugate();
 		};
 		Matrix operator*(const Matrix&, const Matrix&);
