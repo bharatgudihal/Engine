@@ -12,7 +12,7 @@ namespace Engine {
 			a31(i_a31), a32(i_a32), a33(i_a33), a34(i_a34),
 			a41(i_a41), a42(i_a42), a43(i_a43), a44(i_a44) {}
 
-		inline Matrix::Matrix(Matrix& other) :
+		inline Matrix::Matrix(const Matrix& other) :
 			a11(other.a11), a12(other.a12), a13(other.a13), a14(other.a14),
 			a21(other.a21), a22(other.a22), a23(other.a23), a24(other.a24),
 			a31(other.a31), a32(other.a32), a33(other.a33), a34(other.a34),

@@ -186,5 +186,47 @@ namespace Engine {
 			a44 = inverse.a44;
 		}
 		
+		Matrix operator*(const Matrix& lhs, const Matrix& rhs) {
+			float result11 = lhs.a11*rhs.a11 + lhs.a12*rhs.a21 + lhs.a13*rhs.a31 + lhs.a14*rhs.a41;
+			float result12 = lhs.a11*rhs.a12 + lhs.a12*rhs.a22 + lhs.a13*rhs.a32 + lhs.a14*rhs.a42;
+			float result13 = lhs.a11*rhs.a13 + lhs.a12*rhs.a23 + lhs.a13*rhs.a33 + lhs.a14*rhs.a43;
+			float result14 = lhs.a11*rhs.a14 + lhs.a12*rhs.a24 + lhs.a13*rhs.a34 + lhs.a14*rhs.a44;
+			float result21 = lhs.a21*rhs.a11 + lhs.a22*rhs.a21 + lhs.a23*rhs.a31 + lhs.a24*rhs.a41;
+			float result22 = lhs.a21*rhs.a12 + lhs.a22*rhs.a22 + lhs.a23*rhs.a32 + lhs.a24*rhs.a42;
+			float result23 = lhs.a21*rhs.a13 + lhs.a22*rhs.a23 + lhs.a23*rhs.a33 + lhs.a24*rhs.a43;
+			float result24 = lhs.a21*rhs.a14 + lhs.a22*rhs.a24 + lhs.a23*rhs.a34 + lhs.a24*rhs.a44;
+			float result31 = lhs.a31*rhs.a11 + lhs.a32*rhs.a21 + lhs.a33*rhs.a31 + lhs.a34*rhs.a41;
+			float result32 = lhs.a31*rhs.a12 + lhs.a32*rhs.a22 + lhs.a33*rhs.a32 + lhs.a34*rhs.a42;
+			float result33 = lhs.a31*rhs.a13 + lhs.a32*rhs.a23 + lhs.a33*rhs.a33 + lhs.a34*rhs.a43;
+			float result34 = lhs.a31*rhs.a14 + lhs.a32*rhs.a24 + lhs.a33*rhs.a34 + lhs.a34*rhs.a44;
+			float result41 = lhs.a41*rhs.a11 + lhs.a42*rhs.a21 + lhs.a43*rhs.a31 + lhs.a44*rhs.a41;
+			float result42 = lhs.a41*rhs.a12 + lhs.a42*rhs.a22 + lhs.a43*rhs.a32 + lhs.a44*rhs.a42;
+			float result43 = lhs.a41*rhs.a13 + lhs.a42*rhs.a23 + lhs.a43*rhs.a33 + lhs.a44*rhs.a43;
+			float result44 = lhs.a41*rhs.a14 + lhs.a42*rhs.a24 + lhs.a43*rhs.a34 + lhs.a44*rhs.a44;
+			Matrix result(
+				result11, result12, result13, result14,
+				result21, result22, result23, result24,
+				result31, result32, result33, result34,
+				result41, result42, result43, result44);
+			return result;
+		}
+
+		Vector4 operator*(const Vector4& lhs, const Matrix& rhs) {
+			float resultX = lhs.X()*rhs.a11 + lhs.Y()*rhs.a21 + lhs.Z()*rhs.a31 + lhs.W()*rhs.a41;
+			float resultY = lhs.X()*rhs.a12 + lhs.Y()*rhs.a22 + lhs.Z()*rhs.a32 + lhs.W()*rhs.a42;
+			float resultZ = lhs.X()*rhs.a13 + lhs.Y()*rhs.a23 + lhs.Z()*rhs.a33 + lhs.W()*rhs.a43;
+			float resultW = lhs.X()*rhs.a14 + lhs.Y()*rhs.a24 + lhs.Z()*rhs.a34 + lhs.W()*rhs.a44;
+			Vector4 result(resultX, resultY, resultZ, resultW);
+			return result;
+		}
+
+		Vector4 operator*(const Matrix& lhs, const Vector4& rhs) {
+			float resultX = lhs.a11*rhs.X() + lhs.a12*rhs.Y() + lhs.a13*rhs.Z() + lhs.a14*rhs.W();
+			float resultY = lhs.a21*rhs.X() + lhs.a22*rhs.Y() + lhs.a23*rhs.Z() + lhs.a24*rhs.W();
+			float resultZ = lhs.a31*rhs.X() + lhs.a32*rhs.Y() + lhs.a33*rhs.Z() + lhs.a34*rhs.W();
+			float resultW = lhs.a41*rhs.X() + lhs.a42*rhs.Y() + lhs.a43*rhs.Z() + lhs.a44*rhs.W();
+			Vector4 result(resultX, resultY, resultZ, resultW);
+			return result;
+		}
 	}
 }
