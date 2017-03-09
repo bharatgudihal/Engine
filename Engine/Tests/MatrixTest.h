@@ -1,4 +1,5 @@
 #pragma once
+#include <math.h>
 #include "../Math/Matrix.h"
 
 namespace Engine {
