@@ -4,7 +4,7 @@ namespace Engine {
 		ConstantStrings* ConstantStrings::instance = nullptr;
 
 		ConstantStrings::ConstantStrings() :NAME("name"), CLASS("class"), CONTROLLER("controller"), POSITION("position"), PHYSICSBODY("physicsbody"),
-			RENDERSETTINGS("rendersettings"), PLAYER("Player"), PLAYERCONTROLLER("PlayerController"), MASS("mass"), DRAG("drag"), SPRITE("sprite"),
-			FORCEMULTIPLIER("forceMultiplier") {}
+			RENDERSETTINGS("rendersettings"), PLAYER("Player"), GAMEOBJECT("GameObject"), PLAYERCONTROLLER("PlayerController"), MONSTERCONTROLLER("MonsterController"), 
+			MASS("mass"), DRAG("drag"), SPRITE("sprite"), FORCEMULTIPLIER("forceMultiplier") {}
 	}
 }

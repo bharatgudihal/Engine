@@ -7,7 +7,7 @@ namespace Engine {
 		}
 
 		GameObject* GameObject::Create(LuaHelper::LuaHelper* luaHelper) {
-			luaHelper->LoadGlobalTable(String::ConstantStrings::GetInstance()->PLAYER.Get());
+			luaHelper->LoadGlobalTable(String::ConstantStrings::GetInstance()->GAMEOBJECT.Get());
 			String::PooledString name = luaHelper->GetStringFromTable(String::ConstantStrings::GetInstance()->NAME.Get(), -1);
 			Math::Vector3 position;
 			luaHelper->GetVector2DFromTable(String::ConstantStrings::GetInstance()->POSITION.Get(), position, -1);

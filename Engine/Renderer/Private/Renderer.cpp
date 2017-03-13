@@ -28,12 +28,8 @@ namespace Engine {
 		}
 
 		void Draw(const RenderObject* renderObject) {
-			GLib::BeginRendering();
-			GLib::Sprites::BeginRendering();
 			GLib::Point2D position = { renderObject->GetPointer().Acquire()->getPosition().X(), renderObject->GetPointer().Acquire()->getPosition().Y() };
 			GLib::Sprites::RenderSprite(*renderObject->Sprite(), position, 0.0f);
-			GLib::Sprites::EndRendering();
-			GLib::EndRendering();
 		}
 	}
 }

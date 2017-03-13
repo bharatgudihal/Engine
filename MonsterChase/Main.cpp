@@ -24,8 +24,8 @@
 #include "Game.h"
 
 #define _CRTDBG_MAP_ALLOC
-#define TEST
-//#define GAME
+//#define TEST
+#define GAME
 //#define HEAPMANAGERTEST
 //#define CONSTTEST
 //#define ALLOCATORTEST
@@ -39,7 +39,7 @@
 //#define POINTERTEST
 //#define STRINGPOOLTEST
 //#define FILEPROCESSORTEST
-#define MATRIXTEST
+//#define MATRIXTEST
 
 using namespace std;
 

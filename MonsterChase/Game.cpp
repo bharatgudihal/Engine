@@ -5,19 +5,24 @@ namespace Game {
 	void Game::GameObjectTask::ProcessFile(uint8_t* fileData, uint32_t fileSize) {
 		Engine::LuaHelper::LuaHelper luaHelper(fileData, fileSize);
 		Engine::GameObject::GameObject* player = Engine::GameObject::GameObject::Create(&luaHelper);
-		luaHelper.LoadGlobalTable(Engine::String::ConstantStrings::GetInstance()->PLAYER.Get());
+		luaHelper.LoadGlobalTable(Engine::String::ConstantStrings::GetInstance()->GAMEOBJECT.Get());
 		Engine::String::PooledString controller = luaHelper.GetStringFromTable(Engine::String::ConstantStrings::GetInstance()->CONTROLLER.Get(), -1);
 		luaHelper.Pop();
 		if (controller == Engine::String::ConstantStrings::GetInstance()->PLAYERCONTROLLER) {
 			player->SetController(new PlayerController(player->GetActorReference()));
+		}
+		else if (controller == Engine::String::ConstantStrings::GetInstance()->MONSTERCONTROLLER) {
+			player->SetController(nullptr);
 		}
 		assert(player);
 		UpdatePostProcessQueue(player);
 	}
 
 	void Game::InitializeActors() {
-		GameObjectTask* task = new GameObjectTask("Assets\\Data\\Player.lua", &pendingGameObjectsQueue, &pendingQueueMutex);
-		Engine::Utility::FileProcessor::GetInstance().InsertInLoadQueue(*task);
+		GameObjectTask* task1 = new GameObjectTask("Assets\\Data\\Player.lua", &pendingGameObjectsQueue, &pendingQueueMutex);
+		Engine::Utility::FileProcessor::GetInstance().InsertInLoadQueue(*task1);
+		GameObjectTask* task2 = new GameObjectTask("Assets\\Data\\Monster.lua", &pendingGameObjectsQueue, &pendingQueueMutex);
+		Engine::Utility::FileProcessor::GetInstance().InsertInLoadQueue(*task2);
 	}
 
 	void Game::TearDownActors() {
@@ -57,9 +62,13 @@ namespace Game {
 
 	void Game::Update() {
 		if (!quit) {
+			GLib::BeginRendering();
+			GLib::Sprites::BeginRendering();
 			for (unsigned int i = 0; i < sceneObjects.size(); i++) {
 				sceneObjects[i]->Update(deltaTime);
 			}
+			GLib::Sprites::EndRendering();
+			GLib::EndRendering();
 		}
 	}
 }
