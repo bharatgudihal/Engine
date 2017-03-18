@@ -23,7 +23,7 @@ namespace Engine {
 			Pointer::SmartPointer<Actor> actor;
 			Renderer::RenderObject* renderObject;
 			Physics::PhysicsBody* physicsBody;
-			IActorController* controller;
+			IActorController* controller; 
 		};
 	}
 }

@@ -36,6 +36,10 @@ namespace Engine {
 		inline Vector3 operator/(const Vector3&, const float&);
 		inline Vector3 operator-(const Vector3& rhs);
 		inline Vector3 operator*(const Vector3&, const Vector3&);
+		struct AABB {
+			Vector3 Center;
+			Vector3 Extents;
+		};
 	}
 }
 #include "Vector3_Inl.h"

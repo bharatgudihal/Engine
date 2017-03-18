@@ -19,13 +19,18 @@ namespace Engine {
 		inline Actor& operator=(Actor&& rhs);
 		inline String::HashedString getNameHash() const;
 		inline Math::Vector3 getPosition() const;
-		inline void setPosition(const Math::Vector3 newPosition);
+		inline void setPosition(const Math::Vector3& newPosition);
 		inline Math::Vector3 getDirection() const;
-		inline void setDirection(const Math::Vector3 newDirection);
+		inline void setDirection(const Math::Vector3& newDirection);
+		inline Math::Vector3 getRotation() const;
+		inline void setRotation(const Math::Vector3& newRotation);
+		inline const Math::AABB getBounds() const;
 	private:
 		String::HashedString name;
 		Math::Vector3 position = Math::Vector3::ZERO;
 		Math::Vector3 direction = Math::Vector3::ZERO;
+		Math::Vector3 rotation = Math::Vector3::ZERO;
+		Math::AABB bounds;
 	};
 }
 #include "Actor_Inl.h"

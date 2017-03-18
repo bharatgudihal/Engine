@@ -9,10 +9,20 @@ namespace Engine {
 		DEBUG_LOG("Actor copy constructor called duplicating char at location %p into location %p\n", other.name, name);
 	}	
 	inline String::HashedString Actor::getNameHash() const { return name; }
+
 	inline Math::Vector3 Actor::getPosition() const { return position; }
-	inline void Actor::setPosition(const Math::Vector3 newPosition) { position = newPosition; }
+
+	inline void Actor::setPosition(const Math::Vector3& newPosition) { position = newPosition; }
+
 	inline Math::Vector3 Actor::getDirection() const { return direction; }
-	inline void Actor::setDirection(const Math::Vector3 newDirection) { direction = newDirection; }
+
+	inline void Actor::setDirection(const Math::Vector3& newDirection) { direction = newDirection; }
+
+	inline Math::Vector3 Actor::getRotation() const { return rotation; }
+
+	inline void Actor::setRotation(const Math::Vector3& newRotation) { rotation = newRotation; }
+
+	inline const Math::AABB Actor::getBounds() const { return bounds; };
 
 	inline Actor::Actor(Actor&& other) : name(other.name), position(other.position) {
 		DEBUG_LOG("Actor move copy constructor called\n", other.name, name);
