@@ -48,18 +48,6 @@ namespace Engine {
 			}
 		}
 
-		void GameObject::Update(float deltaTime) {
-			if (controller) {
-				controller->Update();
-			}
-			if (physicsBody) {
-				physicsBody->PhysicsUpdate(deltaTime);
-			}
-			if (renderObject) {
-				Engine::Renderer::Draw(renderObject);
-			}
-		}
-
 		void GameObject::SetController(IActorController* i_controller) {
 			controller = i_controller;
 		}

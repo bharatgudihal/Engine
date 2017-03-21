@@ -22,6 +22,7 @@
     <ClInclude Include="Actor\Actor.h" />
     <ClInclude Include="Actor\Actor_Inl.h" />
     <ClInclude Include="Controllers\ActorController.h" />
+    <ClInclude Include="Controllers\Controller.h" />
     <ClInclude Include="Core\Engine.h" />
     <ClInclude Include="GameObject\GameObject.h" />
     <ClInclude Include="GameObject\GameObject_Inl.h" />
@@ -45,6 +46,8 @@
     <ClInclude Include="Memory\HeapManager_Inl.h" />
     <ClInclude Include="Memory\MasterMemoryManager.h" />
     <ClInclude Include="Memory\MasterMemoryManager_Inl.h" />
+    <ClInclude Include="Physics\CollisionCheck.h" />
+    <ClInclude Include="Physics\Physics.h" />
     <ClInclude Include="Physics\PhysicsBody.h" />
     <ClInclude Include="Pointer\Counter.h" />
     <ClInclude Include="Pointer\SmartPointer.h" />
@@ -84,6 +87,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Actor\Private\Actor.cpp" />
+    <ClCompile Include="Controllers\Private\Controller.cpp" />
     <ClCompile Include="Core\Private\Engine.cpp" />
     <ClCompile Include="GameObject\Private\GameObject.cpp" />
     <ClCompile Include="Input\Private\Input.cpp" />
@@ -97,6 +101,8 @@
     <ClCompile Include="Memory\Private\FixedSizeAllocator.cpp" />
     <ClCompile Include="Memory\Private\HeapManager.cpp" />
     <ClCompile Include="Memory\Private\MasterMemoryManager.cpp" />
+    <ClCompile Include="Physics\Private\CollisionCheck.cpp" />
+    <ClCompile Include="Physics\Private\Physics.cpp" />
     <ClCompile Include="Physics\Private\PhysicsBody.cpp" />
     <ClCompile Include="Renderer\Private\Renderer.cpp" />
     <ClCompile Include="String\Private\ConstantStrings.cpp" />

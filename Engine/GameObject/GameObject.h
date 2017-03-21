@@ -1,6 +1,5 @@
 #pragma once
 #include "../Actor/Actor.h"
-#include "../Renderer/Renderer.h"
 #include "../Physics/PhysicsBody.h"
 #include "../Utility/Utility.h"
 #include "../Lua/LuaHelper.h"
@@ -8,6 +7,7 @@
 #include "../String/ConstantStrings.h"
 #include "../Renderer/RenderObject.h"
 #include "../Physics/PhysicsBody.h"
+
 namespace Engine {
 	namespace GameObject {
 		class GameObject {
@@ -16,8 +16,10 @@ namespace Engine {
 			static GameObject* Create(LuaHelper::LuaHelper*);
 			~GameObject();
 			void SetController(IActorController*);
-			inline Pointer::SmartPointer<Actor>* GetActorReference();
-			void Update(float);
+			inline Pointer::SmartPointer<Actor>* GetActorReference();			
+			inline const Renderer::RenderObject* GetRenderObject();
+			inline IActorController* GetController();
+			inline Physics::PhysicsBody* GetPhysicsBody();
 		private:
 			GameObject(Pointer::SmartPointer<Actor> i_actor, Renderer::RenderObject* i_renderObject = nullptr, Physics::PhysicsBody* i_physicsBody = nullptr, IActorController* i_controller = nullptr);
 			Pointer::SmartPointer<Actor> actor;

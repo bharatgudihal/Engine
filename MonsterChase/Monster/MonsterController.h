@@ -10,6 +10,6 @@ public:
 	void Update() override;
 private:
 	Engine::Pointer::WeakPointer<Engine::Actor> monsterReference;
-	float rotationSpeed = 100.0f;
+	float rotationSpeed = 800.0f;
 };
 #endif // !MONSTERCONTROLLER_H

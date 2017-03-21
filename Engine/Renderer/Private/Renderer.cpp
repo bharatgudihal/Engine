@@ -1,5 +1,5 @@
 #include "../Renderer.h"
-#include "../RenderObject.h"
+#include "../../GameObject/GameObject.h"
 
 namespace Engine {
 	namespace Renderer {
@@ -27,9 +27,21 @@ namespace Engine {
 			return sprite;
 		}
 
+		void DrawAll(std::vector<GameObject::GameObject*>& sceneObjects) {
+			GLib::BeginRendering();
+			GLib::Sprites::BeginRendering();
+			for (unsigned int i = 0; i < sceneObjects.size(); i++) {
+				Draw(sceneObjects[i]->GetRenderObject());
+			}
+			GLib::Sprites::EndRendering();
+			GLib::EndRendering();
+		}
+
 		void Draw(const RenderObject* renderObject) {
-			GLib::Point2D position = { renderObject->GetPointer().Acquire()->getPosition().X(), renderObject->GetPointer().Acquire()->getPosition().Y() };
-			GLib::Sprites::RenderSprite(*renderObject->Sprite(), position, renderObject->GetPointer().Acquire()->getRotation().Z()*0.0174533f);
+			if (renderObject != nullptr) {
+				GLib::Point2D position = { renderObject->GetPointer().Acquire()->getPosition().X(), renderObject->GetPointer().Acquire()->getPosition().Y() };
+				GLib::Sprites::RenderSprite(*renderObject->Sprite(), position, renderObject->GetPointer().Acquire()->getRotation().Z()*0.0174533f);
+			}
 		}
 	}
 }
