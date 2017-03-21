@@ -3,7 +3,8 @@
 namespace Engine {
 	namespace Test {
 		bool TestPointers() {
-			Actor* testActor1 = new Actor("test1", Math::Vector3::ZERO);
+			Math::AABB bounds;
+			Actor* testActor1 = new Actor("test1", Math::Vector3::ZERO, bounds);
 			Pointer::SmartPointer<Actor> smartTest1(testActor1);
 			assert(smartTest1);
 			assert(smartTest1.getCounter()->smartCount == 1);
@@ -24,7 +25,7 @@ namespace Engine {
 			smartTest3 = smartTest2;			
 			assert(smartTest3.getCounter()->smartCount == 3);
 			assert(smartTest3.getCounter()->weakCount == 0);
-			Pointer::SmartPointer<Actor> smartTest4(new Actor("test4", Math::Vector3::ZERO));
+			Pointer::SmartPointer<Actor> smartTest4(new Actor("test4", Math::Vector3::ZERO, bounds));
 			assert(smartTest4);
 			smartTest4.swap(smartTest3);
 			assert(smartTest3.getCounter()->smartCount == 1);
@@ -52,7 +53,7 @@ namespace Engine {
 				assert(!weakTest3);
 			}
 			assert(smartTest4.getCounter()->weakCount == 0);
-			Actor* testActor2 = new Actor("test", Math::Vector3::ZERO);
+			Actor* testActor2 = new Actor("test", Math::Vector3::ZERO, bounds);
 			Engine::Pointer::UniquePointer<Actor> uniqueTest1(testActor2);
 			assert(uniqueTest1);
 			Engine::Pointer::UniquePointer<Actor> uniqueTest2;

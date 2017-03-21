@@ -11,7 +11,12 @@ namespace Engine {
 			String::PooledString name = luaHelper->GetStringFromTable(String::ConstantStrings::GetInstance()->NAME.Get(), -1);
 			Math::Vector3 position;
 			luaHelper->GetVector2DFromTable(String::ConstantStrings::GetInstance()->POSITION.Get(), position, -1);
-			luaHelper->GetTableFromTable(String::ConstantStrings::GetInstance()->PHYSICSBODY.Get(), -1);
+			Math::AABB bounds;
+			luaHelper->GetTableFromTable(String::ConstantStrings::GetInstance()->AABB.Get(), -1);
+			luaHelper->GetVector2DFromTable(String::ConstantStrings::GetInstance()->CENTER.Get(), bounds.Center, -1);
+			luaHelper->GetVector2DFromTable(String::ConstantStrings::GetInstance()->EXTENTS.Get(), bounds.Extents, -1);
+			luaHelper->Pop();
+			luaHelper->GetTableFromTable(String::ConstantStrings::GetInstance()->PHYSICSBODY.Get(), -1);			
 			float mass;
 			luaHelper->GetFloatFromTable(String::ConstantStrings::GetInstance()->MASS.Get(), mass, -1);
 			float drag;
@@ -23,7 +28,7 @@ namespace Engine {
 			String::PooledString spritePath = luaHelper->GetStringFromTable(String::ConstantStrings::GetInstance()->SPRITE.Get(), -1);
 			luaHelper->Pop();
 			luaHelper->Pop();
-			Pointer::SmartPointer<Actor> actor(new Actor(name.Get(), position));
+			Pointer::SmartPointer<Actor> actor(new Actor(name.Get(), position, bounds));
 			size_t fileSize;
 			void* file = Utility::LoadFile(spritePath.Get(), fileSize);
 			assert(file && fileSize);

@@ -1,7 +1,7 @@
 #include "..\Math\Vector3.h"
 
 namespace Engine {
-	inline Actor::Actor(const char *i_name, Math::Vector3 i_position) :name(i_name), position(i_position) {
+	inline Actor::Actor(const char *i_name, Math::Vector3 i_position, Math::AABB i_bounds) :name(i_name), position(i_position), bounds(i_bounds) {
 		DEBUG_LOG("Actor constructor called duplicating char at location %p into location %p\n",i_name,name); 
 	}
 

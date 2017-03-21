@@ -13,7 +13,9 @@ namespace Engine {
 						  const float i_a31 = 0.0f, const float i_a32 = 0.0f, const float i_a33 = 0.0f, const float i_a34 = 0.0f,
 						  const float i_a41 = 0.0f, const float i_a42 = 0.0f, const float i_a43 = 0.0f, const float i_a44 = 0.0f);
 			inline Matrix(const Matrix&);
-			static Matrix GetRotationMatrix(const float xRotation, const float yRotation, const float zRotation);
+			static Matrix GetXRotationMatrix(const float rotation);
+			static Matrix GetYRotationMatrix(const float rotation);
+			static Matrix GetZRotationMatrix(const float rotation);
 			inline static Matrix GetScaleMatrix(const Vector3&);
 			inline static Matrix GetTranslationMatrix(const Vector3&);			
 			static const Matrix IDENTITY;

@@ -21,6 +21,9 @@ namespace Engine {
 			const PooledString DRAG;
 			const PooledString SPRITE;
 			const PooledString FORCEMULTIPLIER;
+			const PooledString AABB;
+			const PooledString CENTER;
+			const PooledString EXTENTS;
 		private:
 			ConstantStrings();
 			~ConstantStrings();

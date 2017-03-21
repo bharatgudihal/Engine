@@ -61,16 +61,11 @@ namespace Game {
 	}
 
 	void Game::Update() {
-		if (!quit) {
-			/*GLib::BeginRendering();
-			GLib::Sprites::BeginRendering();
-			for (unsigned int i = 0; i < sceneObjects.size(); i++) {
-				sceneObjects[i]->Update(deltaTime);
-			}
-			GLib::Sprites::EndRendering();
-			GLib::EndRendering();*/
+		if (!quit) {			
 			Engine::Controller::UpdateAll(sceneObjects);
-			Engine::Physics::Collision::CheckCollisions(sceneObjects);
+			//if (Engine::Input::keyCode == 81 && Engine::Input::isDown) {
+				Engine::Physics::Collision::CheckCollisions(sceneObjects);
+			//}
 			Engine::Physics::UpdateAll(sceneObjects, deltaTime);
 			Engine::Renderer::DrawAll(sceneObjects);
 		}

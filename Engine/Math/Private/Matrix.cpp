@@ -8,39 +8,37 @@ namespace Engine {
 			0.0f, 0.0f, 1.0f, 0.0f,
 			0.0f, 0.0f, 0.0f, 1.0f);
 
-		Matrix Matrix::GetRotationMatrix(const float xRotation, const float yRotation, const float zRotation) {
-			Matrix defaultResult;
-			if (xRotation != 0.0f) {
-				float cosX = static_cast<float>(cos(xRotation * DEGREES2RADIANS));
-				float sinX = static_cast<float>(sin(xRotation * DEGREES2RADIANS));
-				Matrix xRotationMatrix(
-					1.0f, 0.0f, 0.0f, 0.0f,
-					0.0f, cosX, -sinX, 0.0f,
-					0.0f, sinX, cosX, 0.0f,
-					0.0f, 0.0f, 0.0f, 1.0f);
-				return xRotationMatrix;
-			}
-			if (yRotation != 0.0f) {
-				float cosY = static_cast<float>(cos(yRotation * DEGREES2RADIANS));
-				float sinY = static_cast<float>(sin(yRotation * DEGREES2RADIANS));
-				Matrix yRotationMatrix(
-					cosY, 0.0f, sinY, 0.0f,
-					0.0f, 1.0f, 0.0f, 0.0f,
-					-sinY, 0.0f, cosY, 0.0f,
-					0.0f, 0.0f, 0.0f, 1.0f);
-				return yRotationMatrix;
-			}
-			if (yRotation != 0.0f) {
-				float cosZ = static_cast<float>(cos(zRotation * DEGREES2RADIANS));
-				float sinZ = static_cast<float>(sin(zRotation * DEGREES2RADIANS));
-				Matrix zRotationMatrix(
-					cosZ, -sinZ, 0.0f, 0.0f,
-					sinZ, cosZ, 0.0f, 0.0f,
-					0.0f, 0.0f, 1.0f, 0.0f,
-					0.0f, 0.0f, 0.0f, 1.0f);
-				return zRotationMatrix;
-			}
-			return defaultResult;
+		Matrix Matrix::GetXRotationMatrix(const float rotation) {
+			float cosX = static_cast<float>(cos(rotation * DEGREES2RADIANS));
+			float sinX = static_cast<float>(sin(rotation * DEGREES2RADIANS));
+			Matrix xRotationMatrix(
+				1.0f, 0.0f, 0.0f, 0.0f,
+				0.0f, cosX, -sinX, 0.0f,
+				0.0f, sinX, cosX, 0.0f,
+				0.0f, 0.0f, 0.0f, 1.0f);
+			return xRotationMatrix;
+		}
+
+		Matrix Matrix::GetYRotationMatrix(const float rotation) {
+			float cosY = static_cast<float>(cos(rotation * DEGREES2RADIANS));
+			float sinY = static_cast<float>(sin(rotation * DEGREES2RADIANS));
+			Matrix yRotationMatrix(
+				cosY, 0.0f, sinY, 0.0f,
+				0.0f, 1.0f, 0.0f, 0.0f,
+				-sinY, 0.0f, cosY, 0.0f,
+				0.0f, 0.0f, 0.0f, 1.0f);
+			return yRotationMatrix;
+		}
+
+		Matrix Matrix::GetZRotationMatrix(const float rotation) {
+			float cosZ = static_cast<float>(cos(rotation * DEGREES2RADIANS));
+			float sinZ = static_cast<float>(sin(rotation * DEGREES2RADIANS));
+			Matrix zRotationMatrix(
+				cosZ, -sinZ, 0.0f, 0.0f,
+				sinZ, cosZ, 0.0f, 0.0f,
+				0.0f, 0.0f, 1.0f, 0.0f,
+				0.0f, 0.0f, 0.0f, 1.0f);
+			return zRotationMatrix;
 		}
 
 		Matrix& Matrix::operator=(Matrix& other) {

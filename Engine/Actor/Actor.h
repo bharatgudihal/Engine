@@ -12,7 +12,7 @@ namespace Engine {
 	public:
 		Actor();		
 		~Actor();
-		inline Actor(const char *i_name, Math::Vector3 i_position);
+		inline Actor(const char *i_name, Math::Vector3 i_position, Math::AABB i_bounds);
 		inline Actor(const Actor& other);
 		inline Actor(Actor&& other);
 		Actor& operator=(const Actor& rhs);
