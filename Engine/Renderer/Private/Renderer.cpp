@@ -29,7 +29,7 @@ namespace Engine {
 
 		void Draw(const RenderObject* renderObject) {
 			GLib::Point2D position = { renderObject->GetPointer().Acquire()->getPosition().X(), renderObject->GetPointer().Acquire()->getPosition().Y() };
-			GLib::Sprites::RenderSprite(*renderObject->Sprite(), position, 0.0f);
+			GLib::Sprites::RenderSprite(*renderObject->Sprite(), position, renderObject->GetPointer().Acquire()->getRotation().Z()*0.0174533f);
 		}
 	}
 }

@@ -12,7 +12,7 @@ namespace Game {
 			player->SetController(new PlayerController(player->GetActorReference()));
 		}
 		else if (controller == Engine::String::ConstantStrings::GetInstance()->MONSTERCONTROLLER) {
-			player->SetController(nullptr);
+			player->SetController(new MonsterController(player->GetActorReference()));
 		}
 		assert(player);
 		UpdatePostProcessQueue(player);

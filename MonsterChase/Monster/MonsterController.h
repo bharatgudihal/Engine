@@ -6,10 +6,10 @@
 
 class MonsterController :public Engine::IActorController{
 public:
-	MonsterController(Engine::Pointer::WeakPointer<Engine::Actor>, Engine::Pointer::WeakPointer<Engine::Actor>);
+	MonsterController(Engine::Pointer::SmartPointer<Engine::Actor>*);
 	void Update() override;
 private:
 	Engine::Pointer::WeakPointer<Engine::Actor> monsterReference;
-	Engine::Pointer::WeakPointer<Engine::Actor> playerReference;
+	float rotationSpeed = 100.0f;
 };
 #endif // !MONSTERCONTROLLER_H
