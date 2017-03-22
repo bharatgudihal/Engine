@@ -11,7 +11,7 @@ namespace Engine {
 		public:
 			inline Vector4(const float iX = 0.0f, const float iY = 0.0f, const float iZ = 0.0f, const float iW = 1.0f);
 			inline Vector4(const Vector4& other);
-			inline Vector4(const Vector3& other);
+			inline Vector4(const Vector3& other, const float i_w);
 			inline float X() const;
 			inline void X(const float iX);
 			inline float Y() const;

@@ -6,7 +6,7 @@ namespace Engine {
 
 		inline 	Vector4::Vector4(const Vector4& other) : x(other.x), y(other.y), z(other.z), w(other.w) {}
 
-		inline Vector4::Vector4(const Vector3& other) : x(other.X()), y(other.Y()), z(other.Z()), w(1.0f) {}
+		inline Vector4::Vector4(const Vector3& other, const float i_w) : x(other.X()), y(other.Y()), z(other.Z()), w(i_w) {}
 
 		inline float Vector4::X() const { return x; }
 

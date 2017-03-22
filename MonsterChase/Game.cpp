@@ -62,9 +62,9 @@ namespace Game {
 
 	void Game::Update() {
 		if (!quit) {			
-			Engine::Controller::UpdateAll(sceneObjects);
+			Engine::Controller::UpdateAll(sceneObjects, deltaTime);
 			//if (Engine::Input::keyCode == 81 && Engine::Input::isDown) {
-				Engine::Physics::Collision::CheckCollisions(sceneObjects);
+				Engine::Physics::Collision::CheckCollisions(sceneObjects, deltaTime);
 			//}
 			Engine::Physics::UpdateAll(sceneObjects, deltaTime);
 			Engine::Renderer::DrawAll(sceneObjects);

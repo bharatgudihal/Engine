@@ -4,6 +4,6 @@
 
 namespace Engine{	
 	namespace Controller {
-		void UpdateAll(std::vector<GameObject::GameObject*>&);
+		void UpdateAll(std::vector<GameObject::GameObject*>&,float);
 	}
 }

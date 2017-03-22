@@ -38,5 +38,9 @@ namespace Engine {
 			Math::Vector3 newPosition = smartPtr->getPosition() + ((previousVelocity + currentVelocity) / 2) * deltaTime;
 			smartPtr->setPosition(newPosition);
 		}
+
+		Math::Vector3 PhysicsBody::GetVelocity() {
+			return currentVelocity;
+		}
 	}
 }

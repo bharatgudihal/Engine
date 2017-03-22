@@ -7,7 +7,7 @@
 namespace Engine {
 	namespace Physics {
 		namespace Collision {
-			void CheckCollisions(std::vector<GameObject::GameObject*>&);
+			void CheckCollisions(std::vector<GameObject::GameObject*>&, float);
 		}
 	}
 }

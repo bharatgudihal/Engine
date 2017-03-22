@@ -9,7 +9,7 @@ class PlayerController:public Engine::IActorController {
 public:
 	PlayerController(Engine::Pointer::SmartPointer<Engine::Actor>*);
 	~PlayerController(){}
-	void Update() override;
+	void Update(float) override;
 private:
 	Engine::Pointer::WeakPointer<Engine::Actor> playerReference;
 };
