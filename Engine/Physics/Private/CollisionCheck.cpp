@@ -4,7 +4,9 @@ namespace Engine {
 	namespace Physics {
 		namespace Collision {
 
-			bool TestCollisionOfBInA(GameObject::GameObject* objectA, GameObject::GameObject* objectB, float deltaTime, float& o_latestTClose, float& o_earliestTOpen) {
+			bool TestCollisionOfBInA(GameObject::GameObject* objectA, GameObject::GameObject* objectB, float deltaTime, float& o_latestTClose, float& o_earliestTOpen, 
+				float& o_collisionTime, Math::Vector4& o_collisionNormal) {
+
 				bool isSeparated;
 				float tStart = 0.0f;
 				float tEnd = deltaTime;
@@ -49,9 +51,16 @@ namespace Engine {
 					o_latestTClose = tClose;
 					o_earliestTOpen = tOpen;
 					isSeparated = tClose > tEnd || tOpen < 0.0f;
+					if (!isSeparated && o_collisionTime > tClose) {
+						o_collisionTime = tClose;						
+						o_collisionNormal = AtoWorld * Math::Vector4(BCenterInA.X());
+					}
 				}
 				else {
 					isSeparated = BCenterInA.X() < ALeft || BCenterInA.X() > ARight;
+					if (!isSeparated) {
+						o_collisionNormal = AtoWorld * Math::Vector4(BCenterInA.X());
+					}
 				}
 				if (!isSeparated) {
 					float BProjectionOnA_Y = fabs(BExtentsXInA.Y()) + fabs(BExtentsYInA.Y());
@@ -76,23 +85,30 @@ namespace Engine {
 							o_earliestTOpen = tOpen;
 						}
 						isSeparated = tClose > tEnd || tOpen < 0.0f;
+						if (!isSeparated && o_collisionTime > tClose) {
+							o_collisionTime = tClose;
+							o_collisionNormal = AtoWorld * Math::Vector4(0.0f,BCenterInA.Y());
+						}
 					}
 					else {
-						isSeparated = BCenterInA.Y() < ABottom || BCenterInA.X() > ATop;
+						isSeparated = BCenterInA.Y() < ABottom || BCenterInA.Y() > ATop;
+						if (!isSeparated) {
+							o_collisionNormal = AtoWorld * Math::Vector4(0.0f, BCenterInA.Y());
+						}
 					}
 				}
 				return !isSeparated;
 			}
 
-			bool CheckCollision(GameObject::GameObject* objectA, GameObject::GameObject* objectB, float deltaTime, float& o_collisionTime, Math::Vector3& o_collisionNormal) {
+			bool CheckCollision(GameObject::GameObject* objectA, GameObject::GameObject* objectB, float deltaTime, float& o_collisionTime, Math::Vector4& o_collisionNormal) {
 				bool result = false;
 				float latestTCloseAB = 0.0f;
 				float earliestTOpenAB = 0.0f;
 				float latestTCloseBA = 0.0f;
 				float earliestTOpenBA = 0.0f;
-				result = TestCollisionOfBInA(objectA, objectB, deltaTime, latestTCloseAB, earliestTOpenAB);
+				result = TestCollisionOfBInA(objectA, objectB, deltaTime, latestTCloseAB, earliestTOpenAB, o_collisionTime, o_collisionNormal);
 				if (result) {
-					result = TestCollisionOfBInA(objectB, objectA, deltaTime, latestTCloseBA, earliestTOpenBA);
+					result = TestCollisionOfBInA(objectB, objectA, deltaTime, latestTCloseBA, earliestTOpenBA, o_collisionTime, o_collisionNormal);
 					if (result) {
 						float latestClose = latestTCloseAB > latestTCloseBA ? latestTCloseAB : latestTCloseBA;
 						float earliestOpen = earliestTOpenAB > earliestTOpenBA ? earliestTOpenAB : earliestTOpenBA;
@@ -103,38 +119,60 @@ namespace Engine {
 			}
 
 			void ResolveCollision(CollisionPair& collisionPair) {
-
+				Math::Vector3 normal = collisionPair.collisionNormal;
+				normal.Normalize();
+				Math::Vector3 velocityA = collisionPair.collisionObjects[0]->GetPhysicsBody()->GetVelocity();
+				Math::Vector3 velocityB = collisionPair.collisionObjects[1]->GetPhysicsBody()->GetVelocity();
+				Math::Vector3 forwardA = (*(collisionPair.collisionObjects[0]->GetActorReference()))->GetForward();
+				Math::Vector3 forwardB = (*(collisionPair.collisionObjects[1]->GetActorReference()))->GetForward();
+				Math::Vector3 reflectionVelocityA = velocityA - normal*2.0f*Math::dot(normal, velocityA);
+				Math::Vector3 reflectionVelocityB = velocityB - normal*2.0f*Math::dot(normal, velocityB);
+				Math::Vector3 reflectionForwardA = forwardA - normal*2.0f*Math::dot(normal, forwardA);
+				Math::Vector3 reflectionForwardB = forwardB - normal*2.0f*Math::dot(normal, forwardB);
+				collisionPair.collisionObjects[0]->GetPhysicsBody()->SetVelocity(reflectionVelocityA);
+				collisionPair.collisionObjects[1]->GetPhysicsBody()->SetVelocity(reflectionVelocityB);
+				(*(collisionPair.collisionObjects[0]->GetActorReference()))->SetForward(reflectionForwardA);
+				(*(collisionPair.collisionObjects[1]->GetActorReference()))->SetForward(reflectionForwardB);
 			}			
 
 			CollisionPair CheckCollisions(std::vector<GameObject::GameObject*>& sceneObjects, float deltaTime) {
-				CollisionPair earlierCollision;
+				CollisionPair earliestCollision;
+				earliestCollision.collisionTime = deltaTime;				
 				if (sceneObjects.size() > 0) {
 					for (int i = 0; i < sceneObjects.size() - 1; i++) {
 						for (int j = i + 1; j < sceneObjects.size(); j++) {
-							float collisionTime;
-							Math::Vector3 collisionNormal;
+							float collisionTime = deltaTime;
+							Math::Vector4 collisionNormal;
 							if (CheckCollision(sceneObjects[i], sceneObjects[j], deltaTime, collisionTime, collisionNormal)) {
-								DEBUG_LOG("Collision! between %d and %d\n", (*(sceneObjects[i]->GetActorReference()))->GetNameHash() && (*(sceneObjects[j]->GetActorReference()))->GetNameHash());
+								if (collisionTime < earliestCollision.collisionTime) {
+									earliestCollision.collisionTime = collisionTime;
+									earliestCollision.collisionNormal = collisionNormal.GetVector3();
+									earliestCollision.collisionObjects[0] = sceneObjects[i];
+									earliestCollision.collisionObjects[1] = sceneObjects[j];
+								}
+								//DEBUG_LOG("Collision! between %d and %d\n", (*(sceneObjects[i]->GetActorReference()))->GetNameHash() && (*(sceneObjects[j]->GetActorReference()))->GetNameHash());
 								break;
 							}
 						}
 					}
 				}
-				return earlierCollision;
+				return earliestCollision;
 			}
 
 			void Update(std::vector<GameObject::GameObject*>& sceneObjects, float deltaTime) {
 				int collisionCheckIterationCount = 0;
+				float currentDeltaTime = deltaTime;				
 				while (collisionCheckIterationCount < MAXCOLLISIONCHECKS) {
-					CollisionPair earliestCollision = CheckCollisions(sceneObjects, deltaTime);
-					if (earliestCollision.collisionNormal == Math::Vector3::ZERO) {
+					CollisionPair earliestCollision = CheckCollisions(sceneObjects, currentDeltaTime);
+					if (earliestCollision.collisionNormal == Math::Vector3::ZERO || earliestCollision.collisionTime >= currentDeltaTime) {
 						break;
 					}
 					else {
+						currentDeltaTime -= earliestCollision.collisionTime;
 						ResolveCollision(earliestCollision);
 					}
 					collisionCheckIterationCount++;
-				}
+				}				
 			}
 		}
 	}

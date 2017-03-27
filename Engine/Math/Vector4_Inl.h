@@ -85,5 +85,9 @@ namespace Engine {
 		inline Vector4 operator*(const Vector4& lhs, const Vector4& rhs) {
 			return Vector4(lhs.X()*rhs.X(), lhs.Y()*rhs.Y(), lhs.Z()*rhs.Z());
 		}
+
+		inline Vector3 Vector4::GetVector3() {
+			return Vector3(x, y, z);
+		}
 	}
 }

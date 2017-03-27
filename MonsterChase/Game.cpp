@@ -20,7 +20,8 @@ namespace Game {
 				Engine::Math::Vector3 forward(static_cast<float>(-50.0f + rand() % 100), static_cast<float>(-50.0f + rand() % 100));
 				forward.Normalize();
 				(*(player->GetActorReference()))->SetForward(forward);
-				Engine::Math::Vector3 position((-400.0f + static_cast<float>(rand() % 800)), (-300.0f + static_cast<float>(rand() % 600)));
+				Engine::Math::Vector3 extents = (*(player->GetActorReference()))->GetBounds().Extents;
+				Engine::Math::Vector3 position((-400.0f + extents.X() + static_cast<float>(rand() % 800 - extents.X())), (-300.0f + extents.Y() + static_cast<float>(rand() % 600 - extents.Y())));
 				(*(player->GetActorReference()))->SetPosition(position);
 			}
 			assert(player);
@@ -29,8 +30,8 @@ namespace Game {
 	}
 
 	void Game::InitializeActors() {
-		GameObjectTask* task1 = new GameObjectTask("Assets\\Data\\Player.lua", &pendingGameObjectsQueue, &pendingQueueMutex);
-		Engine::Utility::FileProcessor::GetInstance().InsertInLoadQueue(*task1);
+		//GameObjectTask* task1 = new GameObjectTask("Assets\\Data\\Player.lua", &pendingGameObjectsQueue, &pendingQueueMutex);
+		//Engine::Utility::FileProcessor::GetInstance().InsertInLoadQueue(*task1);
 		GameObjectTask* task2 = new GameObjectTask("Assets\\Data\\Monster.lua", &pendingGameObjectsQueue, &pendingQueueMutex);
 		Engine::Utility::FileProcessor::GetInstance().InsertInLoadQueue(*task2);
 	}

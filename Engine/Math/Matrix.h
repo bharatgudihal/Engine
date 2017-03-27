@@ -17,7 +17,7 @@ namespace Engine {
 			static Matrix GetYRotationMatrix(const float rotation);
 			static Matrix GetZRotationMatrix(const float rotation);
 			inline static Matrix GetScaleMatrix(const Vector3&);
-			inline static Matrix GetTranslationMatrix(const Vector3&);			
+			inline static Matrix GetTranslationMatrix(const Vector3&);
 			static const Matrix IDENTITY;
 			Matrix& operator=(Matrix&);
 			inline bool operator==(Matrix&);

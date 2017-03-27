@@ -18,5 +18,12 @@ namespace Engine {
 				z /= magnitude;
 			}
 		}
+
+		Vector3 cross(const Vector3& lhs, const Vector3& rhs) {
+			float crossX = lhs.Y()*rhs.Z() - lhs.Z()*rhs.Y();
+			float crossY = lhs.Z()*rhs.X() - lhs.X()*rhs.Z();
+			float crossZ = lhs.X()*rhs.Y() - lhs.Y()*rhs.X();
+			return Vector3(crossX, crossY, crossZ);
+		}
 	}
 }

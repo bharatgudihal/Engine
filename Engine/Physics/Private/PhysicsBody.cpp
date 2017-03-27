@@ -42,5 +42,9 @@ namespace Engine {
 		Math::Vector3 PhysicsBody::GetVelocity() {
 			return currentVelocity;
 		}
+
+		void PhysicsBody::SetVelocity(Math::Vector3& newVelocity) {
+			currentVelocity = newVelocity;
+		}
 	}
 }

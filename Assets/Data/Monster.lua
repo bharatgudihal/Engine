@@ -1,7 +1,7 @@
 GameObject = {
 	name = "Monster",
 	controller = "MonsterController",
-	count = 5.0,
+	count = 2.0,
 	position = {-200.0,-100.0,0.0},
 	AABB = {
 		Center = {0,64.0,0.0},

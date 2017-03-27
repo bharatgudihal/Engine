@@ -36,6 +36,8 @@ namespace Engine {
 		inline Vector3 operator/(const Vector3&, const float&);
 		inline Vector3 operator-(const Vector3& rhs);
 		inline Vector3 operator*(const Vector3&, const Vector3&);
+		inline float dot(const Vector3&, const Vector3&);
+		Vector3 cross(const Vector3&, const Vector3&);
 		struct AABB {
 			Vector3 Center;
 			Vector3 Extents;

@@ -73,5 +73,9 @@ namespace Engine {
 		inline Vector3 operator*(const Vector3& lhs, const Vector3& rhs) {
 			return Vector3(lhs.X()*rhs.X(), lhs.Y()*rhs.Y(), lhs.Z()*rhs.Z());
 		}
+
+		inline float dot(const Vector3& lhs, const Vector3& rhs) {
+			return lhs.X()*rhs.X() + lhs.Y()*rhs.Y() + lhs.Z()*rhs.Z();
+		}
 	}
 }

@@ -30,6 +30,7 @@ namespace Engine {
 			static const Vector4 DOWN;
 			static const Vector4 LEFT;
 			static const Vector4 RIGHT;
+			inline Vector3 GetVector3();
 		private:
 			float x, y, z, w;
 		};

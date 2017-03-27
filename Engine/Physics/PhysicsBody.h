@@ -11,6 +11,7 @@ namespace Engine {
 			~PhysicsBody() {};
 			void PhysicsUpdate(const float deltaTime);
 			Math::Vector3 GetVelocity();
+			void SetVelocity(Math::Vector3&);
 		private:
 			Pointer::WeakPointer<Actor> weakPointer;
 			float mass;
