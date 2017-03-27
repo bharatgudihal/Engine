@@ -47,13 +47,16 @@ namespace Engine {
 						float temp = tOpen;
 						tOpen = tClose;
 						tClose = temp;
+						float DTemp = DClose_X;
+						DClose_X = DOpen_X;
+						DOpen_X = DTemp;
 					}
 					o_latestTClose = tClose;
 					o_earliestTOpen = tOpen;
 					isSeparated = tClose > tEnd || tOpen < 0.0f;
-					if (!isSeparated && o_collisionTime > tClose) {
+					if (!isSeparated && tClose > 0.0f && o_collisionTime > tClose) {
 						o_collisionTime = tClose;						
-						o_collisionNormal = AtoWorld * Math::Vector4(BCenterInA.X());
+						o_collisionNormal = AtoWorld * Math::Vector4(DClose_X,0.0f,0.0f,0.0f);
 					}
 				}
 				else {
@@ -74,9 +77,12 @@ namespace Engine {
 						float tOpen = DOpen_Y / VelBInA.Y();
 						if (tOpen < tClose) {
 							//Moving in opposite direction
-							float temp = tOpen;
+							float temp = tOpen;							
 							tOpen = tClose;
 							tClose = temp;
+							float DTemp = DClose_Y;
+							DClose_Y = DOpen_Y;
+							DOpen_Y = DTemp;
 						}
 						if (o_latestTClose < tClose) {
 							o_latestTClose = tClose;
@@ -85,9 +91,9 @@ namespace Engine {
 							o_earliestTOpen = tOpen;
 						}
 						isSeparated = tClose > tEnd || tOpen < 0.0f;
-						if (!isSeparated && o_collisionTime > tClose) {
+						if (!isSeparated && tClose > 0.0f && o_collisionTime > tClose) {
 							o_collisionTime = tClose;
-							o_collisionNormal = AtoWorld * Math::Vector4(0.0f,BCenterInA.Y());
+							o_collisionNormal = AtoWorld * Math::Vector4(0.0f, DClose_Y, 0.0f, 0.0f);
 						}
 					}
 					else {
@@ -129,6 +135,10 @@ namespace Engine {
 				Math::Vector3 reflectionVelocityB = velocityB - normal*2.0f*Math::dot(normal, velocityB);
 				Math::Vector3 reflectionForwardA = forwardA - normal*2.0f*Math::dot(normal, forwardA);
 				Math::Vector3 reflectionForwardB = forwardB - normal*2.0f*Math::dot(normal, forwardB);
+				/*Math::Vector3 reflectionVelocityA = -velocityA;
+				Math::Vector3 reflectionVelocityB = -velocityB;
+				Math::Vector3 reflectionForwardA = -forwardA;
+				Math::Vector3 reflectionForwardB = -forwardB;*/
 				collisionPair.collisionObjects[0]->GetPhysicsBody()->SetVelocity(reflectionVelocityA);
 				collisionPair.collisionObjects[1]->GetPhysicsBody()->SetVelocity(reflectionVelocityB);
 				(*(collisionPair.collisionObjects[0]->GetActorReference()))->SetForward(reflectionForwardA);
@@ -144,7 +154,7 @@ namespace Engine {
 							float collisionTime = deltaTime;
 							Math::Vector4 collisionNormal;
 							if (CheckCollision(sceneObjects[i], sceneObjects[j], deltaTime, collisionTime, collisionNormal)) {
-								if (collisionTime < earliestCollision.collisionTime) {
+								if (collisionTime <= earliestCollision.collisionTime) {
 									earliestCollision.collisionTime = collisionTime;
 									earliestCollision.collisionNormal = collisionNormal.GetVector3();
 									earliestCollision.collisionObjects[0] = sceneObjects[i];
@@ -159,6 +169,12 @@ namespace Engine {
 				return earliestCollision;
 			}
 
+			void SimulateObjects(std::vector<GameObject::GameObject*>& sceneObjects, float time) {
+				for (int i = 0; i < sceneObjects.size(); i++) {
+					sceneObjects[i]->GetPhysicsBody()->PhysicsUpdate(time);
+				}
+			}
+
 			void Update(std::vector<GameObject::GameObject*>& sceneObjects, float deltaTime) {
 				int collisionCheckIterationCount = 0;
 				float currentDeltaTime = deltaTime;				
@@ -168,8 +184,13 @@ namespace Engine {
 						break;
 					}
 					else {
-						currentDeltaTime -= earliestCollision.collisionTime;
+						DEBUG_LOG("Earliest collision time %f\n", earliestCollision.collisionTime);
+						DEBUG_LOG("Collision normal x:%f, y:%f, z:%f\n", earliestCollision.collisionNormal.X(), earliestCollision.collisionNormal.Y(), earliestCollision.collisionNormal.Z());
+						if (earliestCollision.collisionTime > 0.0f) {
+							currentDeltaTime -= earliestCollision.collisionTime;
+						}
 						ResolveCollision(earliestCollision);
+						SimulateObjects(sceneObjects, earliestCollision.collisionTime);
 					}
 					collisionCheckIterationCount++;
 				}				
