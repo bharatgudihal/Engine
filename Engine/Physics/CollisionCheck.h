@@ -7,7 +7,13 @@
 namespace Engine {
 	namespace Physics {
 		namespace Collision {
-			void CheckCollisions(std::vector<GameObject::GameObject*>&, float);
+#define MAXCOLLISIONCHECKS 50			
+			void Update(std::vector<GameObject::GameObject*>&, float);
+			struct CollisionPair {
+				float collisionTime;
+				Math::Vector3 collisionNormal;
+				GameObject::GameObject* collisionObjects[2];
+			};
 		}
 	}
 }

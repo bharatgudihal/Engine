@@ -39,8 +39,8 @@ namespace Engine {
 
 		void Draw(const RenderObject* renderObject) {
 			if (renderObject != nullptr) {
-				GLib::Point2D position = { renderObject->GetPointer().Acquire()->getPosition().X(), renderObject->GetPointer().Acquire()->getPosition().Y() };
-				GLib::Sprites::RenderSprite(*renderObject->Sprite(), position, renderObject->GetPointer().Acquire()->getRotation().Z()*DEGREES2RADIANS);
+				GLib::Point2D position = { renderObject->GetPointer().Acquire()->GetPosition().X(), renderObject->GetPointer().Acquire()->GetPosition().Y() };
+				GLib::Sprites::RenderSprite(*renderObject->Sprite(), position, renderObject->GetPointer().Acquire()->GetRotation().Z()*DEGREES2RADIANS);
 			}
 		}
 	}

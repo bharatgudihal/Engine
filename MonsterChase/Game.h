@@ -1,6 +1,7 @@
 #pragma once
 #include <Windows.h>
 #include <vector>
+#include <time.h>
 #include "GLib.h"
 #include "Renderer\Renderer.h"
 #include "Timer\CoreTimer.h"

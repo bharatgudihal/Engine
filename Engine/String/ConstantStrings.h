@@ -24,6 +24,7 @@ namespace Engine {
 			const PooledString AABB;
 			const PooledString CENTER;
 			const PooledString EXTENTS;
+			const PooledString COUNT;
 		private:
 			ConstantStrings();
 			~ConstantStrings();

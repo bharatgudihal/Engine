@@ -8,21 +8,21 @@ namespace Engine {
 	inline Actor::Actor(const Actor& other) : name(other.name), position(other.position) {
 		DEBUG_LOG("Actor copy constructor called duplicating char at location %p into location %p\n", other.name, name);
 	}	
-	inline String::HashedString Actor::getNameHash() const { return name; }
+	inline String::HashedString Actor::GetNameHash() const { return name; }
 
-	inline Math::Vector3 Actor::getPosition() const { return position; }
+	inline Math::Vector3 Actor::GetPosition() const { return position; }
 
-	inline void Actor::setPosition(const Math::Vector3& newPosition) { position = newPosition; }
+	inline void Actor::SetPosition(const Math::Vector3& newPosition) { position = newPosition; }
 
-	inline Math::Vector3 Actor::getDirection() const { return direction; }
+	inline Math::Vector3 Actor::GetForward() const { return forward; }
 
-	inline void Actor::setDirection(const Math::Vector3& newDirection) { direction = newDirection; }
+	inline void Actor::SetForward(const Math::Vector3& newForward) { forward = newForward; }
 
-	inline Math::Vector3 Actor::getRotation() const { return rotation; }
+	inline Math::Vector3 Actor::GetRotation() const { return rotation; }
 
-	inline void Actor::setRotation(const Math::Vector3& newRotation) { rotation = newRotation; }
+	inline void Actor::SetRotation(const Math::Vector3& newRotation) { rotation = newRotation; }
 
-	inline const Math::AABB Actor::getBounds() const { return bounds; };
+	inline const Math::AABB Actor::GetBounds() const { return bounds; };
 
 	inline Actor::Actor(Actor&& other) : name(other.name), position(other.position) {
 		DEBUG_LOG("Actor move copy constructor called\n", other.name, name);

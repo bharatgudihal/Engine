@@ -18,5 +18,5 @@ void PlayerController::Update(float deltaTime) {
 			direction += Engine::Math::Vector3::UP;
 		}
 	}
-	playerReference.Acquire()->setDirection(direction);
+	playerReference.Acquire()->SetForward(direction);
 }

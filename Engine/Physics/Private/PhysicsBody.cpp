@@ -31,12 +31,12 @@ namespace Engine {
 		void PhysicsBody::PhysicsUpdate(const float deltaTime) {
 			Math::Vector3 dragForce = CalculateDrag();
 			Pointer::SmartPointer<Actor> smartPtr = weakPointer.Acquire();
-			Math::Vector3 netForce = smartPtr->getDirection() * speed + dragForce + (useGravity ? GRAVITY : Math::Vector3::ZERO);
+			Math::Vector3 netForce = smartPtr->GetForward() * speed + dragForce + (useGravity ? GRAVITY : Math::Vector3::ZERO);
 			Math::Vector3 acceleration = netForce / mass;
 			Math::Vector3 previousVelocity = currentVelocity;
 			currentVelocity = previousVelocity + acceleration * deltaTime;			
-			Math::Vector3 newPosition = smartPtr->getPosition() + ((previousVelocity + currentVelocity) / 2) * deltaTime;
-			smartPtr->setPosition(newPosition);
+			Math::Vector3 newPosition = smartPtr->GetPosition() + ((previousVelocity + currentVelocity) / 2) * deltaTime;
+			smartPtr->SetPosition(newPosition);
 		}
 
 		Math::Vector3 PhysicsBody::GetVelocity() {
