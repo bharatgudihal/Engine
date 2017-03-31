@@ -11,13 +11,13 @@ namespace Engine {
 		public:
 			LuaHelper(void*, size_t);
 			~LuaHelper();
-			void LoadGlobalTable(const char*);
+			bool LoadGlobalTable(const char*);
 			String::PooledString LoadGlobalString(const char*);
-			void LoadGlobalVector2D(const char*, Math::Vector3&);
+			bool LoadGlobalVector2D(const char*, Math::Vector3&);
 			String::PooledString GetStringFromTable(const char*, int);
-			void GetVector2DFromTable(const char*, Math::Vector3&, int);
-			void GetFloatFromTable(const char*, float&, int);
-			void GetTableFromTable(const char*, int);
+			bool GetVector2DFromTable(const char*, Math::Vector3&, int);
+			bool GetFloatFromTable(const char*, float&, int);
+			bool GetTableFromTable(const char*, int);
 			void Pop();
 		private:
 			lua_State * state;

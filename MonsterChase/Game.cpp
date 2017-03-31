@@ -23,6 +23,8 @@ namespace Game {
 				Engine::Math::Vector3 extents = (*(player->GetActorReference()))->GetBounds().Extents;
 				Engine::Math::Vector3 position((-400.0f + extents.X() + static_cast<float>(rand() % 800 - extents.X())), (-300.0f + extents.Y() + static_cast<float>(rand() % 600 - extents.Y())));
 				(*(player->GetActorReference()))->SetPosition(position);
+				Engine::Math::Vector3 rotation(0.0f, 0.0f, static_cast<float>(rand() % 360));
+				(*(player->GetActorReference()))->SetRotation(rotation);
 			}
 			assert(player);
 			UpdatePostProcessQueue(player);
@@ -32,8 +34,16 @@ namespace Game {
 	void Game::InitializeActors() {
 		//GameObjectTask* task1 = new GameObjectTask("Assets\\Data\\Player.lua", &pendingGameObjectsQueue, &pendingQueueMutex);
 		//Engine::Utility::FileProcessor::GetInstance().InsertInLoadQueue(*task1);
-		GameObjectTask* task2 = new GameObjectTask("Assets\\Data\\Monster.lua", &pendingGameObjectsQueue, &pendingQueueMutex);
+		GameObjectTask* task1 = new GameObjectTask("Assets\\Data\\WallLeft.lua", &pendingGameObjectsQueue, &pendingQueueMutex);
+		Engine::Utility::FileProcessor::GetInstance().InsertInLoadQueue(*task1);
+		GameObjectTask* task2 = new GameObjectTask("Assets\\Data\\WallRight.lua", &pendingGameObjectsQueue, &pendingQueueMutex);
 		Engine::Utility::FileProcessor::GetInstance().InsertInLoadQueue(*task2);
+		GameObjectTask* task3 = new GameObjectTask("Assets\\Data\\WallTop.lua", &pendingGameObjectsQueue, &pendingQueueMutex);
+		Engine::Utility::FileProcessor::GetInstance().InsertInLoadQueue(*task3);
+		GameObjectTask* task4 = new GameObjectTask("Assets\\Data\\WallBottom.lua", &pendingGameObjectsQueue, &pendingQueueMutex);
+		Engine::Utility::FileProcessor::GetInstance().InsertInLoadQueue(*task4);
+		GameObjectTask* task5 = new GameObjectTask("Assets\\Data\\Monster.lua", &pendingGameObjectsQueue, &pendingQueueMutex);
+		Engine::Utility::FileProcessor::GetInstance().InsertInLoadQueue(*task5);
 	}
 
 	void Game::TearDownActors() {

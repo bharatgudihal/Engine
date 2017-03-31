@@ -17,11 +17,11 @@ namespace Engine {
 			lua_close(state);
 		}
 
-		void LuaHelper::LoadGlobalTable(const char* key) {
+		bool LuaHelper::LoadGlobalTable(const char* key) {
 			assert(key);
 			int result = 0;
 			result = lua_getglobal(state, key);
-			assert(result == LUA_TTABLE);
+			return result == LUA_TTABLE;
 		}
 
 		String::PooledString LuaHelper::LoadGlobalString(const char* key) {
@@ -34,27 +34,32 @@ namespace Engine {
 			return String::PooledString(resultString);
 		}
 
-		void LuaHelper::LoadGlobalVector2D(const char* key, Math::Vector3& outVector) {
+		bool LuaHelper::LoadGlobalVector2D(const char* key, Math::Vector3& outVector) {
 			assert(key);
 			int result = 0;
 			result = lua_getglobal(state, key);
-			assert(result == LUA_TTABLE);
-			float floatResult[2] = { 0.0f };
-			size_t index = 0;
-			lua_pushnil(state);
-			while (lua_next(state, -2) != 0)
-			{
-				assert(lua_type(state, -1) == LUA_TNUMBER);
-				floatResult[index] = float(lua_tonumber(state, -1));
-				lua_pop(state, 1);
-				if (++index == 2)
+			bool returnValue = false;
+			if (result == LUA_TTABLE) {
+				float floatResult[2] = { 0.0f };
+				size_t index = 0;
+				lua_pushnil(state);
+				while (lua_next(state, -2) != 0)
 				{
-					break;
+					assert(lua_type(state, -1) == LUA_TNUMBER);
+					floatResult[index] = float(lua_tonumber(state, -1));
+					lua_pop(state, 1);
+					if (++index == 2)
+					{
+						break;
+					}
 				}
+				lua_pop(state, 1);
+				outVector.X(floatResult[0]);
+				outVector.Y(floatResult[1]);
+				returnValue = true;
 			}
-			lua_pop(state, 2);
-			outVector.X(floatResult[0]);
-			outVector.Y(floatResult[1]);
+			lua_pop(state, 1);
+			return returnValue;
 		}
 
 		String::PooledString LuaHelper::GetStringFromTable(const char* key, int tableIndex) {
@@ -70,46 +75,61 @@ namespace Engine {
 			return poolString;
 		}
 
-		void LuaHelper::GetVector2DFromTable(const char* key, Math::Vector3& outVector, int tableIndex) {
+		bool LuaHelper::GetVector2DFromTable(const char* key, Math::Vector3& outVector, int tableIndex) {
 			assert(key);
 			int type = LUA_TNIL;
 			lua_pushstring(state, key);
 			type = lua_gettable(state, tableIndex - 1);
-			assert(type == LUA_TTABLE);
-			float floatResult[2] = { 0.0f };
-			size_t index = 0;
-			lua_pushnil(state);
-			while (lua_next(state, tableIndex - 1) != 0)
-			{
-				assert(lua_type(state, - 1) == LUA_TNUMBER);
-				floatResult[index] = float(lua_tonumber(state, -1));
-				lua_pop(state, 1);
-				if (++index == 2)
+			bool result = false;
+			if (type == LUA_TTABLE) {
+				float floatResult[2] = { 0.0f };
+				size_t index = 0;
+				lua_pushnil(state);
+				while (lua_next(state, tableIndex - 1) != 0)
 				{
-					break;
+					assert(lua_type(state, -1) == LUA_TNUMBER);
+					floatResult[index] = float(lua_tonumber(state, -1));
+					lua_pop(state, 1);
+					if (++index == 2)
+					{
+						break;
+					}
 				}
+				lua_pop(state, 1);
+				outVector.X(floatResult[0]);
+				outVector.Y(floatResult[1]);
+				result = true;
 			}
-			lua_pop(state, 2);
-			outVector.X(floatResult[0]);
-			outVector.Y(floatResult[1]);
-		}
-
-		void LuaHelper::GetFloatFromTable(const char* key, float& outFloat, int tableIndex) {
-			assert(key);
-			int type = LUA_TNIL;
-			lua_pushstring(state, key);
-			type = lua_gettable(state, tableIndex - 1);
-			assert(type == LUA_TNUMBER);
-			outFloat = float(lua_tonumber(state, -1));
 			lua_pop(state, 1);
+			return result;
 		}
 
-		void LuaHelper::GetTableFromTable(const char* key, int tableIndex) {
+		bool LuaHelper::GetFloatFromTable(const char* key, float& outFloat, int tableIndex) {
 			assert(key);
 			int type = LUA_TNIL;
 			lua_pushstring(state, key);
 			type = lua_gettable(state, tableIndex - 1);
-			assert(type == LUA_TTABLE);
+			bool result = false;
+			if (type == LUA_TNUMBER) {
+				outFloat = float(lua_tonumber(state, -1));				
+				result = true;
+			}
+			lua_pop(state, 1);
+			return result;
+		}
+
+		bool LuaHelper::GetTableFromTable(const char* key, int tableIndex) {
+			assert(key);
+			int type = LUA_TNIL;
+			lua_pushstring(state, key);
+			type = lua_gettable(state, tableIndex - 1);
+			if (type == LUA_TTABLE) {
+				return true;
+			}
+			else {
+				lua_pop(state, 1);
+				return false;
+			}
 		}
 
 		void LuaHelper::Pop() {

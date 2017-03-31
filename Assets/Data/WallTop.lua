@@ -1,0 +1,13 @@
+GameObject = {
+	name = "Wall",
+	controller = "",
+	count = 1.0,
+	position = {0.0,300.0,0.0},
+	AABB = {
+		Center = {0.0,32.0,0.0},
+		Extents = {400.0,32.0,0.0}
+	},
+	rendersettings = {
+		sprite = "Assets\\Sprites\\WallH.dds"
+	}
+}
