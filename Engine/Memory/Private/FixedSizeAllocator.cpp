@@ -45,7 +45,7 @@ namespace Engine {
 		}
 
 		void* FixedSizeAllocator::allocate() {
-			DEBUG_LOG("Allocating from FSA for size %zd bytes\n", unitSize);
+			//DEBUG_LOG("Allocating from FSA for size %zd bytes\n", unitSize);
 			size_t index = 0;
 			if (bitArray->GetFirstSetBit(index)) {
 				bitArray->ClearBit(index);
@@ -62,7 +62,7 @@ namespace Engine {
 			size_t index = 0;
 			if (isValid(ptr, index)) {
 				bitArray->SetBit(index);
-				DEBUG_LOG("Freeing from FSA for size %zd bytes\n", unitSize);
+				//DEBUG_LOG("Freeing from FSA for size %zd bytes\n", unitSize);
 				return true;
 			}
 			else {

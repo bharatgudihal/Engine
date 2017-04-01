@@ -14,6 +14,7 @@ namespace Game {
 			Engine::GameObject::GameObject* player = Engine::GameObject::GameObject::Create(&luaHelper);			
 			if (controller == Engine::String::ConstantStrings::GetInstance()->PLAYERCONTROLLER) {
 				player->SetController(new PlayerController(player->GetActorReference()));
+				Engine::Math::Vector3 rotation(0.0f, 0.0f, static_cast<float>(rand() % 360));
 			}
 			else if (controller == Engine::String::ConstantStrings::GetInstance()->MONSTERCONTROLLER) {
 				player->SetController(new MonsterController(player->GetActorReference()));
@@ -24,7 +25,9 @@ namespace Game {
 				Engine::Math::Vector3 position((-400.0f + extents.X() + static_cast<float>(rand() % 800 - extents.X())), (-300.0f + extents.Y() + static_cast<float>(rand() % 600 - extents.Y())));
 				(*(player->GetActorReference()))->SetPosition(position);
 				Engine::Math::Vector3 rotation(0.0f, 0.0f, static_cast<float>(rand() % 360));
-				(*(player->GetActorReference()))->SetRotation(rotation);
+				if (rand() % 2) {
+					//(*(player->GetActorReference()))->SetRotation(rotation);
+				}
 			}
 			assert(player);
 			UpdatePostProcessQueue(player);
@@ -84,9 +87,10 @@ namespace Game {
 	void Game::Update() {
 		if (!quit) {			
 			Engine::Controller::UpdateAll(sceneObjects, deltaTime);
-			//if (Engine::Input::keyCode == 81 && Engine::Input::isDown) {
-				Engine::Physics::Collision::Update(sceneObjects, deltaTime);
-			//}
+			if (Engine::Input::keyCode == 81 && Engine::Input::isDown) {
+				int a = 0;
+			}
+			Engine::Physics::Collision::Update(sceneObjects, deltaTime);
 			Engine::Physics::UpdateAll(sceneObjects, deltaTime);
 			Engine::Renderer::DrawAll(sceneObjects);
 		}

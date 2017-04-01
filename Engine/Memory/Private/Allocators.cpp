@@ -1,7 +1,7 @@
 #include "../Allocators.h"
 
 void* operator new (const size_t i_size) {
-	DEBUG_LOG("Allocating pointer for size %d\n", i_size);	
+	//DEBUG_LOG("Allocating pointer for size %d\n", i_size);	
 	uint8_t* pointer = nullptr;
 	Engine::Memory::FixedSizeAllocator* FSA = nullptr;
 	if (Engine::Memory::MasterMemoryManager::isReady) {
@@ -33,7 +33,7 @@ void operator delete (void* i_ptr) {
 	uint8_t* pointer = static_cast<uint8_t*>(i_ptr);
 	pointer -= sizeof(HEAP_PATTERN);
 	if (*pointer == HEAP_PATTERN) {
-		DEBUG_LOG("Freeing pointer %p\n", i_ptr);
+		//DEBUG_LOG("Freeing pointer %p\n", i_ptr);
 		pointer -= sizeof(Engine::Memory::HeapManager*);
 		Engine::Memory::HeapManager** pHeapManager = reinterpret_cast<Engine::Memory::HeapManager**>(pointer);
 		(*pHeapManager)->free(pointer);
@@ -42,19 +42,19 @@ void operator delete (void* i_ptr) {
 		if (Engine::Memory::MasterMemoryManager::isReady) {
 			bool result = Engine::Memory::MasterMemoryManager::Instance()->FreePointerFromFSA(i_ptr);
 			if (!result) {
-				DEBUG_LOG("Freeing pointer outside heapmanager %p\n", i_ptr);
+				//DEBUG_LOG("Freeing pointer outside heapmanager %p\n", i_ptr);
 				_aligned_free(i_ptr);
 			}
 		}
 		else {
-			DEBUG_LOG("Freeing pointer outside heapmanager %p\n", i_ptr);
+			//DEBUG_LOG("Freeing pointer outside heapmanager %p\n", i_ptr);
 			_aligned_free(i_ptr);
 		}
 	}	
 }
 
 void* operator new[](size_t i_size) {
-	DEBUG_LOG("Allocating array pointer for size %d\n", i_size);
+	//DEBUG_LOG("Allocating array pointer for size %d\n", i_size);
 	Engine::Memory::FixedSizeAllocator* FSA = nullptr;
 	uint8_t* pointer = nullptr;
 	if (Engine::Memory::MasterMemoryManager::isReady) {
@@ -83,7 +83,7 @@ void* operator new[](size_t i_size) {
 
 void operator delete[](void* i_ptr) {
 	assert(i_ptr);
-	DEBUG_LOG("Freeing array pointer %p\n", i_ptr);
+	//DEBUG_LOG("Freeing array pointer %p\n", i_ptr);
 	uint8_t* pointer = static_cast<uint8_t*>(i_ptr);
 	pointer -= sizeof(HEAP_PATTERN);
 	if (*pointer == HEAP_PATTERN) {
@@ -102,7 +102,7 @@ void operator delete[](void* i_ptr) {
 }
 
 void* operator new (size_t i_size, uint8_t alignment) {
-	DEBUG_LOG("Allocating pointer for size %d and alignment %d\n", i_size, alignment);	
+	//DEBUG_LOG("Allocating pointer for size %d and alignment %d\n", i_size, alignment);	
 	Engine::Memory::HeapManager* m_heapManager = Engine::Memory::MasterMemoryManager::Instance()->DefaultHeapManager();
 	size_t totalSize = i_size + sizeof(m_heapManager) + sizeof(HEAP_PATTERN);
 	uint8_t* pointer = static_cast<uint8_t*>(m_heapManager->allocate(totalSize, alignment));
@@ -126,7 +126,7 @@ void operator delete (void* i_ptr, uint8_t alignment) {
 }
 
 void* operator new[](size_t i_size, uint8_t alignment) {
-	DEBUG_LOG("Allocating array pointer for size %d and alignment %d\n", i_size, alignment);
+	//DEBUG_LOG("Allocating array pointer for size %d and alignment %d\n", i_size, alignment);
 	Engine::Memory::HeapManager* m_heapManager = Engine::Memory::MasterMemoryManager::Instance()->DefaultHeapManager();
 	size_t totalSize = i_size + sizeof(m_heapManager) + sizeof(HEAP_PATTERN);
 	uint8_t* pointer = static_cast<uint8_t*>(m_heapManager->allocate(totalSize, alignment));
@@ -151,7 +151,7 @@ void operator delete[](void* i_ptr, uint8_t alignment) {
 
 
 void* operator new (size_t i_size, Engine::Memory::HeapManager* pHeapManager) {
-	DEBUG_LOG("Allocating pointer for size %d and heap manager %p\n", i_size, pHeapManager);
+	//DEBUG_LOG("Allocating pointer for size %d and heap manager %p\n", i_size, pHeapManager);
 	size_t totalSize = i_size + sizeof(pHeapManager) + sizeof(HEAP_PATTERN);
 	uint8_t* pointer = static_cast<uint8_t*>(pHeapManager->allocate(totalSize));
 	if (!pointer) {
@@ -174,7 +174,7 @@ void operator delete (void* i_ptr, Engine::Memory::HeapManager* pHeapManager) {
 }
 
 void* operator new[](size_t i_size, Engine::Memory::HeapManager* pHeapManager) {
-	DEBUG_LOG("Allocating array pointer for size %d and heap manager %p\n", i_size, pHeapManager);
+	//DEBUG_LOG("Allocating array pointer for size %d and heap manager %p\n", i_size, pHeapManager);
 	size_t totalSize = i_size + sizeof(pHeapManager) + sizeof(HEAP_PATTERN);
 	uint8_t* pointer = static_cast<uint8_t*>(pHeapManager->allocate(totalSize));
 	if (!pointer) {
@@ -197,7 +197,7 @@ void operator delete[](void* i_ptr, Engine::Memory::HeapManager* pHeapManager) {
 }
 
 void* operator new (size_t i_size, Engine::Memory::HeapManager* pHeapManager, uint8_t alignment) {
-	DEBUG_LOG("Allocating pointer for size %d, heap manager %p and alignment %d\n", i_size, pHeapManager, alignment);
+	//DEBUG_LOG("Allocating pointer for size %d, heap manager %p and alignment %d\n", i_size, pHeapManager, alignment);
 	size_t totalSize = i_size + sizeof(pHeapManager) + sizeof(HEAP_PATTERN);
 	uint8_t* pointer = static_cast<uint8_t*>(pHeapManager->allocate(totalSize, alignment));
 	if (!pointer) {
@@ -220,7 +220,7 @@ void operator delete (void* i_ptr, Engine::Memory::HeapManager* pHeapManager, ui
 }
 
 void* operator new[](size_t i_size, Engine::Memory::HeapManager* pHeapManager, uint8_t alignment) {
-	DEBUG_LOG("Allocating array pointer for size %d, heap manager %p and alignment %d\n", i_size, pHeapManager, alignment);
+	//DEBUG_LOG("Allocating array pointer for size %d, heap manager %p and alignment %d\n", i_size, pHeapManager, alignment);
 	size_t totalSize = i_size + sizeof(pHeapManager) + sizeof(HEAP_PATTERN);
 	uint8_t* pointer = static_cast<uint8_t*>(pHeapManager->allocate(totalSize, alignment));
 	if (!pointer) {

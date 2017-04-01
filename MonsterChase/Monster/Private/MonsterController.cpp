@@ -6,33 +6,11 @@ MonsterController::MonsterController(Engine::Pointer::SmartPointer<Engine::Actor
 
 void MonsterController::Update(float deltaTime) {
 	Engine::Math::Vector3 Extents = monsterReference.Acquire()->GetBounds().Extents;
-	Engine::Math::Matrix ToWorld = Engine::Math::Matrix::GetTranslationMatrix(monsterReference.Acquire()->GetPosition()) * Engine::Math::Matrix::GetZRotationMatrix(monsterReference.Acquire()->GetRotation().Z());
-	/*if (monsterReference.Acquire()->GetPosition().X() + monsterReference.Acquire()->GetBounds().Extents.X() > 400.0f) {
-		Engine::Math::Vector3 forward = monsterReference.Acquire()->GetForward();
-		if (forward.X() > 0.0f) {
-			forward.X(-forward.X());
-		}
-		monsterReference.Acquire()->SetForward(forward);
+	Engine::Math::Vector3 position((-400.0f + Extents.X() + static_cast<float>(rand() % 800 - Extents.X())), (-300.0f + Extents.Y() + static_cast<float>(rand() % 600 - Extents.Y())));
+	if (fabs(monsterReference.Acquire()->GetPosition().X()) > 400.0f) {
+		monsterReference.Acquire()->SetPosition(position);
 	}
-	if (monsterReference.Acquire()->GetPosition().X() - monsterReference.Acquire()->GetBounds().Extents.X() < -400.0f) {
-		Engine::Math::Vector3 forward = monsterReference.Acquire()->GetForward();
-		if (forward.X() < 0.0f) {
-			forward.X(-forward.X());
-		}
-		monsterReference.Acquire()->SetForward(forward);
+	if (fabs(monsterReference.Acquire()->GetPosition().Y()) > 300.0f) {
+		monsterReference.Acquire()->SetPosition(position);
 	}
-	if (monsterReference.Acquire()->GetPosition().Y() + 2*monsterReference.Acquire()->GetBounds().Extents.Y() > 300.0f) {
-		Engine::Math::Vector3 forward = monsterReference.Acquire()->GetForward();
-		if (forward.Y() > 0.0f) {
-			forward.Y(-forward.Y());
-		}
-		monsterReference.Acquire()->SetForward(forward);
-	}
-	if (monsterReference.Acquire()->GetPosition().Y() < -300.0f) {
-		Engine::Math::Vector3 forward = monsterReference.Acquire()->GetForward();
-		if (forward.Y() < 0.0f) {
-			forward.Y(-forward.Y());
-		}
-		monsterReference.Acquire()->SetForward(forward);
-	}*/
 }
