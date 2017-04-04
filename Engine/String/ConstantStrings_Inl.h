@@ -3,13 +3,17 @@ namespace Engine {
 	namespace String {		
 
 		inline bool ConstantStrings::Create() {
-			instance = new ConstantStrings();
+			if (!instance) {
+				instance = new ConstantStrings();
+			}
 			assert(instance);
 			return true;
 		}
 
 		inline void ConstantStrings::Destroy() {
-			delete instance;
+			if (instance) {
+				delete instance;
+			}
 		}
 
 		inline ConstantStrings* ConstantStrings::GetInstance() {

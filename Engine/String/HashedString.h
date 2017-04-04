@@ -8,7 +8,7 @@ namespace Engine {
 			inline HashedString(const HashedString&);
 			inline HashedString(const PooledString&);
 			inline HashedString& operator=(const HashedString&);
-			inline bool operator==(const HashedString&);
+			inline bool operator==(const HashedString&) const;
 			inline operator bool() const;
 			inline const unsigned int Get() const;
 		private:

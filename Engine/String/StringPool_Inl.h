@@ -3,7 +3,9 @@ namespace Engine {
 	namespace String {
 		inline bool StringPool::Startup(const size_t size) {
 			assert(size > 0);
-			instance =  new StringPool(size);
+			if (!instance) {
+				instance = new StringPool(size);
+			}
 			return true;
 		}
 
@@ -12,7 +14,9 @@ namespace Engine {
 		}
 
 		inline void StringPool::ShutDown() {
-			delete instance;
+			if (instance) {
+				delete instance;
+			}
 		}
 
 		inline StringPool::~StringPool() {

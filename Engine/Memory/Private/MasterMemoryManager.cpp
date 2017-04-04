@@ -54,8 +54,10 @@ namespace Engine {
 		}
 
 		void MasterMemoryManager::ShutDown() {
-			DEBUG_LOG("Shutting down MasterMemoryManager\n");
-			delete m_Instance;
+			if (m_Instance) {
+				DEBUG_LOG("Shutting down MasterMemoryManager\n");
+				delete m_Instance;
+			}
 		}
 
 		MasterMemoryManager::~MasterMemoryManager() {

@@ -14,9 +14,10 @@
 #include "Physics\Physics.h"
 #include "Player\PlayerController.h"
 #include "Monster\MonsterController.h"
+#include "Messaging\MessagingSystem.h"
 
 namespace Game {
-	class Game {
+	class Game:public Engine::Messaging::IMessageHandler {
 	public:
 		class GameObjectTask :public Engine::Utility::FileProcessor::Task {
 		public:
@@ -24,6 +25,7 @@ namespace Game {
 			void ProcessFile(uint8_t*, uint32_t) override;
 		};
 		void StartGame(HINSTANCE i_hInstance, int i_nCmdShow);
+		void HandleMessage(const Engine::String::HashedString&) override;
 	private:
 		bool quit;
 		std::vector<Engine::GameObject::GameObject*> sceneObjects;

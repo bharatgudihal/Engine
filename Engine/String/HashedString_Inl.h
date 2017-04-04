@@ -20,7 +20,7 @@ namespace Engine {
 			return *this;
 		}
 
-		inline bool HashedString::operator==(const HashedString& otherHashedString) {
+		inline bool HashedString::operator==(const HashedString& otherHashedString) const{
 			return hash == otherHashedString.hash;
 		}
 

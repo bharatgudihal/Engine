@@ -31,6 +31,7 @@ namespace Game {
 			}
 			assert(player);
 			UpdatePostProcessQueue(player);
+			Engine::Messaging::MessagingSystem::GetInstance()->SendMessageToHandler("ActorAdded");
 		}
 	}
 
@@ -56,6 +57,7 @@ namespace Game {
 	}
 
 	void Game::StartGame(HINSTANCE i_hInstance, int i_nCmdShow) {
+		Engine::Messaging::MessagingSystem::GetInstance()->RegisterMessageHandler("ActorAdded", this);
 		if (GLib::Initialize(i_hInstance, i_nCmdShow, "Game", -1, 800, 600)) {
 			GLib::SetKeyStateChangeCallback(Engine::Input::KeyChangeCallBack);
 			InitializeActors();
@@ -64,10 +66,17 @@ namespace Game {
 				deltaTime = Engine::CoreTimer::GetDeltaTime();
 				GLib::Service(quit);
 				Update();
-				CheckForNewGameObjects();
+				//CheckForNewGameObjects();
 			} while (!quit);
 			TearDownActors();
 			GLib::Shutdown();
+		}
+		Engine::Messaging::MessagingSystem::GetInstance()->RegisterMessageHandler("ActorAdded", this);
+	}
+
+	void Game::HandleMessage(const Engine::String::HashedString& message) {
+		if (message == "ActorAdded") {
+			CheckForNewGameObjects();
 		}
 	}
 
