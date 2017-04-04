@@ -120,7 +120,6 @@ namespace Engine {
 
 			void ResolveCollision(CollisionPair& collisionPair) {
 				Math::Vector3 normal = collisionPair.collisionNormal;
-				normal.Normalize();
 				Math::Vector3 velocityA;
 				Math::Vector3 velocityB;
 				if (collisionPair.collisionObjects[0]->GetPhysicsBody()) {
