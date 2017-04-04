@@ -112,6 +112,12 @@
     <Filter Include="Source Files\Controllers">
       <UniqueIdentifier>{ad9f3c12-71af-4813-b3df-ade9127f44b8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Messaging">
+      <UniqueIdentifier>{1d7d343a-4895-4052-99f4-dfce247eb7cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Messaging">
+      <UniqueIdentifier>{4a5b0252-317f-4785-bcc9-7bc69e8b3eee}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor\Actor.h">
@@ -309,6 +315,9 @@
     <ClInclude Include="Physics\Physics.h">
       <Filter>Header Files\Physics</Filter>
     </ClInclude>
+    <ClInclude Include="Messaging\MessagingSystem.h">
+      <Filter>Header Files\Messaging</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Actor\Private\Actor.cpp">
@@ -424,6 +433,9 @@
     </ClCompile>
     <ClCompile Include="Physics\Private\Physics.cpp">
       <Filter>Source Files\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Messaging\Private\MessagingSystem.cpp">
+      <Filter>Source Files\Messaging</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

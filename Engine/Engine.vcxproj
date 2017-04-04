@@ -46,6 +46,7 @@
     <ClInclude Include="Memory\HeapManager_Inl.h" />
     <ClInclude Include="Memory\MasterMemoryManager.h" />
     <ClInclude Include="Memory\MasterMemoryManager_Inl.h" />
+    <ClInclude Include="Messaging\MessagingSystem.h" />
     <ClInclude Include="Physics\CollisionCheck.h" />
     <ClInclude Include="Physics\Physics.h" />
     <ClInclude Include="Physics\PhysicsBody.h" />
@@ -101,6 +102,7 @@
     <ClCompile Include="Memory\Private\FixedSizeAllocator.cpp" />
     <ClCompile Include="Memory\Private\HeapManager.cpp" />
     <ClCompile Include="Memory\Private\MasterMemoryManager.cpp" />
+    <ClCompile Include="Messaging\Private\MessagingSystem.cpp" />
     <ClCompile Include="Physics\Private\CollisionCheck.cpp" />
     <ClCompile Include="Physics\Private\Physics.cpp" />
     <ClCompile Include="Physics\Private\PhysicsBody.cpp" />
