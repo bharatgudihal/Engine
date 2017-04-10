@@ -8,15 +8,17 @@ namespace Game {
 		float count = 1.0f;
 		luaHelper.GetFloatFromTable(Engine::String::ConstantStrings::GetInstance()->COUNT.Get(), count, -1);
 		Engine::String::PooledString controller = luaHelper.GetStringFromTable(Engine::String::ConstantStrings::GetInstance()->CONTROLLER.Get(), -1);
+		Engine::String::PooledString PLAYERCONTROLLER("PlayerController");
+		Engine::String::PooledString MONSTERCONTROLLER("MonsterController");
 		luaHelper.Pop();
 		srand(static_cast<unsigned int>(time(NULL)));
 		for (int i = 0; i < count; i++) {
 			Engine::GameObject::GameObject* player = Engine::GameObject::GameObject::Create(&luaHelper);			
-			if (controller == Engine::String::ConstantStrings::GetInstance()->PLAYERCONTROLLER) {
+			if (controller == PLAYERCONTROLLER) {
 				player->SetController(new PlayerController(player->GetActorReference()));
 				Engine::Math::Vector3 rotation(0.0f, 0.0f, static_cast<float>(rand() % 360));
 			}
-			else if (controller == Engine::String::ConstantStrings::GetInstance()->MONSTERCONTROLLER) {
+			else if (controller == MONSTERCONTROLLER) {
 				player->SetController(new MonsterController(player->GetActorReference()));
 				Engine::Math::Vector3 forward(static_cast<float>(-50.0f + rand() % 100), static_cast<float>(-50.0f + rand() % 100));
 				forward.Normalize();

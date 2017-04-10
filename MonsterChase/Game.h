@@ -15,6 +15,7 @@
 #include "Player\PlayerController.h"
 #include "Monster\MonsterController.h"
 #include "Messaging\MessagingSystem.h"
+#include "String\PooledString.h"
 
 namespace Game {
 	class Game:public Engine::Messaging::IMessageHandler {
@@ -33,7 +34,7 @@ namespace Game {
 		void Update();
 		void InitializeActors();
 		void TearDownActors();
-		void CheckForNewGameObjects();
+		void CheckForNewGameObjects();		
 		std::queue<void*> pendingGameObjectsQueue;
 		Engine::Threading::Mutex pendingQueueMutex;
 	};	

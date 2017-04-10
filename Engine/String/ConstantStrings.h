@@ -13,10 +13,7 @@ namespace Engine {
 			const PooledString POSITION;
 			const PooledString PHYSICSBODY;
 			const PooledString RENDERSETTINGS;
-			const PooledString PLAYER;
 			const PooledString GAMEOBJECT;
-			const PooledString PLAYERCONTROLLER;
-			const PooledString MONSTERCONTROLLER;
 			const PooledString MASS;
 			const PooledString DRAG;
 			const PooledString SPRITE;
