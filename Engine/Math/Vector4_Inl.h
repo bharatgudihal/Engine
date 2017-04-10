@@ -48,6 +48,10 @@ namespace Engine {
 			return Engine::AreAboutEqual(rhs.X(), lhs.X()) && Engine::AreAboutEqual(rhs.Y(), lhs.Y()) && Engine::AreAboutEqual(rhs.Z(), lhs.Z());
 		}
 
+		inline bool operator!=(const Vector4& rhs, const Vector4& lhs) {
+			return !(rhs == lhs);
+		}
+
 		inline Vector4& Vector4::operator+=(const Vector4& rhs) {
 			*this = *this + rhs;
 			return *this;

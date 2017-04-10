@@ -35,6 +35,8 @@
     <ClInclude Include="Math\Matrix_Inl.h" />
     <ClInclude Include="Math\Vector3.h" />
     <ClInclude Include="Math\Vector3_Inl.h" />
+    <ClInclude Include="Math\Vector3_Opt.h" />
+    <ClInclude Include="Math\Vector3_Opt_Inl.h" />
     <ClInclude Include="Math\Vector4.h" />
     <ClInclude Include="Math\Vector4_Inl.h" />
     <ClInclude Include="Memory\Allocators.h" />

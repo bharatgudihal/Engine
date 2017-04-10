@@ -119,33 +119,29 @@ namespace Engine {
 			}
 
 			void ResolveCollision(CollisionPair& collisionPair) {
-				Math::Vector3 normal = collisionPair.collisionNormal;
-				Math::Vector3 velocityA;
-				Math::Vector3 velocityB;
+				Math::Opt::Vector3 normal = collisionPair.collisionNormal;
+				Math::Opt::Vector3 velocityA;
+				Math::Opt::Vector3 velocityB;
 				if (collisionPair.collisionObjects[0]->GetPhysicsBody()) {
 					velocityA = collisionPair.collisionObjects[0]->GetPhysicsBody()->GetVelocity();
 				}
 				if (collisionPair.collisionObjects[1]->GetPhysicsBody()) {
-					Math::Vector3 velocityB = collisionPair.collisionObjects[1]->GetPhysicsBody()->GetVelocity();
+					velocityB = collisionPair.collisionObjects[1]->GetPhysicsBody()->GetVelocity();
 				}
-				Math::Vector3 forwardA = (*(collisionPair.collisionObjects[0]->GetActorReference()))->GetForward();
-				Math::Vector3 forwardB = (*(collisionPair.collisionObjects[1]->GetActorReference()))->GetForward();
-				Math::Vector3 reflectionVelocityA = velocityA - normal*2.0f*Math::dot(normal, velocityA);
-				//Math::Vector3 reflectionVelocityA = Math::Vector3::ZERO;
-				Math::Vector3 reflectionVelocityB = velocityB - normal*2.0f*Math::dot(normal, velocityB);
-				//Math::Vector3 reflectionVelocityB = Math::Vector3::ZERO;
-				Math::Vector3 reflectionForwardA = forwardA - normal*2.0f*Math::dot(normal, forwardA);
-				//Math::Vector3 reflectionForwardA = Math::Vector3::ZERO;
-				Math::Vector3 reflectionForwardB = forwardB - normal*2.0f*Math::dot(normal, forwardB);
-				//Math::Vector3 reflectionForwardB = Math::Vector3::ZERO;
+				Math::Opt::Vector3 forwardA = (*(collisionPair.collisionObjects[0]->GetActorReference()))->GetForward();
+				Math::Opt::Vector3 forwardB = (*(collisionPair.collisionObjects[1]->GetActorReference()))->GetForward();
+				Math::Opt::Vector3 reflectionVelocityA = velocityA - normal*2.0f*Math::Opt::dot(normal, velocityA);
+				Math::Opt::Vector3 reflectionVelocityB = velocityB - normal*2.0f*Math::Opt::dot(normal, velocityB);
+				Math::Opt::Vector3 reflectionForwardA = forwardA - normal*2.0f*Math::Opt::dot(normal, forwardA);
+				Math::Opt::Vector3 reflectionForwardB = forwardB - normal*2.0f*Math::Opt::dot(normal, forwardB);
 				if (collisionPair.collisionObjects[0]->GetPhysicsBody()) {
-					collisionPair.collisionObjects[0]->GetPhysicsBody()->SetVelocity(reflectionVelocityA);
+					collisionPair.collisionObjects[0]->GetPhysicsBody()->SetVelocity(Math::Vector3(reflectionVelocityA.X(), reflectionVelocityA.Y()));
 				}
 				if (collisionPair.collisionObjects[1]->GetPhysicsBody()) {
-					collisionPair.collisionObjects[1]->GetPhysicsBody()->SetVelocity(reflectionVelocityB);
+					collisionPair.collisionObjects[1]->GetPhysicsBody()->SetVelocity(Math::Vector3(reflectionVelocityB.X(), reflectionVelocityB.Y()));
 				}
-				(*(collisionPair.collisionObjects[0]->GetActorReference()))->SetForward(reflectionForwardA);
-				(*(collisionPair.collisionObjects[1]->GetActorReference()))->SetForward(reflectionForwardB);
+				(*(collisionPair.collisionObjects[0]->GetActorReference()))->SetForward(Math::Vector3(reflectionForwardA.X(), reflectionForwardA.Y()));
+				(*(collisionPair.collisionObjects[1]->GetActorReference()))->SetForward(Math::Vector3(reflectionForwardB.X(), reflectionForwardB.Y()));
 			}
 
 			void ResolveCollisions(std::vector<CollisionPair>& collisions) {
@@ -162,12 +158,14 @@ namespace Engine {
 							Math::Vector4 collisionNormal;
 							CollisionPair collisionPair;
 							if (CheckCollision(sceneObjects[i], sceneObjects[j], deltaTime, collisionTime, collisionNormal)) {
-								DEBUG_LOG("Collision!\n");								
-								collisionPair.collisionTime = collisionTime;
-								collisionPair.collisionNormal = collisionNormal.GetVector3();
-								collisionPair.collisionObjects[0] = sceneObjects[i];
-								collisionPair.collisionObjects[1] = sceneObjects[j];
-								collisions.push_back(collisionPair);
+								DEBUG_LOG("Collision!\n");
+								if (collisionNormal != Math::Vector4::ZERO) {
+									collisionPair.collisionTime = collisionTime;
+									collisionPair.collisionNormal = collisionNormal.GetVector3();
+									collisionPair.collisionObjects[0] = sceneObjects[i];
+									collisionPair.collisionObjects[1] = sceneObjects[j];
+									collisions.push_back(collisionPair);
+								}
 								//DEBUG_LOG("Collision! between %d and %d\n", (*(sceneObjects[i]->GetActorReference()))->GetNameHash() && (*(sceneObjects[j]->GetActorReference()))->GetNameHash());
 								//break;
 							}

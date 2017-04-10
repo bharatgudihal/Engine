@@ -16,6 +16,7 @@ namespace Engine {
 			// Total Size = blockSize + size of BitArray object + size of bit array inside BitArrayObject
 			size_t totalSize = blockSize + sizeof(BitArray) + (sizeof(size_t) * arraySize);
 			blockBase = heapManager->allocate(totalSize);
+			assert(blockBase);
 			uint8_t* ptr = static_cast<uint8_t*>(blockBase);
 			uint8_t* bitArrayPointer = ptr;
 			bitArray = BitArray::Create(units, bitArrayPointer, bitArrayPointer + sizeof(BitArray));

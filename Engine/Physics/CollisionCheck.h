@@ -3,6 +3,7 @@
 #include "../GameObject/GameObject.h"
 #include "../Math/Matrix.h"
 #include "../Logger/Logger.h"
+#include "../Math/Vector3_Opt.h"
 
 namespace Engine {
 	namespace Physics {

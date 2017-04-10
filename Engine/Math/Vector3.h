@@ -3,6 +3,7 @@
 #include <assert.h>
 #include <math.h>
 #include "FloatCheck.h"
+
 namespace Engine {
 	namespace Math {
 		class Vector3

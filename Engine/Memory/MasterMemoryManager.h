@@ -19,8 +19,8 @@ namespace Engine {
 			FixedSizeAllocator* FSAArray[4];
 			static MasterMemoryManager* m_Instance;
 			bool SetupFixedSizeAllocators();
-			const size_t HeapSize = 5120;
-			const uint16_t numberOfBlockDescriptors = 300;
+			const size_t HeapSize = 40960;
+			const uint16_t numberOfBlockDescriptors = 400;
 		};
 	}
 }

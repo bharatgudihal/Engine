@@ -37,6 +37,7 @@ namespace Engine {
 		inline Vector4 operator+(const Vector4&, const Vector4&);
 		inline Vector4 operator-(const Vector4&, const Vector4&);
 		inline bool operator==(const Vector4&, const Vector4&);
+		inline bool operator!=(const Vector4&, const Vector4&);
 		inline Vector4 operator*(const Vector4&, const float&);
 		inline Vector4 operator/(const Vector4&, const float&);
 		inline Vector4 operator-(const Vector4& rhs);
