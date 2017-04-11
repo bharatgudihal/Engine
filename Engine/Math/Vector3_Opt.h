@@ -10,9 +10,9 @@ namespace Engine {
 
 			union Vector3 {
 			public:
-				Vector3(float i_x = 0.0f, float i_y = 0.0f, float i_z = 0.0f) :x(i_x), y(i_y), z(i_z) {}
-				Vector3(__m128 i_vector) :vector(i_vector) {}
-				Vector3(Math::Vector3& i_vector) :x(i_vector.X()), y(i_vector.Y()), z(i_vector.Z()) {}				
+				Vector3(const float i_x = 0.0f, const float i_y = 0.0f, const float i_z = 0.0f) :x(i_x), y(i_y), z(i_z) {}
+				Vector3(const __m128 i_vector) :vector(i_vector) {}
+				Vector3(const Math::Vector3& i_vector) :x(i_vector.X()), y(i_vector.Y()), z(i_vector.Z()) {}				
 				inline float X() const;
 				inline float Y() const;
 				inline float Z() const;
