@@ -43,7 +43,7 @@ namespace Engine {
 		void  MessagingSystem::DeRegisterMessageHandler(const String::HashedString& message, IMessageHandler* handler) {
 			MessageHandler messageHandler(message, handler);
 			messaginMutex.Acquire();
-			for (int i = 0; i < messageHandlers.size(); i++) {
+			for (size_t i = 0; i < messageHandlers.size(); i++) {
 				if (messageHandlers[i] == messageHandler) {
 					messageHandlers.erase(messageHandlers.begin() + i);					
 					break;
@@ -54,7 +54,7 @@ namespace Engine {
 
 		void  MessagingSystem::SendMessageToHandler(const String::HashedString& message) {
 			messaginMutex.Acquire();
-			for (int i = 0; i < messageHandlers.size(); i++) {
+			for (size_t i = 0; i < messageHandlers.size(); i++) {
 				if (messageHandlers[i].message == message) {
 					messageHandlers[i].handler->HandleMessage(message);
 				}

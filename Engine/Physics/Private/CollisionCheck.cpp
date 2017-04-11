@@ -145,15 +145,15 @@ namespace Engine {
 			}
 
 			void ResolveCollisions(std::vector<CollisionPair>& collisions) {
-				for (int i = 0; i < collisions.size(); i++) {
+				for (size_t i = 0; i < collisions.size(); i++) {
 					ResolveCollision(collisions[i]);
 				}
 			}
 
 			void CheckCollisions(std::vector<GameObject::GameObject*>& sceneObjects, float deltaTime, std::vector<CollisionPair>& collisions) {				
 				if (sceneObjects.size() > 0) {
-					for (int i = 0; i < sceneObjects.size() - 1; i++) {
-						for (int j = i + 1; j < sceneObjects.size(); j++) {
+					for (size_t i = 0; i < sceneObjects.size() - 1; i++) {
+						for (size_t j = i + 1; j < sceneObjects.size(); j++) {
 							float collisionTime = deltaTime;
 							Math::Vector4 collisionNormal;
 							CollisionPair collisionPair;
@@ -175,7 +175,7 @@ namespace Engine {
 			}
 
 			void SimulateObjects(std::vector<GameObject::GameObject*>& sceneObjects, float time) {
-				for (int i = 0; i < sceneObjects.size(); i++) {
+				for (size_t i = 0; i < sceneObjects.size(); i++) {
 					if (sceneObjects[i]->GetPhysicsBody()) {
 						sceneObjects[i]->GetPhysicsBody()->PhysicsUpdate(time);
 					}
