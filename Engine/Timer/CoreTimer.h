@@ -4,16 +4,16 @@
 #define MAX_FRAME_TIME (2*DESIRED_FRAME_TIME)
 
 namespace Engine {
-	class CoreTimer{
-
+	class CoreTimer{		
 	public:
+		typedef __int64 tick;
 		static float GetDeltaTime();
-
+		static tick GetCurrentTick();
+		static tick GetTimeDifference(tick);
 	private:
-		static __int64 previousTick;
-		static __int64 tickFrequency;
-		static __int64 GetCounter();
-		static __int64 GetFrequency();
+		static tick previousTick;
+		static tick tickFrequency;
+		static tick GetFrequency();
 		static float CalculateDeltaTime();		
 	};
 }

@@ -118,6 +118,12 @@
     <Filter Include="Source Files\Messaging">
       <UniqueIdentifier>{4a5b0252-317f-4785-bcc9-7bc69e8b3eee}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Profiling">
+      <UniqueIdentifier>{72f5817f-f309-42e3-806c-aaefb06ab0f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Profiling">
+      <UniqueIdentifier>{b492419d-d455-439e-b2ea-a3144751ecee}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor\Actor.h">
@@ -324,6 +330,27 @@
     <ClInclude Include="Math\Vector3_Opt_Inl.h">
       <Filter>Header Files\Math</Filter>
     </ClInclude>
+    <ClInclude Include="Profiling\Accumulator.h">
+      <Filter>Header Files\Profiling</Filter>
+    </ClInclude>
+    <ClInclude Include="Profiling\Profiler.h">
+      <Filter>Header Files\Profiling</Filter>
+    </ClInclude>
+    <ClInclude Include="Profiling\Accumulator_Inl.h">
+      <Filter>Header Files\Profiling</Filter>
+    </ClInclude>
+    <ClInclude Include="Profiling\Profiler_Inl.h">
+      <Filter>Header Files\Profiling</Filter>
+    </ClInclude>
+    <ClInclude Include="Profiling\ScopedTimer.h">
+      <Filter>Header Files\Profiling</Filter>
+    </ClInclude>
+    <ClInclude Include="Profiling\ScopedTimer_Inl.h">
+      <Filter>Header Files\Profiling</Filter>
+    </ClInclude>
+    <ClInclude Include="Profiling\ProfilerMacros.h">
+      <Filter>Header Files\Profiling</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Actor\Private\Actor.cpp">
@@ -442,6 +469,9 @@
     </ClCompile>
     <ClCompile Include="Messaging\Private\MessagingSystem.cpp">
       <Filter>Source Files\Messaging</Filter>
+    </ClCompile>
+    <ClCompile Include="Profiling\Private\Profiler.cpp">
+      <Filter>Source Files\Profiling</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

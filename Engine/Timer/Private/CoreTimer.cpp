@@ -3,10 +3,10 @@
 
 namespace Engine {
 
-	__int64 CoreTimer::previousTick = 0;
-	__int64 CoreTimer::tickFrequency = 0;
+	CoreTimer::tick CoreTimer::previousTick = 0;
+	CoreTimer::tick CoreTimer::tickFrequency = 0;
 
-	__int64 CoreTimer::GetFrequency() {
+	CoreTimer::tick CoreTimer::GetFrequency() {
 		LARGE_INTEGER frequency;
 		if (!tickFrequency) {
 			QueryPerformanceFrequency(&frequency);
@@ -15,17 +15,21 @@ namespace Engine {
 		return tickFrequency;
 	}
 
-	__int64 CoreTimer::GetCounter() {
+	CoreTimer::tick CoreTimer::GetCurrentTick() {
 		LARGE_INTEGER counterValue;
 		QueryPerformanceCounter(&counterValue);
 		return counterValue.QuadPart;
 	}
 
+	CoreTimer::tick CoreTimer::GetTimeDifference(CoreTimer::tick time) {
+		return GetCurrentTick() - time;
+	}
+
 	float CoreTimer::CalculateDeltaTime() {
-		__int64 currentTick = GetCounter();
+		CoreTimer::tick currentTick = GetCurrentTick();
 		float deltaTime;
 		if (previousTick) {
-			__int64 tickDifference = currentTick - previousTick;
+			CoreTimer::tick tickDifference = currentTick - previousTick;
 			deltaTime = tickDifference / static_cast<float>(GetFrequency());
 		}
 		else {
