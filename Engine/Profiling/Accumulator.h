@@ -1,15 +1,16 @@
 #pragma once
 #include <stdint.h>
-#include "Profiler.h"
+#include <limits>
+
 
 namespace Engine {
 	namespace Profiling {
 		class Accumulator {
 		public:
-			inline Accumulator(const char* name);
-			inline void operator+=(float time);
+			Accumulator(const char* name);
+			inline Accumulator& operator+=(float time);
 			inline float average() const;
-			float min, max;
+			float minTime, maxTime;
 		private:
 			double sum;
 			uint64_t count;			

@@ -4,7 +4,7 @@
 #define CONCAT_HELPER(left, right) left##right
 #define CONCAT(left, right) CONCAT_HELPER(left, right)
 
-#if defined( ENABLE_PROFILING )
+#ifdef ENABLE_PROFILING
 
 #define PROFILE_UNSCOPED(name)		\
    static Engine::Profiling::Accumulator CONCAT(__Accumulator,__LINE__)(name); Engine::Profiling::ScopedTimer CONCAT(__Timer,__LINE__)(CONCAT(__Accumulator,__LINE__));

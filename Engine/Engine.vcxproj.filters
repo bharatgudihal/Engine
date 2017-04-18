@@ -473,5 +473,8 @@
     <ClCompile Include="Profiling\Private\Profiler.cpp">
       <Filter>Source Files\Profiling</Filter>
     </ClCompile>
+    <ClCompile Include="Profiling\Private\Accumulator.cpp">
+      <Filter>Source Files\Profiling</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

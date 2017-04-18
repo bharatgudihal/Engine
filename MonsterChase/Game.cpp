@@ -1,4 +1,5 @@
 #include "Game.h"
+#include "Profiling\ProfilerMacros.h"
 
 namespace Game {
 
@@ -101,7 +102,9 @@ namespace Game {
 			if (Engine::Input::keyCode == 81 && Engine::Input::isDown) {
 				int a = 0;
 			}
+			PROFILE_SCOPE_BEGIN("Collision")
 			Engine::Physics::Collision::Update(sceneObjects, deltaTime);
+			PROFILE_SCOPE_END()
 			Engine::Physics::UpdateAll(sceneObjects, deltaTime);
 			Engine::Renderer::DrawAll(sceneObjects);
 		}

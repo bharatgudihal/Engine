@@ -150,7 +150,7 @@ namespace Engine {
 				}
 			}
 
-			void CheckCollisions(std::vector<GameObject::GameObject*>& sceneObjects, float deltaTime, std::vector<CollisionPair>& collisions) {				
+			void CheckCollisions(std::vector<GameObject::GameObject*>& sceneObjects, float deltaTime, std::vector<CollisionPair>& collisions) {
 				if (sceneObjects.size() > 0) {
 					for (size_t i = 0; i < sceneObjects.size() - 1; i++) {
 						for (size_t j = i + 1; j < sceneObjects.size(); j++) {
@@ -166,8 +166,6 @@ namespace Engine {
 									collisionPair.collisionObjects[1] = sceneObjects[j];
 									collisions.push_back(collisionPair);
 								}
-								//DEBUG_LOG("Collision! between %d and %d\n", (*(sceneObjects[i]->GetActorReference()))->GetNameHash() && (*(sceneObjects[j]->GetActorReference()))->GetNameHash());
-								//break;
 							}
 						}
 					}
@@ -186,23 +184,9 @@ namespace Engine {
 				int collisionCheckIterationCount = 0;
 				float currentDeltaTime = deltaTime;
 				std::vector<CollisionPair> collisions;
-				//while (collisionCheckIterationCount < MAXCOLLISIONCHECKS) {
-					CheckCollisions(sceneObjects, currentDeltaTime, collisions);
-					//if (earliestCollision.collisionNormal == Math::Vector3::ZERO || earliestCollision.collisionTime >= currentDeltaTime) {
-						//break;
-					//}
-					//else {
-						//DEBUG_LOG("Earliest collision time %f\n", earliestCollision.collisionTime);
-						//DEBUG_LOG("Collision normal x:%f, y:%f, z:%f\n", earliestCollision.collisionNormal.X(), earliestCollision.collisionNormal.Y(), earliestCollision.collisionNormal.Z());
-						//if (earliestCollision.collisionTime > 0.0f) {
-							//currentDeltaTime -= earliestCollision.collisionTime;
-						//}
-						ResolveCollisions(collisions);
-						//SimulateObjects(sceneObjects, earliestCollision.collisionTime);
-					//}
-					//collisionCheckIterationCount++;
-				}				
-			//}
+				CheckCollisions(sceneObjects, currentDeltaTime, collisions);
+				ResolveCollisions(collisions);
+			}				
 		}
 	}
 }

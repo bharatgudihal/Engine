@@ -26,9 +26,9 @@ namespace Engine {
 			if (!accumulators.empty()) {
 				std::map<const char*, const Accumulator*>::iterator it;
 				for (it = accumulators.begin(); it != accumulators.end(); it++) {
-					DEBUG_LOG("%s average time %f\n", it->first, it->second->average());
-					DEBUG_LOG("%s min time %f\n", it->first, it->second->min);
-					DEBUG_LOG("%s max time %f\n", it->first, it->second->max);
+					PROFILE_LOG("%s average time %f\n", it->first, it->second->average());
+					PROFILE_LOG("%s min time %f\n", it->first, it->second->minTime);
+					PROFILE_LOG("%s max time %f\n", it->first, it->second->maxTime);
 				}
 			}
 		}
