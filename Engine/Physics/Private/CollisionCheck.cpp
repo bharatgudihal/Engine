@@ -10,16 +10,16 @@ namespace Engine {
 				bool isSeparated;
 				float tStart = 0.0f;
 				float tEnd = deltaTime;
-				Math::Matrix ATranslationMatrix = Math::Matrix::GetTranslationMatrix((*(objectA->GetActorReference()))->GetPosition());
-				Math::Matrix ARotationMatrix = Math::Matrix::GetZRotationMatrix((*(objectA->GetActorReference()))->GetRotation().Z());
-				Math::Matrix AtoWorld = ATranslationMatrix * ARotationMatrix;
-				Math::Matrix WorldToA = AtoWorld.GetInverse();
-				Math::Matrix BTranslationMatrix = Math::Matrix::GetTranslationMatrix((*(objectB->GetActorReference()))->GetPosition());
-				Math::Matrix BRotationMatrix = Math::Matrix::GetZRotationMatrix((*(objectB->GetActorReference()))->GetRotation().Z());
-				Math::Matrix BtoWorld = BTranslationMatrix * BRotationMatrix;
-				Math::Matrix WorldToB = BtoWorld.GetInverse();
-				Math::Matrix BtoA = WorldToA * BtoWorld;
-				Math::Matrix AtoB = WorldToB * AtoWorld;
+				Math::Opt::Matrix ATranslationMatrix = Math::Matrix::GetTranslationMatrix((*(objectA->GetActorReference()))->GetPosition());
+				Math::Opt::Matrix ARotationMatrix = Math::Matrix::GetZRotationMatrix((*(objectA->GetActorReference()))->GetRotation().Z());
+				Math::Opt::Matrix AtoWorld = ATranslationMatrix * ARotationMatrix;
+				Math::Opt::Matrix WorldToA = AtoWorld.GetStandardMatrix().GetInverse();
+				Math::Opt::Matrix BTranslationMatrix = Math::Matrix::GetTranslationMatrix((*(objectB->GetActorReference()))->GetPosition());
+				Math::Opt::Matrix BRotationMatrix = Math::Matrix::GetZRotationMatrix((*(objectB->GetActorReference()))->GetRotation().Z());
+				Math::Opt::Matrix BtoWorld = BTranslationMatrix * BRotationMatrix;
+				Math::Opt::Matrix WorldToB = BtoWorld.GetStandardMatrix().GetInverse();
+				Math::Opt::Matrix BtoA = WorldToA * BtoWorld;
+				Math::Opt::Matrix AtoB = WorldToB * AtoWorld;
 				Math::Vector4 BCenterInA = BtoA * Math::Vector4((*(objectB->GetActorReference()))->GetBounds().Center, 1.0f);
 				Math::Vector4 BExtentsXInA = BtoA * Math::Vector4((*(objectB->GetActorReference()))->GetBounds().Extents.X(), 0.0f, 0.0f, 0.0f);
 				Math::Vector4 BExtentsYInA = BtoA * Math::Vector4(0.0f, (*(objectB->GetActorReference()))->GetBounds().Extents.Y(), 0.0f, 0.0f);
@@ -134,6 +134,21 @@ namespace Engine {
 				Math::Opt::Vector3 reflectionVelocityB = velocityB - normal*2.0f*Math::Opt::dot(normal, velocityB);
 				Math::Opt::Vector3 reflectionForwardA = forwardA - normal*2.0f*Math::Opt::dot(normal, forwardA);
 				Math::Opt::Vector3 reflectionForwardB = forwardB - normal*2.0f*Math::Opt::dot(normal, forwardB);
+					/*Math::Vector3 normal = collisionPair.collisionNormal;
+				Math::Vector3 velocityA;
+				Math::Vector3 velocityB;
+				if (collisionPair.collisionObjects[0]->GetPhysicsBody()) {
+					velocityA = collisionPair.collisionObjects[0]->GetPhysicsBody()->GetVelocity();
+				}
+				if (collisionPair.collisionObjects[1]->GetPhysicsBody()) {
+					velocityB = collisionPair.collisionObjects[1]->GetPhysicsBody()->GetVelocity();
+				}
+				Math::Vector3 forwardA = (*(collisionPair.collisionObjects[0]->GetActorReference()))->GetForward();
+				Math::Vector3 forwardB = (*(collisionPair.collisionObjects[1]->GetActorReference()))->GetForward();
+				Math::Vector3 reflectionVelocityA = velocityA - normal*2.0f*Math::dot(normal, velocityA);
+				Math::Vector3 reflectionVelocityB = velocityB - normal*2.0f*Math::dot(normal, velocityB);
+				Math::Vector3 reflectionForwardA = forwardA - normal*2.0f*Math::dot(normal, forwardA);
+				Math::Vector3 reflectionForwardB = forwardB - normal*2.0f*Math::dot(normal, forwardB);*/
 				if (collisionPair.collisionObjects[0]->GetPhysicsBody()) {
 					collisionPair.collisionObjects[0]->GetPhysicsBody()->SetVelocity(Math::Vector3(reflectionVelocityA.X(), reflectionVelocityA.Y()));
 				}

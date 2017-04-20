@@ -33,7 +33,7 @@ namespace Engine {
 
 		inline void Vector4::W(const float iW) {
 			assert(!IsNAN(iW));
-			z = iW;
+			w = iW;
 		}
 
 		inline Vector4 operator+(const Vector4& lhs_vector, const Vector4& rhs_vector) {

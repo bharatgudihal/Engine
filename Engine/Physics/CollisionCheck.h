@@ -4,6 +4,7 @@
 #include "../Math/Matrix.h"
 #include "../Logger/Logger.h"
 #include "../Math/Vector3_Opt.h"
+#include "../Math/Matrix_Opt.h"
 
 namespace Engine {
 	namespace Physics {

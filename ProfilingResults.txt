@@ -1,0 +1,10 @@
+With Intrinsics:
+Collision average time 24.018326
+Collision min time 0.000000
+Collision max time 22.000000
+
+
+With Standard:
+Collision average time 24.171144
+Collision min time 1.000000
+Collision max time 34.000000

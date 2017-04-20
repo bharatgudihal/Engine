@@ -36,12 +36,12 @@ namespace Engine {
 				));
 			}
 
-			inline Vector3 operator*(const Vector3& lhs, const float& rhs) {
+			inline Vector3 operator*(const Vector3& lhs, const float& rhs) {				
 				return Vector3(lhs.X()*rhs, lhs.Y()*rhs, lhs.Z()*rhs);
 			}
 
-			inline Vector3 operator-(const Vector3& lhs, const Vector3& rhs) {
-				return Vector3(lhs.X() - rhs.X(), lhs.Y() - rhs.Y(), lhs.Z() - rhs.Z());
+			inline Vector3 operator-(const Vector3& lhs, const Vector3& rhs) {				
+				return _mm_sub_ps(lhs.vector, rhs.vector);
 			}
 		}
 	}

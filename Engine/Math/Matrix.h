@@ -35,7 +35,7 @@ namespace Engine {
 		};
 		Matrix operator*(const Matrix&, const Matrix&);
 		Vector4 operator*(const Vector4&, const Matrix&);
-		Vector4 operator*(const Matrix&, const Vector4&);
+		Vector4 operator*(const Matrix&, const Vector4&);		
 	}
 }
 #include "Matrix_Inl.h"
