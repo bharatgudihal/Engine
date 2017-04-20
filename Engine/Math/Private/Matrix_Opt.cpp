@@ -19,7 +19,7 @@ namespace Engine {
 				a21(i_matrix.a21), a22(i_matrix.a22), a23(i_matrix.a23), a24(i_matrix.a24),
 				a31(i_matrix.a31), a32(i_matrix.a32), a33(i_matrix.a33), a34(i_matrix.a34),
 				a41(i_matrix.a41), a42(i_matrix.a42), a43(i_matrix.a43), a44(i_matrix.a44) {}
-#ifdef _DEBUG
+
 			Engine::Math::Matrix Matrix::GetStandardMatrix() const{
 				return Engine::Math::Matrix
 					(a11, a12, a13, a14,
@@ -27,7 +27,7 @@ namespace Engine {
 					a31, a32, a33, a34,
 					a41, a42, a43, a44);
 			}
-#endif
+
 			Matrix operator*(const Matrix& lhs, const Matrix& rhs) {				
 				Matrix result;
 
