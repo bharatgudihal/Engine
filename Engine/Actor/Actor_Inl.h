@@ -2,11 +2,11 @@
 
 namespace Engine {
 	inline Actor::Actor(const char *i_name, Math::Vector3 i_position, Math::AABB i_bounds) :name(i_name), position(i_position), bounds(i_bounds) {
-		DEBUG_LOG("Actor constructor called duplicating char at location %p into location %p\n",i_name,name); 
+		//DEBUG_LOG("Actor constructor called duplicating char at location %p into location %p\n",i_name,name); 
 	}
 
 	inline Actor::Actor(const Actor& other) : name(other.name), position(other.position) {
-		DEBUG_LOG("Actor copy constructor called duplicating char at location %p into location %p\n", other.name, name);
+		//DEBUG_LOG("Actor copy constructor called duplicating char at location %p into location %p\n", other.name, name);
 	}	
 	inline String::HashedString Actor::GetNameHash() const { return name; }
 
@@ -25,14 +25,14 @@ namespace Engine {
 	inline const Math::AABB Actor::GetBounds() const { return bounds; };
 
 	inline Actor::Actor(Actor&& other) : name(other.name), position(other.position) {
-		DEBUG_LOG("Actor move copy constructor called\n", other.name, name);
+		//DEBUG_LOG("Actor move copy constructor called\n", other.name, name);
 		other.name = nullptr;
 	}
 
 	inline Actor& Actor::operator=(Actor&& rhs) {		
 		std::swap(name, rhs.name);
 		std::swap(position, rhs.position);
-		DEBUG_LOG("Actor move assignment operator called swapping chars at location %p with location %p\n", rhs.name, name);
+		//DEBUG_LOG("Actor move assignment operator called swapping chars at location %p with location %p\n", rhs.name, name);
 		return *this;
 	}
 }

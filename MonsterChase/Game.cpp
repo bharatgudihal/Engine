@@ -12,7 +12,6 @@ namespace Game {
 		static const Engine::String::PooledString PLAYERCONTROLLER("PlayerController");
 		static const Engine::String::PooledString BRICKCONTROLLER("BrickController");
 		luaHelper.Pop();
-		srand(static_cast<unsigned int>(time(NULL)));
 		for (int i = 0; i < count; i++) {
 			Engine::GameObject::GameObject* gameObject = Engine::GameObject::GameObject::Create(&luaHelper);			
 			if (controller == PLAYERCONTROLLER) {
@@ -22,7 +21,8 @@ namespace Game {
 			else if (controller == BRICKCONTROLLER) {
 				gameObject->SetController(new BrickController(gameObject));
 				Engine::Math::Vector3& originalPosition = (*gameObject->GetActorReference())->GetPosition();				
-				originalPosition.X(originalPosition.X() + i*(*gameObject->GetActorReference())->GetBounds().Extents.X());
+				originalPosition.X(originalPosition.X() + i*(*gameObject->GetActorReference())->GetBounds().Extents.X()*2);
+				(*gameObject->GetActorReference())->SetPosition(originalPosition);
 			}
 			assert(gameObject);
 			UpdatePostProcessQueue(gameObject);
@@ -41,6 +41,12 @@ namespace Game {
 		Engine::Utility::FileProcessor::GetInstance().InsertInLoadQueue(*task4);
 		GameObjectTask* task5 = new GameObjectTask("Assets\\Data\\Row1.lua", &pendingGameObjectsQueue, &pendingQueueMutex);
 		Engine::Utility::FileProcessor::GetInstance().InsertInLoadQueue(*task5);
+		GameObjectTask* task6 = new GameObjectTask("Assets\\Data\\Row2.lua", &pendingGameObjectsQueue, &pendingQueueMutex);
+		Engine::Utility::FileProcessor::GetInstance().InsertInLoadQueue(*task6);
+		GameObjectTask* task7 = new GameObjectTask("Assets\\Data\\Row3.lua", &pendingGameObjectsQueue, &pendingQueueMutex);
+		Engine::Utility::FileProcessor::GetInstance().InsertInLoadQueue(*task7);
+		GameObjectTask* task8 = new GameObjectTask("Assets\\Data\\Row4.lua", &pendingGameObjectsQueue, &pendingQueueMutex);
+		Engine::Utility::FileProcessor::GetInstance().InsertInLoadQueue(*task8);
 	}
 
 	void Game::TearDownActors() {

@@ -184,6 +184,7 @@ namespace Engine {
 			}			
 			ptr = getPointerFromFreeBlocks(i_size, alignment);
 			heapManagerMutex.Release();
+			assert(ptr);
 			return ptr;
 		}
 

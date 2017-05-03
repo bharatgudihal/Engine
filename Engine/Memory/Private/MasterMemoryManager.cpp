@@ -25,11 +25,11 @@ namespace Engine {
 
 		bool MasterMemoryManager::SetupFixedSizeAllocators() {
 			// 16 byte allocator
-			FSAArray[0] = FixedSizeAllocator::Create(1600, 100, defaultHeapManager);
+			FSAArray[0] = FixedSizeAllocator::Create(6400, 400, defaultHeapManager);
 			// 32 byte allocator
 			FSAArray[1] = FixedSizeAllocator::Create(1600, 50, defaultHeapManager);
 			// 64 byte allocator
-			FSAArray[2] = FixedSizeAllocator::Create(1600, 25, defaultHeapManager);
+			FSAArray[2] = FixedSizeAllocator::Create(3200, 50, defaultHeapManager);
 			// 128 byte allocator
 			FSAArray[3] = FixedSizeAllocator::Create(1280, 10, defaultHeapManager);
 			return true;
