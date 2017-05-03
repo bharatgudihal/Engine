@@ -16,6 +16,8 @@ void BallController::Update(float deltaTime) {
 			}
 			if (Engine::Input::keyCode == 32) {
 				direction = Engine::Math::Vector3(1.0f, 1.0f);
+				float speed = ballReference->GetPhysicsBody()->GetSpeed();
+				ballReference->GetPhysicsBody()->SetSpeed(speed + freeSpeedBoost);
 				isFree = true;
 			}
 		}

@@ -158,18 +158,20 @@ namespace Engine {
 			void CheckCollisions(std::vector<GameObject::GameObject*>& sceneObjects, float deltaTime, std::vector<CollisionPair>& collisions) {
 				if (sceneObjects.size() > 0) {
 					for (size_t i = 0; i < sceneObjects.size() - 1; i++) {
-						for (size_t j = i + 1; j < sceneObjects.size(); j++) {
-							float collisionTime = deltaTime;
-							Math::Vector4 collisionNormal;
-							CollisionPair collisionPair;
-							if (CheckCollision(sceneObjects[i], sceneObjects[j], deltaTime, collisionTime, collisionNormal)) {
-								DEBUG_LOG("Collision!\n");
-								if (collisionNormal != Math::Vector4::ZERO) {
-									collisionPair.collisionTime = collisionTime;
-									collisionPair.collisionNormal = collisionNormal.GetVector3();
-									collisionPair.collisionObjects[0] = sceneObjects[i];
-									collisionPair.collisionObjects[1] = sceneObjects[j];
-									collisions.push_back(collisionPair);
+						if (sceneObjects[i]->GetEnabled()) {
+							for (size_t j = i + 1; j < sceneObjects.size(); j++) {
+								float collisionTime = deltaTime;
+								Math::Vector4 collisionNormal;
+								CollisionPair collisionPair;
+								if (sceneObjects[j]->GetEnabled() && CheckCollision(sceneObjects[i], sceneObjects[j], deltaTime, collisionTime, collisionNormal)) {
+									DEBUG_LOG("Collision!\n");
+									if (collisionNormal != Math::Vector4::ZERO) {
+										collisionPair.collisionTime = collisionTime;
+										collisionPair.collisionNormal = collisionNormal.GetVector3();
+										collisionPair.collisionObjects[0] = sceneObjects[i];
+										collisionPair.collisionObjects[1] = sceneObjects[j];
+										collisions.push_back(collisionPair);
+									}
 								}
 							}
 						}

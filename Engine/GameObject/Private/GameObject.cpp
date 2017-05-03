@@ -42,7 +42,8 @@ namespace Engine {
 			return new GameObject(actor, renderObject, physicsBody);			
 		}
 
-		GameObject::GameObject(Pointer::SmartPointer<Actor> i_actor, Renderer::RenderObject* i_renderObject, Physics::PhysicsBody* i_physicsBody, IActorController* i_controller):actor(i_actor), renderObject(i_renderObject), physicsBody(i_physicsBody), controller(i_controller){
+		GameObject::GameObject(Pointer::SmartPointer<Actor> i_actor, Renderer::RenderObject* i_renderObject, Physics::PhysicsBody* i_physicsBody, 
+			IActorController* i_controller):actor(i_actor), renderObject(i_renderObject), physicsBody(i_physicsBody), controller(i_controller), isEnabled(true){
 		}
 
 		GameObject::~GameObject() {

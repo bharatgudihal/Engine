@@ -6,9 +6,6 @@ BrickController::BrickController(Engine::GameObject::GameObject* actorReference)
 void BrickController::Update(float deltaTime) {}
 
 bool BrickController::OnCollisionEnter(const Engine::Math::Vector3& collisionNormal, Engine::GameObject::GameObject* other) {
-	if (!isDisabled) {
-		brickReference->SetRenderObject(nullptr);
-		isDisabled = true;
-	}
-	return isDisabled;
+	brickReference->SetEnabled(false);
+	return false;
 }

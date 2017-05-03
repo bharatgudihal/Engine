@@ -11,4 +11,5 @@ private:
 	Engine::GameObject::GameObject* ballReference;
 	float defaultForce;
 	bool isFree = false;
+	const float freeSpeedBoost = 5000.0f;
 };

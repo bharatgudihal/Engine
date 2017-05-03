@@ -31,7 +31,9 @@ namespace Engine {
 			GLib::BeginRendering();
 			GLib::Sprites::BeginRendering();
 			for (unsigned int i = 0; i < sceneObjects.size(); i++) {
-				Draw(sceneObjects[i]->GetRenderObject());
+				if (sceneObjects[i]->GetEnabled()) {
+					Draw(sceneObjects[i]->GetRenderObject());
+				}
 			}
 			GLib::Sprites::EndRendering();
 			GLib::EndRendering();

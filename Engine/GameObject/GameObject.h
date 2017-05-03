@@ -19,15 +19,18 @@ namespace Engine {
 			inline Pointer::SmartPointer<Actor>* GetActorReference();			
 			inline const Renderer::RenderObject* GetRenderObject();
 			inline void SetRenderObject(Renderer::RenderObject*);
-			inline IActorController* GetController();
-			inline Physics::PhysicsBody* GetPhysicsBody();
+			inline IActorController* GetController() const;
+			inline Physics::PhysicsBody* GetPhysicsBody() const;
 			inline void SetPhysicsBody(Physics::PhysicsBody*);
+			inline void SetEnabled(bool);
+			inline const bool GetEnabled() const;
 		private:
 			GameObject(Pointer::SmartPointer<Actor> i_actor, Renderer::RenderObject* i_renderObject = nullptr, Physics::PhysicsBody* i_physicsBody = nullptr, IActorController* i_controller = nullptr);
 			Pointer::SmartPointer<Actor> actor;
 			Renderer::RenderObject* renderObject;
 			Physics::PhysicsBody* physicsBody;
 			IActorController* controller; 
+			bool isEnabled;
 		};
 	}
 }

@@ -1,7 +1,7 @@
 #pragma once
 namespace Engine {
 	namespace GameObject {
-		inline Pointer::SmartPointer<Actor>* GameObject::GetActorReference() {
+		inline Pointer::SmartPointer<Actor>* GameObject::GetActorReference(){
 			return &actor;
 		}
 
@@ -16,11 +16,11 @@ namespace Engine {
 			renderObject = newRenderer;
 		}
 
-		inline IActorController* GameObject::GetController() {
+		inline IActorController* GameObject::GetController() const{
 			return controller;
 		}
 
-		inline Physics::PhysicsBody* GameObject::GetPhysicsBody() {
+		inline Physics::PhysicsBody* GameObject::GetPhysicsBody() const{
 			return physicsBody;
 		}
 
@@ -29,6 +29,14 @@ namespace Engine {
 				delete physicsBody;
 			}
 			physicsBody = newPhysicsBody;
+		}
+
+		inline void GameObject::SetEnabled(bool i_enabled) {
+			isEnabled = i_enabled;
+		}
+
+		inline const bool GameObject::GetEnabled() const{
+			return isEnabled;
 		}
 	}
 }
