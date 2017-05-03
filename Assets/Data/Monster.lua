@@ -13,6 +13,6 @@ GameObject = {
 		forceMultiplier = 100000.0
 	},
 	rendersettings = {
-		sprite = "Assets\\Sprites\\enemy.dds"
+		sprite = "Assets\\Sprites\\Level1Block.dds"
 	}
 }

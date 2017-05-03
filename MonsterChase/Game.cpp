@@ -9,38 +9,28 @@ namespace Game {
 		float count = 1.0f;
 		luaHelper.GetFloatFromTable(Engine::String::ConstantStrings::GetInstance()->COUNT.Get(), count, -1);
 		Engine::String::PooledString controller = luaHelper.GetStringFromTable(Engine::String::ConstantStrings::GetInstance()->CONTROLLER.Get(), -1);
-		Engine::String::PooledString PLAYERCONTROLLER("PlayerController");
-		Engine::String::PooledString MONSTERCONTROLLER("MonsterController");
+		static const Engine::String::PooledString PLAYERCONTROLLER("PlayerController");
+		static const Engine::String::PooledString BRICKCONTROLLER("BrickController");
 		luaHelper.Pop();
 		srand(static_cast<unsigned int>(time(NULL)));
 		for (int i = 0; i < count; i++) {
-			Engine::GameObject::GameObject* player = Engine::GameObject::GameObject::Create(&luaHelper);			
+			Engine::GameObject::GameObject* gameObject = Engine::GameObject::GameObject::Create(&luaHelper);			
 			if (controller == PLAYERCONTROLLER) {
-				player->SetController(new PlayerController(player->GetActorReference()));
+				gameObject->SetController(new PlayerController(gameObject->GetActorReference()));
 				Engine::Math::Vector3 rotation(0.0f, 0.0f, static_cast<float>(rand() % 360));
 			}
-			else if (controller == MONSTERCONTROLLER) {
-				player->SetController(new MonsterController(player->GetActorReference()));
-				Engine::Math::Vector3 forward(static_cast<float>(-50.0f + rand() % 100), static_cast<float>(-50.0f + rand() % 100));
-				forward.Normalize();
-				(*(player->GetActorReference()))->SetForward(forward);
-				Engine::Math::Vector3 extents = (*(player->GetActorReference()))->GetBounds().Extents;
-				Engine::Math::Vector3 position((-400.0f + extents.X() + static_cast<float>(rand() % 800 - extents.X())), (-300.0f + extents.Y() + static_cast<float>(rand() % 600 - extents.Y())));
-				(*(player->GetActorReference()))->SetPosition(position);
-				Engine::Math::Vector3 rotation(0.0f, 0.0f, static_cast<float>(rand() % 360));
-				if (rand() % 2) {
-					//(*(player->GetActorReference()))->SetRotation(rotation);
-				}
+			else if (controller == BRICKCONTROLLER) {
+				gameObject->SetController(new BrickController(gameObject));
+				Engine::Math::Vector3& originalPosition = (*gameObject->GetActorReference())->GetPosition();				
+				originalPosition.X(originalPosition.X() + i*(*gameObject->GetActorReference())->GetBounds().Extents.X());
 			}
-			assert(player);
-			UpdatePostProcessQueue(player);
+			assert(gameObject);
+			UpdatePostProcessQueue(gameObject);
 			Engine::Messaging::MessagingSystem::GetInstance()->SendMessageToHandler("ActorAdded");
 		}
 	}
 
 	void Game::InitializeActors() {
-		//GameObjectTask* task1 = new GameObjectTask("Assets\\Data\\Player.lua", &pendingGameObjectsQueue, &pendingQueueMutex);
-		//Engine::Utility::FileProcessor::GetInstance().InsertInLoadQueue(*task1);
 		GameObjectTask* task1 = new GameObjectTask("Assets\\Data\\WallLeft.lua", &pendingGameObjectsQueue, &pendingQueueMutex);
 		Engine::Utility::FileProcessor::GetInstance().InsertInLoadQueue(*task1);
 		GameObjectTask* task2 = new GameObjectTask("Assets\\Data\\WallRight.lua", &pendingGameObjectsQueue, &pendingQueueMutex);
@@ -49,7 +39,7 @@ namespace Game {
 		Engine::Utility::FileProcessor::GetInstance().InsertInLoadQueue(*task3);
 		GameObjectTask* task4 = new GameObjectTask("Assets\\Data\\WallBottom.lua", &pendingGameObjectsQueue, &pendingQueueMutex);
 		Engine::Utility::FileProcessor::GetInstance().InsertInLoadQueue(*task4);
-		GameObjectTask* task5 = new GameObjectTask("Assets\\Data\\Monster.lua", &pendingGameObjectsQueue, &pendingQueueMutex);
+		GameObjectTask* task5 = new GameObjectTask("Assets\\Data\\Row1.lua", &pendingGameObjectsQueue, &pendingQueueMutex);
 		Engine::Utility::FileProcessor::GetInstance().InsertInLoadQueue(*task5);
 	}
 

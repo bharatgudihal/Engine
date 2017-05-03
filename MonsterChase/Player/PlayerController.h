@@ -10,6 +10,7 @@ public:
 	PlayerController(Engine::Pointer::SmartPointer<Engine::Actor>*);
 	~PlayerController(){}
 	void Update(float) override;
+	bool OnCollisionEnter(const Engine::Math::Vector3&, Engine::GameObject::GameObject*) override;
 private:
 	Engine::Pointer::WeakPointer<Engine::Actor> playerReference;
 };

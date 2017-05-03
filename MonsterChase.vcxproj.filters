@@ -19,9 +19,6 @@
     <Filter Include="Header Files\Interview">
       <UniqueIdentifier>{a1c34831-4577-46ea-9bec-dc1b96959b5f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Monster">
-      <UniqueIdentifier>{3eb39aee-24de-42b0-8868-c5162a3b7c8c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Player">
       <UniqueIdentifier>{2be252b1-5c53-4d15-9cc8-1402d937f5f1}</UniqueIdentifier>
     </Filter>
@@ -31,11 +28,14 @@
     <Filter Include="Source Files\Interview">
       <UniqueIdentifier>{e18f73af-394f-4f03-b092-223aa23ad286}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Monster">
-      <UniqueIdentifier>{2d236d63-641c-4db1-a708-305a94e59256}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Player">
       <UniqueIdentifier>{42bbaf72-d01a-4864-aee6-6281017e00cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\BrickController">
+      <UniqueIdentifier>{80abf4fb-0505-40e3-9854-886e29d0e75e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BrickController">
+      <UniqueIdentifier>{c05244b3-01a3-4725-8f42-4c07c2cfb042}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -51,14 +51,14 @@
     <ClCompile Include="MonsterChase\Interview\Private\TestReverseWords.cpp">
       <Filter>Source Files\Interview</Filter>
     </ClCompile>
-    <ClCompile Include="MonsterChase\Monster\Private\MonsterController.cpp">
-      <Filter>Source Files\Monster</Filter>
-    </ClCompile>
     <ClCompile Include="MonsterChase\Player\Private\PlayerController.cpp">
       <Filter>Source Files\Player</Filter>
     </ClCompile>
     <ClCompile Include="MonsterChase\Game.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MonsterChase\Brick\Private\BrickController.cpp">
+      <Filter>Source Files\BrickController</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -71,14 +71,14 @@
     <ClInclude Include="MonsterChase\Interview\TestReverseWords.h">
       <Filter>Header Files\Interview</Filter>
     </ClInclude>
-    <ClInclude Include="MonsterChase\Monster\MonsterController.h">
-      <Filter>Header Files\Monster</Filter>
-    </ClInclude>
     <ClInclude Include="MonsterChase\Player\PlayerController.h">
       <Filter>Header Files\Player</Filter>
     </ClInclude>
     <ClInclude Include="MonsterChase\Game.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MonsterChase\Brick\BrickController.h">
+      <Filter>Header Files\BrickController</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -13,7 +13,7 @@
 #include "Physics\CollisionCheck.h"
 #include "Physics\Physics.h"
 #include "Player\PlayerController.h"
-#include "Monster\MonsterController.h"
+#include "Brick\BrickController.h"
 #include "Messaging\MessagingSystem.h"
 #include "String\PooledString.h"
 

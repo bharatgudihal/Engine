@@ -135,6 +135,7 @@
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(SolutionDir)Engine\;$(SolutionDir)Libs\</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -153,6 +154,7 @@
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(SolutionDir)Engine\;$(SolutionDir)Libs\</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -173,6 +175,7 @@
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(SolutionDir)Engine\;$(SolutionDir)Libs\</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -196,6 +199,7 @@
       <AdditionalIncludeDirectories>$(SolutionDir)Engine\;$(SolutionDir)Libs\</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <PreprocessToFile>false</PreprocessToFile>
+      <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -218,6 +222,7 @@
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(SolutionDir)Engine\;$(SolutionDir)Libs\</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -241,6 +246,7 @@
       <AdditionalIncludeDirectories>$(SolutionDir)Engine\;$(SolutionDir)Libs\</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <PreprocessToFile>false</PreprocessToFile>
+      <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -252,12 +258,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="MonsterChase\Brick\Private\BrickController.cpp" />
     <ClCompile Include="MonsterChase\Game.cpp" />
     <ClCompile Include="MonsterChase\GLibTest\Private\GLibTest.cpp" />
     <ClCompile Include="MonsterChase\Interview\Private\ReverseWords.cpp" />
     <ClCompile Include="MonsterChase\Interview\Private\TestReverseWords.cpp" />
     <ClCompile Include="MonsterChase\Main.cpp" />
-    <ClCompile Include="MonsterChase\Monster\Private\MonsterController.cpp" />
     <ClCompile Include="MonsterChase\Player\Private\PlayerController.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -266,11 +272,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="MonsterChase\Brick\BrickController.h" />
     <ClInclude Include="MonsterChase\Game.h" />
     <ClInclude Include="MonsterChase\GLibTest\GLibTest.h" />
     <ClInclude Include="MonsterChase\Interview\ReverseWords.h" />
     <ClInclude Include="MonsterChase\Interview\TestReverseWords.h" />
-    <ClInclude Include="MonsterChase\Monster\MonsterController.h" />
     <ClInclude Include="MonsterChase\Player\PlayerController.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

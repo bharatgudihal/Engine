@@ -20,3 +20,7 @@ void PlayerController::Update(float deltaTime) {
 	}
 	playerReference.Acquire()->SetForward(direction);
 }
+
+bool PlayerController::OnCollisionEnter(const Engine::Math::Vector3& collisionNormal, Engine::GameObject::GameObject* other) {
+	return false;
+}
