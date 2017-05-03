@@ -4,7 +4,7 @@ GameObject = {
 	count = 8.0,
 	position = {-280.0,260.0,0.0},
 	AABB = {
-		Center = {40.0,10.0,0.0},
+		Center = {0,10.0,0.0},
 		Extents = {40.0,10.0,0.0}
 	},
 	rendersettings = {

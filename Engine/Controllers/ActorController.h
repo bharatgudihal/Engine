@@ -13,7 +13,7 @@ namespace Engine {
 	public:		
 		virtual void Update(float) = 0;
 		virtual ~IActorController() {};
-		// Return false if you want the Physics system to handle collision
+		// Return false if you want the Physics system to handle collision response
 		virtual bool OnCollisionEnter(const Math::Vector3&, GameObject::GameObject* other) = 0;
 	};
 }

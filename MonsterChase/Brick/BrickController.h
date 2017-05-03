@@ -9,4 +9,5 @@ public:
 	bool OnCollisionEnter(const Engine::Math::Vector3&, Engine::GameObject::GameObject*) override;
 private:
 	Engine::GameObject::GameObject* brickReference;
+	bool isDisabled = false;
 };

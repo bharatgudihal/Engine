@@ -11,18 +11,22 @@ namespace Game {
 		Engine::String::PooledString controller = luaHelper.GetStringFromTable(Engine::String::ConstantStrings::GetInstance()->CONTROLLER.Get(), -1);
 		static const Engine::String::PooledString PLAYERCONTROLLER("PlayerController");
 		static const Engine::String::PooledString BRICKCONTROLLER("BrickController");
+		static const Engine::String::PooledString BALLCONTROLLER("BallController");
 		luaHelper.Pop();
 		for (int i = 0; i < count; i++) {
-			Engine::GameObject::GameObject* gameObject = Engine::GameObject::GameObject::Create(&luaHelper);			
+			Engine::GameObject::GameObject* gameObject = Engine::GameObject::GameObject::Create(&luaHelper);
 			if (controller == PLAYERCONTROLLER) {
 				gameObject->SetController(new PlayerController(gameObject->GetActorReference()));
 				Engine::Math::Vector3 rotation(0.0f, 0.0f, static_cast<float>(rand() % 360));
 			}
 			else if (controller == BRICKCONTROLLER) {
 				gameObject->SetController(new BrickController(gameObject));
-				Engine::Math::Vector3& originalPosition = (*gameObject->GetActorReference())->GetPosition();				
-				originalPosition.X(originalPosition.X() + i*(*gameObject->GetActorReference())->GetBounds().Extents.X()*2);
+				Engine::Math::Vector3& originalPosition = (*gameObject->GetActorReference())->GetPosition();
+				originalPosition.X(originalPosition.X() + i*(*gameObject->GetActorReference())->GetBounds().Extents.X() * 2);
 				(*gameObject->GetActorReference())->SetPosition(originalPosition);
+			}
+			else if (controller == BALLCONTROLLER) {
+				gameObject->SetController(new BallController(gameObject));
 			}
 			assert(gameObject);
 			UpdatePostProcessQueue(gameObject);
@@ -47,6 +51,10 @@ namespace Game {
 		Engine::Utility::FileProcessor::GetInstance().InsertInLoadQueue(*task7);
 		GameObjectTask* task8 = new GameObjectTask("Assets\\Data\\Row4.lua", &pendingGameObjectsQueue, &pendingQueueMutex);
 		Engine::Utility::FileProcessor::GetInstance().InsertInLoadQueue(*task8);
+		GameObjectTask* task9 = new GameObjectTask("Assets\\Data\\Player.lua", &pendingGameObjectsQueue, &pendingQueueMutex);
+		Engine::Utility::FileProcessor::GetInstance().InsertInLoadQueue(*task9);
+		GameObjectTask* task10 = new GameObjectTask("Assets\\Data\\Ball.lua", &pendingGameObjectsQueue, &pendingQueueMutex);
+		Engine::Utility::FileProcessor::GetInstance().InsertInLoadQueue(*task10);
 	}
 
 	void Game::TearDownActors() {
@@ -65,7 +73,6 @@ namespace Game {
 				deltaTime = Engine::CoreTimer::GetDeltaTime();
 				GLib::Service(quit);
 				Update();
-				//CheckForNewGameObjects();
 			} while (!quit);
 			TearDownActors();
 			GLib::Shutdown();
@@ -95,9 +102,6 @@ namespace Game {
 	void Game::Update() {
 		if (!quit) {			
 			Engine::Controller::UpdateAll(sceneObjects, deltaTime);
-			if (Engine::Input::keyCode == 81 && Engine::Input::isDown) {
-				int a = 0;
-			}
 			PROFILE_SCOPE_BEGIN("Collision");
 			Engine::Physics::Collision::Update(sceneObjects, deltaTime);
 			PROFILE_SCOPE_END();

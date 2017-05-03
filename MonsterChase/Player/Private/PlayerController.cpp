@@ -5,17 +5,11 @@ PlayerController::PlayerController(Engine::Pointer::SmartPointer<Engine::Actor>*
 void PlayerController::Update(float deltaTime) {	
 	Engine::Math::Vector3 direction = Engine::Math::Vector3::ZERO;
 	if (Engine::Input::isDown) {
-		if (Engine::Input::keyCode == 65) {
+		if (Engine::Input::keyCode == 65 && playerReference.Acquire()->GetPosition().X() > -350) {
 			direction += Engine::Math::Vector3::LEFT;
 		}
-		if (Engine::Input::keyCode == 68) {
+		if (Engine::Input::keyCode == 68 && playerReference.Acquire()->GetPosition().X() < 350) {
 			direction += Engine::Math::Vector3::RIGHT;
-		}
-		if (Engine::Input::keyCode == 83) {
-			direction += Engine::Math::Vector3::DOWN;
-		}
-		if (Engine::Input::keyCode == 87) {
-			direction += Engine::Math::Vector3::UP;
 		}
 	}
 	playerReference.Acquire()->SetForward(direction);

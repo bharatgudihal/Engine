@@ -1,11 +1,11 @@
 GameObject = {
-	name = "Paddle",
-	controller = "PlayerController",
+	name = "Ball",
+	controller = "BallController",
 	count = 1.0,
-	position = {0.0,-250.0,0.0},
+	position = {0.0,-230.0,0.0},
 	AABB = {
 		Center = {0,10.0,0.0},
-		Extents = {50.0,10.0,0.0}
+		Extents = {10.0,10.0,0.0}
 	},
 	physicsbody = {
 		mass = 1.0,
@@ -13,6 +13,6 @@ GameObject = {
 		forceMultiplier = 10000.0
 	},
 	rendersettings = {
-		sprite = "Assets\\Sprites\\player.dds"
+		sprite = "Assets\\Sprites\\ball.dds"
 	}
 }

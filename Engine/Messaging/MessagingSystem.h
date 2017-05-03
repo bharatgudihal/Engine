@@ -1,5 +1,6 @@
 #pragma once
 #include <functional>
+#include <map>
 #include <vector>
 #include "../String/HashedString.h"
 #include "../Threading/Mutex.h"
@@ -33,7 +34,7 @@ namespace Engine {
 			MessagingSystem();
 			~MessagingSystem();
 			static MessagingSystem* instance;
-			std::vector<MessageHandler> messageHandlers;
+			std::map<String::HashedString, std::vector<MessageHandler>> messageHandlers;
 			Threading::Mutex messaginMutex;
 		};
 	}

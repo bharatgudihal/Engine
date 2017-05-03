@@ -37,6 +37,12 @@
     <Filter Include="Source Files\BrickController">
       <UniqueIdentifier>{c05244b3-01a3-4725-8f42-4c07c2cfb042}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Ball">
+      <UniqueIdentifier>{9365bb1f-2357-41ab-91af-c923262e677e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Ball">
+      <UniqueIdentifier>{3c206f6f-74e3-49bf-83d1-7dfec84ec570}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MonsterChase\Main.cpp">
@@ -60,6 +66,9 @@
     <ClCompile Include="MonsterChase\Brick\Private\BrickController.cpp">
       <Filter>Source Files\BrickController</Filter>
     </ClCompile>
+    <ClCompile Include="MonsterChase\Ball\Private\BallController.cpp">
+      <Filter>Source Files\Ball</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MonsterChase\GLibTest\GLibTest.h">
@@ -79,6 +88,9 @@
     </ClInclude>
     <ClInclude Include="MonsterChase\Brick\BrickController.h">
       <Filter>Header Files\BrickController</Filter>
+    </ClInclude>
+    <ClInclude Include="MonsterChase\Ball\BallController.h">
+      <Filter>Header Files\Ball</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

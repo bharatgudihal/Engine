@@ -1,7 +1,7 @@
 #include "../Allocators.h"
 
 void* operator new (const size_t i_size) {
-	DEBUG_LOG("Allocating pointer for size %d\n", i_size);	
+	//DEBUG_LOG("Allocating pointer for size %d\n", i_size);	
 	uint8_t* pointer = nullptr;
 	Engine::Memory::FixedSizeAllocator* FSA = nullptr;
 	if (Engine::Memory::MasterMemoryManager::isReady) {

@@ -14,6 +14,7 @@
 #include "Physics\Physics.h"
 #include "Player\PlayerController.h"
 #include "Brick\BrickController.h"
+#include "Ball\BallController.h"
 #include "Messaging\MessagingSystem.h"
 #include "String\PooledString.h"
 

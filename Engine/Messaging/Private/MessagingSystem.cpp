@@ -36,28 +36,23 @@ namespace Engine {
 		void  MessagingSystem::RegisterMessageHandler(const String::HashedString& message, IMessageHandler* handler) {
 			MessageHandler messageHandler(message, handler);
 			messaginMutex.Acquire();
-			messageHandlers.push_back(messageHandler);
+			messageHandlers[message].push_back(messageHandler);
 			messaginMutex.Release();
 		}
 
 		void  MessagingSystem::DeRegisterMessageHandler(const String::HashedString& message, IMessageHandler* handler) {
 			MessageHandler messageHandler(message, handler);
 			messaginMutex.Acquire();
-			for (size_t i = 0; i < messageHandlers.size(); i++) {
-				if (messageHandlers[i] == messageHandler) {
-					messageHandlers.erase(messageHandlers.begin() + i);					
-					break;
-				}
-			}
+			std::vector<MessageHandler> vector = messageHandlers[message];
+			vector.erase(std::remove(vector.begin(), vector.end(), messageHandler), vector.end());
 			messaginMutex.Release();
 		}
 
 		void  MessagingSystem::SendMessageToHandler(const String::HashedString& message) {
 			messaginMutex.Acquire();
-			for (size_t i = 0; i < messageHandlers.size(); i++) {
-				if (messageHandlers[i].message == message) {
-					messageHandlers[i].handler->HandleMessage(message);
-				}
+			std::vector<MessageHandler> vector = messageHandlers[message];
+			for (size_t i = 0; i < vector.size(); i++) {
+				vector[i].handler->HandleMessage(message);
 			}
 			messaginMutex.Release();
 		}
