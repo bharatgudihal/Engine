@@ -30,12 +30,16 @@ namespace Engine {
 
 		void PhysicsBody::PhysicsUpdate(const float deltaTime) {
 			Math::Vector3 dragForce = CalculateDrag();
+			if (isinf(dragForce.X())) {
+				int a = 0;
+			}
 			Pointer::SmartPointer<Actor> smartPtr = weakPointer.Acquire();
 			Math::Vector3 netForce = smartPtr->GetForward() * speed + dragForce + (useGravity ? GRAVITY : Math::Vector3::ZERO);
 			Math::Vector3 acceleration = netForce / mass;
 			Math::Vector3 previousVelocity = currentVelocity;
-			currentVelocity = previousVelocity + acceleration * deltaTime;			
-			Math::Vector3 newPosition = smartPtr->GetPosition() + ((previousVelocity + currentVelocity) / 2) * deltaTime;
+			currentVelocity = previousVelocity + acceleration * deltaTime;
+			currentVelocity = currentVelocity.SquareMagnitude() > 100000.0f ? previousVelocity : currentVelocity;
+			Math::Vector3 newPosition = smartPtr->GetPosition() + ((previousVelocity + currentVelocity) / 2) * deltaTime;			
 			smartPtr->SetPosition(newPosition);
 		}
 

@@ -1,4 +1,6 @@
 #include "../GameObject.h"
+#include "../../Core/UIDGenerator.h"
+
 namespace Engine {
 	namespace GameObject {
 		GameObject* GameObject::Create(uint8_t* fileData, uint32_t fileSize) {
@@ -43,7 +45,7 @@ namespace Engine {
 		}
 
 		GameObject::GameObject(Pointer::SmartPointer<Actor> i_actor, Renderer::RenderObject* i_renderObject, Physics::PhysicsBody* i_physicsBody, 
-			IActorController* i_controller):actor(i_actor), renderObject(i_renderObject), physicsBody(i_physicsBody), controller(i_controller), isEnabled(true){
+			IActorController* i_controller):actor(i_actor), renderObject(i_renderObject), physicsBody(i_physicsBody), controller(i_controller), isEnabled(true), UID(Core::UIDGenerator::GetUID()){
 		}
 
 		GameObject::~GameObject() {

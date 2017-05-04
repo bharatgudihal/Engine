@@ -2,6 +2,7 @@ GameObject = {
 	name = "Ball",
 	controller = "BallController",
 	count = 1.0,
+	isEnabled = "true",
 	position = {0.0,-230.0,0.0},
 	AABB = {
 		Center = {0,10.0,0.0},

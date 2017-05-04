@@ -20,6 +20,7 @@ namespace Engine {
 			inline Vector3& operator+=(const Vector3& rhs);
 			inline Vector3& operator-=(const Vector3& rhs);
 			inline Vector3& operator=(const Vector3& rhs);
+			inline float SquareMagnitude() const;
 			inline float Magnitude() const;
 			void Normalize();
 			static const Vector3 ZERO;

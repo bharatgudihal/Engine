@@ -2,6 +2,7 @@ GameObject = {
 	name = "Wall",
 	controller = "",
 	count = 1.0,
+	isEnabled = "true",
 	position = {432.0,-300.0,0.0},
 	AABB = {
 		Center = {0,300.0,0.0},

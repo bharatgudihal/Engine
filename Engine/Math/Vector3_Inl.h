@@ -54,8 +54,12 @@ namespace Engine {
 			return *this;
 		}
 
+		inline float Vector3::SquareMagnitude() const {
+			return (x*x) + (y*y) + (z*z);
+		}
+
 		inline float Vector3::Magnitude() const {
-			return static_cast<float>(pow((pow(x, 2) + pow(y, 2) + pow(z, 2)), 0.5f));
+			return static_cast<float>(pow(SquareMagnitude(), 0.5f));
 		}
 
 		inline Vector3 operator*(const Vector3& lhs_vector, const float& rhs_float) {

@@ -38,5 +38,9 @@ namespace Engine {
 		inline const bool GameObject::GetEnabled() const{
 			return isEnabled;
 		}
+
+		inline const uint8_t GameObject::GetUID() const {
+			return UID;
+		}
 	}
 }

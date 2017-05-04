@@ -2,6 +2,7 @@ GameObject = {
 	name = "Paddle",
 	controller = "PlayerController",
 	count = 1.0,
+	isEnabled = "true",
 	position = {0.0,-250.0,0.0},
 	AABB = {
 		Center = {0,10.0,0.0},

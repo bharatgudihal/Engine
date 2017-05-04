@@ -38,5 +38,6 @@ namespace Game {
 		void CheckForNewGameObjects();		
 		std::queue<void*> pendingGameObjectsQueue;
 		Engine::Threading::Mutex pendingQueueMutex;
+		Engine::Threading::Mutex sceneQueueMutex;
 	};	
 }

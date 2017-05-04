@@ -2,6 +2,7 @@ GameObject = {
 	name = "Brick",
 	controller = "BrickController",
 	count = 8.0,
+	isEnabled = "true",
 	position = {-280.0,220.0,0.0},
 	AABB = {
 		Center = {0,10.0,0.0},

@@ -354,6 +354,9 @@
     <ClInclude Include="Math\Matrix_Opt.h">
       <Filter>Header Files\Math</Filter>
     </ClInclude>
+    <ClInclude Include="Core\UIDGenerator.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Actor\Private\Actor.cpp">
@@ -481,6 +484,9 @@
     </ClCompile>
     <ClCompile Include="Math\Private\Matrix_Opt.cpp">
       <Filter>Source Files\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Private\UIDGenerator.cpp">
+      <Filter>Source Files\Core</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

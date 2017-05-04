@@ -24,6 +24,7 @@ namespace Engine {
 			inline void SetPhysicsBody(Physics::PhysicsBody*);
 			inline void SetEnabled(bool);
 			inline const bool GetEnabled() const;
+			inline const uint8_t GetUID() const;
 		private:
 			GameObject(Pointer::SmartPointer<Actor> i_actor, Renderer::RenderObject* i_renderObject = nullptr, Physics::PhysicsBody* i_physicsBody = nullptr, IActorController* i_controller = nullptr);
 			Pointer::SmartPointer<Actor> actor;
@@ -31,6 +32,7 @@ namespace Engine {
 			Physics::PhysicsBody* physicsBody;
 			IActorController* controller; 
 			bool isEnabled;
+			uint8_t UID;
 		};
 	}
 }

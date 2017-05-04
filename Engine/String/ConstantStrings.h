@@ -22,6 +22,9 @@ namespace Engine {
 			const PooledString CENTER;
 			const PooledString EXTENTS;
 			const PooledString COUNT;
+			const PooledString ISENABLED;
+			const PooledString TRUE_STRING;
+			const PooledString FALSE_STRING;
 		private:
 			ConstantStrings();
 			~ConstantStrings();
