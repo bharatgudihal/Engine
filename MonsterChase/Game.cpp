@@ -151,6 +151,9 @@ namespace Game {
 			sceneQueueMutex.Acquire();
 			if (!pause) {
 				Engine::Controller::UpdateAll(sceneObjects, deltaTime);
+				if (Engine::Input::isDown && Engine::Input::keyCode == 81) {
+					int a = 0;
+				}
 				PROFILE_SCOPE_BEGIN("Collision");
 				Engine::Physics::Collision::Update(sceneObjects, deltaTime);
 				PROFILE_SCOPE_END();

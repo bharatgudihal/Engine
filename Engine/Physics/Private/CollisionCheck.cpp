@@ -121,7 +121,7 @@ namespace Engine {
 						else if (latestClose == latestTCloseBA) {
 							o_collisionNormal = collisionNormalBA;
 						}
-						result = latestClose < earliestOpen;
+						result = !(latestClose > earliestOpen);
 						if (result) {
 							o_collisionTime = latestClose;
 						}

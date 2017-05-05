@@ -17,8 +17,8 @@ void BallController::Update(float deltaTime) {
 			}
 			srand(static_cast<unsigned int>(time(NULL)));
 			if (Engine::Input::keyCode == 32) {
-				float randomX = -2.0f + rand() % 4;
-				float randomY = -2.0f + rand() % 4;
+				float randomX = 1.0f + rand() % 1;
+				float randomY = 2.0f - randomX;
 				direction = Engine::Math::Vector3(randomX, randomY);
 				float speed = ballReference->GetPhysicsBody()->GetSpeed();
 				ballReference->GetPhysicsBody()->SetSpeed(speed);

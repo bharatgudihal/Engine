@@ -7,7 +7,7 @@ BrickController::BrickController(Engine::GameObject::GameObject* actorReference)
 void BrickController::Update(float deltaTime) {}
 
 bool BrickController::OnCollisionEnter(const Engine::Math::Vector3& collisionNormal, Engine::GameObject::GameObject* other) {
-	if (brickReference->GetEnabled()) {
+	if (brickReference->GetEnabled() && (*(other->GetActorReference()))->GetNameHash() == "Ball") {
 		Engine::Messaging::MessagingSystem::GetInstance()->SendMessageToHandler("BrickDestroyed");
 		brickReference->SetEnabled(false);
 	}
