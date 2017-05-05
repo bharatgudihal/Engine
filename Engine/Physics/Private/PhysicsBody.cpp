@@ -30,9 +30,6 @@ namespace Engine {
 
 		void PhysicsBody::PhysicsUpdate(const float deltaTime) {
 			Math::Vector3 dragForce = CalculateDrag();
-			if (isinf(dragForce.X())) {
-				int a = 0;
-			}
 			Pointer::SmartPointer<Actor> smartPtr = weakPointer.Acquire();
 			Math::Vector3 netForce = smartPtr->GetForward() * speed + dragForce + (useGravity ? GRAVITY : Math::Vector3::ZERO);
 			Math::Vector3 acceleration = netForce / mass;
