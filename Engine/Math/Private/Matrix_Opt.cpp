@@ -74,10 +74,10 @@ namespace Engine {
 				float z = lhs.Z();
 				float w = lhs.W();
 
-				__m128 rhs_row1 = _mm_load_ps(&rhs.a11);
-				__m128 rhs_row2 = _mm_load_ps(&rhs.a21);
-				__m128 rhs_row3 = _mm_load_ps(&rhs.a31);
-				__m128 rhs_row4 = _mm_load_ps(&rhs.a41);
+				__m128 rhs_row1 = rhs.rows[0];
+				__m128 rhs_row2 = rhs.rows[1];
+				__m128 rhs_row3 = rhs.rows[2];
+				__m128 rhs_row4 = rhs.rows[3];
 
 				__m128 sum = _mm_mul_ps(_mm_load1_ps(&x), rhs_row1);
 				sum = _mm_add_ps(sum, _mm_mul_ps(_mm_load1_ps(&y), rhs_row2));
@@ -90,10 +90,10 @@ namespace Engine {
 				Vector4 result;
 				__m128 vector = _mm_set_ps(rhs.W(), rhs.Z(), rhs.Y(), rhs.X());
 
-				__m128 lhs_row1 = _mm_load_ps(&lhs.a11);
-				__m128 lhs_row2 = _mm_load_ps(&lhs.a21);
-				__m128 lhs_row3 = _mm_load_ps(&lhs.a31);
-				__m128 lhs_row4 = _mm_load_ps(&lhs.a41);
+				__m128 lhs_row1 = lhs.rows[0];
+				__m128 lhs_row2 = lhs.rows[1];
+				__m128 lhs_row3 = lhs.rows[2];
+				__m128 lhs_row4 = lhs.rows[3];
 
 				__m128 acc = _mm_mul_ps(vector, lhs_row1);
 				acc = _mm_hadd_ps(acc, acc);

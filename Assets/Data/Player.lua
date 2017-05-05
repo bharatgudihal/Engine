@@ -11,7 +11,7 @@ GameObject = {
 	physicsbody = {
 		mass = 1.0,
 		drag = 1.0,
-		forceMultiplier = 40000.0
+		forceMultiplier = 20000.0
 	},
 	rendersettings = {
 		sprite = "Assets\\Sprites\\player.dds"
