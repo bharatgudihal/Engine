@@ -14,11 +14,12 @@ namespace Engine {
 				a31(i_a31), a32(i_a32), a33(i_a33), a34(i_a34),
 				a41(i_a41), a42(i_a42), a43(i_a43), a44(i_a44) {}
 
-			Matrix::Matrix(const Engine::Math::Matrix& i_matrix):
-				a11(i_matrix.a11), a12(i_matrix.a12), a13(i_matrix.a13), a14(i_matrix.a14),
-				a21(i_matrix.a21), a22(i_matrix.a22), a23(i_matrix.a23), a24(i_matrix.a24),
-				a31(i_matrix.a31), a32(i_matrix.a32), a33(i_matrix.a33), a34(i_matrix.a34),
-				a41(i_matrix.a41), a42(i_matrix.a42), a43(i_matrix.a43), a44(i_matrix.a44) {}
+			Matrix::Matrix(const Engine::Math::Matrix& i_matrix){
+				rows[0] = _mm_set_ps(i_matrix.a14, i_matrix.a13, i_matrix.a12, i_matrix.a11);
+				rows[1] = _mm_set_ps(i_matrix.a24, i_matrix.a23, i_matrix.a22, i_matrix.a21);
+				rows[2] = _mm_set_ps(i_matrix.a34, i_matrix.a33, i_matrix.a32, i_matrix.a31);
+				rows[3] = _mm_set_ps(i_matrix.a44, i_matrix.a43, i_matrix.a42, i_matrix.a41);
+			}
 
 			Engine::Math::Matrix Matrix::GetStandardMatrix() const{
 				return Engine::Math::Matrix
@@ -31,10 +32,10 @@ namespace Engine {
 			Matrix operator*(const Matrix& lhs, const Matrix& rhs) {				
 				Matrix result;
 
-				__m128 rhs_row1 = _mm_load_ps(&rhs.a11);
-				__m128 rhs_row2 = _mm_load_ps(&rhs.a21);
-				__m128 rhs_row3 = _mm_load_ps(&rhs.a31);
-				__m128 rhs_row4 = _mm_load_ps(&rhs.a41);
+				__m128 rhs_row1 = rhs.rows[0];
+				__m128 rhs_row2 = rhs.rows[1];
+				__m128 rhs_row3 = rhs.rows[2];
+				__m128 rhs_row4 = rhs.rows[3];
 
 				__m128 sum = _mm_mul_ps(_mm_load1_ps(&lhs.a11), rhs_row1);
 				sum = _mm_add_ps(sum, _mm_mul_ps(_mm_load1_ps(&lhs.a12), rhs_row2));
@@ -43,21 +44,21 @@ namespace Engine {
 				_mm_storel_pi(reinterpret_cast<__m64*>(&result.a11), sum);
 				_mm_storeh_pi(reinterpret_cast<__m64*>(&result.a13), sum);
 
-				sum = _mm_mul_ps(_mm_load1_ps(&lhs.a21), rhs.row1);
+				sum = _mm_mul_ps(_mm_load1_ps(&lhs.a21), rhs.rows[0]);
 				sum = _mm_add_ps(sum, _mm_mul_ps(_mm_load1_ps(&lhs.a22), rhs_row2));
 				sum = _mm_add_ps(sum, _mm_mul_ps(_mm_load1_ps(&lhs.a23), rhs_row3));
 				sum = _mm_add_ps(sum, _mm_mul_ps(_mm_load1_ps(&lhs.a24), rhs_row4));
 				_mm_storel_pi(reinterpret_cast<__m64*>(&result.a21), sum);
 				_mm_storeh_pi(reinterpret_cast<__m64*>(&result.a23), sum);
 
-				sum = _mm_mul_ps(_mm_load1_ps(&lhs.a31), rhs.row1);
+				sum = _mm_mul_ps(_mm_load1_ps(&lhs.a31), rhs.rows[0]);
 				sum = _mm_add_ps(sum, _mm_mul_ps(_mm_load1_ps(&lhs.a32), rhs_row2));
 				sum = _mm_add_ps(sum, _mm_mul_ps(_mm_load1_ps(&lhs.a33), rhs_row3));
 				sum = _mm_add_ps(sum, _mm_mul_ps(_mm_load1_ps(&lhs.a34), rhs_row4));
 				_mm_storel_pi(reinterpret_cast<__m64*>(&result.a31), sum);
 				_mm_storeh_pi(reinterpret_cast<__m64*>(&result.a33), sum);
 
-				sum = _mm_mul_ps(_mm_load1_ps(&lhs.a41), rhs.row1);
+				sum = _mm_mul_ps(_mm_load1_ps(&lhs.a41), rhs.rows[0]);
 				sum = _mm_add_ps(sum, _mm_mul_ps(_mm_load1_ps(&lhs.a42), rhs_row2));
 				sum = _mm_add_ps(sum, _mm_mul_ps(_mm_load1_ps(&lhs.a43), rhs_row3));
 				sum = _mm_add_ps(sum, _mm_mul_ps(_mm_load1_ps(&lhs.a44), rhs_row4));
