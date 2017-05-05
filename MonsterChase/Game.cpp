@@ -21,7 +21,6 @@ namespace Game {
 			assert(gameObject);
 			if (controller == PLAYERCONTROLLER) {
 				gameObject->SetController(new PlayerController(gameObject->GetActorReference()));
-				Engine::Math::Vector3 rotation(0.0f, 0.0f, static_cast<float>(rand() % 360));
 			}
 			else if (controller == BRICKCONTROLLER || controller == HARDBRICKCONTROLLER) {
 				if (controller == BRICKCONTROLLER) {
