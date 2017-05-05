@@ -13,6 +13,7 @@ namespace Game {
 		static const Engine::String::PooledString PLAYERCONTROLLER("PlayerController");
 		static const Engine::String::PooledString BRICKCONTROLLER("BrickController");
 		static const Engine::String::PooledString BALLCONTROLLER("BallController");
+		static const Engine::String::PooledString DEATHBOXCONTROLLER("DeathBoxController");
 		luaHelper.Pop();
 		for (int i = 0; i < count; i++) {
 			Engine::GameObject::GameObject* gameObject = Engine::GameObject::GameObject::Create(&luaHelper);
@@ -29,6 +30,9 @@ namespace Game {
 			}
 			else if (controller == BALLCONTROLLER) {
 				gameObject->SetController(new BallController(gameObject));
+			}
+			else if (controller == DEATHBOXCONTROLLER) {
+				gameObject->SetController(new DeathBoxController(gameObject));
 			}
 			if (isEnabled == Engine::String::ConstantStrings::GetInstance()->FALSE_STRING) {
 				gameObject->SetEnabled(false);
@@ -73,6 +77,8 @@ namespace Game {
 
 	void Game::StartGame(HINSTANCE i_hInstance, int i_nCmdShow) {
 		Engine::Messaging::MessagingSystem::GetInstance()->RegisterMessageHandler("ActorAdded", this);
+		Engine::Messaging::MessagingSystem::GetInstance()->RegisterMessageHandler("BrickDestroyed", this);
+		Engine::Messaging::MessagingSystem::GetInstance()->RegisterMessageHandler("GameLost", this);
 		if (GLib::Initialize(i_hInstance, i_nCmdShow, "Game", -1, 800, 600)) {
 			GLib::SetKeyStateChangeCallback(Engine::Input::KeyChangeCallBack);
 			InitializeActors();
@@ -85,20 +91,34 @@ namespace Game {
 			TearDownActors();
 			GLib::Shutdown();
 		}
-		Engine::Messaging::MessagingSystem::GetInstance()->RegisterMessageHandler("ActorAdded", this);
+		Engine::Messaging::MessagingSystem::GetInstance()->DeRegisterMessageHandler("GameLost", this);
+		Engine::Messaging::MessagingSystem::GetInstance()->DeRegisterMessageHandler("BrickDestroyed", this);
+		Engine::Messaging::MessagingSystem::GetInstance()->DeRegisterMessageHandler("ActorAdded", this);
 	}
 
 	void Game::HandleMessage(const Engine::String::HashedString& message) {
 		if (message == "ActorAdded") {
 			CheckForNewGameObjects();
 		}
+		if (message == "BrickDestroyed") {
+			ReduceBrickCount();
+		}
+		if (message == "GameLost") {
+			GameLost();
+		}
 	}
 
 	void Game::CheckForNewGameObjects() {
-		void* gameObject = nullptr;
+		Engine::GameObject::GameObject* gameObject = nullptr;
 		pendingQueueMutex.Acquire();
 		if (!pendingGameObjectsQueue.empty()) {
-			gameObject = pendingGameObjectsQueue.front();
+			gameObject = static_cast<Engine::GameObject::GameObject*>(pendingGameObjectsQueue.front());
+			if ((*gameObject->GetActorReference())->GetNameHash() == "WinScreen") {
+				winScreen = gameObject;
+			}
+			if ((*gameObject->GetActorReference())->GetNameHash() == "LoseScreen") {
+				loseScreen = gameObject;
+			}
 			pendingGameObjectsQueue.pop();
 		}
 		pendingQueueMutex.Release();
@@ -109,14 +129,31 @@ namespace Game {
 		sceneQueueMutex.Release();
 	}
 
+	void Game::ReduceBrickCount()
+	{
+		if (--bricksLeft == 0) {
+			DEBUG_LOG("WINNER!\n");
+			pause = true;
+			winScreen->SetEnabled(true);
+		}
+	}
+
+	void Game::GameLost()
+	{
+		pause = true;
+		loseScreen->SetEnabled(true);
+	}
+
 	void Game::Update() {
 		if (!quit) {
 			sceneQueueMutex.Acquire();
-			Engine::Controller::UpdateAll(sceneObjects, deltaTime);
-			PROFILE_SCOPE_BEGIN("Collision");
-			Engine::Physics::Collision::Update(sceneObjects, deltaTime);
-			PROFILE_SCOPE_END();
-			Engine::Physics::UpdateAll(sceneObjects, deltaTime);
+			if (!pause) {
+				Engine::Controller::UpdateAll(sceneObjects, deltaTime);
+				PROFILE_SCOPE_BEGIN("Collision");
+				Engine::Physics::Collision::Update(sceneObjects, deltaTime);
+				PROFILE_SCOPE_END();
+				Engine::Physics::UpdateAll(sceneObjects, deltaTime);
+			}
 			Engine::Renderer::DrawAll(sceneObjects);
 			sceneQueueMutex.Release();
 		}

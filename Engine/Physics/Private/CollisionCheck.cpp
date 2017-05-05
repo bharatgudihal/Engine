@@ -74,7 +74,7 @@ namespace Engine {
 						float tOpen = DOpen_Y / VelBInA.Y();
 						if (tOpen < tClose) {
 							//Moving in opposite direction
-							float temp = tOpen;							
+							float temp = tOpen;
 							tOpen = tClose;
 							tClose = temp;
 						}
@@ -164,7 +164,7 @@ namespace Engine {
 								Math::Vector4 collisionNormal;
 								CollisionPair collisionPair;
 								if (sceneObjects[j]->GetEnabled() && CheckCollision(sceneObjects[i], sceneObjects[j], deltaTime, collisionTime, collisionNormal)) {
-									DEBUG_LOG("Collision!\n");
+									//DEBUG_LOG("Collision!\n");
 									if (collisionNormal != Math::Vector4::ZERO) {
 										collisionPair.collisionTime = collisionTime;
 										collisionPair.collisionNormal = collisionNormal.GetVector3();

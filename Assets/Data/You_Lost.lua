@@ -1,5 +1,5 @@
 GameObject = {
-	name = "You Lost",
+	name = "LoseScreen",
 	controller = "",
 	count = 1.0,
 	isEnabled = "false",

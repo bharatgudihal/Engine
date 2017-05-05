@@ -8,6 +8,6 @@ namespace Engine {
 	void Input::KeyChangeCallBack(unsigned int i_KeyCode, bool i_IsDown) {
 		Input::keyCode = i_KeyCode;
 		Input::isDown = i_IsDown;
-		DEBUG_LOG("Key %d, isdown %d\n", Input::keyCode, Input::isDown);
+		//DEBUG_LOG("Key %d, isdown %d\n", Input::keyCode, Input::isDown);
 	}
 }

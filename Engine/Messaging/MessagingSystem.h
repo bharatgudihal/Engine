@@ -17,6 +17,8 @@ namespace Engine {
 		class MessageHandler {
 		public:
 			MessageHandler(const String::HashedString&, IMessageHandler*);
+			MessageHandler(const MessageHandler&);
+			MessageHandler& operator=(const MessageHandler&);
 			String::HashedString message;
 			IMessageHandler* handler;
 			bool operator==(const MessageHandler&) const;
@@ -34,7 +36,7 @@ namespace Engine {
 			MessagingSystem();
 			~MessagingSystem();
 			static MessagingSystem* instance;
-			std::map<String::HashedString, std::vector<MessageHandler>> messageHandlers;
+			std::vector<MessageHandler> messageHandlers;
 			Threading::Mutex messaginMutex;
 		};
 	}

@@ -1,6 +1,6 @@
 GameObject = {
 	name = "Wall",
-	controller = "",
+	controller = "DeathBoxController",
 	count = 1.0,
 	isEnabled = "true",
 	position = {0.0,-364.0,0.0},

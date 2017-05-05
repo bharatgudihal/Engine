@@ -1,5 +1,5 @@
 GameObject = {
-	name = "You Won",
+	name = "WinScreen",
 	controller = "",
 	count = 1.0,
 	isEnabled = "false",

@@ -16,5 +16,6 @@ void PlayerController::Update(float deltaTime) {
 }
 
 bool PlayerController::OnCollisionEnter(const Engine::Math::Vector3& collisionNormal, Engine::GameObject::GameObject* other) {
+	DEBUG_LOG("Collision\n");
 	return false;
 }

@@ -43,6 +43,12 @@
     <Filter Include="Source Files\Ball">
       <UniqueIdentifier>{3c206f6f-74e3-49bf-83d1-7dfec84ec570}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\DeathBox">
+      <UniqueIdentifier>{b170b4a1-6855-4e27-b6aa-05c2440e604f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\DeathBox">
+      <UniqueIdentifier>{8acc0586-fb51-481d-a1a9-4746d878b55b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MonsterChase\Main.cpp">
@@ -69,6 +75,9 @@
     <ClCompile Include="MonsterChase\Ball\Private\BallController.cpp">
       <Filter>Source Files\Ball</Filter>
     </ClCompile>
+    <ClCompile Include="MonsterChase\DeathBox\Private\DeathBoxController.cpp">
+      <Filter>Source Files\DeathBox</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MonsterChase\GLibTest\GLibTest.h">
@@ -91,6 +100,9 @@
     </ClInclude>
     <ClInclude Include="MonsterChase\Ball\BallController.h">
       <Filter>Header Files\Ball</Filter>
+    </ClInclude>
+    <ClInclude Include="MonsterChase\DeathBox\DeathBoxController.h">
+      <Filter>Header Files\DeathBox</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

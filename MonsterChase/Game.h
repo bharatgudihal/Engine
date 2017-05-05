@@ -15,6 +15,7 @@
 #include "Player\PlayerController.h"
 #include "Brick\BrickController.h"
 #include "Ball\BallController.h"
+#include "DeathBox\DeathBoxController.h"
 #include "Messaging\MessagingSystem.h"
 #include "String\PooledString.h"
 
@@ -28,16 +29,22 @@ namespace Game {
 		};
 		void StartGame(HINSTANCE i_hInstance, int i_nCmdShow);
 		void HandleMessage(const Engine::String::HashedString&) override;
-	private:
-		bool quit;
+	private:		
 		std::vector<Engine::GameObject::GameObject*> sceneObjects;
-		float deltaTime;
-		void Update();
-		void InitializeActors();
-		void TearDownActors();
-		void CheckForNewGameObjects();		
 		std::queue<void*> pendingGameObjectsQueue;
 		Engine::Threading::Mutex pendingQueueMutex;
 		Engine::Threading::Mutex sceneQueueMutex;
+		Engine::GameObject::GameObject* winScreen;
+		Engine::GameObject::GameObject* loseScreen;
+		float deltaTime;
+		int bricksLeft = 32;
+		bool pause;
+		bool quit;
+		void Update();
+		void InitializeActors();
+		void TearDownActors();
+		void CheckForNewGameObjects();
+		void ReduceBrickCount();
+		void GameLost();
 	};	
 }
