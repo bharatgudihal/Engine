@@ -1,3 +1,4 @@
+#include <time.h>
 #include "../BallController.h"
 #include "GameObject\GameObject.h"
 
@@ -14,8 +15,11 @@ void BallController::Update(float deltaTime) {
 			if (Engine::Input::keyCode == 68 && (*ballReference->GetActorReference())->GetPosition().X() < 350) {
 				direction += Engine::Math::Vector3::RIGHT;
 			}
+			srand(static_cast<unsigned int>(time(NULL)));
 			if (Engine::Input::keyCode == 32) {
-				direction = Engine::Math::Vector3(1.0f, 1.0f);
+				float randomX = -2.0f + rand() % 4;
+				float randomY = -2.0f + rand() % 4;
+				direction = Engine::Math::Vector3(randomX, randomY);
 				float speed = ballReference->GetPhysicsBody()->GetSpeed();
 				ballReference->GetPhysicsBody()->SetSpeed(speed);
 				isFree = true;

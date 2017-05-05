@@ -9,7 +9,7 @@ void* operator new (const size_t i_size) {
 	}
 	if (FSA != nullptr) {
 		pointer = static_cast<uint8_t*>(FSA->allocate());
-		DEBUG_LOG("Allocating pointer %p for size %d from FSA\n", pointer, i_size);
+		//DEBUG_LOG("Allocating pointer %p for size %d from FSA\n", pointer, i_size);
 	}
 	if(!pointer){
 		Engine::Memory::HeapManager* m_heapManager = Engine::Memory::MasterMemoryManager::Instance()->DefaultHeapManager();
@@ -25,7 +25,7 @@ void* operator new (const size_t i_size) {
 		pointer += sizeof(m_heapManager);
 		*pointer = HEAP_PATTERN;
 		pointer += sizeof(HEAP_PATTERN);
-		DEBUG_LOG("Allocating pointer %p for size %d from heapmanager\n", pointer, i_size);
+		//DEBUG_LOG("Allocating pointer %p for size %d from heapmanager\n", pointer, i_size);
 	}
 	assert(pointer);
 	return pointer;
@@ -36,7 +36,7 @@ void operator delete (void* i_ptr) {
 	uint8_t* pointer = static_cast<uint8_t*>(i_ptr);
 	pointer -= sizeof(HEAP_PATTERN);
 	if (*pointer == HEAP_PATTERN) {
-		DEBUG_LOG("Freeing pointer %p\n", i_ptr);
+		//DEBUG_LOG("Freeing pointer %p\n", i_ptr);
 		pointer -= sizeof(Engine::Memory::HeapManager*);
 		Engine::Memory::HeapManager** pHeapManager = reinterpret_cast<Engine::Memory::HeapManager**>(pointer);
 		(*pHeapManager)->free(pointer);
@@ -45,13 +45,13 @@ void operator delete (void* i_ptr) {
 		if (Engine::Memory::MasterMemoryManager::isReady) {
 			bool result = Engine::Memory::MasterMemoryManager::Instance()->FreePointerFromFSA(i_ptr);
 			if (!result) {
-				DEBUG_LOG("Freeing pointer outside heapmanager %p\n", i_ptr);
+				//DEBUG_LOG("Freeing pointer outside heapmanager %p\n", i_ptr);
 				Engine::Memory::MasterMemoryManager::Instance()->FreePointerFromFSA(i_ptr);
 				_aligned_free(i_ptr);
 			}
 		}
 		else {
-			DEBUG_LOG("Freeing pointer outside heapmanager %p\n", i_ptr);
+			//DEBUG_LOG("Freeing pointer outside heapmanager %p\n", i_ptr);
 			_aligned_free(i_ptr);
 		}
 	}	
@@ -82,13 +82,13 @@ void* operator new[](size_t i_size) {
 		*pointer = HEAP_PATTERN;
 		pointer += sizeof(HEAP_PATTERN);
 	}
-	DEBUG_LOG("Allocating pointer %p for size %d\n", pointer, i_size);
+	//DEBUG_LOG("Allocating pointer %p for size %d\n", pointer, i_size);
 	return pointer;
 }
 
 void operator delete[](void* i_ptr) {
 	assert(i_ptr);
-	DEBUG_LOG("Freeing array pointer %p\n", i_ptr);
+	//DEBUG_LOG("Freeing array pointer %p\n", i_ptr);
 	uint8_t* pointer = static_cast<uint8_t*>(i_ptr);
 	pointer -= sizeof(HEAP_PATTERN);
 	if (*pointer == HEAP_PATTERN) {
