@@ -70,9 +70,11 @@ namespace Game {
 	}
 
 	void Game::TearDownActors() {
+		sceneQueueMutex.Acquire();
 		for (unsigned int i = 0; i < sceneObjects.size(); i++) {
 			delete sceneObjects[i];
 		}
+		sceneQueueMutex.Release();
 	}
 
 	void Game::StartGame(HINSTANCE i_hInstance, int i_nCmdShow) {

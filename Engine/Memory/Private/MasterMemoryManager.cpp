@@ -29,7 +29,7 @@ namespace Engine {
 			// 32 byte allocator
 			FSAArray[1] = FixedSizeAllocator::Create(3200, 100, defaultHeapManager);
 			// 64 byte allocator
-			FSAArray[2] = FixedSizeAllocator::Create(6400, 100, defaultHeapManager);
+			FSAArray[2] = FixedSizeAllocator::Create(3200, 50, defaultHeapManager);
 			// 128 byte allocator
 			FSAArray[3] = FixedSizeAllocator::Create(2560, 20, defaultHeapManager);
 			return true;
