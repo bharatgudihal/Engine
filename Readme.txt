@@ -1,26 +1,12 @@
-1) Implemented guardbands
-"\Engine\Memory\Private\FixedSizeAllocator.cpp" Line 34
+BREAKOUT!!
 
-2) Handling 32/64 bit platforms
-"\Engine\Memory\BitArray.h" Line 31,39
+Destroy all the bricks to win!
 
-3) Using _BitScanForward()/_BitScanForward64()
-"\Engine\Memory\BitArray.h" Line 6
-"\Engine\Memory\Private\BitArray.cpp" Line 67
-"\Engine\Memory\Private\BitArray.cpp" Line 74
-"\Engine\Memory\Private\BitArray.cpp" Line 92
-"\Engine\Memory\Private\BitArray.cpp" Line 99
-"\Engine\Memory\Private\BitArray.cpp" Line 134
-"\Engine\Memory\Private\BitArray.cpp" Line 142
-"\Engine\Memory\Private\BitArray.cpp" Line 167
-"\Engine\Memory\Private\BitArray.cpp" Line 180
+Controls:
 
-4) Creating FSA in one allocation
-"\Engine\Memory\Private\FixedSizeAllocator.cpp" Line 17
+1) A and D move the platform left and right
+2) Space to launch the ball
 
-5)FixedSizedAllocator properly validate pointers in it's free function
-"\Engine\Memory\Private\FixedSizeAllocator.cpp" Line 85 IsValid function
+Notes:
 
-6)HeapManager / BlockAllocator and FixedSizeAllocator recognize and warn about outstanding allocation when they're destructed
-"\Engine\Memory\Private\FixedSizeAllocator.cpp" Line 27
-"\Engine\Memory\Private\HeapManager.cpp" Line 363
+1) There are random collision and launch bugs that I will be trying to fix. Will post updates as and when they get fixed.
