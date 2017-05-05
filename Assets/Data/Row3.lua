@@ -1,6 +1,6 @@
 GameObject = {
 	name = "Brick",
-	controller = "BrickController",
+	controller = "HardBrickController",
 	count = 8.0,
 	isEnabled = "true",
 	position = {-280.0,240.0,0.0},

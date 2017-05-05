@@ -78,6 +78,9 @@
     <ClCompile Include="MonsterChase\DeathBox\Private\DeathBoxController.cpp">
       <Filter>Source Files\DeathBox</Filter>
     </ClCompile>
+    <ClCompile Include="MonsterChase\Brick\Private\HardBrickController.cpp">
+      <Filter>Source Files\BrickController</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MonsterChase\GLibTest\GLibTest.h">
@@ -103,6 +106,9 @@
     </ClInclude>
     <ClInclude Include="MonsterChase\DeathBox\DeathBoxController.h">
       <Filter>Header Files\DeathBox</Filter>
+    </ClInclude>
+    <ClInclude Include="MonsterChase\Brick\HardBrickController.h">
+      <Filter>Header Files\BrickController</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -260,6 +260,7 @@
   <ItemGroup>
     <ClCompile Include="MonsterChase\Ball\Private\BallController.cpp" />
     <ClCompile Include="MonsterChase\Brick\Private\BrickController.cpp" />
+    <ClCompile Include="MonsterChase\Brick\Private\HardBrickController.cpp" />
     <ClCompile Include="MonsterChase\DeathBox\Private\DeathBoxController.cpp" />
     <ClCompile Include="MonsterChase\Game.cpp" />
     <ClCompile Include="MonsterChase\GLibTest\Private\GLibTest.cpp" />
@@ -276,6 +277,7 @@
   <ItemGroup>
     <ClInclude Include="MonsterChase\Ball\BallController.h" />
     <ClInclude Include="MonsterChase\Brick\BrickController.h" />
+    <ClInclude Include="MonsterChase\Brick\HardBrickController.h" />
     <ClInclude Include="MonsterChase\DeathBox\DeathBoxController.h" />
     <ClInclude Include="MonsterChase\Game.h" />
     <ClInclude Include="MonsterChase\GLibTest\GLibTest.h" />

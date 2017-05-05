@@ -14,6 +14,7 @@ namespace Game {
 		static const Engine::String::PooledString BRICKCONTROLLER("BrickController");
 		static const Engine::String::PooledString BALLCONTROLLER("BallController");
 		static const Engine::String::PooledString DEATHBOXCONTROLLER("DeathBoxController");
+		static const Engine::String::PooledString HARDBRICKCONTROLLER("HardBrickController");
 		luaHelper.Pop();
 		for (int i = 0; i < count; i++) {
 			Engine::GameObject::GameObject* gameObject = Engine::GameObject::GameObject::Create(&luaHelper);
@@ -22,8 +23,12 @@ namespace Game {
 				gameObject->SetController(new PlayerController(gameObject->GetActorReference()));
 				Engine::Math::Vector3 rotation(0.0f, 0.0f, static_cast<float>(rand() % 360));
 			}
-			else if (controller == BRICKCONTROLLER) {
-				gameObject->SetController(new BrickController(gameObject));
+			else if (controller == BRICKCONTROLLER || controller == HARDBRICKCONTROLLER) {
+				if (controller == BRICKCONTROLLER) {
+					gameObject->SetController(new BrickController(gameObject));
+				}else{
+					gameObject->SetController(new HardBrickController(gameObject));
+				}
 				Engine::Math::Vector3& originalPosition = (*gameObject->GetActorReference())->GetPosition();
 				originalPosition.X(originalPosition.X() + i*(*gameObject->GetActorReference())->GetBounds().Extents.X() * 2);
 				(*gameObject->GetActorReference())->SetPosition(originalPosition);
