@@ -34,7 +34,6 @@ namespace Game {
 		std::vector<Engine::GameObject::GameObject*> sceneObjects;
 		std::queue<void*> pendingGameObjectsQueue;
 		Engine::Threading::Mutex pendingQueueMutex;
-		Engine::Threading::Mutex sceneQueueMutex;
 		Engine::GameObject::GameObject* winScreen;
 		Engine::GameObject::GameObject* loseScreen;
 		float deltaTime;

@@ -42,7 +42,6 @@ namespace Game {
 				gameObject->SetEnabled(false);
 			}
 			UpdatePostProcessQueue(gameObject);
-			Engine::Messaging::MessagingSystem::GetInstance()->SendMessageToHandler("ActorAdded");
 		}
 	}
 
@@ -74,15 +73,12 @@ namespace Game {
 	}
 
 	void Game::TearDownActors() {
-		sceneQueueMutex.Acquire();
 		for (unsigned int i = 0; i < sceneObjects.size(); i++) {
 			delete sceneObjects[i];
 		}
-		sceneQueueMutex.Release();
 	}
 
 	void Game::StartGame(HINSTANCE i_hInstance, int i_nCmdShow) {
-		Engine::Messaging::MessagingSystem::GetInstance()->RegisterMessageHandler("ActorAdded", this);
 		Engine::Messaging::MessagingSystem::GetInstance()->RegisterMessageHandler("BrickDestroyed", this);
 		Engine::Messaging::MessagingSystem::GetInstance()->RegisterMessageHandler("GameLost", this);
 		if (GLib::Initialize(i_hInstance, i_nCmdShow, "Game", -1, 800, 600)) {
@@ -99,7 +95,6 @@ namespace Game {
 		}
 		Engine::Messaging::MessagingSystem::GetInstance()->DeRegisterMessageHandler("GameLost", this);
 		Engine::Messaging::MessagingSystem::GetInstance()->DeRegisterMessageHandler("BrickDestroyed", this);
-		Engine::Messaging::MessagingSystem::GetInstance()->DeRegisterMessageHandler("ActorAdded", this);
 	}
 
 	void Game::HandleMessage(const Engine::String::HashedString& message) {
@@ -117,7 +112,7 @@ namespace Game {
 	void Game::CheckForNewGameObjects() {
 		Engine::GameObject::GameObject* gameObject = nullptr;
 		pendingQueueMutex.Acquire();
-		if (!pendingGameObjectsQueue.empty()) {
+		while (!pendingGameObjectsQueue.empty()) {
 			gameObject = static_cast<Engine::GameObject::GameObject*>(pendingGameObjectsQueue.front());
 			if ((*gameObject->GetActorReference())->GetNameHash() == "WinScreen") {
 				winScreen = gameObject;
@@ -126,13 +121,11 @@ namespace Game {
 				loseScreen = gameObject;
 			}
 			pendingGameObjectsQueue.pop();
+			if (gameObject != nullptr) {
+				sceneObjects.push_back(gameObject);
+			}
 		}
-		pendingQueueMutex.Release();
-		sceneQueueMutex.Acquire();
-		if (gameObject != nullptr) {
-			sceneObjects.push_back(static_cast<Engine::GameObject::GameObject*>(gameObject));
-		}
-		sceneQueueMutex.Release();
+		pendingQueueMutex.Release();		
 	}
 
 	void Game::ReduceBrickCount()
@@ -152,19 +145,15 @@ namespace Game {
 
 	void Game::Update() {
 		if (!quit) {
-			sceneQueueMutex.Acquire();
 			if (!pause) {
 				Engine::Controller::UpdateAll(sceneObjects, deltaTime);
-				if (Engine::Input::isDown && Engine::Input::keyCode == 81) {
-					int a = 0;
-				}
 				PROFILE_SCOPE_BEGIN("Collision");
 				Engine::Physics::Collision::Update(sceneObjects, deltaTime);
 				PROFILE_SCOPE_END();
 				Engine::Physics::UpdateAll(sceneObjects, deltaTime);
 			}
 			Engine::Renderer::DrawAll(sceneObjects);
-			sceneQueueMutex.Release();
+			CheckForNewGameObjects();
 		}
 	}
 }

@@ -3,11 +3,7 @@
 namespace Engine {
 	Actor::Actor():name(nullptr){}
 
-	Actor::~Actor(){
-		if (name) {
-			DEBUG_LOG("Actor destructor called freeing char at location %p\n", name);		
-		}
-	}
+	Actor::~Actor(){}
 
 	Actor& Actor::operator=(const Actor& rhs) {		
 		name = rhs.name;
