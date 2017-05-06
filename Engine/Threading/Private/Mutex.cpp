@@ -1,4 +1,6 @@
 #include "../Mutex.h"
+#include "../../Logger/Logger.h"
+
 namespace Engine {
 	namespace Threading {
 		Mutex::Mutex(bool takeOwnerShip, const char* name) {
@@ -22,12 +24,14 @@ namespace Engine {
 			return result == WAIT_OBJECT_0;
 		}
 
-		void Mutex::Acquire() {
+		void Mutex::Acquire() const{
+			//DEBUG_LOG("Mutex acquired\n");
 			DWORD result = WaitForSingleObject(handle, INFINITE);
 			assert(result == WAIT_OBJECT_0);
 		}
 
-		void Mutex::Release() {
+		void Mutex::Release() const{
+			//DEBUG_LOG("Mutex released\n");
 			BOOL result = ReleaseMutex(handle);
 			assert(result == TRUE);
 		}

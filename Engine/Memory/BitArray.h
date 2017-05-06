@@ -1,5 +1,7 @@
 #pragma once
 #include "HeapManager.h"
+#include "../Threading/Mutex.h"
+
 namespace Engine {
 	namespace Memory {
 		class BitArray {
@@ -29,6 +31,7 @@ namespace Engine {
 			BitArray(const size_t i_numberOfBits, const bool i_startClear, HeapManager* heapManager);
 			BitArray(const size_t i_numberOfBits);
 			BitArray(const size_t i_numberOfBits, void* i_ptr);
+			Threading::Mutex bitArrayMutex;
 			size_t* bits;
 			size_t arraySize;
 			size_t numberOfBits;

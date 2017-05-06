@@ -16,9 +16,9 @@ namespace Engine {
 
 		bool FileProcessorTest::TestFileProcessor() {
 			TestFileTask* task1 = new TestFileTask("Assets\\Data\\Player.lua", &fileQueue, &fileQueueMutex);
-			Utility::FileProcessor::GetInstance().InsertInLoadQueue(*task1);
+			Utility::FileProcessor::GetInstance().InsertInLoadQueue(task1);
 			TestFileTask* task2 = new TestFileTask("Assets\\Data\\Test.txt", &fileQueue, &fileQueueMutex);
-			Utility::FileProcessor::GetInstance().InsertInLoadQueue(*task2);
+			Utility::FileProcessor::GetInstance().InsertInLoadQueue(task2);
 			bool done = false;
 			int count = 0;
 			while (!done) {

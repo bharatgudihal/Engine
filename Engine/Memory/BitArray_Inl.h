@@ -14,7 +14,9 @@ namespace Engine {
 		}
 
 		inline void BitArray::ClearAll() {
+			bitArrayMutex.Acquire();
 			memset(bits, 0, bitsPerUnit / bitsPerByte*arraySize);
+			bitArrayMutex.Release();
 		}
 
 		inline bool BitArray::IsBitClear(const size_t i_bitNumber) const {

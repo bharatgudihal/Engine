@@ -9,4 +9,4 @@ Controls:
 
 Notes:
 
-1) There are random launch bugs that I will be trying to fix. Will post updates as and when they get fixed.
+1) Reduced the frequency of random launch bugs.

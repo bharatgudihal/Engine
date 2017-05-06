@@ -87,23 +87,23 @@ namespace Engine {
 			ResumeThread(processFileHandle);
 		}
 
-		bool FileProcessor::InsertInLoadQueue(Task& task) {
-			DEBUG_LOG("Inserting %s in load queue\n", task.GetFileName());
+		bool FileProcessor::InsertInLoadQueue(Task* task) {
+			DEBUG_LOG("Inserting %s in load queue\n", task->GetFileName());
 			loadMutex.Acquire();
-			loadQueue.push(&task);
+			loadQueue.push(task);
 			loadMutex.Release();
 			loadSemaphore.Increment();
-			DEBUG_LOG("Inserted %s in load queue\n", task.GetFileName());
+			DEBUG_LOG("Inserted %s in load queue\n", task->GetFileName());
 			return true;
 		}
 
-		bool FileProcessor::InsertInProcessQueue(FileData& fileData) {
-			DEBUG_LOG("Inserting %s in process queue\n", fileData.task->GetFileName());
+		bool FileProcessor::InsertInProcessQueue(FileData* fileData) {
+			DEBUG_LOG("Inserting %s in process queue\n", fileData->task->GetFileName());
 			processMutex.Acquire();
-			processQueue.push(&fileData);
+			processQueue.push(fileData);
 			processMutex.Release();
 			processSemaphore.Increment();
-			DEBUG_LOG("Inserted %s in process queue\n", fileData.task->GetFileName());
+			DEBUG_LOG("Inserted %s in process queue\n", fileData->task->GetFileName());
 			return true;
 		}
 
@@ -180,7 +180,7 @@ namespace Engine {
 								BOOL GORResult = GetOverlappedResult(fileHandle, &fileOverLapped, &bytesRead, FALSE);
 								assert(GORResult == TRUE);
 								FileData* fileData = new FileData(task, fileBuffer, bytesRead);
-								instance.InsertInProcessQueue(*fileData);
+								instance.InsertInProcessQueue(fileData);
 							}
 							else {
 								delete task;

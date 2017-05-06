@@ -36,20 +36,26 @@ namespace Engine {
 		}
 
 		FixedSizeAllocator* MasterMemoryManager::FindFixedSizeAllocator(size_t i_size) {
+			masterMemoryMutex.Acquire();
 			for (uint8_t index = 0; index < 4; index++) {
 				if (i_size <= FSAArray[index]->unitSize - FSA_GUARD_BAND_SIZE * 2) {
+					masterMemoryMutex.Release();
 					return FSAArray[index];
 				}
 			}
+			masterMemoryMutex.Release();
 			return nullptr;
 		}
 
 		bool MasterMemoryManager::FreePointerFromFSA(void* i_ptr) {
+			masterMemoryMutex.Acquire();
 			for (uint8_t index = 0; index < 4; index++) {
 				if (FSAArray[index]->free(i_ptr)) {
+					masterMemoryMutex.Release();
 					return true;
 				}
 			}
+			masterMemoryMutex.Release();
 			return false;
 		}
 

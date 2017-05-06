@@ -1,6 +1,9 @@
 #include "../Allocators.h"
 
+Engine::Threading::Mutex allocatorsMutex;
+
 void* operator new (const size_t i_size) {
+	allocatorsMutex.Acquire();
 	//DEBUG_LOG("Allocating pointer for size %d\n", i_size);	
 	uint8_t* pointer = nullptr;
 	Engine::Memory::FixedSizeAllocator* FSA = nullptr;
@@ -28,10 +31,12 @@ void* operator new (const size_t i_size) {
 		//DEBUG_LOG("Allocating pointer %p for size %d from heapmanager\n", pointer, i_size);
 	}
 	assert(pointer);
+	allocatorsMutex.Release();
 	return pointer;
 }
 
 void operator delete (void* i_ptr) {
+	allocatorsMutex.Acquire();
 	assert(i_ptr);	
 	uint8_t* pointer = static_cast<uint8_t*>(i_ptr);
 	pointer -= sizeof(HEAP_PATTERN);
@@ -54,10 +59,12 @@ void operator delete (void* i_ptr) {
 			//DEBUG_LOG("Freeing pointer outside heapmanager %p\n", i_ptr);
 			_aligned_free(i_ptr);
 		}
-	}	
+	}
+	allocatorsMutex.Release();
 }
 
 void* operator new[](size_t i_size) {
+	allocatorsMutex.Acquire();
 	//DEBUG_LOG("Allocating array pointer for size %d\n", i_size);
 	Engine::Memory::FixedSizeAllocator* FSA = nullptr;
 	uint8_t* pointer = nullptr;
@@ -83,10 +90,12 @@ void* operator new[](size_t i_size) {
 		pointer += sizeof(HEAP_PATTERN);
 	}
 	//DEBUG_LOG("Allocating pointer %p for size %d\n", pointer, i_size);
+	allocatorsMutex.Release();
 	return pointer;
 }
 
 void operator delete[](void* i_ptr) {
+	allocatorsMutex.Acquire();
 	assert(i_ptr);
 	//DEBUG_LOG("Freeing array pointer %p\n", i_ptr);
 	uint8_t* pointer = static_cast<uint8_t*>(i_ptr);
@@ -104,9 +113,11 @@ void operator delete[](void* i_ptr) {
 			}
 		}
 	}
+	allocatorsMutex.Release();
 }
 
 void* operator new (size_t i_size, uint8_t alignment) {
+	allocatorsMutex.Acquire();
 	DEBUG_LOG("Allocating pointer for size %d and alignment %d\n", i_size, alignment);	
 	Engine::Memory::HeapManager* m_heapManager = Engine::Memory::MasterMemoryManager::Instance()->DefaultHeapManager();
 	size_t totalSize = i_size + sizeof(m_heapManager) + sizeof(HEAP_PATTERN);
@@ -122,16 +133,20 @@ void* operator new (size_t i_size, uint8_t alignment) {
 	*pointer = HEAP_PATTERN;
 	pointer += sizeof(HEAP_PATTERN);
 	DEBUG_LOG("Allocating pointer %p for size %d\n", pointer, i_size);
+	allocatorsMutex.Release();
 	return pointer;
 }
 
 void operator delete (void* i_ptr, uint8_t alignment) {
+	allocatorsMutex.Acquire();
 	assert(i_ptr);
 	DEBUG_LOG("Freeing pointer %p with alignment %d. Should never execute!\n", i_ptr, alignment);
 	_aligned_free(i_ptr);
+	allocatorsMutex.Release();
 }
 
 void* operator new[](size_t i_size, uint8_t alignment) {
+	allocatorsMutex.Acquire();
 	DEBUG_LOG("Allocating array pointer for size %d and alignment %d\n", i_size, alignment);
 	Engine::Memory::HeapManager* m_heapManager = Engine::Memory::MasterMemoryManager::Instance()->DefaultHeapManager();
 	size_t totalSize = i_size + sizeof(m_heapManager) + sizeof(HEAP_PATTERN);
@@ -147,17 +162,21 @@ void* operator new[](size_t i_size, uint8_t alignment) {
 	*pointer = HEAP_PATTERN;
 	pointer += sizeof(HEAP_PATTERN);
 	DEBUG_LOG("Allocating pointer %p for size %d\n", pointer, i_size);
+	allocatorsMutex.Release();
 	return pointer;
 }
 
 void operator delete[](void* i_ptr, uint8_t alignment) {
+	allocatorsMutex.Acquire();
 	assert(i_ptr);
 	DEBUG_LOG("Freeing array pointer %p and alignment %d. Should never execute!\n", i_ptr,alignment);
 	_aligned_free(i_ptr);
+	allocatorsMutex.Release();
 }
 
 
 void* operator new (size_t i_size, Engine::Memory::HeapManager* pHeapManager) {
+	allocatorsMutex.Acquire();
 	DEBUG_LOG("Allocating pointer for size %d and heap manager %p\n", i_size, pHeapManager);
 	size_t totalSize = i_size + sizeof(pHeapManager) + sizeof(HEAP_PATTERN);
 	uint8_t* pointer = static_cast<uint8_t*>(pHeapManager->allocate(totalSize));
@@ -172,16 +191,20 @@ void* operator new (size_t i_size, Engine::Memory::HeapManager* pHeapManager) {
 	*pointer = HEAP_PATTERN;
 	pointer += sizeof(HEAP_PATTERN);
 	DEBUG_LOG("Allocating pointer %p for size %d\n", pointer, i_size);
+	allocatorsMutex.Release();
 	return pointer;
 }
 
 void operator delete (void* i_ptr, Engine::Memory::HeapManager* pHeapManager) {
+	allocatorsMutex.Acquire();
 	DEBUG_LOG("Freeing pointer for pointer %p and heap manager %p. Should never execute!\n", i_ptr, pHeapManager);
 	assert(i_ptr);
 	pHeapManager->free(i_ptr);
+	allocatorsMutex.Release();
 }
 
 void* operator new[](size_t i_size, Engine::Memory::HeapManager* pHeapManager) {
+	allocatorsMutex.Acquire();
 	DEBUG_LOG("Allocating array pointer for size %d and heap manager %p\n", i_size, pHeapManager);
 	size_t totalSize = i_size + sizeof(pHeapManager) + sizeof(HEAP_PATTERN);
 	uint8_t* pointer = static_cast<uint8_t*>(pHeapManager->allocate(totalSize));
@@ -196,16 +219,20 @@ void* operator new[](size_t i_size, Engine::Memory::HeapManager* pHeapManager) {
 	*pointer = HEAP_PATTERN;
 	pointer += sizeof(HEAP_PATTERN);
 	DEBUG_LOG("Allocating pointer %p for size %d\n", pointer, i_size);
+	allocatorsMutex.Release();
 	return pointer;
 }
 
 void operator delete[](void* i_ptr, Engine::Memory::HeapManager* pHeapManager) {
+	allocatorsMutex.Acquire();
 	DEBUG_LOG("Freeing pointer for pointer %p and heap manager %p. Should never execute!\n", i_ptr, pHeapManager);
 	assert(i_ptr);
 	pHeapManager->free(i_ptr);
+	allocatorsMutex.Release();
 }
 
 void* operator new (size_t i_size, Engine::Memory::HeapManager* pHeapManager, uint8_t alignment) {
+	allocatorsMutex.Acquire();
 	DEBUG_LOG("Allocating pointer for size %d, heap manager %p and alignment %d\n", i_size, pHeapManager, alignment);
 	size_t totalSize = i_size + sizeof(pHeapManager) + sizeof(HEAP_PATTERN);
 	uint8_t* pointer = static_cast<uint8_t*>(pHeapManager->allocate(totalSize, alignment));
@@ -220,16 +247,20 @@ void* operator new (size_t i_size, Engine::Memory::HeapManager* pHeapManager, ui
 	*pointer = HEAP_PATTERN;
 	pointer += sizeof(HEAP_PATTERN);
 	DEBUG_LOG("Allocating pointer %p for size %d\n", pointer, i_size);
+	allocatorsMutex.Release();
 	return pointer;
 }
 
 void operator delete (void* i_ptr, Engine::Memory::HeapManager* pHeapManager, uint8_t alignment) {
+	allocatorsMutex.Acquire();
 	DEBUG_LOG("Freeing pointer for pointer %p, heap manager %p and alignment %d. Should never execute!\n", i_ptr, pHeapManager,alignment);
 	assert(i_ptr);
 	pHeapManager->free(i_ptr);
+	allocatorsMutex.Release();
 }
 
 void* operator new[](size_t i_size, Engine::Memory::HeapManager* pHeapManager, uint8_t alignment) {
+	allocatorsMutex.Acquire();
 	DEBUG_LOG("Allocating array pointer for size %d, heap manager %p and alignment %d\n", i_size, pHeapManager, alignment);
 	size_t totalSize = i_size + sizeof(pHeapManager) + sizeof(HEAP_PATTERN);
 	uint8_t* pointer = static_cast<uint8_t*>(pHeapManager->allocate(totalSize, alignment));
@@ -244,10 +275,13 @@ void* operator new[](size_t i_size, Engine::Memory::HeapManager* pHeapManager, u
 	*pointer = HEAP_PATTERN;
 	pointer += sizeof(HEAP_PATTERN);
 	DEBUG_LOG("Allocating pointer %p for size %d\n", pointer, i_size);
+	allocatorsMutex.Release();
 	return pointer;
 }
 void operator delete[](void* i_ptr, Engine::Memory::HeapManager* pHeapManager, uint8_t alignment) {
+	allocatorsMutex.Acquire();
 	DEBUG_LOG("Freeing array pointer for pointer %p, heap manager %p and alignment %d. Should never execute!\n", i_ptr, pHeapManager, alignment);
 	assert(i_ptr);
 	pHeapManager->free(i_ptr);
+	allocatorsMutex.Release();
 }

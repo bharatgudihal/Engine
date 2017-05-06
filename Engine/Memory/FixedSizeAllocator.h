@@ -1,6 +1,8 @@
 #pragma once
 #include <stdint.h>
 #include "BitArray.h"
+#include "../Threading/Mutex.h"
+
 namespace Engine {
 	namespace Memory {
 #ifdef _DEBUG
@@ -26,6 +28,7 @@ namespace Engine {
 			size_t units;
 			BitArray* bitArray;
 			HeapManager* heapManager;
+			Threading::Mutex FSAMutex;
 			bool isValid(void* ptr, size_t& o_index) const;
 			const uint8_t FSA_GUARD_BAND_FILL = 0xCC;
 			void AddGuardBands(uint8_t*) const;

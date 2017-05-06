@@ -46,30 +46,114 @@ namespace Game {
 	}
 
 	void Game::InitializeActors() {
-		GameObjectTask* task1 = new GameObjectTask("Assets\\Data\\WallLeft.lua", &pendingGameObjectsQueue, &pendingQueueMutex);
-		Engine::Utility::FileProcessor::GetInstance().InsertInLoadQueue(*task1);
-		GameObjectTask* task2 = new GameObjectTask("Assets\\Data\\WallRight.lua", &pendingGameObjectsQueue, &pendingQueueMutex);
-		Engine::Utility::FileProcessor::GetInstance().InsertInLoadQueue(*task2);
-		GameObjectTask* task3 = new GameObjectTask("Assets\\Data\\WallTop.lua", &pendingGameObjectsQueue, &pendingQueueMutex);
-		Engine::Utility::FileProcessor::GetInstance().InsertInLoadQueue(*task3);
-		GameObjectTask* task4 = new GameObjectTask("Assets\\Data\\WallBottom.lua", &pendingGameObjectsQueue, &pendingQueueMutex);
-		Engine::Utility::FileProcessor::GetInstance().InsertInLoadQueue(*task4);
-		GameObjectTask* task5 = new GameObjectTask("Assets\\Data\\Row1.lua", &pendingGameObjectsQueue, &pendingQueueMutex);
-		Engine::Utility::FileProcessor::GetInstance().InsertInLoadQueue(*task5);
-		GameObjectTask* task6 = new GameObjectTask("Assets\\Data\\Row2.lua", &pendingGameObjectsQueue, &pendingQueueMutex);
-		Engine::Utility::FileProcessor::GetInstance().InsertInLoadQueue(*task6);
-		GameObjectTask* task7 = new GameObjectTask("Assets\\Data\\Row3.lua", &pendingGameObjectsQueue, &pendingQueueMutex);
-		Engine::Utility::FileProcessor::GetInstance().InsertInLoadQueue(*task7);
-		GameObjectTask* task8 = new GameObjectTask("Assets\\Data\\Row4.lua", &pendingGameObjectsQueue, &pendingQueueMutex);
-		Engine::Utility::FileProcessor::GetInstance().InsertInLoadQueue(*task8);
-		GameObjectTask* task9 = new GameObjectTask("Assets\\Data\\Player.lua", &pendingGameObjectsQueue, &pendingQueueMutex);
-		Engine::Utility::FileProcessor::GetInstance().InsertInLoadQueue(*task9);
-		GameObjectTask* task10 = new GameObjectTask("Assets\\Data\\Ball.lua", &pendingGameObjectsQueue, &pendingQueueMutex);
-		Engine::Utility::FileProcessor::GetInstance().InsertInLoadQueue(*task10);
-		GameObjectTask* task11 = new GameObjectTask("Assets\\Data\\You_Lost.lua", &pendingGameObjectsQueue, &pendingQueueMutex);
-		Engine::Utility::FileProcessor::GetInstance().InsertInLoadQueue(*task11);
-		GameObjectTask* task12 = new GameObjectTask("Assets\\Data\\You_Won.lua", &pendingGameObjectsQueue, &pendingQueueMutex);
-		Engine::Utility::FileProcessor::GetInstance().InsertInLoadQueue(*task12);
+		{
+			GameObjectTask* task1 = new GameObjectTask("Assets\\Data\\WallLeft.lua", &pendingGameObjectsQueue, &pendingQueueMutex);
+			/*size_t size;
+			void* file = Engine::Utility::LoadFile("Assets\\Data\\WallLeft.lua", size);
+			task1->ProcessFile(reinterpret_cast<uint8_t*>(file), static_cast<uint32_t>(size));
+			delete file;
+			delete task1;*/
+			Engine::Utility::FileProcessor::GetInstance().InsertInLoadQueue(task1);
+		}
+		{
+			GameObjectTask* task2 = new GameObjectTask("Assets\\Data\\WallRight.lua", &pendingGameObjectsQueue, &pendingQueueMutex);
+			/*size_t size;
+			void* file = Engine::Utility::LoadFile("Assets\\Data\\WallRight.lua", size);
+			task2->ProcessFile(reinterpret_cast<uint8_t*>(file), static_cast<uint32_t>(size));
+			delete file;
+			delete task2;*/
+			Engine::Utility::FileProcessor::GetInstance().InsertInLoadQueue(task2);
+		}		
+		{
+			GameObjectTask* task3 = new GameObjectTask("Assets\\Data\\WallTop.lua", &pendingGameObjectsQueue, &pendingQueueMutex);
+			/*size_t size;
+			void* file = Engine::Utility::LoadFile("Assets\\Data\\WallTop.lua", size);
+			task3->ProcessFile(reinterpret_cast<uint8_t*>(file), static_cast<uint32_t>(size));
+			delete file;
+			delete task3;*/
+			Engine::Utility::FileProcessor::GetInstance().InsertInLoadQueue(task3);
+		}		
+		{
+			GameObjectTask* task4 = new GameObjectTask("Assets\\Data\\WallBottom.lua", &pendingGameObjectsQueue, &pendingQueueMutex);
+			/*size_t size;
+			void* file = Engine::Utility::LoadFile("Assets\\Data\\WallBottom.lua", size);
+			task4->ProcessFile(reinterpret_cast<uint8_t*>(file), static_cast<uint32_t>(size));
+			delete file;
+			delete task4;*/
+			Engine::Utility::FileProcessor::GetInstance().InsertInLoadQueue(task4);
+		}		
+		{
+			GameObjectTask* task5 = new GameObjectTask("Assets\\Data\\Row1.lua", &pendingGameObjectsQueue, &pendingQueueMutex);
+			/*size_t size;
+			void* file = Engine::Utility::LoadFile("Assets\\Data\\Row1.lua", size);
+			task5->ProcessFile(reinterpret_cast<uint8_t*>(file), static_cast<uint32_t>(size));
+			delete file;
+			delete task5;*/
+			Engine::Utility::FileProcessor::GetInstance().InsertInLoadQueue(task5);
+		}
+		{
+			GameObjectTask* task6 = new GameObjectTask("Assets\\Data\\Row2.lua", &pendingGameObjectsQueue, &pendingQueueMutex);
+			/*size_t size;
+			void* file = Engine::Utility::LoadFile("Assets\\Data\\Row2.lua", size);
+			task6->ProcessFile(reinterpret_cast<uint8_t*>(file), static_cast<uint32_t>(size));
+			delete file;
+			delete task6;*/
+			Engine::Utility::FileProcessor::GetInstance().InsertInLoadQueue(task6);
+		}
+		{
+			GameObjectTask* task7 = new GameObjectTask("Assets\\Data\\Row3.lua", &pendingGameObjectsQueue, &pendingQueueMutex);
+			/*size_t size;
+			void* file = Engine::Utility::LoadFile("Assets\\Data\\Row3.lua", size);
+			task7->ProcessFile(reinterpret_cast<uint8_t*>(file), static_cast<uint32_t>(size));
+			delete file;
+			delete task7;*/
+			Engine::Utility::FileProcessor::GetInstance().InsertInLoadQueue(task7);
+		}
+		{
+			GameObjectTask* task8 = new GameObjectTask("Assets\\Data\\Row4.lua", &pendingGameObjectsQueue, &pendingQueueMutex);
+			/*size_t size;
+			void* file = Engine::Utility::LoadFile("Assets\\Data\\Row4.lua", size);
+			task8->ProcessFile(reinterpret_cast<uint8_t*>(file), static_cast<uint32_t>(size));
+			delete file;
+			delete task8;*/
+			Engine::Utility::FileProcessor::GetInstance().InsertInLoadQueue(task8);
+		}
+		{
+			GameObjectTask* task9 = new GameObjectTask("Assets\\Data\\Player.lua", &pendingGameObjectsQueue, &pendingQueueMutex);
+			/*size_t size;
+			void* file = Engine::Utility::LoadFile("Assets\\Data\\Player.lua", size);
+			task9->ProcessFile(reinterpret_cast<uint8_t*>(file), static_cast<uint32_t>(size));
+			delete file;
+			delete task9;*/
+			Engine::Utility::FileProcessor::GetInstance().InsertInLoadQueue(task9);
+		}
+		{
+			GameObjectTask* task10 = new GameObjectTask("Assets\\Data\\Ball.lua", &pendingGameObjectsQueue, &pendingQueueMutex);
+			/*size_t size;
+			void* file = Engine::Utility::LoadFile("Assets\\Data\\Ball.lua", size);
+			task10->ProcessFile(reinterpret_cast<uint8_t*>(file), static_cast<uint32_t>(size));
+			delete file;
+			delete task10;*/
+			Engine::Utility::FileProcessor::GetInstance().InsertInLoadQueue(task10);
+		}
+		{
+			GameObjectTask* task11 = new GameObjectTask("Assets\\Data\\You_Lost.lua", &pendingGameObjectsQueue, &pendingQueueMutex);
+			/*size_t size;
+			void* file = Engine::Utility::LoadFile("Assets\\Data\\You_Lost.lua", size);
+			task11->ProcessFile(reinterpret_cast<uint8_t*>(file), static_cast<uint32_t>(size));
+			delete file;
+			delete task11;*/
+			Engine::Utility::FileProcessor::GetInstance().InsertInLoadQueue(task11);
+		}
+		{
+			GameObjectTask* task12 = new GameObjectTask("Assets\\Data\\You_Won.lua", &pendingGameObjectsQueue, &pendingQueueMutex);
+			/*size_t size;
+			void* file = Engine::Utility::LoadFile("Assets\\Data\\You_Won.lua", size);
+			task12->ProcessFile(reinterpret_cast<uint8_t*>(file), static_cast<uint32_t>(size));
+			delete file;
+			delete task12;*/
+			Engine::Utility::FileProcessor::GetInstance().InsertInLoadQueue(task12);
+		}
 	}
 
 	void Game::TearDownActors() {

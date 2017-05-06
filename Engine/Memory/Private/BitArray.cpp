@@ -48,6 +48,7 @@ namespace Engine {
 		}
 
 		void BitArray::SetAll() {
+			bitArrayMutex.Acquire();
 			if (remainder == 0) {
 				memset(bits, MAX_SET, bitsPerUnit / bitsPerByte * arraySize);
 			}
@@ -57,14 +58,17 @@ namespace Engine {
 					bits[arraySize - 1] = bits[arraySize - 1] | (maskUnit << index);
 				}
 			}
+			bitArrayMutex.Release();
 		}
 
 		bool BitArray::AreAllClear() const {
 			unsigned long bitIndex;
+			bitArrayMutex.Acquire();
 			if (remainder == 0) {
 				for (size_t index = 0; index < arraySize; index++) {
 					unsigned long bitIndex;
 					if (BITSCAN(&bitIndex, bits[index])) {
+						bitArrayMutex.Release();
 						return false;
 					}
 				}
@@ -72,24 +76,29 @@ namespace Engine {
 			else {
 				for (size_t index = 0; index < arraySize - 1; index++) {
 					if (BITSCAN(&bitIndex, bits[index])) {
+						bitArrayMutex.Release();
 						return false;
 					}
 				}
 				for (size_t bitIndex = 0; bitIndex < remainder; bitIndex++) {
 					if ((bits[arraySize - 1] & (maskUnit << bitIndex))) {
+						bitArrayMutex.Release();
 						return false;
 					}
 				}
 			}
+			bitArrayMutex.Release();
 			return true;
 		}
 
 		bool BitArray::AreAllSet() const {
 			unsigned long bitIndex;
+			bitArrayMutex.Acquire();
 			if (remainder == 0) {
 				unsigned long bitIndex;
 				for (size_t index = 0; index < arraySize; index++) {
 					if (BITSCAN(&bitIndex, ~bits[index])) {
+						bitArrayMutex.Release();
 						return false;
 					}
 				}
@@ -97,42 +106,54 @@ namespace Engine {
 			else {
 				for (size_t index = 0; index < arraySize - 1; index++) {
 					if (BITSCAN(&bitIndex, ~bits[index])) {
+						bitArrayMutex.Release();
 						return false;
 					}
 				}
 				for (size_t bitIndex = 0; bitIndex < remainder; bitIndex++) {
 					if (!(bits[arraySize - 1] & (maskUnit << bitIndex))) {
+						bitArrayMutex.Release();
 						return false;
 					}
 				}
 			}
+			bitArrayMutex.Release();
 			return true;
 		}
 
 		bool BitArray::IsBitSet(const size_t i_bitNumber) const {
+			bitArrayMutex.Acquire();
 			size_t arrayIndex = i_bitNumber / bitsPerUnit;
 			size_t bitRemainder = i_bitNumber % bitsPerUnit;
-			return (bits[arrayIndex] & (maskUnit << bitRemainder)) != 0;
+			bool result = (bits[arrayIndex] & (maskUnit << bitRemainder)) != 0;
+			bitArrayMutex.Release();
+			return result;
 		}
 
 		void BitArray::SetBit(const size_t i_bitNumber) {
+			bitArrayMutex.Acquire();
 			size_t arrayIndex = i_bitNumber / bitsPerUnit;
 			size_t bitRemainder = i_bitNumber % bitsPerUnit;
 			bits[arrayIndex] = bits[arrayIndex] | (maskUnit << bitRemainder);
+			bitArrayMutex.Release();
 		}
 
 		void BitArray::ClearBit(const size_t i_bitNumber) {
+			bitArrayMutex.Acquire();
 			size_t arrayIndex = i_bitNumber / bitsPerUnit;
 			size_t bitRemainder = i_bitNumber % bitsPerUnit;
 			bits[arrayIndex] = bits[arrayIndex] & ~(maskUnit << bitRemainder);
+			bitArrayMutex.Release();
 		}
 
 		bool BitArray::GetFirstClearBit(size_t& o_bitNumber) const {
 			unsigned long longBitIndex;
+			bitArrayMutex.Acquire();
 			if (remainder == 0) {
 				for (size_t index = 0; index < arraySize; index++) {
 					if (BITSCAN(&longBitIndex, ~(bits[index]))) {
 						o_bitNumber = longBitIndex + index*bitsPerUnit;
+						bitArrayMutex.Release();
 						return true;
 					}
 				}
@@ -141,6 +162,7 @@ namespace Engine {
 				for (size_t index = 0; index < arraySize - 1; index++) {
 					if (BITSCAN(&longBitIndex, ~(bits[index]))) {
 						o_bitNumber = longBitIndex + index*bitsPerUnit;
+						bitArrayMutex.Release();
 						return true;
 					}
 				}
@@ -150,25 +172,31 @@ namespace Engine {
 				}
 				o_bitNumber = bitIndex + (arraySize - 1) * bitsPerUnit;
 				if (o_bitNumber == numberOfBits) {
+					bitArrayMutex.Release();
 					return false;
 				}
 				else {
+					bitArrayMutex.Release();
 					return true;
 				}
 			}
+			bitArrayMutex.Release();
 			return false;
 		}
 
 		bool BitArray::GetFirstSetBit(size_t& o_bitNumber) const {
 			unsigned long longBitIndex;
+			bitArrayMutex.Acquire();
 			if (remainder == 0) {
 				for (size_t index = 0; index < arraySize; index++) {
 					if (bits[index] != 0) {
 						if (BITSCAN(&longBitIndex, bits[index])) {
 							o_bitNumber = longBitIndex + index * bitsPerUnit;
+							bitArrayMutex.Release();
 							return true;
 						}
 						else {
+							bitArrayMutex.Release();
 							return false;
 						}
 					}
@@ -179,9 +207,11 @@ namespace Engine {
 					if (bits[index] != 0) {
 						if (BITSCAN(&longBitIndex, bits[index])) {
 							o_bitNumber = longBitIndex + index * bitsPerUnit;
+							bitArrayMutex.Release();
 							return true;
 						}
 						else {
+							bitArrayMutex.Release();
 							return false;
 						}
 					}
@@ -192,12 +222,15 @@ namespace Engine {
 				}
 				o_bitNumber = bitIndex + (arraySize - 1) * bitsPerUnit;
 				if (o_bitNumber == numberOfBits) {
+					bitArrayMutex.Release();
 					return false;
 				}
 				else {
+					bitArrayMutex.Release();
 					return true;
 				}
 			}
+			bitArrayMutex.Release();
 			return false;
 		}
 	}

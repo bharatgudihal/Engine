@@ -23,19 +23,25 @@
 namespace Game {
 	class Game:public Engine::Messaging::IMessageHandler {
 	public:
+
 		class GameObjectTask :public Engine::Utility::FileProcessor::Task {
 		public:
 			GameObjectTask(const char* fileName, std::queue<void*>* i_postProcessQueue, Engine::Threading::Mutex* i_postProcessMutex) :Engine::Utility::FileProcessor::Task(fileName, i_postProcessQueue, i_postProcessMutex) {};
 			void ProcessFile(uint8_t*, uint32_t) override;
 		};
+
 		void StartGame(HINSTANCE i_hInstance, int i_nCmdShow);
 		void HandleMessage(const Engine::String::HashedString&) override;
-	private:		
+
+	private:
+
 		std::vector<Engine::GameObject::GameObject*> sceneObjects;
 		std::queue<void*> pendingGameObjectsQueue;
+
 		Engine::Threading::Mutex pendingQueueMutex;
 		Engine::GameObject::GameObject* winScreen;
 		Engine::GameObject::GameObject* loseScreen;
+
 		float deltaTime;
 		int bricksLeft = 32;
 		bool pause;

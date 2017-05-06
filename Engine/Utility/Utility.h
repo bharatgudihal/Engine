@@ -29,7 +29,7 @@ namespace Engine {
 			static bool Startup();
 			static void ShutDown();
 			static FileProcessor& GetInstance();
-			bool InsertInLoadQueue(Task&);			
+			bool InsertInLoadQueue(Task*);			
 		private:
 			struct FileData {
 				Task* task;
@@ -53,7 +53,7 @@ namespace Engine {
 			std::queue<FileData*> processQueue;
 			FileProcessor(HANDLE, HANDLE);
 			Task* GetFromLoadQueue();
-			bool InsertInProcessQueue(FileData&);
+			bool InsertInProcessQueue(FileData*);
 			FileData* GetFromProcessQueue();
 			static DWORD WINAPI LoadFile(void*);
 			static DWORD WINAPI ProcessFile(void*);

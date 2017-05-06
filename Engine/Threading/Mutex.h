@@ -8,9 +8,9 @@ namespace Engine {
 			Mutex(bool takeOwnerShip = false, const char* name = nullptr);
 			~Mutex();
 			bool TryToAcquire();
-			void Acquire();
+			void Acquire() const;
 			bool Acquire(DWORD timeInMilliseconds);
-			void Release();
+			void Release() const;
 		};
 	}
 }

@@ -1,5 +1,6 @@
 #pragma once
 #include "FixedSizeAllocator.h"
+
 namespace Engine {
 	namespace Memory {
 		class MasterMemoryManager {
@@ -21,6 +22,7 @@ namespace Engine {
 			bool SetupFixedSizeAllocators();
 			const size_t HeapSize = 1024*1000;
 			const uint16_t numberOfBlockDescriptors = 400;
+			Engine::Threading::Mutex masterMemoryMutex;
 		};
 	}
 }

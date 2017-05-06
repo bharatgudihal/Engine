@@ -46,27 +46,33 @@ namespace Engine {
 		}
 
 		void* FixedSizeAllocator::allocate() {
+			FSAMutex.Acquire();
 			//DEBUG_LOG("Allocating from FSA for size %zd bytes\n", unitSize);
 			size_t index = 0;
 			if (bitArray->GetFirstSetBit(index)) {
 				bitArray->ClearBit(index);
 				uint8_t* userPointer = reinterpret_cast<uint8_t*>(workingBase) + (unitSize * index);
 				AddGuardBands(userPointer);
+				FSAMutex.Release();
 				return userPointer + FSA_GUARD_BAND_SIZE;
 			}
 			else {
+				FSAMutex.Release();
 				return nullptr;
 			}
 		}
 
 		bool FixedSizeAllocator::free(void* ptr) {
+			FSAMutex.Acquire();
 			size_t index = 0;
 			if (isValid(ptr, index)) {
 				bitArray->SetBit(index);
 				//DEBUG_LOG("Freeing from FSA for size %zd bytes\n", unitSize);
+				FSAMutex.Release();
 				return true;
 			}
 			else {
+				FSAMutex.Release();
 				return false;
 			}
 		}
@@ -90,13 +96,13 @@ namespace Engine {
 			ptrdiff_t addressDiff = address - workingBase;
 			if (addressDiff >= 0 && addressDiff % unitSize == 0) {
 				o_index = addressDiff / unitSize;
-				//if (bitArray->IsBitClear(o_index)) {
-				CheckGuardBands(address);
-				return true;
-				//}
-				/*else {
+				if (bitArray->IsBitClear(o_index)) {
+					CheckGuardBands(address);
+					return true;
+				}
+				else {
 					return false;
-				}*/
+				}
 			}
 			else {
 				return false;
