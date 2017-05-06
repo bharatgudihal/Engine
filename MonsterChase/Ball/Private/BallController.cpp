@@ -20,8 +20,6 @@ void BallController::Update(float deltaTime) {
 				float randomX = static_cast<float>(1 + rand() % 2);
 				float randomY = static_cast<float>(1 + rand() % 2);
 				direction = Engine::Math::Vector3(randomX, randomY);
-				float speed = ballReference->GetPhysicsBody()->GetSpeed();
-				ballReference->GetPhysicsBody()->SetSpeed(speed);
 				isFree = true;
 			}
 		}
