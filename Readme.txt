@@ -4,7 +4,7 @@ Destroy all the bricks to win!
 
 Rules and Controls:
 
-1) A and D move the platform left and right
+1) Use the arrow keys to move the platform left and right
 2) Space to launch the ball
 3) You lose if you miss the ball
 4) The top 2 rows of bricks require 2 hits to break

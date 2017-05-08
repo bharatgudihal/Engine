@@ -9,10 +9,10 @@ void BallController::Update(float deltaTime) {
 	if (!isFree) {		
 		Engine::Math::Vector3 direction = Engine::Math::Vector3::ZERO;
 		if (Engine::Input::isDown) {
-			if (Engine::Input::keyCode == 65 && (*ballReference->GetActorReference())->GetPosition().X() > -350) {
+			if (Engine::Input::keyCode == 0x25 && (*ballReference->GetActorReference())->GetPosition().X() > -350) {
 				direction += Engine::Math::Vector3::LEFT;
 			}
-			if (Engine::Input::keyCode == 68 && (*ballReference->GetActorReference())->GetPosition().X() < 350) {
+			if (Engine::Input::keyCode == 0x27 && (*ballReference->GetActorReference())->GetPosition().X() < 350) {
 				direction += Engine::Math::Vector3::RIGHT;
 			}
 			srand(static_cast<unsigned int>(time(NULL)));
