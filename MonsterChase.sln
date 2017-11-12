@@ -5,10 +5,14 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MonsterChase", "MonsterChase.vcxproj", "{0F0D1FA7-43C7-4AF4-8B9E-1215776CAACD}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Engine", "Engine\Engine.vcxproj", "{71B675E8-5F71-4AD6-B294-BC7210075F0C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
 		Debug|x86 = Debug|x86
+		Profiler|x64 = Profiler|x64
+		Profiler|x86 = Profiler|x86
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
 	EndGlobalSection
@@ -17,10 +21,26 @@ Global
 		{0F0D1FA7-43C7-4AF4-8B9E-1215776CAACD}.Debug|x64.Build.0 = Debug|x64
 		{0F0D1FA7-43C7-4AF4-8B9E-1215776CAACD}.Debug|x86.ActiveCfg = Debug|Win32
 		{0F0D1FA7-43C7-4AF4-8B9E-1215776CAACD}.Debug|x86.Build.0 = Debug|Win32
+		{0F0D1FA7-43C7-4AF4-8B9E-1215776CAACD}.Profiler|x64.ActiveCfg = Profiler|x64
+		{0F0D1FA7-43C7-4AF4-8B9E-1215776CAACD}.Profiler|x64.Build.0 = Profiler|x64
+		{0F0D1FA7-43C7-4AF4-8B9E-1215776CAACD}.Profiler|x86.ActiveCfg = Profiler|Win32
+		{0F0D1FA7-43C7-4AF4-8B9E-1215776CAACD}.Profiler|x86.Build.0 = Profiler|Win32
 		{0F0D1FA7-43C7-4AF4-8B9E-1215776CAACD}.Release|x64.ActiveCfg = Release|x64
 		{0F0D1FA7-43C7-4AF4-8B9E-1215776CAACD}.Release|x64.Build.0 = Release|x64
 		{0F0D1FA7-43C7-4AF4-8B9E-1215776CAACD}.Release|x86.ActiveCfg = Release|Win32
 		{0F0D1FA7-43C7-4AF4-8B9E-1215776CAACD}.Release|x86.Build.0 = Release|Win32
+		{71B675E8-5F71-4AD6-B294-BC7210075F0C}.Debug|x64.ActiveCfg = Debug|x64
+		{71B675E8-5F71-4AD6-B294-BC7210075F0C}.Debug|x64.Build.0 = Debug|x64
+		{71B675E8-5F71-4AD6-B294-BC7210075F0C}.Debug|x86.ActiveCfg = Debug|Win32
+		{71B675E8-5F71-4AD6-B294-BC7210075F0C}.Debug|x86.Build.0 = Debug|Win32
+		{71B675E8-5F71-4AD6-B294-BC7210075F0C}.Profiler|x64.ActiveCfg = Profiler|x64
+		{71B675E8-5F71-4AD6-B294-BC7210075F0C}.Profiler|x64.Build.0 = Profiler|x64
+		{71B675E8-5F71-4AD6-B294-BC7210075F0C}.Profiler|x86.ActiveCfg = Profiler|Win32
+		{71B675E8-5F71-4AD6-B294-BC7210075F0C}.Profiler|x86.Build.0 = Profiler|Win32
+		{71B675E8-5F71-4AD6-B294-BC7210075F0C}.Release|x64.ActiveCfg = Release|x64
+		{71B675E8-5F71-4AD6-B294-BC7210075F0C}.Release|x64.Build.0 = Release|x64
+		{71B675E8-5F71-4AD6-B294-BC7210075F0C}.Release|x86.ActiveCfg = Release|Win32
+		{71B675E8-5F71-4AD6-B294-BC7210075F0C}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

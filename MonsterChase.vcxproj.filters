@@ -13,10 +13,72 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\GLibTest">
+      <UniqueIdentifier>{7d74a9f7-8804-49d0-afb5-7b6a08cd01cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Interview">
+      <UniqueIdentifier>{a1c34831-4577-46ea-9bec-dc1b96959b5f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Monster">
+      <UniqueIdentifier>{3eb39aee-24de-42b0-8868-c5162a3b7c8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Player">
+      <UniqueIdentifier>{2be252b1-5c53-4d15-9cc8-1402d937f5f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GLibTest">
+      <UniqueIdentifier>{06085815-a372-4605-8fd2-2b273fff55e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Interview">
+      <UniqueIdentifier>{e18f73af-394f-4f03-b092-223aa23ad286}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Monster">
+      <UniqueIdentifier>{2d236d63-641c-4db1-a708-305a94e59256}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Player">
+      <UniqueIdentifier>{42bbaf72-d01a-4864-aee6-6281017e00cf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp">
+    <ClCompile Include="MonsterChase\Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MonsterChase\GLibTest\Private\GLibTest.cpp">
+      <Filter>Source Files\GLibTest</Filter>
+    </ClCompile>
+    <ClCompile Include="MonsterChase\Interview\Private\ReverseWords.cpp">
+      <Filter>Source Files\Interview</Filter>
+    </ClCompile>
+    <ClCompile Include="MonsterChase\Interview\Private\TestReverseWords.cpp">
+      <Filter>Source Files\Interview</Filter>
+    </ClCompile>
+    <ClCompile Include="MonsterChase\Monster\Private\MonsterController.cpp">
+      <Filter>Source Files\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="MonsterChase\Player\Private\PlayerController.cpp">
+      <Filter>Source Files\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="MonsterChase\Game.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="MonsterChase\GLibTest\GLibTest.h">
+      <Filter>Header Files\GLibTest</Filter>
+    </ClInclude>
+    <ClInclude Include="MonsterChase\Interview\ReverseWords.h">
+      <Filter>Header Files\Interview</Filter>
+    </ClInclude>
+    <ClInclude Include="MonsterChase\Interview\TestReverseWords.h">
+      <Filter>Header Files\Interview</Filter>
+    </ClInclude>
+    <ClInclude Include="MonsterChase\Monster\MonsterController.h">
+      <Filter>Header Files\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="MonsterChase\Player\PlayerController.h">
+      <Filter>Header Files\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="MonsterChase\Game.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

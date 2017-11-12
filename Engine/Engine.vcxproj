@@ -1,0 +1,357 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Profiler|Win32">
+      <Configuration>Profiler</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Profiler|x64">
+      <Configuration>Profiler</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Actor\Actor.h" />
+    <ClInclude Include="Actor\Actor_Inl.h" />
+    <ClInclude Include="Controllers\ActorController.h" />
+    <ClInclude Include="Controllers\Controller.h" />
+    <ClInclude Include="Core\Engine.h" />
+    <ClInclude Include="GameObject\GameObject.h" />
+    <ClInclude Include="GameObject\GameObject_Inl.h" />
+    <ClInclude Include="Input\Input.h" />
+    <ClInclude Include="Logger\Logger.h" />
+    <ClInclude Include="Lua\LuaHelper.h" />
+    <ClInclude Include="Math\FloatCheck_Inl.h" />
+    <ClInclude Include="Math\FloatCheck.h" />
+    <ClInclude Include="Math\Matrix.h" />
+    <ClInclude Include="Math\Matrix_Inl.h" />
+    <ClInclude Include="Math\Matrix_Opt.h" />
+    <ClInclude Include="Math\Vector3.h" />
+    <ClInclude Include="Math\Vector3_Inl.h" />
+    <ClInclude Include="Math\Vector3_Opt.h" />
+    <ClInclude Include="Math\Vector3_Opt_Inl.h" />
+    <ClInclude Include="Math\Vector4.h" />
+    <ClInclude Include="Math\Vector4_Inl.h" />
+    <ClInclude Include="Memory\Allocators.h" />
+    <ClInclude Include="Memory\BitArray.h" />
+    <ClInclude Include="Memory\BitArray_Inl.h" />
+    <ClInclude Include="Memory\FixedSizeAllocator.h" />
+    <ClInclude Include="Memory\FixedSizeAllocator_Inl.h" />
+    <ClInclude Include="Memory\HeapManager.h" />
+    <ClInclude Include="Memory\HeapManager_Inl.h" />
+    <ClInclude Include="Memory\MasterMemoryManager.h" />
+    <ClInclude Include="Memory\MasterMemoryManager_Inl.h" />
+    <ClInclude Include="Messaging\MessagingSystem.h" />
+    <ClInclude Include="Physics\CollisionCheck.h" />
+    <ClInclude Include="Physics\Physics.h" />
+    <ClInclude Include="Physics\PhysicsBody.h" />
+    <ClInclude Include="Pointer\Counter.h" />
+    <ClInclude Include="Pointer\SmartPointer.h" />
+    <ClInclude Include="Pointer\SmartPointer_Inl.h" />
+    <ClInclude Include="Pointer\UniquePointer.h" />
+    <ClInclude Include="Pointer\UniquePointer_Inl.h" />
+    <ClInclude Include="Pointer\WeakPointer.h" />
+    <ClInclude Include="Pointer\WeakPointer_Inl.h" />
+    <ClInclude Include="Profiling\Accumulator.h" />
+    <ClInclude Include="Profiling\Accumulator_Inl.h" />
+    <ClInclude Include="Profiling\Profiler.h" />
+    <ClInclude Include="Profiling\ProfilerMacros.h" />
+    <ClInclude Include="Profiling\Profiler_Inl.h" />
+    <ClInclude Include="Profiling\ScopedTimer.h" />
+    <ClInclude Include="Profiling\ScopedTimer_Inl.h" />
+    <ClInclude Include="Renderer\Renderer.h" />
+    <ClInclude Include="Renderer\RenderObject.h" />
+    <ClInclude Include="Renderer\RenderObject_Inl.h" />
+    <ClInclude Include="String\ConstantStrings.h" />
+    <ClInclude Include="String\ConstantStrings_Inl.h" />
+    <ClInclude Include="String\HashedString.h" />
+    <ClInclude Include="String\HashedString_Inl.h" />
+    <ClInclude Include="String\PooledString.h" />
+    <ClInclude Include="String\PooledString_Inl.h" />
+    <ClInclude Include="String\StringPool.h" />
+    <ClInclude Include="String\StringPool_Inl.h" />
+    <ClInclude Include="Tests\AllocatorTest.h" />
+    <ClInclude Include="Tests\BitArrayUnitTest.h" />
+    <ClInclude Include="Tests\ConstChecker.h" />
+    <ClInclude Include="Tests\FileProcessorTest.h" />
+    <ClInclude Include="Tests\FSATest.h" />
+    <ClInclude Include="Tests\HeapManagerTest.h" />
+    <ClInclude Include="Tests\IsNANTest.h" />
+    <ClInclude Include="Tests\MatrixTest.h" />
+    <ClInclude Include="Tests\MoveCopyTest.h" />
+    <ClInclude Include="Tests\PointerTest.h" />
+    <ClInclude Include="Tests\StringPoolTest.h" />
+    <ClInclude Include="Threading\Event.h" />
+    <ClInclude Include="Threading\Mutex.h" />
+    <ClInclude Include="Threading\Semaphore.h" />
+    <ClInclude Include="Threading\WaitableObject.h" />
+    <ClInclude Include="Timer\CoreTimer.h" />
+    <ClInclude Include="Utility\Utility.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Actor\Private\Actor.cpp" />
+    <ClCompile Include="Controllers\Private\Controller.cpp" />
+    <ClCompile Include="Core\Private\Engine.cpp" />
+    <ClCompile Include="GameObject\Private\GameObject.cpp" />
+    <ClCompile Include="Input\Private\Input.cpp" />
+    <ClCompile Include="Logger\Private\Logger.cpp" />
+    <ClCompile Include="Lua\Private\LuaHelper.cpp" />
+    <ClCompile Include="Math\Private\Matrix.cpp" />
+    <ClCompile Include="Math\Private\Matrix_Opt.cpp" />
+    <ClCompile Include="Math\Private\Vector3.cpp" />
+    <ClCompile Include="Math\Private\Vector4.cpp" />
+    <ClCompile Include="Memory\Private\Allocators.cpp" />
+    <ClCompile Include="Memory\Private\BitArray.cpp" />
+    <ClCompile Include="Memory\Private\FixedSizeAllocator.cpp" />
+    <ClCompile Include="Memory\Private\HeapManager.cpp" />
+    <ClCompile Include="Memory\Private\MasterMemoryManager.cpp" />
+    <ClCompile Include="Messaging\Private\MessagingSystem.cpp" />
+    <ClCompile Include="Physics\Private\CollisionCheck.cpp" />
+    <ClCompile Include="Physics\Private\Physics.cpp" />
+    <ClCompile Include="Physics\Private\PhysicsBody.cpp" />
+    <ClCompile Include="Profiling\Private\Accumulator.cpp" />
+    <ClCompile Include="Profiling\Private\Profiler.cpp" />
+    <ClCompile Include="Renderer\Private\Renderer.cpp" />
+    <ClCompile Include="String\Private\ConstantStrings.cpp" />
+    <ClCompile Include="String\Private\HashedString.cpp" />
+    <ClCompile Include="String\Private\StringPool.cpp" />
+    <ClCompile Include="Tests\Private\AllocatorTest.cpp" />
+    <ClCompile Include="Tests\Private\BitArrayUnitTest.cpp" />
+    <ClCompile Include="Tests\Private\ConstChecker.cpp" />
+    <ClCompile Include="Tests\Private\FileProcessorTest.cpp" />
+    <ClCompile Include="Tests\Private\FSATest.cpp" />
+    <ClCompile Include="Tests\Private\HeapManagerTest.cpp" />
+    <ClCompile Include="Tests\Private\IsNANTest.cpp" />
+    <ClCompile Include="Tests\Private\MatrixTest.cpp" />
+    <ClCompile Include="Tests\Private\MoveCopyTest.cpp" />
+    <ClCompile Include="Tests\Private\PointerTest.cpp" />
+    <ClCompile Include="Tests\Private\StringPoolTest.cpp" />
+    <ClCompile Include="Threading\Private\Event.cpp" />
+    <ClCompile Include="Threading\Private\Mutex.cpp" />
+    <ClCompile Include="Threading\Private\Semaphore.cpp" />
+    <ClCompile Include="Timer\Private\CoreTimer.cpp" />
+    <ClCompile Include="Utility\Private\Utility.cpp" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{71B675E8-5F71-4AD6-B294-BC7210075F0C}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>Engine</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Profiler|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Profiler|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Profiler|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Profiler|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IntDir>.intermediates\$(PlatformTarget)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IntDir>.intermediates\$(PlatformTarget)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Profiler|Win32'">
+    <IntDir>.intermediates\$(PlatformTarget)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IntDir>.intermediates\$(PlatformTarget)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IntDir>.intermediates\$(PlatformTarget)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Profiler|x64'">
+    <IntDir>.intermediates\$(PlatformTarget)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions);NOMINMAX</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)Libs\</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+    <Lib>
+      <AdditionalLibraryDirectories>$(SolutionDir)Libs;</AdditionalLibraryDirectories>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions);NOMINMAX</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)Libs\</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+    <Lib>
+      <AdditionalLibraryDirectories>$(SolutionDir)Libs;</AdditionalLibraryDirectories>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions);NOMINMAX</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)Libs\</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+    <Lib>
+      <AdditionalLibraryDirectories>$(SolutionDir)Libs;</AdditionalLibraryDirectories>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Profiler|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions);ENABLE_PROFILING;NOMINMAX</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)Libs\</AdditionalIncludeDirectories>
+      <PreprocessToFile>false</PreprocessToFile>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+    <Lib>
+      <AdditionalLibraryDirectories>$(SolutionDir)Libs;</AdditionalLibraryDirectories>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions);NOMINMAX</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)Libs\</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+    <Lib>
+      <AdditionalLibraryDirectories>$(SolutionDir)Libs;</AdditionalLibraryDirectories>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Profiler|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions);ENABLE_PROFILING;NOMINMAX</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)Libs\</AdditionalIncludeDirectories>
+      <PreprocessToFile>false</PreprocessToFile>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+    <Lib>
+      <AdditionalLibraryDirectories>$(SolutionDir)Libs;</AdditionalLibraryDirectories>
+    </Lib>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
